@@ -1,0 +1,4 @@
+name: Wynncraft
+version: '${version}'
+main: com.iantapply.wynncraft.Wynncraft
+api-version: '1.20'
