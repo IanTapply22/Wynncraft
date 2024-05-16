@@ -3,7 +3,7 @@ package com.iantapply.wynncraft.npc;
 import lombok.Getter;
 import lombok.Setter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 
 import static net.kyori.adventure.text.Component.text;
@@ -57,9 +57,9 @@ public class Dialogue {
      */
     public void play(Player player, String npcName, Integer dialogueIndex, Integer dialogueCount) {
         // Build the message using the new chat components
-        Component messageComponent = text().content("[" + dialogueIndex + "/" + dialogueCount + "]").color(TextColor.fromHexString("#AAAAAA"))
-                .append(text(" " + npcName + ": ").color(TextColor.fromHexString("#00AA00")))
-                .append(text(dialogueText).color(TextColor.fromHexString("#55FF55"))).build();
+        Component messageComponent = text().content("[" + dialogueIndex + "/" + dialogueCount + "]").color(NamedTextColor.GRAY)
+                .append(text(" " + npcName + ": ").color(NamedTextColor.DARK_GREEN))
+                .append(text(dialogueText).color(NamedTextColor.GREEN)).build();
 
         // Send the message to the player
         player.sendActionBar(messageComponent);

@@ -2,6 +2,7 @@ package com.iantapply.wynncraft.npc;
 
 import com.iantapply.wynncraft.world.NPCLocation;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 
@@ -98,8 +99,17 @@ public interface NPC {
      * Starts the dialogue sequence for the player when they interact with the NPC
      * @param player The player to start the dialogue for
      */
-    default void startDialogue(Player player) {
-        // TODO
+    default void startDialogue(Player player, Plugin plugin) {
+        // Play the dialogues in order and for the length specified in seconds after the one before it is done
+        for (int i = 0; i < this.dialogues.size(); i++) {
+            final int dialogueIndex = i;
+            Dialogue dialogue = this.dialogues.get(i);
+
+            // Schedule the dialogue to play after the previous one is done
+            player.getServer().getScheduler().runTaskLater(plugin, () -> {
+                playDialogue(player, dialogueIndex);
+            }, dialogue.getDialogueLength() * 20L);
+        }
     }
 
     /**
