@@ -1,4 +1,4 @@
-package com.iantapply.wynncraft.database.models;
+package com.iantapply.wynncraft.database.model;
 
 /**
  * Represents a model that contains various data on an object

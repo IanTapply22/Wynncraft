@@ -183,4 +183,39 @@ public class DatabaseHelpers {
 
         return finishQuery(queryStatement);
     }
+
+    /**
+     * Creates a column in a table with the given type
+     * @param connection The database connection to use
+     * @param table The table to create the column in
+     * @param column The name of the column to create
+     * @param type The type of the column to create (e.g. "INT", "VARCHAR(255)", "INT")
+     * @throws SQLException If the statement cannot be executed or closed
+     */
+    public static void createColumn(Connection connection, String table, String column, String type) throws SQLException {
+        // Prepare the SQL query
+        String query = String.format("ALTER TABLE %s ADD COLUMN %s %s", table, column, type);
+
+        // Execute and finishes the query
+        PreparedStatement queryStatement = connection.prepareStatement(query);
+        finishQueryWithoutResult(queryStatement);
+    }
+
+    /**
+     * Creates a column in a table with the given type and default value
+     * @param connection The database connection to use
+     * @param table The table to create the column in
+     * @param column The name of the column to create
+     * @param type The type of the column to create (e.g. "INT", "VARCHAR(255)", "INT")
+     * @param defaultValue The default value that should be inserted in the column
+     * @throws SQLException If the statement cannot be executed or closed
+     */
+    public static void createColumn(Connection connection, String table, String column, String type, String defaultValue) throws SQLException {
+        // Prepare the SQL query
+        String query = String.format("ALTER TABLE %s ADD COLUMN %s %s DEFAULT %s", table, column, type, defaultValue);
+
+        // Execute and finishes the query
+        PreparedStatement queryStatement = connection.prepareStatement(query);
+        finishQueryWithoutResult(queryStatement);
+    }
 }

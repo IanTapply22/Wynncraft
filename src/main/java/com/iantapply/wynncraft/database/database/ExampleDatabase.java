@@ -1,4 +1,4 @@
-package com.iantapply.wynncraft.database.databases;
+package com.iantapply.wynncraft.database.database;
 
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.DatabaseHelpers;

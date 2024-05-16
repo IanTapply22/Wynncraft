@@ -1,4 +1,4 @@
-package com.iantapply.wynncraft.database.models;
+package com.iantapply.wynncraft.database.model;
 
 import lombok.Getter;
 import lombok.Setter;

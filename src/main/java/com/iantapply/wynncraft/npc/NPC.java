@@ -71,6 +71,22 @@ public interface NPC {
     }
 
     /**
+     * Removes all dialogues from the NPC
+     */
+    default void removeAllDialogue() {
+        this.dialogues.clear();
+    }
+
+    /**
+     * Sets the dialogues of the NPC to the given array of dialogues
+     * @param dialogues The dialogues to set
+     */
+    default void setDialogues(ArrayList<Dialogue> dialogues) {
+        this.dialogues.clear();
+        this.dialogues.addAll(dialogues);
+    }
+
+    /**
      * Returns the dialogues of the NPC
      * @return The dialogues of the NPC
      */
@@ -78,8 +94,12 @@ public interface NPC {
         return this.dialogues;
     }
 
+    /**
+     * Starts the dialogue sequence for the player when they interact with the NPC
+     * @param player The player to start the dialogue for
+     */
     default void startDialogue(Player player) {
-        this.playDialogue(player, 0);
+        // TODO
     }
 
     /**
