@@ -11,7 +11,7 @@ import org.bukkit.World;
  */
 @Getter
 public enum WorldLocation {
-    EXAMPLE("Example location", new LocationCoordinates(0, 0, 0);
+    EXAMPLE("Example location", new LocationCoordinates(0, 0, 0));
 
     private final String name;
     private final LocationCoordinates location;
