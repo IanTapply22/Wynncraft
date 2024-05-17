@@ -1,11 +1,11 @@
 [![Java CI with Gradle](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml) 
 # Wynncraft
-[Wynncraft](https://wynncraft.com/) is one of the largest MMORPG of Minecraft. This repository contains code that attempts to recreate nearly every aspect if the server in its current state. The server is written in Java and is based on the Bukkit/Paper API.
+[Wynncraft](https://wynncraft.com/) is one of the largest MMORPG of Minecraft. This repository contains code that attempts to recreate nearly every aspect if the server in its current state. The plugin is written in Java and is based on the Bukkit/Paper API.
 
 ## Licensing
 `Why doesn't this have a license?`
 <br>
-Great question! This repository does not contain a license at this point of time because of the fact that this is a recreation of the Wynncraft server. I **did not** create the ideas or aspects of the actual server and I wish to give all credit to the developers of Wynncraft when possible.
+Great question! This repository does not contain a license at this point of time because of the fact that this is a recreation of the Wynncraft core functionality. I **did not** create the ideas or aspects of the actual server and I wish to give all credit to the developers of Wynncraft when possible.
 
 ## Remaining Plugin Modules/Features
 Most of the remaining features/modules have documentation attached to them. All modules and features have a number in brackets on the far right, this is to signify the priority of each task. The following is a list of features that are yet to be implemented:
