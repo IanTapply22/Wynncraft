@@ -2,6 +2,8 @@ package com.iantapply.wynncraft.world;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
+import org.bukkit.World;
 
 /**
  * Represents the coordinates of a location in the game. This class is used to define the
@@ -23,5 +25,16 @@ public class LocationCoordinates {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    /**
+     * Gets the LocationCoordinates location as a new Bukkit
+     * location in the given world
+     * @param world The world to specify the location in
+     * @return A new Bukkit location that is able to be used within the Bukkit/Paper
+     * API
+     */
+    public Location getBukkitLocation(World world) {
+        return new Location(world, getX(), getY(), getZ());
     }
 }

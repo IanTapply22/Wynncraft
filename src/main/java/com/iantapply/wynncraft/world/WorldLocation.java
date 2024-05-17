@@ -5,27 +5,25 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 /**
- * Represents an NPC location in the game. This enum is used to define the different locations
- * for NPC that are registered in the game.
+ * Represents a world location in the game. This enum is used to define the different locations
+ * that can be used in the game that are important. It provides information like the name and
+ * coordinates of the location.
  */
 @Getter
-public enum NPCLocation {
-    EXAMPLE_NPC("Example", new LocationCoordinates(0, 0, 0), LandmarkLocation.RAGNI);
+public enum WorldLocation {
+    EXAMPLE("Example location", new LocationCoordinates(0, 0, 0);
 
-    private final String npcName;
+    private final String name;
     private final LocationCoordinates location;
-    private final LandmarkLocation landmarkLocation;
 
     /**
-     * Creates a new NPC location object with the given name and location coordinates.
-     * @param npcName The name of the location on the map (detlas, nemract, etc.)
+     * Creates a new location object with the given name and location coordinates.
+     * @param name The name of the location on the map (detlas, nemract, etc.)
      * @param location The coordinates of the location (x, y, z)
-     * @param landmarkLocation The landmark location of the NPC
      */
-    NPCLocation(String npcName, LocationCoordinates location, LandmarkLocation landmarkLocation) {
-        this.npcName = npcName;
+    WorldLocation(String name, LocationCoordinates location) {
+        this.name = name;
         this.location = location;
-        this.landmarkLocation = landmarkLocation;
     }
 
     /**
@@ -39,7 +37,7 @@ public enum NPCLocation {
     }
 
     /**
-     * Gets the NPC locations X value
+     * Gets the locations X value
      * @return The X value as a double
      */
     public double getLocationX() {
@@ -47,7 +45,7 @@ public enum NPCLocation {
     }
 
     /**
-     * Gets the NPC locations Y value
+     * Gets the locations Y value
      * @return The Y value as a double
      */
     public double getLocationY() {
@@ -55,10 +53,11 @@ public enum NPCLocation {
     }
 
     /**
-     * Gets the NPC locations Z value
+     * Gets the locations Z value
      * @return The Z value as a double
      */
     public double getLocationZ() {
         return getLocation().getZ();
     }
 }
+

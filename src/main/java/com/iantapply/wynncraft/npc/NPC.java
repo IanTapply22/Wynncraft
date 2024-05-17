@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.npc;
 
 import com.iantapply.wynncraft.world.NPCLocation;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -33,7 +34,7 @@ public interface NPC {
      * What should be done when the player interacts with the NPC
      * This is usually starting dialogue or a new quest
      */
-    void onInteract();
+    void onInteract(Player player);
 
     default void setVisibility(Player player, boolean visibility) {}
 
@@ -54,6 +55,8 @@ public interface NPC {
      * @return The location name of the NPC
      */
     NPCLocation location();
+
+    World serverWorld();
 
     /**
      * Adds a dialogue to the NPC
