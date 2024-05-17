@@ -6,10 +6,15 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a party that can move players together and have private chat capabilities
+ */
 @Getter @Setter
 public class Party {
     private PartyMessage partyMessage;
     private PartyTeleportation partyTeleportation;
+
+    private ArrayList<Player> bannedPlayers = new ArrayList<>();
 
     private Player partyLeader;
     private ArrayList<Player> partyMembers = new ArrayList<>();
@@ -61,15 +66,56 @@ public class Party {
     }
 
     /**
+     * Disbands the party and removes all party members
+     * The instance of the party still remains, but an even will be fired hear to
+     * remove it from the leaders and members party list
+     */
+    public void disband() {
+        this.partyMembers.clear();
+    }
+
+    /**
+     * Promotes a player to be the leader of the party
+     * @param player The player to promote to the leader of the party
+     */
+    public void promote(Player player) {
+        // TODO: Send a message to all players in the party that the leader has changed here
+        // TODO: Send a message that they have been promoted to the new leader
+        this.partyMembers.add(this.partyLeader);
+        this.partyLeader = player;
+    }
+
+    /**
+     * Bans a player from the current party, they cannot be invited until they are unbanned
+     * @param player The player to ban from the party
+     */
+    public void ban(Player player) {
+        if (this.partyMembers.contains(player)) {
+            this.bannedPlayers.add(player);
+            this.partyMembers.remove(player);
+        } else {
+            this.bannedPlayers.add(player);
+        }
+    }
+
+    /**
+     * Unbans a player from the current party, they can now be invited back to the party
+     * @param player The player to unban from the party
+     */
+    public void unban(Player player) {
+        this.bannedPlayers.remove(player);
+    }
+
+    /**
      * Adds a new player to the party and abides by the party player limit
      * @param player The player to add to the party
      */
     public void addPartyMember(Player player) {
-        if (partyMembers.size() < partyPlayerLimit) {
-            partyMembers.add(player);
-            getPartyMessage().sendPartyLeaderSuccess(String.format("Added %s to the party.", player.getName()));
+        if (this.partyMembers.size() < this.partyPlayerLimit) {
+            this.partyMembers.add(player);
+            this.getPartyMessage().sendPartyLeaderSuccess(String.format("Added %s to the party.", player.getName()));
         } else {
-            getPartyMessage().sendPartyLeaderError("The party is full and cannot add any more members.");
+            this.getPartyMessage().sendPartyLeaderError("The party is full and cannot add any more members");
         }
     }
 
@@ -79,7 +125,7 @@ public class Party {
      */
     public void addPartyMemberOverride(Player player) {
         this.partyMembers.add(player);
-        getPartyMessage().sendPartyLeaderOverride(String.format("Added %s to the party with override", player.getName()));
+        this.getPartyMessage().sendPartyLeaderOverride(String.format("Added %s to the party with override", player.getName()));
     }
 
     /**
@@ -87,6 +133,6 @@ public class Party {
      * @param player The player to remove from the party
      */
     public void removePartyMember(Player player) {
-        partyMembers.remove(player);
+        this.partyMembers.remove(player);
     }
 }
