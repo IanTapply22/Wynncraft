@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.logger;
 
-import com.iantapply.wynncraft.configuration.PluginConfiguration;
+import com.iantapply.wynncraft.configuration.Plugin;
 import org.bukkit.Bukkit;
 
 /**
@@ -36,8 +36,8 @@ public class Logger {
      */
     public static void logStartup() {
         log(LoggingLevel.INFO, "Wynncraft core plugin has initialized");
-        log(LoggingLevel.INFO, "Version: " + PluginConfiguration.VERSION);
-        log(LoggingLevel.INFO, "Developers: " + PluginConfiguration.DEVELOPER_CREDITS);
+        log(LoggingLevel.INFO, "Version: " + Plugin.VERSION);
+        log(LoggingLevel.INFO, "Developers: " + Plugin.DEVELOPER_CREDITS);
     }
 
     /**
