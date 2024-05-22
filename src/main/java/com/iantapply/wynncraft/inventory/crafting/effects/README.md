@@ -16,13 +16,12 @@ type of effect value is stored as the following:
 ```json
 {
   "typeId": 1,
+  "effectId": 0,
   "min": {
-    "value": 1,
-    "effectId": 0
+    "value": 1
   },
   "max": {
-    "value": 2,
-    "effectId": 1
+    "value": 2
   }
 }
 ```
@@ -31,6 +30,7 @@ type of effect value is stored as the following:
 ```json
 {
   "typeId": 2,
+  "effectId": 0,
   "value": 1
 }
 ```
@@ -39,13 +39,12 @@ type of effect value is stored as the following:
 ```json
 {
   "typeId": 3,
+  "effectId": 0,
   "min": {
-    "value": 1,
-    "effectId": 0
+    "value": 1
   },
   "max": {
-    "value": 2,
-    "effectId": 1
+    "value": 2
   }
 }
 ```
@@ -57,13 +56,13 @@ type of effect value is stored as the following:
   "values": [
     {
       "typeId": 0,
-      "value": 1,
-      "effectId": 0
+      "effectId": 0,
+      "value": 1
     },
     {
       "typeId": 1,
-      "value": 2,
-      "effectId": 1
+      "effectId": 1,
+      "value": 2
     }
   ]
 }
