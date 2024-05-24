@@ -21,13 +21,13 @@ public enum NonPurchasableRank {
             .append(Component.text("Media", NamedTextColor.DARK_PURPLE))
             .append(Component.text("]", NamedTextColor.LIGHT_PURPLE)),
             "com.wynncraft.rank.media", new ChampionBenefits()),
-    MODERATOR(0, "MODERATOR",
+    MODERATOR(1, "MODERATOR",
             "If you need help or if you have a problem, you can ask them either in game or on the forums",
             Component.text("[", NamedTextColor.GOLD)
             .append(Component.text("Mod", NamedTextColor.YELLOW))
             .append(Component.text("]", NamedTextColor.GOLD)),
             "com.wynncraft.rank.mod", new ChampionBenefits()),
-    ADMIN(0, "ADMIN",
+    ADMIN(2, "ADMIN",
             "Admins are either the owners or developer of Wynncraft",
             Component.text("[", NamedTextColor.DARK_RED)
             .append(Component.text("Admin", NamedTextColor.RED))

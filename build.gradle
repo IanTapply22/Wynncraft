@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.0"
     id("io.papermc.paperweight.userdev") version "1.7.1"
+    id 'maven-publish'
 }
 
 group = 'com.iantapply'
@@ -16,6 +17,19 @@ repositories {
     maven {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "Wynncraft"
+            url = "https://maven.pkg.github.com/IanTapply22/Wynncraft"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 
