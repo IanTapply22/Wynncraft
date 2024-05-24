@@ -23,7 +23,7 @@ repositories {
 publishing {
     repositories {
         maven {
-            name = "Wynncraft"
+            name = "GitHubPackages"
             url = "https://maven.pkg.github.com/IanTapply22/Wynncraft"
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
