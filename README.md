@@ -1,4 +1,7 @@
 [![Java CI with Gradle](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml) 
+[![Publish package to GitHub Packages](https://github.com/IanTapply22/Wynncraft/actions/workflows/publish.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/publish.yml)
+[![Publish Changelog](https://github.com/IanTapply22/Wynncraft/actions/workflows/changelog.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/changelog.yml)
+
 # Wynncraft
 [Wynncraft](https://wynncraft.com/) is one of the largest MMORPG of Minecraft. This repository contains code that attempts to recreate nearly every aspect if the server in its current state. The plugin is written in Java and is based on the Bukkit/Paper API.
 
