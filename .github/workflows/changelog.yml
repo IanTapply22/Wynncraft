@@ -4,6 +4,8 @@ on:
   push:
     branches: [ "main" ]
 
+  workflow_dispatch:
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -19,12 +21,12 @@ jobs:
 
       - name: Generate changelog
         id: changelog
-        uses: jaywcjlove/changelog-generator@v2.1.0
+        uses: jaywcjlove/changelog-generator@v1.6.1
         with:
           token: ${{ github.token }}
 
       - id: get-version
-        uses: jactions/maven-version@v1.2.0
+        uses: thecodemonkey/action-get-gradle-version@master
 
       - name: Create github release
         id: create_release
