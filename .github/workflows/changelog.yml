@@ -7,11 +7,20 @@ on:
   workflow_dispatch:
 
 jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: thecodemonkey/action-get-gradle-version@master
+        id: version
+      - run: 'echo version ${{ steps.version.outputs.version }}'
+
   release:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
-    outputs:
-      version: ${{ steps.get-version.outputs.version }}
+    needs: version
 
     steps:
       - uses: actions/checkout@v4
@@ -20,10 +29,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - id: get-version
-        uses: thecodemonkey/action-get-gradle-version@master
-
 
       - name: Generate changelog
         id: changelog
@@ -38,10 +43,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get-version.outputs.version }}
-          release_name: ${{ steps.get-version.outputs.version }}
+          tag_name: ${{needs.version.outputs.version}}
+          release_name: ${{needs.version.outputs.version}}
           body: |
-            Grab the new version from https://github.com/IanTapply22/Wynncraft/packages/2160010 version ${{ steps.get-version.outputs.version }}
+            Grab the new version from https://github.com/IanTapply22/Wynncraft/packages/2160010 version ${{needs.version.outputs.version}}
             
             ```
             <dependencies>

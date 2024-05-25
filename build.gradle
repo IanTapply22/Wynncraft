@@ -5,8 +5,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.iantapply'
-version = '1.0.3'
+group = "com.iantapply"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
