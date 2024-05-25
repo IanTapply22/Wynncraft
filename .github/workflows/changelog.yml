@@ -22,6 +22,12 @@ jobs:
       - id: get-version
         uses: thecodemonkey/action-get-gradle-version@master
 
+      - name: Generate changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@v1.6.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create github release
         id: create_release
         uses: actions/create-release@latest
@@ -46,9 +52,3 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-
-      - name: Generate changelog
-        id: changelog
-        uses: jaywcjlove/changelog-generator@v1.6.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
