@@ -19,12 +19,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Generate changelog
-        id: changelog
-        uses: jaywcjlove/changelog-generator@v1.6.1
-        with:
-          token: ${{ github.token }}
-
       - id: get-version
         uses: thecodemonkey/action-get-gradle-version@master
 
@@ -52,3 +46,9 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
+
+      - name: Generate changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@v1.6.1
+        with:
+          token: ${{ github.token }}
