@@ -39,7 +39,7 @@ jobs:
           PUBLISHED_VERSION=$(curl -s \
             -u ${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_TOKEN }} \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/packages/gradle/${{needs.version.outputs.version}})
+            https://github.com/IanTapply22/Wynncraft/packages/2160010?version=${{needs.version.outputs.version}})
           if [[ "$PUBLISHED_VERSION" == *"${{needs.version.outputs.version}}"* ]]; then
             echo "Version is already published. Skipping publish step."
             exit 0
