@@ -16,6 +16,7 @@ jobs:
       - run: 'echo version ${{ steps.version.outputs.version }}'
 
   publish:
+    if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     needs: version
     runs-on: ubuntu-latest
     permissions:
@@ -32,17 +33,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
-
-      - name: Check version change
-        id: check_version_update
-        run: |
-          previous_version=$(git show HEAD^:build.gradle | grep -oP '(version\s*")\K[^"]+' | head -n1)
-          current_version=$(grep -oP '(version\s*")\K[^"]+' build.gradle | head -n1)
-          if [ "$previous_version" != "$current_version" ]; then
-            echo "::set-output name=version_changed::true"
-          else
-            echo "::set-output name=version_changed::false"
-          fi
 
       - name: Publish package
         if: steps.check_version_update.outputs.version_changed == 'true'
