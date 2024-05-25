@@ -8,6 +8,7 @@ on:
 
 jobs:
   dependency-submission:
+    name: Generate and submit dependency graph
     runs-on: ubuntu-latest
     permissions:
       contents: write
