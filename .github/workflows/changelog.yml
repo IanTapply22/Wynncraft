@@ -10,6 +10,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +23,7 @@ jobs:
 
       - id: get-version
         uses: thecodemonkey/action-get-gradle-version@master
+
 
       - name: Generate changelog
         id: changelog
