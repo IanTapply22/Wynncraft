@@ -1,4 +1,4 @@
-[![Java CI with Gradle](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/gradle.yml) 
+[![Build CI with multiple platforms/configs](https://github.com/IanTapply22/Wynncraft/actions/workflows/build.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/build.yml)
 [![Publish package to GitHub Packages](https://github.com/IanTapply22/Wynncraft/actions/workflows/publish.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/publish.yml)
 [![Publish Changelog](https://github.com/IanTapply22/Wynncraft/actions/workflows/changelog.yml/badge.svg)](https://github.com/IanTapply22/Wynncraft/actions/workflows/changelog.yml)
 
