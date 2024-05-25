@@ -33,12 +33,22 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
-      - name: Check version changes
-        id: check
-        uses: EndBug/version-check@v1.0.0 # More info about the arguments on the action page
+      - name: Compare with published version
+        id: compare_versions
+        run: |
+          PUBLISHED_VERSION=$(curl -s \
+            -u ${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_TOKEN }} \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/users/IanTapply22/packages/maven/wynncraft/versions | jq '[.[] ] | .[0] .metadata .container .tags[0]')
+          if [[ "$PUBLISHED_VERSION" == *"${{ steps.check_version.outputs.version }}"* ]]; then
+            echo "Version is already published. Skipping publish step."
+            exit 0
+          else
+            echo "Version not published. Proceeding with publish step."
+          fi
 
       - name: Publish package
-        if: steps.check.outputs.changed == 'true'
+        if: steps.compare_versions.outputs.skip != 'true'
         run: ./gradlew publish
         env:
           GITHUB_USERNAME: IanTapply22
