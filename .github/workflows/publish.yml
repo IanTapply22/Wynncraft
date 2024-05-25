@@ -6,6 +6,7 @@ on:
 
 jobs:
   version:
+    if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
