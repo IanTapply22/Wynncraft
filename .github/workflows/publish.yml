@@ -35,8 +35,7 @@ jobs:
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
       - name: Publish package
-        if: steps.check_version_update.outputs.version_changed == 'true'
         run: ./gradlew publish
         env:
-          GITHUB_USERNAME: IanTapply22
+          GITHUB_USERNAME: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
