@@ -51,4 +51,4 @@ jobs:
         id: changelog
         uses: jaywcjlove/changelog-generator@v1.6.1
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
