@@ -8,18 +8,19 @@ on:
 
 jobs:
   ubunutu-jdk21:
-    name: 'Ubuntu Latest (JDK 21)'
+    name: 'Ubuntu Latest (JDK ${{ vars.JAVA_VERSION }})'
     runs-on: ubuntu-latest
+    environment: jdk21-building
     permissions:
       contents: read
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 21
+    - name: Set up JDK ${{ vars.JAVA_VERSION }}
       uses: actions/setup-java@v4
       with:
-        java-version: '21'
-        distribution: 'temurin'
+        java-version: ${{ vars.JAVA_VERSION }}
+        distribution: ${{ vars.UBUNTU_DISTRIBUTION }}
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
@@ -28,18 +29,19 @@ jobs:
       run: ./gradlew build --scan
 
   macos-jdk21:
-    name: 'MacOS Latest (JDK 21)'
+    name: 'MacOS Latest (JDK ${{ vars.JAVA_VERSION }})'
     runs-on: macos-latest
+    environment: jdk21-building
     permissions:
       contents: read
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ vars.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: ${{ vars.JAVA_VERSION }}
+          distribution: ${{ vars.MACOS_DISTRIBUTION }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
@@ -48,18 +50,19 @@ jobs:
         run: ./gradlew build --scan
 
   windows-jdk21:
-    name: 'Windows Latest (JDK 21)'
+    name: 'Windows Latest (JDK ${{ vars.JAVA_VERSION }})'
     runs-on: windows-latest
+    environment: jdk21-building
     permissions:
       contents: read
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ vars.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
+          distribution: ${{ vars.WINDOWS_DISTRIBUTION }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
