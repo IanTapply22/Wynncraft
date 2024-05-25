@@ -1,0 +1,53 @@
+name: Publish Changelog
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
+    needs: central
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Generate changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@v2.1.0
+        with:
+          token: ${{ github.token }}
+
+      - id: get-version
+        uses: jactions/maven-version@v1.2.0
+
+      - name: Create github release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ steps.get-version.outputs.version }}
+          release_name: ${{ steps.get-version.outputs.version }}
+          body: |
+            Grab the new version from https://github.com/IanTapply22/Wynncraft/packages/2160010 version ${{ steps.get-version.outputs.version }}
+            
+            ```
+            <dependencies>
+            	<dependency>
+            	    <groupId>com.iantapply</groupId>
+            	    <artifactId>wynncraft</artifactId>
+            	    <version>${{ steps.get-version.outputs.version }}</version>
+            	</dependency>
+            </dependencies>
+            ```
+            ### Changelog
+            ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
