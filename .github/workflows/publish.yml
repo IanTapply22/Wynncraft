@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Publish Package to GitHub Packages
 
 on:
   push:
@@ -6,10 +6,13 @@ on:
 
 jobs:
   version:
+    name: Fetch Gradle Version
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     runs-on: ubuntu-latest
+
     outputs:
       version: ${{ steps.version.outputs.version }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: thecodemonkey/action-get-gradle-version@master
@@ -17,9 +20,11 @@ jobs:
       - run: 'echo version ${{ steps.version.outputs.version }}'
 
   publish:
+    name: Publish Package
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     needs: version
     runs-on: ubuntu-latest
+    environment: jdk21-publishing
     permissions:
       contents: read
       packages: write
@@ -29,8 +34,8 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: ${{ vars.JAVA_VERSION }}
+          distribution: ${{ vars.JAVA_DISTRIBUTION }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
