@@ -36,8 +36,8 @@ jobs:
       - name: Check version change
         id: check_version_update
         run: |
-          previous_version=$(git show HEAD:build.gradle | grep -oP '(?<=version\s+\").*(?=\")')
-          current_version=$(cat build.gradle | grep -oP '(?<=version\s+\").*(?=\")')
+          previous_version=$(git show HEAD^:build.gradle | grep -oP '(version\s*")\K[^"]+' | head -n1)
+          current_version=$(grep -oP '(version\s*")\K[^"]+' build.gradle | head -n1)
           if [ "$previous_version" != "$current_version" ]; then
             echo "::set-output name=version_changed::true"
           else
