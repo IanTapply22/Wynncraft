@@ -6,9 +6,11 @@
 [Wynncraft](https://wynncraft.com/) is one of the largest MMORPG of Minecraft. This repository contains code that attempts to recreate nearly every aspect if the server in its current state. The plugin is written in Java and is based on the Bukkit/Paper API.
 
 ## Licensing
-`Why doesn't this have a license?`
+`Why doesn't this have a restrictive license?`
 <br>
 Great question! This repository does not contain a license at this point of time because of the fact that this is a recreation of the Wynncraft core functionality. I **did not** create the ideas or aspects of the actual server and I wish to give all credit to the developers of Wynncraft when possible.
+
+It currently does contain a license though to ensure that the code is code is not used in a malicious way and that the liability doesn't fall onto contributors or the author of this repository. This repository currently falls under the [MIT License](https://github.com/IanTapply22/Wynncraft/blob/main/LICENSE.md)
 
 ## Roadmap and Progress
 Aren't sure when a new release will be published or what's planned for this project? Please see the [Project Board/Planner](https://github.com/users/IanTapply22/projects/8) to view the progress, roadmap, backlog, and reported bugs associated with the project. The board is updated frequently and is the go-to place to view the status of this project.
