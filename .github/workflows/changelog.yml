@@ -57,7 +57,7 @@ jobs:
             	<dependency>
             	    <groupId>com.iantapply</groupId>
             	    <artifactId>wynncraft</artifactId>
-            	    <version>${{ steps.get-version.outputs.version }}</version>
+            	    <version>${{needs.version.outputs.version}}</version>
             	</dependency>
             </dependencies>
             ```
