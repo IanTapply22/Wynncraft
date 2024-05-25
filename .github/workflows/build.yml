@@ -6,12 +6,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  JAVA_VERSION: ${{ vars.JAVA_VERSION }}
-
 jobs:
   ubunutu:
-    name: 'Ubuntu Latest (JDK $JAVA_VERSION)'
+    name: 'Ubuntu Latest'
     runs-on: ubuntu-latest
     environment: jdk21-building
     permissions:
@@ -32,7 +29,7 @@ jobs:
       run: ./gradlew build --scan
 
   macos:
-    name: 'MacOS Latest (JDK $JAVA_VERSION)'
+    name: 'MacOS Latest'
     runs-on: macos-latest
     environment: jdk21-building
     permissions:
@@ -53,7 +50,7 @@ jobs:
         run: ./gradlew build --scan
 
   windows:
-    name: 'Windows Latest (JDK $JAVA_VERSION)'
+    name: 'Windows Latest'
     runs-on: windows-latest
     environment: jdk21-building
     permissions:
