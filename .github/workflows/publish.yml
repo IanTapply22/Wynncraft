@@ -36,11 +36,11 @@ jobs:
       - name: Compare with published version
         id: compare_versions
         run: |
-          PUBLISHED_VERSION=$(curl -s \
+            PUBLISHED_VERSION=$(curl -s \
             -u ${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_TOKEN }} \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/users/IanTapply22/packages/maven/wynncraft/versions | jq -r '.[] | .name')
-          if [[ "$PUBLISHED_VERSION" == *"${{ steps.check_version.outputs.version }}"* ]]; then
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/users/IanTapply22/packages/maven/wynncraft/versions | jq -r '.[].name' | sort -V | tail -n 1)
+          if [[ "$PUBLISHED_VERSION" == *"${{ steps.version.outputs.version }}"* ]]; then
             echo "Version is already published. Skipping publish step."
             exit 0
           else
