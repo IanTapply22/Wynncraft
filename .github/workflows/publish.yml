@@ -42,9 +42,10 @@ jobs:
             https://github.com/IanTapply22/Wynncraft/packages/2160010?version=${{needs.version.outputs.version}})
           if [[ "$PUBLISHED_VERSION" == *"${{needs.version.outputs.version}}"* ]]; then
             echo "Version is already published. Skipping publish step."
-            exit 0
+            echo "::set-output name=skip::true"
           else
             echo "Version not published. Proceeding with publish step."
+            echo "::set-output name=skip::false"
           fi
 
       - name: Publish package
