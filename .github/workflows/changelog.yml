@@ -8,6 +8,7 @@ on:
 
 jobs:
   version:
+    name: Fetch Gradle Version
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     runs-on: ubuntu-latest
     outputs:
@@ -19,6 +20,7 @@ jobs:
       - run: 'echo version ${{ steps.version.outputs.version }}'
 
   release:
+    name: Create GitHub Release
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     needs: version
