@@ -1,5 +1,6 @@
 name: Submit Dependency Summary
 
+# Triggered on both PRs and pushes to main
 on:
   push:
     branches: [ "main" ]
@@ -7,19 +8,22 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # Runs on Ubuntu latest (version 22.04)
   dependency-submission:
     name: Generate and submit dependency graph
     runs-on: ubuntu-latest
+    environment: jdk21-flat
     permissions:
       contents: write
 
+    # This will run on the JDK environment specified above
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ vars.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: ${{ vars.JAVA_VERSION }}
+          distribution: ${{ vars.JAVA_DISTRIBUTION }}
 
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/gradle-build-action@v3

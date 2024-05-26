@@ -1,5 +1,6 @@
-name: Build CI with multiple platforms/configs
+name: Build on Latest and All Platforms
 
+# Triggered on both PRs and pushes to main
 on:
   push:
     branches: [ "main" ]
@@ -7,6 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # Runs on Ubuntu latest (version 22.04)
   ubunutu:
     name: 'Build Ubuntu Latest'
     runs-on: ubuntu-latest
@@ -14,6 +16,7 @@ jobs:
     permissions:
       contents: read
 
+    # This will run on the JDK environment specified above
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK ${{ vars.JAVA_VERSION }}
@@ -23,11 +26,12 @@ jobs:
         distribution: ${{ vars.UBUNTU_DISTRIBUTION }}
 
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+      uses: gradle/gradle-build-action@v3
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build --scan
 
+  # Runs on MacOS latest (version 12.0)
   macos:
     name: 'Build MacOS Latest'
     runs-on: macos-latest
@@ -35,6 +39,7 @@ jobs:
     permissions:
       contents: read
 
+    # This will run on the JDK environment specified above
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ vars.JAVA_VERSION }}
@@ -44,11 +49,12 @@ jobs:
           distribution: ${{ vars.MACOS_DISTRIBUTION }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/gradle-build-action@v3
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build --scan
 
+  # Runs on Windows latest (version 2022)
   windows:
     name: 'Build Windows Latest'
     runs-on: windows-latest
@@ -56,6 +62,7 @@ jobs:
     permissions:
       contents: read
 
+    # This will run on the JDK environment specified above
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ vars.JAVA_VERSION }}
@@ -65,7 +72,7 @@ jobs:
           distribution: ${{ vars.WINDOWS_DISTRIBUTION }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/gradle-build-action@v3
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build --scan

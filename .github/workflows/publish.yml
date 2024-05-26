@@ -1,24 +1,30 @@
 name: Publish Package to GitHub Packages
 
+# Triggered on pushes to main
 on:
   push:
     branches: [ "main" ]
 
+# Jobs are only triggered when the commit message starts with 'feat'
 jobs:
+  # Fetches the Gradle version from build.gradle
   version:
     name: Fetch Gradle Version
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
     runs-on: ubuntu-latest
 
+    # This job outputs the Gradle version
     outputs:
       version: ${{ steps.version.outputs.version }}
 
+    # Fetch and output the Gradle version
     steps:
       - uses: actions/checkout@v2
       - uses: thecodemonkey/action-get-gradle-version@master
         id: version
       - run: 'echo version ${{ steps.version.outputs.version }}'
 
+  # Publishes the package to GitHub Packages
   publish:
     name: Publish Package
     if: ${{ startsWith(github.event.head_commit.message, 'feat') }}
@@ -29,16 +35,16 @@ jobs:
       contents: read
       packages: write
 
+    # This job publishes the package to GitHub Packages via ./gradlew publish
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-java@v4
         with:
           java-version: ${{ vars.JAVA_VERSION }}
           distribution: ${{ vars.JAVA_DISTRIBUTION }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/gradle-build-action@v3
 
       - name: Publish package
         run: ./gradlew publish
