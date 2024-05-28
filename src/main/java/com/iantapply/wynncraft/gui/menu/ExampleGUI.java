@@ -2,15 +2,14 @@ package com.iantapply.wynncraft.gui.menu;
 
 import com.iantapply.wynncraft.gui.GUIClickableItem;
 import com.iantapply.wynncraft.gui.WynncraftGUI;
+import com.iantapply.wynncraft.gui.item.border.BlackGlassPaneBorder;
+import com.iantapply.wynncraft.gui.item.filler.CookieFillerItem;
 import com.iantapply.wynncraft.inventory.WynncraftItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ExampleGUI extends WynncraftGUI {
     Inventory inventory;
@@ -54,50 +53,12 @@ public class ExampleGUI extends WynncraftGUI {
      */
     @Override
     public GUIClickableItem fillerItem(int slot) {
-        return new GUIClickableItem() {
-            @Override
-            public void run(InventoryClickEvent event) {
-                event.setCancelled(true);
-            }
-
-            @Override
-            public int getSlot() {
-                return slot;
-            }
-
-            @Override
-            public WynncraftItem getItem() {
-                WynncraftItem item = new WynncraftItem(new ItemStack(Material.COOKIE));
-                ItemMeta meta = item.getItemMeta();
-                meta.displayName(Component.text(" "));
-                item.setItemMeta(meta);
-                return item;
-            }
-        };
+        return CookieFillerItem.getItem(slot);
     }
 
     @Override
     public GUIClickableItem borderItem(int slot) {
-        return new GUIClickableItem() {
-            @Override
-            public void run(InventoryClickEvent event) {
-                event.setCancelled(true);
-            }
-
-            @Override
-            public int getSlot() {
-                return slot;
-            }
-
-            @Override
-            public WynncraftItem getItem() {
-                WynncraftItem item = new WynncraftItem(new ItemStack(Material.COCOA_BEANS));
-                ItemMeta meta = item.getItemMeta();
-                meta.displayName(Component.text(" "));
-                item.setItemMeta(meta);
-                return item;
-            }
-        };
+        return BlackGlassPaneBorder.getItem(slot);
     }
 
     @Override
