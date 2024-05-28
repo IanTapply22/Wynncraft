@@ -14,7 +14,7 @@ public enum StaffTag {
     WEBDEV(0, "WEBDEV", "Given to the people who helped develop the website", Component.text("[", NamedTextColor.DARK_RED)
             .append(Component.text("WebDev", NamedTextColor.RED))
             .append(Component.text("]", NamedTextColor.DARK_RED))),
-    GM(1, "GM", "Given to Game Masters, the creators of items, quests, mobs, etc", Component.text("[", NamedTextColor.DARK_AQUA)
+    GM(1, "GM", "Given to Game Masters, the creators of item, quests, mobs, etc", Component.text("[", NamedTextColor.DARK_AQUA)
             .append(Component.text("GM", NamedTextColor.AQUA))
             .append(Component.text("]", NamedTextColor.DARK_AQUA))),
     BUILD(2, "BUILD", "Given to the builders who built the physical map", Component.text("[", NamedTextColor.DARK_AQUA)

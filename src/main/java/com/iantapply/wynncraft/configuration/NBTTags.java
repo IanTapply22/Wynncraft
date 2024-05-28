@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.configuration;
 
 /**
- * A class that holds the configuration for commonly used NBT tags on items
+ * A class that holds the configuration for commonly used NBT tags on item
  */
 public class NBTTags {
 
