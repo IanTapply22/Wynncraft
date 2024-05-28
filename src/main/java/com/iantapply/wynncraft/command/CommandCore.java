@@ -69,7 +69,7 @@ public class CommandCore implements CommandExecutor {
      * @param command Command which was executed
      * @param label Alias of the command which was used
      * @param args Passed command arguments
-     * @return Whether the command was successful
+     * @return
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -99,7 +99,10 @@ public class CommandCore implements CommandExecutor {
                 // Execute the command and call the event that should be triggered when the command is run
                 try {
                     wynncraftCommand.execute(sender, args);
-                    wynncraftCommand.getTriggerEvent().callEvent();
+
+                    if (wynncraftCommand.getTriggerEvent() != null) {
+                        wynncraftCommand.getTriggerEvent().callEvent();
+                    }
                 } catch (Exception e) {
                     // In the event of incorrect usage, send an error message to the sender and console to notify of the error
                     Component errorMessage = Component.text("An error occurred while executing the command '")

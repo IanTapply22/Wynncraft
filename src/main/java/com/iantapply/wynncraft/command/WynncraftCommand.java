@@ -88,13 +88,15 @@ public abstract class WynncraftCommand {
      * The event that triggers when the command is executed
      * @return The event that is called when the command is run
      */
-    public abstract WynncraftEvent getTriggerEvent();
+    public WynncraftEvent getTriggerEvent() {
+        return null;
+    };
 
     /**
      * The method that is called when the command is executed
      * @param sender The sender of the command
      * @param args The arguments of the command
-     * @return Whether or not the command was executed successfully
+     * @return
      */
     public abstract boolean execute(CommandSender sender, String[] args) throws Exception;
 }
