@@ -210,7 +210,7 @@ public class CraftingIngredient {
     }
 
     /**
-     * Helper functions to add and remove items from arrays
+     * Helper functions to add and remove item from arrays
      */
 
     public void addPositiveEffectRange(PositiveRange range) {

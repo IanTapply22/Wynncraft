@@ -4,7 +4,6 @@ import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -85,6 +84,7 @@ public class WynncraftGUICore {
         } else {
             // Open the GUI and start a task to update the GUI every 20 ticks
             gui.open(player);
+            player.openInventory(gui.inventory());
             gui.startUpdater(this.getPlugin());
 
             // Trigger the event specified in the GUI if it exists

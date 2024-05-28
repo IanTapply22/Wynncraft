@@ -187,7 +187,7 @@ public interface RankBenefit {
 
     /**
      * A temporary booth will be set up in an area which will
-     * sell items you are selling on the Trade Market.
+     * sell item you are selling on the Trade Market.
      * @return true if the player should have access to the merchant booth placement
      */
     default boolean merchantBoothPlacement() {

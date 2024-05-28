@@ -1,12 +1,14 @@
 package com.iantapply.wynncraft.gui;
 
-import com.iantapply.wynncraft.gui.item.GUIClickableItem;
 import com.iantapply.wynncraft.inventory.WynncraftItem;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+/**
+ * A listener to handle GUI click events
+ */
 public class GUIListener implements Listener {
 
     @EventHandler
@@ -25,7 +27,7 @@ public class GUIListener implements Listener {
             return;
         }
 
-        GUIClickableItem clickableItem = GUIClickableItem.items.get(item.getStringFlag(GUIHelpers.getClickableItemFlag()));
+        GUIClickableItem clickableItem = GUIClickableItem.item.get(item.getStringFlag(GUIHelpers.getClickableItemFlag()));
         clickableItem.run(event);
         if (!clickableItem.canPickup()) {
             event.setCancelled(true);

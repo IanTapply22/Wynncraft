@@ -1,8 +1,8 @@
 package com.iantapply.wynncraft.gui;
 
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
-import com.iantapply.wynncraft.gui.item.GUIClickableItem;
 import com.iantapply.wynncraft.inventory.WynncraftItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -24,9 +24,9 @@ public abstract class WynncraftGUI {
 
     /**
      * The name that is displayed as the GUI title
-     * @return The name as a String object
+     * @return The name
      */
-    public abstract String name();
+    public abstract Component name();
 
     /**
      * The number of slots that are present within the GUI
@@ -39,9 +39,20 @@ public abstract class WynncraftGUI {
      * The filler item that is used to fill empty slots in the GUI
      * @return The filler item as a WynncraftItem object
      */
-    public abstract GUIClickableItem fillerItem();
+    public abstract GUIClickableItem fillerItem(int slot);
 
-    public abstract GUIClickableItem borderItem();
+    /**
+     * The border item that is used to create a border around the GUI
+     * @return The border item as a WynncraftItem object
+     */
+    public abstract GUIClickableItem borderItem(int slot);
+
+    /**
+     * The item that is displayed in the GUI but can't be picked up
+     * @param slot The slot that the item is in
+     * @return The item as a WynncraftItem object
+     */
+    public abstract GUIClickableItem cantPickup(WynncraftItem item, int slot);
 
     /**
      * The event that is fired when the GUI is opened or triggered
@@ -107,17 +118,17 @@ public abstract class WynncraftGUI {
         if (size < 27) return;
 
         for (int i = 0; i < 9; i++) {
-            addItem(borderItem(), i);
+            addItem(borderItem(i), i);
         }
 
         for(int i = 0; i < Math.ceil(size / 10.0); i++) {
-            addItem(borderItem(), (8 + (9 * i)));
+            addItem(borderItem(i), (8 + (9 * i)));
             if(9 + (9 * i) > size - 1) continue;
-            addItem(borderItem(), (9 + (9 * i)));
+            addItem(borderItem(i), (9 + (9 * i)));
         }
 
         for(int i = size - 9; i < size; i++) {
-            addItem(borderItem(), (i));
+            addItem(borderItem(i), (i));
         }
     }
 
@@ -127,7 +138,7 @@ public abstract class WynncraftGUI {
     public void fillEmptySlots() {
         for (int i = 0; i < slots(); i++) {
             if (inventory().getItem(i) == null) {
-                inventory().setItem(i, fillerItem().getItem());
+                inventory().setItem(i, fillerItem(i).getItem());
             }
         }
     }
@@ -137,7 +148,7 @@ public abstract class WynncraftGUI {
      */
     public void fillAllSlots() {
         for (int i = 0; i < slots(); i++) {
-            inventory().setItem(i, fillerItem().getItem());
+            inventory().setItem(i, fillerItem(i).getItem());
         }
     }
 }
