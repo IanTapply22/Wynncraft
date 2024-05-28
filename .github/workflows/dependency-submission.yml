@@ -26,4 +26,4 @@ jobs:
           distribution: ${{ vars.JAVA_DISTRIBUTION }}
 
       - name: Generate and submit dependency graph
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
