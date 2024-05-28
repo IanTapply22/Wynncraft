@@ -11,7 +11,7 @@ import java.util.UUID;
  * non-interactable.
  */
 public abstract class GUIClickableItem {
-    public static HashMap<String, GUIClickableItem> item = new HashMap<>();
+    public static HashMap<String, GUIClickableItem> itemData = new HashMap<>();
     private final String uuid;
 
     /**
@@ -19,7 +19,7 @@ public abstract class GUIClickableItem {
      */
     public GUIClickableItem() {
         this.uuid = UUID.randomUUID().toString();
-        item.put(uuid, this);
+        itemData.put(uuid, this);
     }
 
     /**

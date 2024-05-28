@@ -27,7 +27,8 @@ public class GUIListener implements Listener {
             return;
         }
 
-        GUIClickableItem clickableItem = GUIClickableItem.item.get(item.getStringFlag(GUIHelpers.getClickableItemFlag()));
+        // Get the clickable item and run it, and/or cancel it if it can't be picked up
+        GUIClickableItem clickableItem = GUIClickableItem.itemData.get(item.getStringFlag(GUIHelpers.getClickableItemFlag()));
         clickableItem.run(event);
         if (!clickableItem.canPickup()) {
             event.setCancelled(true);
