@@ -1,24 +1,28 @@
 package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
+import com.iantapply.wynncraft.database.database.MigrationsDatabase;
 import com.iantapply.wynncraft.database.table.Column;
-import com.iantapply.wynncraft.rank.NonPurchasableRank;
-import com.iantapply.wynncraft.rank.PurchasableRank;
+import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 
+/**
+ * A model that is used to track the versioning of models as they are migrated.
+ * <p>
+ * This is used to notify administrators of migrations that are needed to be performed
+ * on the database.
+ */
 @Getter @Setter
-public class PlayerModel implements Model {
-    private String uuid;
-    /* These are stored separately to give players permissions based on things that other ranks doesn't have **/
-    private PurchasableRank purchasedRank;
-    private NonPurchasableRank nonPurchasedRank;
-    private double combatLevelXp; // The amount of XP the player has towards their next combat level, this will be converted to a level in the service
-    private String classes; // The profiles the player has on their account, this is stored as a JSON string and only has IDs
+public class MigrationModel implements Model {
+    public String uuid;
+    public String version;
 
-    public PlayerModel(Integer someNumber, String someString) {
+    public MigrationModel(String uuid, String version) {
+        this.uuid = uuid;
+        this.version = version;
     }
 
     /**
@@ -28,7 +32,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public Database database() {
-        return null;
+        return new MigrationsDatabase();
     }
 
     /**
@@ -37,7 +41,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String table() {
-        return null;
+        return "migrations";
     }
 
     /**
@@ -46,7 +50,11 @@ public class PlayerModel implements Model {
      */
     @Override
     public ArrayList<Column> columns() {
-        return null;
+        ArrayList<Column> columns = new ArrayList<>();
+        columns.add(new Column("uuid", DataType.UUID));
+        columns.add(new Column("version", DataType.TEXT));
+
+        return columns;
     }
 
     /**
@@ -56,7 +64,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String name() {
-        return "Player";
+        return "Example";
     }
 
     /**

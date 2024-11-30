@@ -1,7 +1,13 @@
 package com.iantapply.wynncraft.database.model;
 
+import com.iantapply.wynncraft.database.Database;
+import com.iantapply.wynncraft.database.database.ExampleDatabase;
+import com.iantapply.wynncraft.database.table.Column;
+import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
 
 /**
  * Represents an example model that can be used to demonstrate
@@ -15,6 +21,37 @@ public class ExampleModel implements Model {
     public ExampleModel(Integer someNumber, String someString) {
         this.someNumber = someNumber;
         this.someString = someString;
+    }
+
+    /**
+     * The database, or table that the model is the child of. This is also referred to as
+     * the parent of the model.
+     * @return The Database object of the table
+     */
+    @Override
+    public Database database() {
+        return new ExampleDatabase();
+    }
+
+    /**
+     * The table the migration will be run on inside the parent
+     * @return The name of the table in the parent database
+     */
+    @Override
+    public String table() {
+        return "example";
+    }
+
+    /**
+     * The columns that will appear in order and in the specified parent
+     * @return An arraylist of column objects the contain the information of the column
+     */
+    @Override
+    public ArrayList<Column> columns() {
+        ArrayList<Column> columns = new ArrayList<>();
+        columns.add(new Column("Example", DataType.TEXT));
+
+        return columns;
     }
 
     /**

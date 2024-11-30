@@ -11,6 +11,7 @@ import java.util.Collections;
  * but not limited to building URLs, finishing queries, and interacting
  * with tables
  */
+// TODO: Remove thrown exceptions and handle
 public class DatabaseHelpers {
 
     /**
