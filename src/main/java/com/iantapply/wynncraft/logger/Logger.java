@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.logger;
 
 import com.iantapply.wynncraft.configuration.Plugin;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 
 /**
@@ -8,9 +9,11 @@ import org.bukkit.Bukkit;
  */
 public class Logger {
     /**
-     * Log a message to the console with STDOUT
+     * Deprecated method to log a message to the console with STDOUT.
+     * The preferred method to log is with the log method which uses the Adventure API.
      * @param message The message to log
      */
+    @Deprecated
     public static void logWithSTDOUT(String message) {
         System.out.println(message);
     }
@@ -21,7 +24,13 @@ public class Logger {
      * @param message The message to log
      */
     public static void log(LoggingLevel level, String message) {
-        Bukkit.getServer().getConsoleSender().sendMessage(level.getColor() + "[" + level.getName() + "] " + message);
+        Component logMessage = Component.text()
+                .append(Component.text("[" + level.getName() + "] ")
+                        .color(level.getColor()))
+                .append(Component.text(message))
+                .build();
+
+        Bukkit.getServer().getConsoleSender().sendMessage(logMessage);
     }
 
     /**

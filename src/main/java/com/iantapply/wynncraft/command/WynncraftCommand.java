@@ -3,8 +3,6 @@ package com.iantapply.wynncraft.command;
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
 import com.iantapply.wynncraft.rank.PurchasableRank;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -77,7 +75,7 @@ public abstract class WynncraftCommand {
     }
 
     /**
-     * Whether or not the command can only be executed by a player
+     * Whether the command can only be executed by a player
      * @return A boolean to determine if the command is player executable only
      */
     public boolean isPlayerOnly() {
@@ -94,9 +92,9 @@ public abstract class WynncraftCommand {
 
     /**
      * The method that is called when the command is executed
+     *
      * @param sender The sender of the command
-     * @param args The arguments of the command
-     * @return
+     * @param args   The arguments of the command
      */
-    public abstract boolean execute(CommandSender sender, String[] args) throws Exception;
+    public abstract void execute(CommandSender sender, String[] args) throws Exception;
 }
