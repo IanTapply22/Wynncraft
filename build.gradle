@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.0"
     id("io.papermc.paperweight.userdev") version "1.7.1"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
 }
 
@@ -39,7 +40,7 @@ publishing {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT"
     implementation "net.kyori:adventure-api:4.17.0"
 
     compileOnly 'org.projectlombok:lombok:1.18.32'
@@ -48,13 +49,23 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.32'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
 
-    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
+
+    implementation 'org.postgresql:postgresql:42.7.4'
 }
 
 tasks {
     runServer {
-        minecraftVersion("1.20.4")
+        minecraftVersion("1.21.3")
     }
+}
+
+tasks.named('shadowJar') {
+    archiveClassifier.set('')
+}
+
+tasks.named('build') {
+    dependsOn(tasks.named('shadowJar'))
 }
 
 def targetJavaVersion = 21

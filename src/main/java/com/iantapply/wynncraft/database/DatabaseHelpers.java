@@ -1,9 +1,9 @@
 package com.iantapply.wynncraft.database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.iantapply.wynncraft.logger.Logger;
+import com.iantapply.wynncraft.logger.LoggingLevel;
+
+import java.sql.*;
 import java.util.Collections;
 
 /**
@@ -23,13 +23,28 @@ public class DatabaseHelpers {
     }
 
     /**
+     * Builds a database URL from the given database information and a flag
+     * of if the database is the fallback database.
+     * @param databaseInformation The information to build the URL from
+     * @param fallbackDatabase Whether the database is the fallback database
+     * @return The built URL as a string
+     */
+    public static String buildDatabaseUrl(DatabaseInformation databaseInformation, boolean fallbackDatabase) {
+        String databaseName = fallbackDatabase ? databaseInformation.getFallbackName() : databaseInformation.getName();
+        return String.format("%s%s:%s/%s", databaseInformation.getUrlPrefix(), databaseInformation.getHost(), databaseInformation.getPort(), databaseName);
+    }
+
+    /**
      * Finishes a query by executing the statement and closing it without returning a result
      * @param queryStatement The statement to finish
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void finishQueryWithoutResult(PreparedStatement queryStatement) throws SQLException {
-        queryStatement.execute();
-        queryStatement.close();
+    public static void finishQueryWithoutResult(PreparedStatement queryStatement) {
+        try {
+            queryStatement.execute();
+            queryStatement.close();
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 
     /**
@@ -51,6 +66,79 @@ public class DatabaseHelpers {
         resultSet.close();
         queryStatement.close();
         return result;
+    }
+
+    /**
+     * Executes a query on the provided database name and with the provided query
+     * @param databaseClassName The name of the Java class that appears in the database subfolder.
+     *                          This is the name of the class itself, not the name of the physical database as there can be duplicates.
+     * @param query The query that is executed on the specified database
+     */
+    public static void executeQuery(String databaseClassName, String query) {
+        try {
+            // Dynamically load the class
+            Class<?> databaseClass = Class.forName(String.format("com.iantapply.wynncraft.database.database.%s", databaseClassName));
+
+            // Ensure the class is of type Database
+            if (!Database.class.isAssignableFrom(databaseClass)) {
+                Logger.log(LoggingLevel.ERROR, "The provided class does not extend the Database base class.");
+                return;
+            }
+
+            // Instantiate the database class
+            Database databaseInstance = (Database) databaseClass.getDeclaredConstructor().newInstance();
+
+            // Get the connection and execute the query
+            try (Connection connection = databaseInstance.connection();
+                 Statement statement = connection.createStatement()) {
+                statement.execute(query);
+                Logger.log(LoggingLevel.INFO, "Query executed successfully!");
+            } catch (SQLException e) {
+                Logger.log(LoggingLevel.ERROR, "Failed to execute query: " + e.getMessage());
+            }
+
+        } catch (ClassNotFoundException e) {
+            Logger.log(LoggingLevel.ERROR, "The database class could not be found! Be sure to match a class name in the database folder.");
+        } catch (ReflectiveOperationException e) {
+            Logger.log(LoggingLevel.ERROR, "Failed to instantiate the database class: " + e.getMessage());
+        }
+    }
+
+
+    /**
+     * Creates a database with the given database name
+     * @param connection The database connection to use
+     * @param database The name of the database to create
+     */
+    public static void createDatabase(Connection connection, String database) {
+        // Prepare the SQL query
+        String query = String.format("CREATE DATABASE %s", database);
+
+        // Execute and finishes the query
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
+    }
+
+    /**
+     * Drops a database with the given database name
+     * @param connection The database connection to use
+     * @param database The name of the database to drop
+     */
+    public static void dropDatabase(Connection connection, String database) {
+        // Prepare the SQL query
+        String query = String.format("DROP DATABASE %s", database);
+
+        // Execute and finishes the query
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 
     /**

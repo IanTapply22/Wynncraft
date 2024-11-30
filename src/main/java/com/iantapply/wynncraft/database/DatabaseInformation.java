@@ -13,12 +13,13 @@ public class DatabaseInformation {
     private String displayName;
 
     /** Connection related information */
-    private String urlPrefix = "jdbc:mysql://";
+    private String urlPrefix = "jdbc:postgresql://";
     private String host = "localhost";
-    private String port = "3306";
+    private String port = "5432";
 
     /** Database/permission related information */
     private String name;
+    private final String fallbackName = "postgres";
     private String username = "root";
     private String password = "";
 

@@ -54,16 +54,15 @@ public class ExampleCommand extends WynncraftCommand {
     public int maxArgs() {
         return 0;
     }
+
     /**
      * The method that is called when the command is executed
      *
      * @param sender The sender of the command
      * @param args   The arguments of the command
-     * @return
      */
     @Override
-    public boolean execute(CommandSender sender, String[] args) throws Exception {
+    public void execute(CommandSender sender, String[] args) {
         sender.sendMessage("This is an example command!");
-        return false;
     }
 }
