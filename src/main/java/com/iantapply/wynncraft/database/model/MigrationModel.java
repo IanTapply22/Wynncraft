@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
-import com.iantapply.wynncraft.database.database.ExampleDatabase;
+import com.iantapply.wynncraft.database.database.MigrationsDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
@@ -10,23 +10,27 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 /**
- * Represents an example model that can be used to demonstrate
- * how to create a model for the database.
+ * A model that is used to track the versioning of models as they are migrated.
+ * <p>
+ * This is used to notify administrators of migrations that are needed to be performed
+ * on the database.
  */
 @Getter @Setter
-public class ExampleModel implements Model {
-    private Integer someNumber;
-    private String someString;
+public class MigrationModel implements Model {
+    public String uuid;
+    public String version;
+    public String createdAt;
 
-    public ExampleModel(Integer someNumber, String someString) {
-        this.someNumber = someNumber;
-        this.someString = someString;
+    public MigrationModel(String uuid, String version, String createdAt) {
+        this.uuid = uuid;
+        this.version = version;
+        this.createdAt = createdAt;
     }
 
     /**
      * Used only for running the migrate and revert methods
      */
-    public ExampleModel() {}
+    public MigrationModel() {}
 
     /**
      * The UUID of the model. This does not change
@@ -34,7 +38,7 @@ public class ExampleModel implements Model {
      */
     @Override
     public String uuid() {
-        return "9b794d87-1fb4-4405-a16c-b95e64542d4b";
+        return "0091a112-8502-4a31-bc1f-71842f8f5cec";
     }
 
     /**
@@ -44,7 +48,7 @@ public class ExampleModel implements Model {
      */
     @Override
     public Database database() {
-        return new ExampleDatabase();
+        return new MigrationsDatabase();
     }
 
     /**
@@ -53,7 +57,7 @@ public class ExampleModel implements Model {
      */
     @Override
     public String table() {
-        return "example";
+        return "migrations";
     }
 
     /**
@@ -63,7 +67,9 @@ public class ExampleModel implements Model {
     @Override
     public ArrayList<Column> columns() {
         ArrayList<Column> columns = new ArrayList<>();
-        columns.add(new Column("example", DataType.TEXT));
+        columns.add(new Column("uuid", DataType.UUID));
+        columns.add(new Column("version", DataType.TEXT));
+        columns.add(new Column("created_at", DataType.TIMESTAMP));
 
         return columns;
     }
@@ -75,7 +81,7 @@ public class ExampleModel implements Model {
      */
     @Override
     public String name() {
-        return "Example";
+        return "Migration";
     }
 
     /**

@@ -30,8 +30,11 @@ public abstract class Database {
 
     /**
      * Connects to the database
+     *
+     * @param silent Whether the database should be connected to silently not displaying
+     *               non-fatal logged outputs.
      */
-    public void connect() {
+    public Connection connect(boolean silent) {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException e) {
@@ -39,7 +42,7 @@ public abstract class Database {
         }
 
         // If the connection is already established, return the current connection
-        if (this.connection != null) return;
+        if (this.connection != null) return this.connection;
 
         // Build the database connection URL based off of the database information
         String connectionUrl = DatabaseHelpers.buildDatabaseUrl(databaseInformation());
@@ -57,7 +60,7 @@ public abstract class Database {
                 DatabaseHelpers.createDatabase(fallbackConnection, databaseInformation().getName());
             } catch (SQLException fallbackException) {
                 Logger.log(LoggingLevel.ERROR, "Failed to create database: " + fallbackException.getMessage());
-                throw new RuntimeException("Cannot proceed without the database.", fallbackException);
+                return null;
             }
 
             // Retry connecting to the newly created database
@@ -65,11 +68,15 @@ public abstract class Database {
                 this.connection = DriverManager.getConnection(connectionUrl, databaseInformation().getUsername(), databaseInformation().getPassword());
             } catch (SQLException retryException) {
                 Logger.log(LoggingLevel.ERROR, "Failed to reconnect after creating database: " + retryException.getMessage());
-                throw new RuntimeException("Cannot connect to the newly created database.", retryException);
+                return null;
             }
         }
 
-        Logger.log(LoggingLevel.INFO, "Connected to " + databaseInformation().getDisplayName() + " database");
+        if (!silent) {
+            Logger.log(LoggingLevel.INFO, "Connected to " + databaseInformation().getDisplayName() + " database");
+        }
+
+        return this.connection;
     }
 
     /**
