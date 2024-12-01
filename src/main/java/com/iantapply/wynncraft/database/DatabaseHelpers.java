@@ -14,6 +14,7 @@ import java.util.Collections;
  * with tables
  */
 // TODO: Remove thrown exceptions and handle
+// TODO: Utilize the Column constructor for queries and remove String arrays
 public class DatabaseHelpers {
 
     /**

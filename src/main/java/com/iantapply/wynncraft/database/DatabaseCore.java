@@ -1,6 +1,5 @@
 package com.iantapply.wynncraft.database;
 
-import com.iantapply.wynncraft.database.model.ExampleModel;
 import com.iantapply.wynncraft.database.model.MigrationModel;
 import com.iantapply.wynncraft.database.model.Model;
 import com.iantapply.wynncraft.logger.Logger;
@@ -12,15 +11,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Getter @Setter
 public class DatabaseCore {
-    // TODO: Create a way to mark models as automatically migrating upon startup
-    // TODO: Create method to notify console of outdated migrations
-    // TODO: Use database object to make connection for below query
-    // TODO: If model can be migrated, migrate it by altering the table and adding the columns in the "columns" value of the interface
-    // TODO: Upon failing, notify console
     private ArrayList<Model> models;
 
     public DatabaseCore() {
@@ -33,7 +26,6 @@ public class DatabaseCore {
      */
     public void initialize() {
         this.stageModel(new MigrationModel());
-        this.stageModel(new ExampleModel());
     }
 
     /**
@@ -44,7 +36,7 @@ public class DatabaseCore {
         if (!models.contains(model)) {
             this.models.add(model);
         } else {
-            Logger.log(LoggingLevel.INFO, String.format("Model %s is already staged.", model.name()));
+            Logger.log(LoggingLevel.WARNING, String.format("Model %s is already staged", model.name()));
         }
     }
 
@@ -66,7 +58,7 @@ public class DatabaseCore {
             for (Model model : this.models) {
                 Logger.log(LoggingLevel.INFO, String.format("Registering %s model...", model.name()));
 
-                Connection connection = model.database().connectSilently();
+                Connection connection = model.database().connect(true);
                 // Check if table does not exist, if not then create the blank table
                 if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
                     Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));

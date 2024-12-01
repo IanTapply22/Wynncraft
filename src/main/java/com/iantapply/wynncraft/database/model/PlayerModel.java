@@ -9,6 +9,10 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
+/**
+ * A model that is used to handle and store the base profile data of a
+ * player who is registered on the server.
+ */
 @Getter @Setter
 public class PlayerModel implements Model {
     private String uuid;
@@ -18,7 +22,11 @@ public class PlayerModel implements Model {
     private double combatLevelXp; // The amount of XP the player has towards their next combat level, this will be converted to a level in the service
     private String classes; // The profiles the player has on their account, this is stored as a JSON string and only has IDs
 
-    public PlayerModel(Integer someNumber, String someString) {
+    public PlayerModel(PurchasableRank purchasableRank, NonPurchasableRank nonPurchasableRank, double combatLevelXp, String classes) {
+        this.purchasedRank = purchasableRank;
+        this.nonPurchasedRank = nonPurchasableRank;
+        this.combatLevelXp = combatLevelXp;
+        this.classes = classes;
     }
 
     /**

@@ -16,7 +16,8 @@ public enum DataType {
     TEXT(4, "text", "Variable-length character string"),
     UUID(5, "uuid", "Universally unique identifier"),
     DATE(6, "date", "Calendar date (year, month, day)"),
-    CIDR(7, "cidr", "IPv4 or IPv6 network address");
+    CIDR(7, "cidr", "IPv4 or IPv6 network address"),
+    TIME_WITH_TIMEZONE(8, "timetz", "Time with timezone");
 
     private final int id;
     private final String type;

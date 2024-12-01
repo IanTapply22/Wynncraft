@@ -2,14 +2,12 @@ package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.database.ExampleDatabase;
-import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Represents an example model that can be used to demonstrate
