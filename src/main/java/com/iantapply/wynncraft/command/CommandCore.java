@@ -1,6 +1,5 @@
 package com.iantapply.wynncraft.command;
 
-import com.iantapply.wynncraft.command.commands.ExampleCommand;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
@@ -48,7 +47,7 @@ public class CommandCore implements CommandExecutor {
      * This is done here to reduce the size of Wynncraft.
      */
     public void initialize() {
-        stageCommand(new ExampleCommand());
+        // TODO: Stage commands
     }
 
     /**
