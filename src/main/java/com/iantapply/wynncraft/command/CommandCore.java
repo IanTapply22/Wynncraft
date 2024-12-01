@@ -1,5 +1,6 @@
 package com.iantapply.wynncraft.command;
 
+import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
@@ -47,7 +48,9 @@ public class CommandCore implements CommandExecutor {
      * This is done here to reduce the size of Wynncraft.
      */
     public void initialize() {
-        // TODO: Stage commands
+        GameCommandsCore gameCommandsCore = new GameCommandsCore();
+
+        gameCommandsCore.initialize();
     }
 
     /**
@@ -96,8 +99,8 @@ public class CommandCore implements CommandExecutor {
                 if (!this.isPlayer(sender) && wynncraftCommand.isPlayerOnly()) return false;
 
                 if (args.length < wynncraftCommand.minArgs() || args.length > wynncraftCommand.maxArgs()) {
-                    Component errorMessage = Component.text("Incorrect usage. The correct syntax is '")
-                            .append(Component.text(wynncraftCommand.syntax()).color(NamedTextColor.RED))
+                    Component errorMessage = Component.text("Incorrect usage. The correct syntax is '").color(NamedTextColor.RED)
+                            .append(Component.text("/" + wynncraftCommand.syntax()).color(NamedTextColor.RED))
                             .append(Component.text("'. Please try again."));
 
                     sender.sendMessage(errorMessage);
@@ -116,7 +119,7 @@ public class CommandCore implements CommandExecutor {
                     Component errorMessage = Component.text("An error occurred while executing the command '")
                             .append(Component.text(wynncraftCommand.name()).color(NamedTextColor.RED))
                             .append(Component.text("'. Incorrect usage, the correct syntax is '").color(NamedTextColor.RED))
-                            .append(Component.text(wynncraftCommand.syntax())).color(NamedTextColor.RED)
+                            .append(Component.text("/" + wynncraftCommand.syntax())).color(NamedTextColor.RED)
                             .append(Component.text("'. Please try again."));
 
                     sender.sendMessage(errorMessage);

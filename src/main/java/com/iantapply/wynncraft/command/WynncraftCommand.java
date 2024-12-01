@@ -96,5 +96,5 @@ public abstract class WynncraftCommand {
      * @param sender The sender of the command
      * @param args   The arguments of the command
      */
-    public abstract void execute(CommandSender sender, String[] args) throws Exception;
+    public abstract void execute(CommandSender sender, String[] args);
 }
