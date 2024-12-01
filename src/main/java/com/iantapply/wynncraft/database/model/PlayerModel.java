@@ -22,6 +22,20 @@ public class PlayerModel implements Model {
     }
 
     /**
+     * Used only for running the migrate and revert methods
+     */
+    public PlayerModel() {}
+
+    /**
+     * The UUID of the model. This does not change
+     * @return The UUID of the model
+     */
+    @Override
+    public String uuid() {
+        return "163d5af6-43dd-4c82-8da7-df40bddb7d62";
+    }
+
+    /**
      * The database, or table that the model is the child of. This is also referred to as
      * the parent of the model.
      * @return The Database object of the table

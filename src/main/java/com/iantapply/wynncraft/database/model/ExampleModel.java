@@ -2,12 +2,14 @@ package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.database.ExampleDatabase;
+import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Represents an example model that can be used to demonstrate
@@ -21,6 +23,20 @@ public class ExampleModel implements Model {
     public ExampleModel(Integer someNumber, String someString) {
         this.someNumber = someNumber;
         this.someString = someString;
+    }
+
+    /**
+     * Used only for running the migrate and revert methods
+     */
+    public ExampleModel() {}
+
+    /**
+     * The UUID of the model. This does not change
+     * @return The UUID of the model
+     */
+    @Override
+    public String uuid() {
+        return "9b794d87-1fb4-4405-a16c-b95e64542d4b";
     }
 
     /**
@@ -49,7 +65,7 @@ public class ExampleModel implements Model {
     @Override
     public ArrayList<Column> columns() {
         ArrayList<Column> columns = new ArrayList<>();
-        columns.add(new Column("Example", DataType.TEXT));
+        columns.add(new Column("example", DataType.TEXT));
 
         return columns;
     }

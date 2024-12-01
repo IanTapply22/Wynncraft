@@ -12,7 +12,8 @@ public enum LoggingLevel {
     WARNING("WARNING", NamedTextColor.RED),
     INFO("INFO", NamedTextColor.YELLOW),
     ERROR("ERROR", NamedTextColor.DARK_RED),
-    DEBUG("DEBUG", NamedTextColor.WHITE);
+    DEBUG("DEBUG", NamedTextColor.WHITE),
+    SUCCESS("SUCCESS", NamedTextColor.DARK_GREEN),;
 
     private final String name;
     private final NamedTextColor color;

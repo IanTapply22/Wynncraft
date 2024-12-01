@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft;
 
 import com.iantapply.wynncraft.command.CommandCore;
+import com.iantapply.wynncraft.database.DatabaseCore;
 import com.iantapply.wynncraft.database.database.MigrationsDatabase;
 import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.logger.Logger;
@@ -15,8 +16,9 @@ public final class Wynncraft extends JavaPlugin {
     public void onEnable() {
         Logger.logInitialization();
 
-        new MigrationsDatabase().connect();
-        new WynncraftDatabase().connect();
+        DatabaseCore databaseCore = new DatabaseCore();
+        databaseCore.initialize();
+        databaseCore.registerModels();
 
         CommandCore commandCore = new CommandCore(this);
         commandCore.initialize();

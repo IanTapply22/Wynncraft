@@ -1,9 +1,11 @@
 package com.iantapply.wynncraft.database;
 
+import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -143,28 +145,37 @@ public class DatabaseHelpers {
     }
 
     /**
-     * Inserts a row into a table with the given columns and values
-     * <p>
-     * Please be aware and cautious that this does not sanitize the input
-     * nor does it check for the types of both the columns and values inserted.
-     * @param table The table to insert the row into
-     * @param columns The columns to insert the values into
-     * @param values The values to insert into the columns
+     * Inserts a row into a table with the given columns and values.
+     *
+     * @param connection The database connection to use.
+     * @param table The name of the table to insert the row into.
+     * @param columns The columns to insert the values into.
+     * @param values The values to insert into the columns.
+     * @throws SQLException If the statement cannot be executed or closed.
      */
     public static void insertRow(Connection connection, String table, String[] columns, String[] values) throws SQLException {
+        if (columns.length != values.length) {
+            throw new IllegalArgumentException("Columns and values must have the same length.");
+        }
+
         // Prepare the SQL query
         String columnString = String.join(", ", columns);
         String valuePlaceholderString = String.join(", ", Collections.nCopies(values.length, "?"));
         String query = String.format("INSERT INTO %s (%s) VALUES (%s)", table, columnString, valuePlaceholderString);
 
-        // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        for (int i = 0; i < values.length; i++) {
-            queryStatement.setString(i + 1, values[i]);
+        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                if (columns[i].equalsIgnoreCase("uuid")) {
+                    // Explicitly cast the UUID value
+                    queryStatement.setObject(i + 1, java.util.UUID.fromString(values[i]));
+                } else {
+                    queryStatement.setString(i + 1, values[i]);
+                }
+            }
+            queryStatement.executeUpdate();
         }
-
-        finishQueryWithoutResult(queryStatement);
     }
+
 
     /**
      * Updates a row in a table with the given columns and values
@@ -214,19 +225,24 @@ public class DatabaseHelpers {
     }
 
     /**
-     * Creates a table with the given columns and types
-     * @param connection The database connection to use
-     * @param table The table to create
-     * @param columns The columns to create in the table (e.g. "id", "name", "age")
-     * @param types The types of the columns to create (e.g. "INT", "VARCHAR(255)", "INT")
-     * @throws SQLException If the statement cannot be executed or closed
+     * Creates a table with the given columns and types.
+     *
+     * @param connection The database connection to use.
+     * @param table The name of the table to create.
+     * @param columns The ArrayList of Column objects containing column definitions.
+     * @throws SQLException If the statement cannot be executed or closed.
      */
-    public static void createTable(Connection connection, String table, String[] columns, String[] types) throws SQLException {
-        // Builds the column string
+    public static void createTable(Connection connection, String table, ArrayList<Column> columns) throws SQLException {
+        if (columns == null || columns.isEmpty()) {
+            throw new IllegalArgumentException("The columns list cannot be null or empty.");
+        }
+
+        // Build the column string
         StringBuilder columnString = new StringBuilder();
-        for (int i = 0; i < columns.length; i++) {
-            columnString.append(columns[i]).append(" ").append(types[i]);
-            if (i < columns.length - 1) {
+        for (int i = 0; i < columns.size(); i++) {
+            Column column = columns.get(i);
+            columnString.append(column.getName()).append(" ").append(column.getType());
+            if (i < columns.size() - 1) {
                 columnString.append(", ");
             }
         }
@@ -234,9 +250,10 @@ public class DatabaseHelpers {
         // Prepare the SQL query
         String query = String.format("CREATE TABLE IF NOT EXISTS %s (%s)", table, columnString);
 
-        // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        finishQueryWithoutResult(queryStatement);
+        // Execute the query
+        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+            queryStatement.execute();
+        }
     }
 
     /**
@@ -255,22 +272,55 @@ public class DatabaseHelpers {
     }
 
     /**
-     * Selects an entire row from a table with the given condition
-     * @param connection The database connection to use
-     * @param table The table to select the row from
-     * @param condition The condition to check for when selecting a row (e.g. "id = 1")
-     * @return The rows data in a String array
+     * Checks if a table exists in a database connection
+     *
+     * @param connection The database connection
+     * @param table The name of the table to check for existence
+     * @return A boolean indicating if the table exists
      * @throws SQLException If the statement cannot be executed or closed
      */
-    public static String[] selectRow(Connection connection, String table, String condition) throws SQLException {
+    public static boolean checkTableExists(Connection connection, String table) throws SQLException {
+        // Use database metadata to check for the table's existence
+        try (ResultSet tables = connection.getMetaData().getTables(null, null, table, null)) {
+            return tables.next(); // Returns true if a table with the specified name exists
+        }
+    }
+
+    /**
+     * Selects an entire row from a table with the given condition.
+     *
+     * @param connection The database connection to use.
+     * @param table The table to select the row from.
+     * @param condition The condition to check for when selecting a row (e.g., "uuid = ?").
+     * @param conditionValues The values to bind to the condition's placeholders.
+     * @return The row's data in a String array.
+     * @throws SQLException If the statement cannot be executed or closed.
+     */
+    public static String[] selectRow(Connection connection, String table, String condition, Object... conditionValues) throws SQLException {
         // Prepare the SQL query
         String query = String.format("SELECT * FROM %s WHERE %s", table, condition);
+        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+            // Set condition values
+            for (int i = 0; i < conditionValues.length; i++) {
+                queryStatement.setObject(i + 1, conditionValues[i]);
+            }
 
-        // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
+            // Execute the query and process the result
+            try (ResultSet resultSet = queryStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Fetch all columns of the row as a String array
+                    int columnCount = resultSet.getMetaData().getColumnCount();
+                    String[] row = new String[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = resultSet.getString(i + 1); // ResultSet columns are 1-based
+                    }
+                    return row;
+                }
+            }
+        }
 
-
-        return finishQuery(queryStatement);
+        // Return null if no row is found
+        return null;
     }
 
     /**

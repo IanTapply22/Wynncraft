@@ -26,6 +26,20 @@ public class MigrationModel implements Model {
     }
 
     /**
+     * Used only for running the migrate and revert methods
+     */
+    public MigrationModel() {}
+
+    /**
+     * The UUID of the model. This does not change
+     * @return The UUID of the model
+     */
+    @Override
+    public String uuid() {
+        return "0091a112-8502-4a31-bc1f-71842f8f5cec";
+    }
+
+    /**
      * The database, or table that the model is the child of. This is also referred to as
      * the parent of the model.
      * @return The Database object of the table
@@ -64,7 +78,7 @@ public class MigrationModel implements Model {
      */
     @Override
     public String name() {
-        return "Example";
+        return "Migration";
     }
 
     /**
