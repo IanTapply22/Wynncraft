@@ -60,7 +60,7 @@ public abstract class Database {
                 DatabaseHelpers.createDatabase(fallbackConnection, databaseInformation().getName());
             } catch (SQLException fallbackException) {
                 Logger.log(LoggingLevel.ERROR, "Failed to create database: " + fallbackException.getMessage());
-                throw new RuntimeException("Cannot proceed without the database.", fallbackException);
+                return null;
             }
 
             // Retry connecting to the newly created database
@@ -68,7 +68,7 @@ public abstract class Database {
                 this.connection = DriverManager.getConnection(connectionUrl, databaseInformation().getUsername(), databaseInformation().getPassword());
             } catch (SQLException retryException) {
                 Logger.log(LoggingLevel.ERROR, "Failed to reconnect after creating database: " + retryException.getMessage());
-                throw new RuntimeException("Cannot connect to the newly created database.", retryException);
+                return null;
             }
         }
 

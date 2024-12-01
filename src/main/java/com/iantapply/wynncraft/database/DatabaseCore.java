@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -43,7 +44,6 @@ public class DatabaseCore {
      * Registers a model to the plugin by checking for migrations and migrating if available
      */
     public void registerModels() {
-        // TODO: Handle reversion on failure of partial migration
         int migrationNeededCount = 0;
         int autoMigratedCount = 0;
 
@@ -57,10 +57,17 @@ public class DatabaseCore {
 
             Connection connection = model.database().connect(true);
             // Check if table does not exist, if not then create the blank table
-            if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
-                Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));
-                model.migrate(true);
-                Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));
+            try {
+                if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
+                    Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));
+                    model.migrate(true);
+                    Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));
+                    model.database().disconnect();
+                    continue;
+                }
+            } catch (SQLException e) {
+                // TODO: Run reversion here
+                Logger.log(LoggingLevel.ERROR, String.format("Error while running initial migration on table %s: %s.", model.table(), e.getMessage()));
                 model.database().disconnect();
                 continue;
             }

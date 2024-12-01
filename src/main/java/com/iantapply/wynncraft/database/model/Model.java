@@ -7,6 +7,7 @@ import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -75,13 +76,18 @@ public interface Model {
         Model migrationModel = new MigrationModel();
         // Use model UUID as this is its ID and will remain static
         String uuidSearch = "uuid = CAST(? AS UUID)";
-        String[] migrationRow = DatabaseHelpers.selectRow(migrationModel.database().connect(true), migrationModel.table(), uuidSearch, this.uuid());
+        try {
+            String[] migrationRow = DatabaseHelpers.selectRow(migrationModel.database().connect(true), migrationModel.table(), uuidSearch, this.uuid());
+            if (migrationRow == null) return "-1";
 
-        if (migrationRow == null) return "-1";
+            migrationModel.database().disconnect();
+            // Pull migration version, the index is the order in which is appears in MigrationModel
+            return migrationRow[1];
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, String.format("Unable to select row for migrated version check: %s", e.getMessage()));
+        }
 
-        migrationModel.database().disconnect();
-        // Pull migration version, the index is the order in which is appears in MigrationModel
-        return migrationRow[1];
+        return "-1";
     }
 
     /**
@@ -90,7 +96,13 @@ public interface Model {
     default void migrate(boolean init) {
         if (init) {
             // If it is initial run, we need a table so we will migrate automatically
-            DatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
+            try {
+                DatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
+            } catch (Exception e) {
+                Logger.log(LoggingLevel.ERROR, String.format("Creating table for migration failed. Skipping migration with error: %s", e.getMessage()));
+                this.database().disconnect();
+                return;
+            }
         } else {
             // Loops over each column and adds the column to the specified table in the model
             // This is restricted to only run on the specified table in the specified database.
@@ -98,17 +110,34 @@ public interface Model {
                 // Skip if column already exists;
                 // In the case you want to change the type and change the data in a column you must use a manual query
                 // TODO: Migrations support for custom data manipulation
-                if (DatabaseHelpers.checkColumnExists(this.database().connect(true), this.table(), column.getName())) continue;
+                try {
+                    if (DatabaseHelpers.checkColumnExists(this.database().connect(true), this.table(), column.getName())) continue;
+                } catch (SQLException e) {
+                    Logger.log(LoggingLevel.ERROR, String.format("Failed to check if column exists for database table: %s", e.getMessage()));
+                    this.database().disconnect();
+                    return;
+                }
 
                 // Catch clause to catch if there's no default value
                 if (column.getDefaultValue() == null) {
-                    DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
+                    try {
+                        DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
+                    } catch (SQLException e) {
+                        Logger.log(LoggingLevel.ERROR, String.format("Failed to create column with default value: %s", e.getMessage()));
+                        this.database().disconnect();
+                        continue;
+                    }
                     database().disconnect();
                     continue;
                 }
 
                 // Create the column with a default value if there's one present
-                DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
+                try {
+                    DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
+                } catch (SQLException e) {
+                    Logger.log(LoggingLevel.ERROR, String.format("Failed to create column for table: %s", e.getMessage()));
+                    database().disconnect();
+                }
                 database().disconnect();
             }
         }
@@ -118,10 +147,14 @@ public interface Model {
                 .withZone(ZoneId.systemDefault());
         String createdAt = formatter.format(timestamp.toInstant());
 
-        // Update migration status
-        MigrationModel migrationModel = new MigrationModel();
-        Connection connection = migrationModel.database().connect(true);
-        DatabaseHelpers.insertRow(connection, migrationModel.table(), new String[]{"uuid", "version", "created_at"}, new String[]{this.uuid(), this.version(), createdAt});
+        try {
+            // Update migration status in migrations table
+            MigrationModel migrationModel = new MigrationModel();
+            Connection connection = migrationModel.database().connect(true);
+            DatabaseHelpers.insertRow(connection, migrationModel.table(), new String[]{"uuid", "version", "created_at"}, new String[]{this.uuid(), this.version(), createdAt});
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, String.format("Failed to insert row into database: %s", e.getMessage()));
+        }
     }
 
     /**
