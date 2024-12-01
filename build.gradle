@@ -1,8 +1,9 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.0"
-    id("io.papermc.paperweight.userdev") version "1.7.1"
+    id("io.papermc.paperweight.userdev") version "1.7.5"
     id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id("com.gradleup.shadow") version "8.3.2"
     id 'maven-publish'
 }
 
@@ -50,13 +51,25 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
 
     paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
+    implementation 'xyz.jpenilla:reflection-remapper:0.1.1'
 
     implementation 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.incendo:cloud-paper:2.0.0-beta.10'
 }
 
 tasks {
     runServer {
         minecraftVersion("1.21.3")
+    }
+    shadowJar {
+        // Helper method to relocate a package into our package namespace
+        def reloc = { pkg ->
+            relocate(pkg, "com.iantapply.wynncraft.dependency.${pkg}")
+        }
+
+        // Relocate cloud and its transitive dependencies
+        reloc("org.incendo.cloud")
+        reloc("io.leangen.geantyref")
     }
 }
 
