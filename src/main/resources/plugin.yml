@@ -78,3 +78,72 @@ commands:
   rules:
     description: "Displays the server rules."
     usage: "/rules"
+  # Chat Commands
+  g:
+    description: "Sends the provided message into the Guild Chat."
+    usage: "/g <message>"
+  p:
+    description: "Sends the provided message into the current Party Chat."
+    usage: "/p <message>"
+  msg:
+    description: "Sends someone a private message."
+    usage: "/msg <name> <message>"
+    aliases: [tell]
+  r:
+    description: "Quickly reply to a message. You are required to send/receive a message to someone first."
+    usage: "/r <message>"
+  # Toggle Commands
+  toggle:
+    description: "Toggles in-game settings."
+    usage: "/toggle <toggle>"
+  # Cosmetic Commands
+  pet:
+    description: "Opens the list of pets interface."
+    usage: "/pet"
+    aliases: [pets]
+  crates:
+    description: "Opens the crate interface."
+    usage: "/crates"
+  use:
+    description: "Activate items that you have purchased from the store or claimed from Loot Crates."
+    usage: "/use"
+  renamepet:
+    description: "Rename a pet or horse."
+    usage: "/renamepet <name>"
+  renameitem:
+    description: "Rename a crafted item. (Only the creator of a crafted item can rename it.)"
+    usage: "/renameitem <name>"
+  relore:
+    description: "Adds lore to a crafted item. (Only the creator of a crafted item can relore it.)"
+    usage: "/relore <lore>"
+  particles:
+    description: "Limits the time (in-game ticks) between each game particle. (20 is the equivalent of 1 particle per second)"
+    usage: "/particles <off/low/medium/high/veryhigh/highest/(particles per tick)>"
+    aliases: [pq]
+  changetag:
+    description: "Changes your rank tag."
+    usage: "/changetag <VIP/VIP+/HERO/CHAMPION/RESET>"
+  # Friend Commands
+  friend:
+    description: "Handles the in-game friend system."
+    usage: "/friend <command> <args>"
+    aliases: [friends]
+  # Ignore Commands
+  ignore:
+    description: "Handles the in-game ignore list."
+    usage: "/ignore <add/remove> <player>"
+  # Party Commands
+  party:
+    description: "Handles all party related actions."
+    usage: "/party <command> <args>"
+    aliases: [p]
+  # Guild Commands
+  guild:
+    description: "Handles the in-game guilds."
+    usage: "/guild <command> <args>"
+    aliases: [gu]
+  # Housing Commands
+  housing:
+    description: "Handles all housing related actions."
+    usage: "/housing <command> <args>"
+    aliases: [is]
