@@ -1,5 +1,6 @@
 package com.iantapply.wynncraft.command;
 
+import com.iantapply.wynncraft.command.commands.friend.FriendCommandsCore;
 import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
 import com.iantapply.wynncraft.command.commands.ignore.IgnoreCommandsCore;
 import com.iantapply.wynncraft.command.commands.party.PartyCommandsCore;
@@ -55,10 +56,12 @@ public class CommandCore implements CommandExecutor {
         GameCommandsCore gameCommandsCore = new GameCommandsCore();
         PartyCommandsCore partyCommandsCore = new PartyCommandsCore();
         IgnoreCommandsCore ignoreCommandsCore = new IgnoreCommandsCore();
+        FriendCommandsCore friendCommandsCore = new FriendCommandsCore();
 
         gameCommandsCore.initialize();
         partyCommandsCore.initialize();
         ignoreCommandsCore.initialize();
+        friendCommandsCore.initialize();
     }
 
     /**
