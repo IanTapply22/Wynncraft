@@ -25,15 +25,15 @@ public class HousingCommand extends WynncraftCommand {
     public ArrayList<WynncraftCommand> subcommands() {
         // TODO
         ArrayList<WynncraftCommand> subcommands = new ArrayList<>();
-//        subcommands.add(new HousingEditCommand()));
-//        subcommands.add(new HousingInviteCommand());
-//        subcommands.add(new HousingVisitCommand());
-//        subcommands.add(new HousingLeaveCommand());
-//        subcommands.add(new HousingPublicCommand());
-//        subcommands.add(new HousingKickCommand());
-//        subcommands.add(new HousingKickallCommand());
+        subcommands.add(new HousingEditCommand());
+        subcommands.add(new HousingInviteCommand());
+        subcommands.add(new HousingVisitCommand());
+        subcommands.add(new HousingLeaveCommand());
+        subcommands.add(new HousingPublicCommand());
+        subcommands.add(new HousingKickCommand());
+        subcommands.add(new HousingKickallCommand());
         subcommands.add(new HousingBanCommand());
-//        subcommands.add(new HousingUnbanCommand());
+        subcommands.add(new HousingUnbanCommand());
         subcommands.add(new HousingAllowEditCommand());
         subcommands.add(new HousingDisallowEditCommand());
 
