@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -44,7 +43,6 @@ public class DatabaseCore {
      * Registers a model to the plugin by checking for migrations and migrating if available
      */
     public void registerModels() {
-        // TODO: Remove SQLException in parallel with the migrate method
         // TODO: Handle reversion on failure of partial migration
         int migrationNeededCount = 0;
         int autoMigratedCount = 0;
@@ -54,42 +52,38 @@ public class DatabaseCore {
             return;
         }
 
-        try {
-            for (Model model : this.models) {
-                Logger.log(LoggingLevel.INFO, String.format("Registering %s model...", model.name()));
+        for (Model model : this.models) {
+            Logger.log(LoggingLevel.INFO, String.format("Registering %s model...", model.name()));
 
-                Connection connection = model.database().connect(true);
-                // Check if table does not exist, if not then create the blank table
-                if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
-                    Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));
-                    model.migrate(true);
+            Connection connection = model.database().connect(true);
+            // Check if table does not exist, if not then create the blank table
+            if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
+                Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));
+                model.migrate(true);
+                Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));
+                model.database().disconnect();
+                continue;
+            }
+
+            // Check current version in comparison to migrated version
+            if (Objects.equals(model.migratedVersion(), model.version())) {
+                Logger.log(LoggingLevel.INFO, String.format("Registered %s model", model.name()));
+            } else {
+                // If we can automatically migrate upon registration
+                if (model.automaticallyMigrate()) {
+                    // Notifies of version mismatch
+                    Logger.log(LoggingLevel.WARNING, String.format("Model migration version mismatch (current: %s, migrated: %s). Attempting to auto-migrate.", model.version(), model.migratedVersion()));
+
+                    Logger.log(LoggingLevel.INFO, String.format("Model can be auto-migrated. Migrating %s...", model.name()));
+                    model.migrate(false);
                     Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));
-                    model.database().disconnect();
-                    continue;
-                }
-
-                // Check current version in comparison to migrated version
-                if (Objects.equals(model.migratedVersion(), model.version())) {
-                    Logger.log(LoggingLevel.INFO, String.format("Registered %s model", model.name()));
+                    autoMigratedCount++;
                 } else {
-                    // If we can automatically migrate upon registration
-                    if (model.automaticallyMigrate()) {
-                        // Notifies of version mismatch
-                        Logger.log(LoggingLevel.WARNING, String.format("Model migration version mismatch (current: %s, migrated: %s). Attempting to auto-migrate.", model.version(), model.migratedVersion()));
-
-                        Logger.log(LoggingLevel.INFO, String.format("Model can be auto-migrated. Migrating %s...", model.name()));
-                        model.migrate(false);
-                        Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));
-                        autoMigratedCount++;
-                    } else {
-                        // In the case we can't auto migrate, advise manual migration rather than auto-migrating
-                        Logger.log(LoggingLevel.WARNING, String.format("Model migration version mismatch (current: %s, migrated: %s). Please manually migrate the %s model.", model.version(), model.migratedVersion(), model.name()));
-                        migrationNeededCount++;
-                    }
+                    // In the case we can't auto migrate, advise manual migration rather than auto-migrating
+                    Logger.log(LoggingLevel.WARNING, String.format("Model migration version mismatch (current: %s, migrated: %s). Please manually migrate the %s model.", model.version(), model.migratedVersion(), model.name()));
+                    migrationNeededCount++;
                 }
             }
-        } catch (SQLException e) {
-            Logger.log(LoggingLevel.ERROR, String.format("Database error: %s", e.getMessage()));
         }
 
         Logger.log(LoggingLevel.SUCCESS, String.format("Registered %s models with %s needing manual migrations and %s auto-migrated upon registration.", models.size(), migrationNeededCount, autoMigratedCount));

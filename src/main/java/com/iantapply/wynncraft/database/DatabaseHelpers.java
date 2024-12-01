@@ -13,7 +13,8 @@ import java.util.Collections;
  * but not limited to building URLs, finishing queries, and interacting
  * with tables
  */
-// TODO: Remove thrown exceptions and handle
+// TODO: Prevent SQL injection with proper prepared statements and by validating table, database, and column names to prevent injection into existing queries
+// SQL injection prevention isn't a top priority as it isn't a front facing feature to the consumer, but it should still be safe guarded.
 // TODO: Utilize the Column constructor for queries and remove String arrays
 public class DatabaseHelpers {
 
@@ -54,22 +55,26 @@ public class DatabaseHelpers {
     /**
      * Finishes a query by executing the statement and closing it
      * @param queryStatement The statement to finish
-     * @return The result of the query
-     * @throws SQLException If the statement cannot be executed or closed
+     * @return The result of the query. An empty array if there is an SQL error that occurs
      */
-    public static String[] finishQuery(PreparedStatement queryStatement) throws SQLException {
-        ResultSet resultSet = queryStatement.executeQuery();
-        String[] result = new String[resultSet.getMetaData().getColumnCount()];
+    public static String[] finishQuery(PreparedStatement queryStatement) {
+        try {
+            ResultSet resultSet = queryStatement.executeQuery();
+            String[] result = new String[resultSet.getMetaData().getColumnCount()];
 
-        if (resultSet.next()) {
-            for (int i = 0; i < result.length; i++) {
-                result[i] = resultSet.getString(i + 1);
+            if (resultSet.next()) {
+                for (int i = 0; i < result.length; i++) {
+                    result[i] = resultSet.getString(i + 1);
+                }
             }
-        }
 
-        resultSet.close();
-        queryStatement.close();
-        return result;
+            resultSet.close();
+            queryStatement.close();
+            return result;
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+            return new String[]{};
+        }
     }
 
     /**
@@ -108,7 +113,6 @@ public class DatabaseHelpers {
         }
     }
 
-
     /**
      * Creates a database with the given database name
      * @param connection The database connection to use
@@ -116,14 +120,13 @@ public class DatabaseHelpers {
      */
     public static void createDatabase(Connection connection, String database) {
         // Prepare the SQL query
-        String query = String.format("CREATE DATABASE %s", database);
+        String query = String.format("CREATE DATABASE `%s`", database);
 
-        // Execute and finishes the query
-        try {
-            PreparedStatement queryStatement = connection.prepareStatement(query);
-            finishQueryWithoutResult(queryStatement);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(query);
+            Logger.log(LoggingLevel.INFO, "Database created successfully!");
         } catch (SQLException e) {
-            Logger.log(LoggingLevel.ERROR, e.getMessage());
+            Logger.log(LoggingLevel.ERROR, "Failed to create database: " + e.getMessage());
         }
     }
 
@@ -152,9 +155,8 @@ public class DatabaseHelpers {
      * @param table The name of the table to insert the row into.
      * @param columns The columns to insert the values into.
      * @param values The values to insert into the columns.
-     * @throws SQLException If the statement cannot be executed or closed.
      */
-    public static void insertRow(Connection connection, String table, String[] columns, String[] values) throws SQLException {
+    public static void insertRow(Connection connection, String table, String[] columns, String[] values) {
         if (columns.length != values.length) {
             throw new IllegalArgumentException("Columns and values must have the same length.");
         }
@@ -169,14 +171,18 @@ public class DatabaseHelpers {
                 if (columns[i].equalsIgnoreCase("uuid")) {
                     // Explicitly cast the UUID value
                     queryStatement.setObject(i + 1, java.util.UUID.fromString(values[i]));
+                } else if (columns[i].equalsIgnoreCase("created_at")) {
+                    // For created_at, cast it to a Timestamp
+                    queryStatement.setTimestamp(i + 1, Timestamp.valueOf(values[i]));
                 } else {
                     queryStatement.setString(i + 1, values[i]);
                 }
             }
             queryStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
         }
     }
-
 
     /**
      * Updates a row in a table with the given columns and values
@@ -185,9 +191,8 @@ public class DatabaseHelpers {
      * @param columns The columns to update
      * @param values The values to update the columns with
      * @param condition The condition to check for when updating a row (e.g. "id = 1")
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void updateRow(Connection connection, String table, String[] columns, String[] values, String condition) throws SQLException {
+    public static void updateRow(Connection connection, String table, String[] columns, String[] values, String condition) {
         // Builds the set clause
         StringBuilder setClause = new StringBuilder();
         for (int i = 0; i < columns.length; i++) {
@@ -201,12 +206,16 @@ public class DatabaseHelpers {
         String query = String.format("UPDATE %s SET %s WHERE %s", table, setClause, condition);
 
         // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        for (int i = 0; i < values.length; i++) {
-            queryStatement.setString(i + 1, values[i]);
-        }
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            for (int i = 0; i < values.length; i++) {
+                queryStatement.setString(i + 1, values[i]);
+            }
 
-        finishQueryWithoutResult(queryStatement);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 
     /**
@@ -214,15 +223,18 @@ public class DatabaseHelpers {
      * @param connection The database connection to use
      * @param table The table to delete the row from
      * @param condition The condition to check for when deleting a row (e.g. "id = 1")
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void deleteRow(Connection connection, String table, String condition) throws SQLException {
+    public static void deleteRow(Connection connection, String table, String condition) {
         // Prepare the SQL query
         String query = String.format("DELETE FROM %s WHERE %s", table, condition);
 
         // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        finishQueryWithoutResult(queryStatement);
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 
     /**
@@ -231,9 +243,8 @@ public class DatabaseHelpers {
      * @param connection The database connection to use.
      * @param table The name of the table to create.
      * @param columns The ArrayList of Column objects containing column definitions.
-     * @throws SQLException If the statement cannot be executed or closed.
      */
-    public static void createTable(Connection connection, String table, ArrayList<Column> columns) throws SQLException {
+    public static void createTable(Connection connection, String table, ArrayList<Column> columns) {
         if (columns == null || columns.isEmpty()) {
             throw new IllegalArgumentException("The columns list cannot be null or empty.");
         }
@@ -254,6 +265,8 @@ public class DatabaseHelpers {
         // Execute the query
         try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
             queryStatement.execute();
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
         }
     }
 
@@ -261,15 +274,18 @@ public class DatabaseHelpers {
      * Drops a table from the database
      * @param connection The database connection to use
      * @param table The name of the table to drop
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void dropTable(Connection connection, String table) throws SQLException {
+    public static void dropTable(Connection connection, String table) {
         // Prepare the SQL query
         String query = String.format("DROP TABLE IF EXISTS %s", table);
 
         // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        finishQueryWithoutResult(queryStatement);
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 
     /**
@@ -277,13 +293,15 @@ public class DatabaseHelpers {
      *
      * @param connection The database connection
      * @param table The name of the table to check for existence
-     * @return A boolean indicating if the table exists
-     * @throws SQLException If the statement cannot be executed or closed
+     * @return A boolean indicating if the table exists. Returns false upon SQL error.
      */
-    public static boolean checkTableExists(Connection connection, String table) throws SQLException {
+    public static boolean checkTableExists(Connection connection, String table) {
         // Use database metadata to check for the table's existence
         try (ResultSet tables = connection.getMetaData().getTables(null, null, table, null)) {
             return tables.next(); // Returns true if a table with the specified name exists
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+            return false;
         }
     }
 
@@ -295,9 +313,8 @@ public class DatabaseHelpers {
      * @param condition The condition to check for when selecting a row (e.g., "uuid = ?").
      * @param conditionValues The values to bind to the condition's placeholders.
      * @return The row's data in a String array.
-     * @throws SQLException If the statement cannot be executed or closed.
      */
-    public static String[] selectRow(Connection connection, String table, String condition, Object... conditionValues) throws SQLException {
+    public static String[] selectRow(Connection connection, String table, String condition, Object... conditionValues) {
         // Prepare the SQL query
         String query = String.format("SELECT * FROM %s WHERE %s", table, condition);
         try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
@@ -318,6 +335,8 @@ public class DatabaseHelpers {
                     return row;
                 }
             }
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
         }
 
         // Return null if no row is found
@@ -330,15 +349,48 @@ public class DatabaseHelpers {
      * @param table The table to create the column in
      * @param column The name of the column to create
      * @param type The type of the column to create (e.g. "INT", "VARCHAR(255)", "INT")
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void createColumn(Connection connection, String table, String column, String type) throws SQLException {
+    public static void createColumn(Connection connection, String table, String column, String type) {
         // Prepare the SQL query
         String query = String.format("ALTER TABLE %s ADD COLUMN %s %s", table, column, type);
 
         // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        finishQueryWithoutResult(queryStatement);
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a column in a table exists and returns a boolean
+     * @param connection The database connection to use
+     * @param table The name of the table that the column appears in
+     * @param column The name of the column to search for
+     * @return Whether the column exists as a boolean. Returns false upon SQL error
+     */
+    public static boolean checkColumnExists(Connection connection, String table, String column) {
+        String query = "SELECT COUNT(*) FROM information_schema.columns " +
+                "WHERE table_schema = 'public' " +
+                "AND table_name = ? " +
+                "AND column_name = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, table);
+            statement.setString(2, column);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+            return false;
+        }
+
+        return false;
     }
 
     /**
@@ -348,14 +400,17 @@ public class DatabaseHelpers {
      * @param column The name of the column to create
      * @param type The type of the column to create (e.g. "INT", "VARCHAR(255)", "INT")
      * @param defaultValue The default value that should be inserted in the column
-     * @throws SQLException If the statement cannot be executed or closed
      */
-    public static void createColumn(Connection connection, String table, String column, String type, String defaultValue) throws SQLException {
+    public static void createColumn(Connection connection, String table, String column, String type, String defaultValue) {
         // Prepare the SQL query
         String query = String.format("ALTER TABLE %s ADD COLUMN %s %s DEFAULT %s", table, column, type, defaultValue);
 
         // Execute and finishes the query
-        PreparedStatement queryStatement = connection.prepareStatement(query);
-        finishQueryWithoutResult(queryStatement);
+        try {
+            PreparedStatement queryStatement = connection.prepareStatement(query);
+            finishQueryWithoutResult(queryStatement);
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, e.getMessage());
+        }
     }
 }

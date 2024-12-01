@@ -19,10 +19,12 @@ import java.util.ArrayList;
 public class MigrationModel implements Model {
     public String uuid;
     public String version;
+    public String createdAt;
 
-    public MigrationModel(String uuid, String version) {
+    public MigrationModel(String uuid, String version, String createdAt) {
         this.uuid = uuid;
         this.version = version;
+        this.createdAt = createdAt;
     }
 
     /**
@@ -67,6 +69,7 @@ public class MigrationModel implements Model {
         ArrayList<Column> columns = new ArrayList<>();
         columns.add(new Column("uuid", DataType.UUID));
         columns.add(new Column("version", DataType.TEXT));
+        columns.add(new Column("created_at", DataType.TIMESTAMP));
 
         return columns;
     }

@@ -7,7 +7,9 @@ import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -68,11 +70,8 @@ public interface Model {
     /**
      * Gets the migrated version that has been last used for a model
      * @return The version as a String type. -1 is returned upon no row being found.
-     * @throws SQLException If the statement cannot be executed or close. This will be removed
-     * as there will be handles for this error.
      */
-    default String migratedVersion() throws SQLException {
-        // TODO: Handle SQLException properly in selectRow method
+    default String migratedVersion() {
         Model migrationModel = new MigrationModel();
         // Use model UUID as this is its ID and will remain static
         String uuidSearch = "uuid = CAST(? AS UUID)";
@@ -87,11 +86,8 @@ public interface Model {
 
     /**
      * Migrates the model on a table and creates the columns by default
-     * @throws SQLException If the statement cannot be executed or close. This will be removed
-     * as there will be handles for this error.
      */
-    default void migrate(boolean init) throws SQLException {
-        // TODO: Remove SQLException in parallel with createColumn method
+    default void migrate(boolean init) {
         if (init) {
             // If it is initial run, we need a table so we will migrate automatically
             DatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
@@ -99,6 +95,11 @@ public interface Model {
             // Loops over each column and adds the column to the specified table in the model
             // This is restricted to only run on the specified table in the specified database.
             for (Column column : columns()) {
+                // Skip if column already exists;
+                // In the case you want to change the type and change the data in a column you must use a manual query
+                // TODO: Migrations support for custom data manipulation
+                if (DatabaseHelpers.checkColumnExists(this.database().connect(true), this.table(), column.getName())) continue;
+
                 // Catch clause to catch if there's no default value
                 if (column.getDefaultValue() == null) {
                     DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
@@ -112,10 +113,15 @@ public interface Model {
             }
         }
 
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                .withZone(ZoneId.systemDefault());
+        String createdAt = formatter.format(timestamp.toInstant());
+
         // Update migration status
         MigrationModel migrationModel = new MigrationModel();
         Connection connection = migrationModel.database().connect(true);
-        DatabaseHelpers.insertRow(connection, migrationModel.table(), new String[]{"uuid", "version"}, new String[]{this.uuid(), this.version()});
+        DatabaseHelpers.insertRow(connection, migrationModel.table(), new String[]{"uuid", "version", "created_at"}, new String[]{this.uuid(), this.version(), createdAt});
     }
 
     /**
@@ -123,7 +129,6 @@ public interface Model {
      * <p>
      * This has no action by default as it can be intrusive to assume actions.
      */
-    // TODO: Handle reversion on failure of migration
     default void revert() {
         Logger.log(LoggingLevel.INFO, "No reversion is available. Please set one.");
     }
