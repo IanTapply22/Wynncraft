@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.command;
 
 import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
+import com.iantapply.wynncraft.command.commands.ignore.IgnoreCommandsCore;
 import com.iantapply.wynncraft.command.commands.party.PartyCommandsCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
@@ -53,9 +54,11 @@ public class CommandCore implements CommandExecutor {
     public void initialize() {
         GameCommandsCore gameCommandsCore = new GameCommandsCore();
         PartyCommandsCore partyCommandsCore = new PartyCommandsCore();
+        IgnoreCommandsCore ignoreCommandsCore = new IgnoreCommandsCore();
 
         gameCommandsCore.initialize();
         partyCommandsCore.initialize();
+        ignoreCommandsCore.initialize();
     }
 
     /**
