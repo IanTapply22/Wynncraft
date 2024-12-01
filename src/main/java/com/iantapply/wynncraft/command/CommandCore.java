@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.command;
 
 import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
+import com.iantapply.wynncraft.command.commands.party.PartyCommandsCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
@@ -12,11 +13,13 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,8 +52,10 @@ public class CommandCore implements CommandExecutor {
      */
     public void initialize() {
         GameCommandsCore gameCommandsCore = new GameCommandsCore();
+        PartyCommandsCore partyCommandsCore = new PartyCommandsCore();
 
         gameCommandsCore.initialize();
+        partyCommandsCore.initialize();
     }
 
     /**
@@ -66,15 +71,21 @@ public class CommandCore implements CommandExecutor {
      */
     public void registerCommands() {
         for (WynncraftCommand command : this.getCommands()) {
-            List<String> aliases = command.aliases() == null || command.aliases().isEmpty()
-                    ? List.of(command.name())
-                    : command.aliases();
+            List<String> aliases = new ArrayList<>();
+            if (command.aliases() != null) {
+                aliases.addAll(command.aliases());
+            }
+            if (!aliases.contains(command.name())) {
+                aliases.add(command.name());
+            }
 
             for (String alias : aliases) {
                 if (this.getPlugin().getCommand(alias) == null) {
                     Logger.log(LoggingLevel.ERROR, "The command alias '" + alias + "' is not registered in the plugin.yml file. Please add it to the file.");
                 } else {
-                    Objects.requireNonNull(this.getPlugin().getCommand(alias)).setExecutor(this);
+                    // Cast and set usage to be nothing so it can appear in help commands and in the proper plugin.yml
+                    PluginCommand registeredCommand = (PluginCommand) Objects.requireNonNull(this.getPlugin().getCommand(alias)).setUsage("");
+                    Objects.requireNonNull(registeredCommand).setExecutor(this);
                 }
             }
         }
@@ -105,6 +116,55 @@ public class CommandCore implements CommandExecutor {
 
                     sender.sendMessage(errorMessage);
                     return false;
+                }
+
+                // If there are sub command available, skip treating as regular command
+                if (!wynncraftCommand.subcommands().isEmpty()) {
+                    boolean subcommandHandled = false;
+
+                    for (WynncraftCommand subcommand : wynncraftCommand.subcommands()) {
+                        if (subcommand.name().equalsIgnoreCase(args[0]) || subcommand.aliases().contains(args[0])) {
+                            subcommandHandled = true;
+
+                            if (!this.hasPermission(sender, subcommand)) return false;
+                            if (!this.isPlayer(sender) && subcommand.isPlayerOnly()) return false;
+
+                            if ((args.length - 1) < subcommand.minArgs() || (args.length - 1) > subcommand.maxArgs()) {
+                                sender.sendMessage(Component.text("Incorrect usage. The correct syntax is '/" + subcommand.syntax() + "'. Please try again.")
+                                        .color(NamedTextColor.RED));
+                                return false;
+                            }
+
+                            try {
+                                String[] strippedArguments = Arrays.copyOfRange(args, 1, args.length);
+                                subcommand.execute(sender, strippedArguments);
+
+                                if (subcommand.getTriggerEvent() != null) {
+                                    subcommand.getTriggerEvent().callEvent();
+                                }
+                            } catch (Exception e) {
+                                sender.sendMessage(Component.text("An error occurred while executing the subcommand '/" + subcommand.name() + "'. Please check the syntax and try again.")
+                                        .color(NamedTextColor.RED));
+                            }
+
+                            break;
+                        }
+                    }
+
+                    // No subcommand matched, handle the main command
+                    if (!subcommandHandled) {
+                        try {
+                            wynncraftCommand.execute(sender, args);
+
+                            if (wynncraftCommand.getTriggerEvent() != null) {
+                                wynncraftCommand.getTriggerEvent().callEvent();
+                            }
+                        } catch (Exception e) {
+                            sender.sendMessage(Component.text("An error occurred while executing the command '/" + wynncraftCommand.name() + "'. Please check the syntax and try again.")
+                                    .color(NamedTextColor.RED));
+                        }
+                    }
+                    return true;
                 }
 
                 // Execute the command and call the event that should be triggered when the command is run
