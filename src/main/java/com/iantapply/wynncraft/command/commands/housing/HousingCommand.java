@@ -23,7 +23,6 @@ public class HousingCommand extends WynncraftCommand {
 
     @Override
     public ArrayList<WynncraftCommand> subcommands() {
-        // TODO
         ArrayList<WynncraftCommand> subcommands = new ArrayList<>();
         subcommands.add(new HousingEditCommand());
         subcommands.add(new HousingInviteCommand());
