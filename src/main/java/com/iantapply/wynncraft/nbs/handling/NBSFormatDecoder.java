@@ -2,7 +2,7 @@ package com.iantapply.wynncraft.nbs.handling;
 
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
-import com.iantapply.wynncraft.nbs.CustomInstrument;
+import com.iantapply.wynncraft.nbs.instruments.NBSCustomInstrument;
 import com.iantapply.wynncraft.nbs.utils.VersionUtils;
 import com.iantapply.wynncraft.nbs.utils.InstrumentUtils;
 
@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-// TODO: Better error handling and rework/lighten up
 public class NBSFormatDecoder {
 
     public static NBSSong parse(File decodeFile) {
         try {
             return parse(new FileInputStream(decodeFile), decodeFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Logger.log(LoggingLevel.ERROR, "The file provided could not be found. Please provide a valid file.");
         }
         return null;
     }
@@ -32,17 +31,17 @@ public class NBSFormatDecoder {
         try {
             DataInputStream dataInputStream = new DataInputStream(inputStream);
             short length = readShort(dataInputStream);
-            int firstcustominstrument = 10;
-            int firstcustominstrumentdiff;
+            int firstCustomInstrument = 10;
+            int firstCustomInstrumentDelta;
             int nbsversion = 0;
             if (length == 0) {
                 nbsversion = dataInputStream.readByte();
-                firstcustominstrument = dataInputStream.readByte();
+                firstCustomInstrument = dataInputStream.readByte();
                 if (nbsversion >= 3) {
                     length = readShort(dataInputStream);
                 }
             }
-            firstcustominstrumentdiff = InstrumentUtils.getCustomInstrumentFirstIndex() - firstcustominstrument;
+            firstCustomInstrumentDelta = InstrumentUtils.getCustomInstrumentFirstIndex() - firstCustomInstrument;
             short songHeight = readShort(dataInputStream);
             String title = readString(dataInputStream);
             String author = readString(dataInputStream);
@@ -75,8 +74,8 @@ public class NBSFormatDecoder {
                     layer += jumpLayers;
                     byte instrument = dataInputStream.readByte();
 
-                    if (firstcustominstrumentdiff > 0 && instrument >= firstcustominstrument){
-                        instrument += firstcustominstrumentdiff;
+                    if (firstCustomInstrumentDelta > 0 && instrument >= firstCustomInstrument){
+                        instrument += (byte) firstCustomInstrumentDelta;
                     }
 
                     byte key = dataInputStream.readByte();
@@ -92,22 +91,17 @@ public class NBSFormatDecoder {
                 }
             }
 
-            if (nbsversion > 0 && nbsversion < 3) {
-                length = tick;
-            }
+            if (nbsversion > 0 && nbsversion < 3) length = tick;
 
             for (int i = 0; i < songHeight; i++) {
                 NBSLayer layer = layerHashMap.get(i);
 
                 String name = readString(dataInputStream);
-                if (nbsversion >= 4){
-                    dataInputStream.readByte(); // layer lock
-                }
+                if (nbsversion >= 4) dataInputStream.readByte(); // layer lock
 
                 byte volume = dataInputStream.readByte();
-                if (nbsversion >= 2){
-                    dataInputStream.readByte(); // layer stereo
-                }
+                if (nbsversion >= 2) dataInputStream.readByte(); // layer stereo
+
                 if (layer != null) {
                     layer.setName(name);
                     layer.setVolume(volume);
@@ -115,31 +109,31 @@ public class NBSFormatDecoder {
             }
 
             byte customInstrumentAmount = dataInputStream.readByte();
-            CustomInstrument[] customInstrumentsArray = new CustomInstrument[customInstrumentAmount];
+            NBSCustomInstrument[] customInstrumentsArray = new NBSCustomInstrument[customInstrumentAmount];
 
             for (int index = 0; index < customInstrumentAmount; index++) {
-                customInstrumentsArray[index] = new CustomInstrument((byte) index,
+                customInstrumentsArray[index] = new NBSCustomInstrument((byte) index,
                         readString(dataInputStream), readString(dataInputStream));
                 dataInputStream.readByte(); // pitch
                 dataInputStream.readByte(); // key
             }
 
-            if (firstcustominstrumentdiff < 0){
-                ArrayList<CustomInstrument> customInstruments = VersionUtils.getVersionCustomInstrumentsForSong(firstcustominstrument);
+            if (firstCustomInstrumentDelta < 0){
+                ArrayList<NBSCustomInstrument> customInstruments = VersionUtils.getVersionCustomInstrumentsForSong(firstCustomInstrument);
                 customInstruments.addAll(Arrays.asList(customInstrumentsArray));
                 customInstrumentsArray = customInstruments.toArray(customInstrumentsArray);
             } else {
-                firstcustominstrument += firstcustominstrumentdiff;
+                firstCustomInstrument += firstCustomInstrumentDelta;
             }
 
             return new NBSSong(speed, layerHashMap, songHeight, length, title,
-                    author, description, songFile, firstcustominstrument, customInstrumentsArray);
+                    author, description, songFile, firstCustomInstrument, customInstrumentsArray);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Logger.log(LoggingLevel.ERROR, "The file provided could not be found. Please provide a valid file.");
         } catch (EOFException e) {
-            Logger.log(LoggingLevel.ERROR, "File is corrupted: " + e.getMessage());
+            Logger.log(LoggingLevel.ERROR, "File is corrupted or wrong NBS version/format: " + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.log(LoggingLevel.ERROR, "Could not form IO link: " + e.getMessage());
         }
         return null;
     }

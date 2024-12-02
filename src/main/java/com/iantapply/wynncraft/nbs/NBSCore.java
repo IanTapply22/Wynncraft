@@ -17,29 +17,29 @@ public class NBSCore {
         this.instance = this;
     }
 
-    public boolean isReceivingSong(Player p) {
-        return ((this.playingSongs.get(p.getName()) != null) && (!this.playingSongs.get(p.getName()).isEmpty()));
+    public boolean isReceivingSong(Player player) {
+        return ((this.playingSongs.get(player.getName()) != null) && (!this.playingSongs.get(player.getName()).isEmpty()));
     }
 
-    public void stopPlaying(Player p) {
-        if (this.playingSongs.get(p.getName()) == null) {
+    public void stopPlaying(Player player) {
+        if (this.playingSongs.get(player.getName()) == null) {
             return;
         }
-        for (NBSSongPlayer s : this.playingSongs.get(p.getName())) {
-            s.removePlayer(p);
+        for (NBSSongPlayer songPlayer : this.playingSongs.get(player.getName())) {
+            songPlayer.removePlayer(player);
         }
     }
 
-    public void setPlayerVolume(Player p, byte volume) {
-        this.playerVolume.put(p.getName(), volume);
+    public void setPlayerVolume(Player player, byte volume) {
+        this.playerVolume.put(player.getName(), volume);
     }
 
-    public byte getPlayerVolume(Player p) {
-        Byte b = this.playerVolume.get(p.getName());
-        if (b == null) {
-            b = 100;
-            playerVolume.put(p.getName(), b);
+    public byte getPlayerVolume(Player player) {
+        Byte volumeByte = this.playerVolume.get(player.getName());
+        if (volumeByte == null) {
+            volumeByte = 100;
+            this.playerVolume.put(player.getName(), volumeByte);
         }
-        return b;
+        return volumeByte;
     }
 }

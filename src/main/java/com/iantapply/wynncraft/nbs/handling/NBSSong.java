@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.nbs.handling;
 
-import com.iantapply.wynncraft.nbs.CustomInstrument;
+import com.iantapply.wynncraft.nbs.instruments.NBSCustomInstrument;
 import lombok.Getter;
 
 import java.io.File;
@@ -18,27 +18,27 @@ public class NBSSong {
     private final String description;
     private final float speed;
     private final float delay;
-    private final CustomInstrument[] customInstruments;
+    private final NBSCustomInstrument[] customInstruments;
     private final int firstCustomInstrumentIndex;
     private final boolean isStereo;
 
     public NBSSong(float speed, HashMap<Integer, NBSLayer> layerHashMap,
                 short songHeight, final short length, String title, String author,
-                String description, File path, int firstCustomInstrumentIndex, CustomInstrument[] customInstruments) {
+                String description, File path, int firstCustomInstrumentIndex, NBSCustomInstrument[] customInstruments) {
         this(speed, layerHashMap, songHeight, length, title, author, description, path, firstCustomInstrumentIndex, customInstruments, false);
     }
 
     public NBSSong(float speed, HashMap<Integer, NBSLayer> layerHashMap,
-                short songHeight, final short length, String title, String author,
-                String description, File path, int firstCustomInstrumentIndex, CustomInstrument[] customInstruments, boolean isStereo) {
+                   short songHeight, final short length, String title, String author,
+                   String description, File path, int firstCustomInstrumentIndex, NBSCustomInstrument[] customInstruments, boolean isStereo) {
         this(speed, layerHashMap, songHeight, length, title, author, "", description, path, firstCustomInstrumentIndex, customInstruments, isStereo);
     }
 
     public NBSSong(float speed, HashMap<Integer, NBSLayer> layerHashMap,
-                short songHeight, final short length, String title, String author, String originalAuthor,
-                String description, File path, int firstCustomInstrumentIndex, CustomInstrument[] customInstruments, boolean isStereo) {
+                   short songHeight, final short length, String title, String author, String originalAuthor,
+                   String description, File path, int firstCustomInstrumentIndex, NBSCustomInstrument[] customInstruments, boolean isStereo) {
         this.speed = speed;
-        delay = 20 / speed;
+        this.delay = 20 / speed;
         this.layerHashMap = layerHashMap;
         this.songHeight = songHeight;
         this.length = length;
@@ -53,6 +53,6 @@ public class NBSSong {
     }
 
     public boolean isStereo() {
-        return isStereo;
+        return this.isStereo;
     }
 }

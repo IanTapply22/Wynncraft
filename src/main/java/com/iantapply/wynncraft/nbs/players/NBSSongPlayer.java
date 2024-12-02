@@ -33,78 +33,73 @@ public abstract class NBSSongPlayer {
     public NBSSongPlayer(NBSCore core, NBSSong song) {
         this.song = song;
         this.core = core;
-        createThread();
+        this.createThread();
     }
 
     protected void calculateFade() {
-        if (fadeDone == fadeDuration) return;
+        if (this.fadeDone == this.fadeDuration) return;
 
-        double targetVolume = Interpolator.interpLinear(new double[]{0, fadeStart, fadeDuration, fadeTarget}, fadeDone);
+        double targetVolume = Interpolator.interpLinear(new double[]{ 0, this.fadeStart, this.fadeDuration, this.fadeTarget }, this.fadeDone);
         setVolume((byte) targetVolume);
-        fadeDone++;
+        this.fadeDone++;
     }
 
     protected void createThread() {
-        playerThread = new Thread(() -> {
-            while (!destroyed) {
+        this.playerThread = new Thread(() -> {
+            while (!this.destroyed) {
                 long startTime = System.currentTimeMillis();
                 synchronized (NBSSongPlayer.this) {
-                    if (playing) {
+                    if (this.playing) {
                         calculateFade();
-                        tick++;
-                        if (tick > song.getLength()) {
-                            if(loop){
-                                tick = 0;
+                        this.tick++;
+                        if (this.tick > this.song.getLength()) {
+                            if(this.loop){
+                                this.tick = 0;
                                 continue;
                             }
-                            playing = false;
-                            tick = -1;
+                            this.playing = false;
+                            this.tick = -1;
                             // TODO: Send custom emit song end event
-                            if (autoDestroy) {
+                            if (this.autoDestroy) {
                                 destroy();
                                 return;
                             }
                         }
-                        for (String s : playerList) {
-                            Player p = Bukkit.getPlayerExact(s);
-                            if (p == null) {
-                                // offline...
-                                continue;
-                            }
-                            playTick(p, tick);
+                        for (String playerGamertag : this.playerList) {
+                            Player player = Bukkit.getPlayerExact(playerGamertag);
+                            if (player == null) continue;
+                            playTick(player, this.tick);
                         }
                     }
                 }
                 long duration = System.currentTimeMillis() - startTime;
-                float delayMillis = song.getDelay() * 50;
+                float delayMillis = this.song.getDelay() * 50;
                 if (duration < delayMillis) {
                     try {
                         Thread.sleep((long) (delayMillis - duration));
-                    } catch (InterruptedException e) {
-                        // do nothing
-                    }
+                    } catch (InterruptedException ignored) {}
                 }
             }
         });
-        playerThread.setPriority(Thread.MAX_PRIORITY);
-        playerThread.start();
+        this.playerThread.setPriority(Thread.MAX_PRIORITY);
+        this.playerThread.start();
     }
 
     public List<String> getPlayerList() {
-        return Collections.unmodifiableList(playerList);
+        return Collections.unmodifiableList(this.playerList);
     }
 
-    public void addPlayer(Player p) {
+    public void addPlayer(Player player) {
         synchronized (this) {
-            if (!playerList.contains(p.getName())) {
-                playerList.add(p.getName());
+            if (!this.getPlayerList().contains(player.getName())) {
+                this.playerList.add(player.getName());
                 ArrayList<NBSSongPlayer> songs = this.core.getPlayingSongs()
-                        .get(p.getName());
+                        .get(player.getName());
                 if (songs == null) {
                     songs = new ArrayList<>();
                 }
                 songs.add(this);
-                this.core.getPlayingSongs().put(p.getName(), songs);
+                this.core.getPlayingSongs().put(player.getName(), songs);
             }
         }
     }
@@ -123,13 +118,13 @@ public abstract class NBSSongPlayer {
     }
     public boolean getAutoDestroy() {
         synchronized (this) {
-            return autoDestroy;
+            return this.autoDestroy;
         }
     }
 
     public void setAutoDestroy(boolean value) {
         synchronized (this) {
-            autoDestroy = value;
+            this.autoDestroy = value;
         }
     }
 
@@ -139,9 +134,9 @@ public abstract class NBSSongPlayer {
         synchronized (this) {
 
             // TODO: Call song destroy custom emit event and cancel thread via thread ID
-            destroyed = true;
-            playing = false;
-            setTick((short) -1);
+            this.setDestroyed(true);
+            this.setPlaying(false);
+            this.setTick((short) -1);
         }
     }
 
@@ -152,17 +147,17 @@ public abstract class NBSSongPlayer {
         }
     }
 
-    public void removePlayer(Player p) {
+    public void removePlayer(Player player) {
         synchronized (this) {
-            playerList.remove(p.getName());
-            if (this.core.getPlayingSongs().get(p.getName()) == null) {
+            this.getPlayerList().remove(player.getName());
+            if (this.core.getPlayingSongs().get(player.getName()) == null) {
                 return;
             }
             ArrayList<NBSSongPlayer> songs = new ArrayList<>(
-                    this.core.getPlayingSongs().get(p.getName()));
+                    this.core.getPlayingSongs().get(player.getName()));
             songs.remove(this);
-            this.core.getPlayingSongs().put(p.getName(), songs);
-            if (playerList.isEmpty() && autoDestroy) {
+            this.core.getPlayingSongs().put(player.getName(), songs);
+            if (this.getPlayerList().isEmpty() && this.getAutoDestroy()) {
                 // TODO: Call song end event emit
                 destroy();
             }

@@ -9,8 +9,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class NbsPlayCommand extends WynncraftCommand {
@@ -26,7 +24,7 @@ public class NbsPlayCommand extends WynncraftCommand {
 
     @Override
     public String description() {
-        return "Plays an NBS file from the plugins folder.";
+        return "Plays an NBS file from the internal resources folder.";
     }
 
     @Override
@@ -43,8 +41,7 @@ public class NbsPlayCommand extends WynncraftCommand {
     public void execute(CommandSender sender, String[] args) {
         try {
             Player player = (Player) sender;
-            File songFile = new File("./plugins/" + args[0]);
-            InputStream inputStreamSong = new FileInputStream(songFile);
+            InputStream inputStreamSong = getClass().getClassLoader().getResourceAsStream("songs/" + args[0]);
             NBSSong song = NBSFormatDecoder.parse(inputStreamSong);
             NbsCore.player = new PlayerOrientedSongPlayer(Wynncraft.getInstance().getNbsCore(), song);
             NbsCore.player.setPlayer(player);
@@ -54,7 +51,8 @@ public class NbsPlayCommand extends WynncraftCommand {
             NbsCore.player.setPlaying(true);
             sender.sendMessage("Started playing NBS song: " + args[0]);
         } catch (Exception e) {
-            sender.sendMessage("The provided file does not exist. Please provide a valid NBS file in the plugins directory.");
+            e.printStackTrace();
+            sender.sendMessage("The provided file does not exist. Please provide a valid NBS file in the songs resource directory internally.");
         }
     }
 }

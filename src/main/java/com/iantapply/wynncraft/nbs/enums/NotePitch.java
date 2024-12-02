@@ -1,7 +1,6 @@
 package com.iantapply.wynncraft.nbs.enums;
 
 public enum NotePitch {
-
     NOTE_0(0, 0.5F),
     NOTE_1(1, 0.53F),
     NOTE_2(2, 0.56F),
