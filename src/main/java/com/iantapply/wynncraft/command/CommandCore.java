@@ -1,5 +1,6 @@
 package com.iantapply.wynncraft.command;
 
+import com.iantapply.wynncraft.command.commands.cosmetic.CosmeticCommandsCore;
 import com.iantapply.wynncraft.command.commands.friend.FriendCommandsCore;
 import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
 import com.iantapply.wynncraft.command.commands.guild.GuildCommandsCore;
@@ -61,6 +62,7 @@ public class CommandCore implements CommandExecutor {
         FriendCommandsCore friendCommandsCore = new FriendCommandsCore();
         HousingCommandsCore housingCommandsCore = new HousingCommandsCore();
         GuildCommandsCore guildCommandsCore = new GuildCommandsCore();
+        CosmeticCommandsCore cosmeticCommandsCore = new CosmeticCommandsCore();
 
         gameCommandsCore.initialize();
         partyCommandsCore.initialize();
@@ -68,6 +70,7 @@ public class CommandCore implements CommandExecutor {
         friendCommandsCore.initialize();
         housingCommandsCore.initialize();
         guildCommandsCore.initialize();
+        cosmeticCommandsCore.initialize();
     }
 
     /**
