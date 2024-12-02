@@ -1,5 +1,6 @@
 package com.iantapply.wynncraft.nbs.players;
 
+import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongDestroyedEvent;
 import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongEndEvent;
 import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongStopEvent;
@@ -70,7 +71,7 @@ public abstract class NBSSongPlayer {
                             this.playing = false;
                             this.tick = -1;
                             NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
-                            Bukkit.getPluginManager().callEvent(songEndEvent);
+                            songEndEvent.callEvent();
                             if (this.autoDestroy) {
                                 destroy();
                                 return;
@@ -178,7 +179,7 @@ public abstract class NBSSongPlayer {
     public void destroy() {
         synchronized (this) {
             NBSSongDestroyedEvent songDestroyingEvent = new NBSSongDestroyedEvent();
-            Bukkit.getPluginManager().callEvent(songDestroyingEvent);
+            songDestroyingEvent.callEvent();
 
             if (songDestroyingEvent.isCancelled()) {
                 return;
@@ -197,7 +198,7 @@ public abstract class NBSSongPlayer {
         this.playing = playing;
         if (!playing) {
             NBSSongStopEvent songStopEvent = new NBSSongStopEvent();
-            Bukkit.getPluginManager().callEvent(songStopEvent);
+            songStopEvent.callEvent();
         }
     }
 
@@ -217,7 +218,7 @@ public abstract class NBSSongPlayer {
             this.core.getPlayingSongs().put(player.getName(), songs);
             if (this.getPlayerList().isEmpty() && this.getAutoDestroy()) {
                 NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
-                Bukkit.getPluginManager().callEvent(songEndEvent);
+                songEndEvent.callEvent();
                 destroy();
             }
         }
