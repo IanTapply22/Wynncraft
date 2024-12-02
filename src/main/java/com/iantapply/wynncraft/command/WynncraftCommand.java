@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * Represents a command that can be executed by a player or console
  */
 public abstract class WynncraftCommand {
-
     /**
      * The name that is appended after the leading '/' character
      * @return The name
@@ -29,6 +28,13 @@ public abstract class WynncraftCommand {
      * @return The description
      */
     public abstract String description();
+
+    /**
+     * The subcommands that are bound to the current command, this being provided will
+     * override the execute method of the parent command.
+     * @return An arraylist containing all commands that are subcommands of this base command
+     */
+    public ArrayList<WynncraftCommand> subcommands() { return new ArrayList<>(); }
 
     /**
      * The aliases of the command that are alternatives to the primary name
@@ -96,5 +102,5 @@ public abstract class WynncraftCommand {
      * @param sender The sender of the command
      * @param args   The arguments of the command
      */
-    public abstract void execute(CommandSender sender, String[] args) throws Exception;
+    public abstract void execute(CommandSender sender, String[] args);
 }

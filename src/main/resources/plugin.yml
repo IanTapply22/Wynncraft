@@ -1,4 +1,135 @@
 name: Wynncraft
-version: '${version}'
+version: 1.0.0
 main: com.iantapply.wynncraft.Wynncraft
-api-version: '1.20'
+description: A recreation of Wynncraft with the use of the Bukkit/Paper API to create a bundled plugin
+author: IanTapply22
+contributors: [IanTapply22]
+website: https://github.com/IanTapply22/Wynncraft
+api-version: '1.21.3'
+load: POSTWORLD
+prefix: Wynncraft
+commands:
+  # Game Commands
+  help:
+    description: "Show help for commands."
+    usage: "/help"
+  buy:
+    description: "If you bought gold coins before the old store got changes in September 2016, you can spend them using this command."
+    usage: "/buy"
+    aliases: [cash, store, gold, goldcoins, gc, shop]
+  class:
+    description: "Opens the character selector."
+    usage: "/class"
+    aliases: [classes]
+  daily:
+    description: "Collects rewards of the daily objective completion."
+    usage: "/daily"
+  kill:
+    description: "Kill your character (useful if you're stuck)."
+    usage: "/kill"
+    aliases: [suicide, die]
+  duel:
+    description: "Challenges another player to a duel."
+    usage: "/duel <player>"
+  find:
+    description: "Find out what world the provided player is currently on."
+    usage: "/find <player>"
+  fixquests:
+    description: "Returns lost but needed quest items to the player."
+    usage: "/fixquests"
+  fixstart:
+    description: "Fixes the tutorial quest (King's Recruit) if broken."
+    usage: "/fixstart"
+  forum:
+    description: "Starts the process of linking your forums account with your game account."
+    usage: "/forum"
+  report:
+    description: "Report the provided player to the Wynncraft Moderators."
+    usage: "/report <player> <reason>"
+  hub:
+    description: "Moves you back to the lobby."
+    usage: "/hub"
+    aliases: [leave, lobby, port, change, wcl, servers]
+  trade:
+    description: "Sends a trade request to the provided player."
+    usage: "/trade <player>"
+    aliases: [share]
+  itemlock:
+    description: "Locks item that is being held, so it cannot be dropped."
+    usage: "/itemlock"
+  skiptutorial:
+    description: "Skips the tutorial if you have completed it in another class."
+    usage: "/skiptutorial"
+  stream:
+    description: "Hides the server you are on and shows your name as 'Player' to everyone else. You are invisible to everyone and they are invisible to you, unless they are in your Friend list, Guild, or Party."
+    usage: "/stream"
+  switch:
+    description: "Switches you to the specified world."
+    usage: "/switch <world>"
+  totems:
+    description: "Opens the mob totem interface."
+    usage: "/totems"
+  claimitembomb:
+    description: "Claims a thrown item bomb."
+    usage: "/claimitembomb"
+  claimingredientbomb:
+    description: "Claims a thrown ingredient bomb."
+    usage: "/claimingredientbomb"
+  rules:
+    description: "Displays the server rules."
+    usage: "/rules"
+  # Toggle Commands
+  toggle:
+    description: "Toggles in-game settings."
+    usage: "/toggle <toggle>"
+  # Cosmetic Commands
+  pet:
+    description: "Opens the list of pets interface."
+    usage: "/pet"
+    aliases: [pets]
+  crates:
+    description: "Opens the crate interface."
+    usage: "/crates"
+  use:
+    description: "Activate items that you have purchased from the store or claimed from Loot Crates."
+    usage: "/use"
+  renamepet:
+    description: "Rename a pet or horse."
+    usage: "/renamepet <name>"
+  renameitem:
+    description: "Rename a crafted item. (Only the creator of a crafted item can rename it.)"
+    usage: "/renameitem <name>"
+  relore:
+    description: "Adds lore to a crafted item. (Only the creator of a crafted item can relore it.)"
+    usage: "/relore <lore>"
+  particles:
+    description: "Limits the time (in-game ticks) between each game particle. (20 is the equivalent of 1 particle per second)"
+    usage: "/particles <off/low/medium/high/veryhigh/highest/(particles per tick)>"
+    aliases: [pq]
+  changetag:
+    description: "Changes your rank tag."
+    usage: "/changetag <VIP/VIP+/HERO/CHAMPION/RESET>"
+  # Friend Commands
+  friend:
+    description: "Handles the in-game friend system."
+    usage: "/friend <command> <args>"
+    aliases: [friends]
+  # Ignore Commands
+  ignore:
+    description: "Handles the in-game ignore list."
+    usage: "/ignore <add/remove> <player>"
+  # Party Commands
+  party:
+    description: "Handles all party related actions."
+    usage: "/party <command> <args>"
+    aliases: [p]
+  # Guild Commands
+  guild:
+    description: "Handles the in-game guilds."
+    usage: "/guild <command> <args>"
+    aliases: [gu]
+  # Housing Commands
+  housing:
+    description: "Handles all housing related actions."
+    usage: "/housing <command> <args>"
+    aliases: [is]

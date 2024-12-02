@@ -8,19 +8,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Wynncraft extends JavaPlugin {
     @Getter
-    private static Wynncraft instance;
+    public static Wynncraft instance;
+    @Getter
+    public CommandCore commandCore;
 
     @Override
     public void onEnable() {
+        instance = this;
         Logger.logInitialization();
 
         DatabaseCore databaseCore = new DatabaseCore();
         databaseCore.initialize();
         databaseCore.registerModels();
 
-        CommandCore commandCore = new CommandCore(this);
-        commandCore.initialize();
-        commandCore.registerCommands();
+        this.commandCore = new CommandCore(this);
+        this.commandCore.initialize();
+        this.commandCore.registerCommands();
 
         Logger.logStartup();
     }
