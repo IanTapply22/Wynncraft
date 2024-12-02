@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.nbs.instruments;
 
-import com.iantapply.wynncraft.nbs.enums.Sound;
 import lombok.Getter;
+import org.bukkit.Sound;
 
 @Getter
 public class NBSCustomInstrument {
@@ -15,7 +15,7 @@ public class NBSCustomInstrument {
         this.name = name;
         this.soundFileName = soundFileName.replaceAll(".ogg", "");
         if (this.soundFileName.equalsIgnoreCase("pling")){
-            this.sound = Sound.NOTE_PLING.bukkitSound();
+            this.sound = Sound.BLOCK_NOTE_BLOCK_PLING;
         }
     }
 }

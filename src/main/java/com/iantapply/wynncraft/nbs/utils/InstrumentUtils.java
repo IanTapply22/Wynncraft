@@ -1,27 +1,24 @@
 package com.iantapply.wynncraft.nbs.utils;
 
-import com.iantapply.wynncraft.nbs.enums.Sound;
-
 public class InstrumentUtils {
-    public static String getInstrumentName(byte instrument) {
+    public static String getNamespacedKey(byte instrument) {
         return switch (instrument) {
-            case 0 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_HARP").toString();
-            case 1 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_BASS").toString();
-            case 2 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_BASEDRUM").toString();
-            case 3 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_SNARE").toString();
-            case 4 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_HAT").toString();
-            case 5 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_GUITAR").toString();
-            case 6 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_FLUTE").toString();
-            case 7 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_BELL").toString();
-            case 8 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_CHIME").toString();
-            case 9 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_XYLOPHONE").toString();
-            case 10 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_IRON_XYLOPHONE").toString();
-            case 11 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_COW_BELL").toString();
-            case 12 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_DIDGERIDOO").toString();
-            case 13 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_BIT").toString();
-            case 14 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_BANJO").toString();
-            case 15 -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_PLING").toString();
-            default -> Sound.getFromBukkitName("BLOCK_NOTE_BLOCK_HARP").toString();
+            case 1 -> "block.note_block.bass";
+            case 2 -> "block.note_block.basedrum";
+            case 3 -> "block.note_block.snare";
+            case 4 -> "block.note_block.hat";
+            case 5 -> "block.note_block.guitar";
+            case 6 -> "block.note_block.flute";
+            case 7 -> "block.note_block.bell";
+            case 8 -> "block.note_block.chime";
+            case 9 -> "block.note_block.xylophone";
+            case 10 -> "block.note_block.iron_xylophone";
+            case 11 -> "block.note_block.cow_bell";
+            case 12 -> "block.note_block.didgeridoo";
+            case 13 -> "block.note_block.bit";
+            case 14 -> "block.note_block.banjo";
+            case 15 -> "block.note_block.pling";
+            default -> "block.note_block.harp";
         };
     }
 
