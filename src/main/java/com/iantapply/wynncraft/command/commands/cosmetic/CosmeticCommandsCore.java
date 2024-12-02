@@ -1,7 +1,6 @@
 package com.iantapply.wynncraft.command.commands.cosmetic;
 
 import com.iantapply.wynncraft.Wynncraft;
-import org.bukkit.craftbukkit.block.impl.CraftCommand;
 
 public class CosmeticCommandsCore {
 
@@ -10,7 +9,7 @@ public class CosmeticCommandsCore {
      */
     public void initialize() {
         Wynncraft.getInstance().getCommandCore().stageCommand(new ChangeTagCommand());
-        Wynncraft.getInstance().getCommandCore().stageCommand(new CraftCommand());
+        Wynncraft.getInstance().getCommandCore().stageCommand(new CratesCommand());
         Wynncraft.getInstance().getCommandCore().stageCommand(new ParticlesCommand());
         Wynncraft.getInstance().getCommandCore().stageCommand(new PetCommand());
         Wynncraft.getInstance().getCommandCore().stageCommand(new ReloreCommand());

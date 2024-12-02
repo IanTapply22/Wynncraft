@@ -7,6 +7,7 @@ import com.iantapply.wynncraft.command.commands.guild.GuildCommandsCore;
 import com.iantapply.wynncraft.command.commands.housing.HousingCommandsCore;
 import com.iantapply.wynncraft.command.commands.ignore.IgnoreCommandsCore;
 import com.iantapply.wynncraft.command.commands.party.PartyCommandsCore;
+import com.iantapply.wynncraft.command.commands.toggle.ToggleCommandsCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
@@ -63,6 +64,7 @@ public class CommandCore implements CommandExecutor {
         HousingCommandsCore housingCommandsCore = new HousingCommandsCore();
         GuildCommandsCore guildCommandsCore = new GuildCommandsCore();
         CosmeticCommandsCore cosmeticCommandsCore = new CosmeticCommandsCore();
+        ToggleCommandsCore toggleCommandsCore = new ToggleCommandsCore();
 
         gameCommandsCore.initialize();
         partyCommandsCore.initialize();
@@ -71,6 +73,7 @@ public class CommandCore implements CommandExecutor {
         housingCommandsCore.initialize();
         guildCommandsCore.initialize();
         cosmeticCommandsCore.initialize();
+        toggleCommandsCore.initialize();
     }
 
     /**

@@ -78,20 +78,6 @@ commands:
   rules:
     description: "Displays the server rules."
     usage: "/rules"
-  # Chat Commands
-  g:
-    description: "Sends the provided message into the Guild Chat."
-    usage: "/g <message>"
-  p:
-    description: "Sends the provided message into the current Party Chat."
-    usage: "/p <message>"
-  msg:
-    description: "Sends someone a private message."
-    usage: "/msg <name> <message>"
-    aliases: [tell]
-  r:
-    description: "Quickly reply to a message. You are required to send/receive a message to someone first."
-    usage: "/r <message>"
   # Toggle Commands
   toggle:
     description: "Toggles in-game settings."
