@@ -124,17 +124,8 @@ public class CommandCore implements CommandExecutor {
 
             // Check if the command matches either the name or one of its aliases
             if (command.getName().equalsIgnoreCase(wynncraftCommand.name()) || aliases.contains(command.getName())) {
-                if (!this.hasPermission(sender, wynncraftCommand)) return false;
-                if (!this.isPlayer(sender) && wynncraftCommand.isPlayerOnly()) return false;
-
-                if (args.length < wynncraftCommand.minArgs() || args.length > wynncraftCommand.maxArgs()) {
-                    Component errorMessage = Component.text("Incorrect usage. The correct syntax is '").color(NamedTextColor.RED)
-                            .append(Component.text("/" + wynncraftCommand.syntax()).color(NamedTextColor.RED))
-                            .append(Component.text("'. Please try again."));
-
-                    sender.sendMessage(errorMessage);
-                    return false;
-                }
+                // Check validity of the command execution
+                if (!this.isValidExecution(wynncraftCommand, sender, args.length)) return false;
 
                 // If there are sub command available, skip treating as regular command
                 if (!wynncraftCommand.subcommands().isEmpty()) {
@@ -143,16 +134,10 @@ public class CommandCore implements CommandExecutor {
                     for (WynncraftCommand subcommand : wynncraftCommand.subcommands()) {
                         if (subcommand.name().equalsIgnoreCase(args[0]) || subcommand.aliases().contains(args[0])) {
                             subcommandHandled = true;
+                            // Check validity of the command execution
+                            if (!this.isValidExecution(subcommand, sender, (args.length - 1))) return false;
 
-                            if (!this.hasPermission(sender, subcommand)) return false;
-                            if (!this.isPlayer(sender) && subcommand.isPlayerOnly()) return false;
-
-                            if ((args.length - 1) < subcommand.minArgs() || (args.length - 1) > subcommand.maxArgs()) {
-                                sender.sendMessage(Component.text("Incorrect usage. The correct syntax is '/" + subcommand.syntax() + "'. Please try again.")
-                                        .color(NamedTextColor.RED));
-                                return false;
-                            }
-
+                            // Execute subcommand with the prefix command itself stripped
                             try {
                                 String[] strippedArguments = Arrays.copyOfRange(args, 1, args.length);
                                 subcommand.execute(sender, strippedArguments);
@@ -169,7 +154,7 @@ public class CommandCore implements CommandExecutor {
                         }
                     }
 
-                    // No subcommand matched, handle the main command
+                    // No subcommand matched, handle the main command as a retry-like attempt
                     if (!subcommandHandled) {
                         try {
                             wynncraftCommand.execute(sender, args);
@@ -207,6 +192,25 @@ public class CommandCore implements CommandExecutor {
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the command execution is valid
+     * @param command The command that is being checked
+     * @param sender The command sender
+     * @param argsLength The number of arguments provided
+     * @return A boolean representing if the execution can be carries on
+     */
+    public boolean isValidExecution(WynncraftCommand command, CommandSender sender, int argsLength) {
+        if (!this.hasPermission(sender, command)) return false;
+        if (!this.isPlayer(sender) && command.isPlayerOnly()) return false;
+
+        if ((argsLength) < command.minArgs() || (argsLength) > command.maxArgs()) {
+            sender.sendMessage(Component.text("Incorrect usage. The correct syntax is '/" + command.syntax() + "'. Please try again.")
+                    .color(NamedTextColor.RED));
+            return false;
+        }
+        return true;
     }
 
     /**
