@@ -1,5 +1,8 @@
 package com.iantapply.wynncraft.nbs.players;
 
+import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongDestroyedEvent;
+import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongEndEvent;
+import com.iantapply.wynncraft.event.wynncraft.nbs.NBSSongStopEvent;
 import com.iantapply.wynncraft.nbs.NBSCore;
 import com.iantapply.wynncraft.nbs.handling.NBSSong;
 import com.iantapply.wynncraft.nbs.utils.Interpolator;
@@ -12,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// TODO: Make custom events for song playing events
 @Getter @Setter
 public abstract class NBSSongPlayer {
     protected NBSSong song;
@@ -67,7 +69,8 @@ public abstract class NBSSongPlayer {
                             }
                             this.playing = false;
                             this.tick = -1;
-                            // TODO: Send custom emit song end event
+                            NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
+                            Bukkit.getPluginManager().callEvent(songEndEvent);
                             if (this.autoDestroy) {
                                 destroy();
                                 return;
@@ -174,8 +177,12 @@ public abstract class NBSSongPlayer {
      */
     public void destroy() {
         synchronized (this) {
+            NBSSongDestroyedEvent songDestroyingEvent = new NBSSongDestroyedEvent();
+            Bukkit.getPluginManager().callEvent(songDestroyingEvent);
 
-            // TODO: Call song destroy custom emit event and cancel thread via thread ID
+            if (songDestroyingEvent.isCancelled()) {
+                return;
+            }
             this.setDestroyed(true);
             this.setPlaying(false);
             this.setTick((short) -1);
@@ -189,7 +196,8 @@ public abstract class NBSSongPlayer {
     public void setPlaying(boolean playing) {
         this.playing = playing;
         if (!playing) {
-            // TODO: Call song stopped event
+            NBSSongStopEvent songStopEvent = new NBSSongStopEvent();
+            Bukkit.getPluginManager().callEvent(songStopEvent);
         }
     }
 
@@ -208,7 +216,8 @@ public abstract class NBSSongPlayer {
             songs.remove(this);
             this.core.getPlayingSongs().put(player.getName(), songs);
             if (this.getPlayerList().isEmpty() && this.getAutoDestroy()) {
-                // TODO: Call song end event emit
+                NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
+                Bukkit.getPluginManager().callEvent(songEndEvent);
                 destroy();
             }
         }
