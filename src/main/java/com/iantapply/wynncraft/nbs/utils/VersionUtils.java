@@ -9,6 +9,11 @@ import org.bukkit.Bukkit;
 public class VersionUtils {
     private static float serverVersion = -1;
 
+    /**
+     * Constructs and ArrayList of instruments that are available for use based on server version
+     * @param serverVersion The floating point server version decimal
+     * @return An ArrayList of NBSCustomInstrument
+     */
     public static ArrayList<NBSCustomInstrument> getVersionCustomInstruments(float serverVersion){
         ArrayList<NBSCustomInstrument> instruments = new ArrayList<>();
         if (serverVersion == 0.0112f){
@@ -32,6 +37,12 @@ public class VersionUtils {
         return instruments;
     }
 
+    /**
+     * Constructs an ArrayList of all NBSCustomInstrument's that are available based on the server version and
+     * the first custom instrument index.
+     * @param firstCustomInstrumentIndex The index of the first custom instrument
+     * @return An ArrayList of NBSCustomInstrument that contains all available instruments
+     */
     public static ArrayList<NBSCustomInstrument> getVersionCustomInstrumentsForSong(int firstCustomInstrumentIndex){
         ArrayList<NBSCustomInstrument> instruments = new ArrayList<>();
 
@@ -51,6 +62,10 @@ public class VersionUtils {
         return instruments;
     }
 
+    /**
+     * Gets the server version as a floating point decimal
+     * @return The server version as a floating point decimal
+     */
     public static float getServerVersion(){
         if (serverVersion != -1){
             return serverVersion;

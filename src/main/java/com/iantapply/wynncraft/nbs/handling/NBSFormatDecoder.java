@@ -13,6 +13,11 @@ import java.util.HashMap;
 
 public class NBSFormatDecoder {
 
+    /**
+     * Parses a decoded NBS file instance and returns an NBSSong object
+     * @param decodeFile The decoded, NBS file
+     * @return The NBSSong object for the specified file
+     */
     public static NBSSong parse(File decodeFile) {
         try {
             return parse(new FileInputStream(decodeFile), decodeFile);
@@ -22,10 +27,22 @@ public class NBSFormatDecoder {
         return null;
     }
 
+    /**
+     * Parses an InputStream for an NBS file and returns an NBSSong object
+     * @param inputStream The input stream of the NBS file
+     * @return The NBSSong object for the specified InputStream
+     */
     public static NBSSong parse(InputStream inputStream) {
         return parse(inputStream, null);
     }
 
+    /**
+     * Reads an NBS format song file InputStream and/or File instance and produces a usable
+     * NBSSong object that can be used to play the note block notes.
+     * @param inputStream The InputStream object of the NBS file
+     * @param songFile The file instance of the NBS file
+     * @return A usable NBSSong object used to play the sounds
+     */
     private static NBSSong parse(InputStream inputStream, File songFile) {
         HashMap<Integer, NBSLayer> layerHashMap = new HashMap<>();
         try {
@@ -138,21 +155,41 @@ public class NBSFormatDecoder {
         return null;
     }
 
-    private static void setNote(int layer, int ticks, byte instrument, byte key, HashMap<Integer, NBSLayer> layerHashMap) {
-        NBSLayer l = layerHashMap.get(layer);
-        if (l == null) {
-            l = new NBSLayer();
-            layerHashMap.put(layer, l);
+    /**
+     * Sets a note object in the NBS layer hashmap
+     * @param noteLayer The integer identifier of the note layer
+     * @param ticks The ticks the note lasts for
+     * @param instrument The ID of the instrument
+     * @param key The byte for the note
+     * @param layerHashMap The layer hashmap object
+     */
+    private static void setNote(int noteLayer, int ticks, byte instrument, byte key, HashMap<Integer, NBSLayer> layerHashMap) {
+        NBSLayer layer = layerHashMap.get(noteLayer);
+        if (layer == null) {
+            layer = new NBSLayer();
+            layerHashMap.put(noteLayer, layer);
         }
-        l.setNote(ticks, new NBSNote(instrument, key));
+        layer.setNote(ticks, new NBSNote(instrument, key));
     }
 
+    /**
+     * Reads a value of a short from a DataInputStream
+     * @param dis The DataInputStream object
+     * @return The short value from the data stream
+     * @throws IOException An IO exception thrown from not being able to read data stream
+     */
     private static short readShort(DataInputStream dis) throws IOException {
         int byte1 = dis.readUnsignedByte();
         int byte2 = dis.readUnsignedByte();
         return (short) (byte1 + (byte2 << 8));
     }
 
+    /**
+     * Reads a value of an int from a DataInputStream
+     * @param dis The DataInputStream object
+     * @return The int value from the data stream
+     * @throws IOException An IO exception thrown from not being able to read data stream
+     */
     private static int readInt(DataInputStream dis) throws IOException {
         int byte1 = dis.readUnsignedByte();
         int byte2 = dis.readUnsignedByte();
@@ -161,6 +198,12 @@ public class NBSFormatDecoder {
         return (byte1 + (byte2 << 8) + (byte3 << 16) + (byte4 << 24));
     }
 
+    /**
+     * Reads a value of a string from a DataInputStream
+     * @param dis The DataInputStream object
+     * @return The string value from the data stream
+     * @throws IOException An IO exception thrown from not being able to read data stream
+     */
     private static String readString(DataInputStream dis) throws IOException {
         int length = readInt(dis);
         StringBuilder sb = new StringBuilder(length);

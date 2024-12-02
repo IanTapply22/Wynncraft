@@ -52,6 +52,10 @@ public class NBSSong {
         this.isStereo = isStereo;
     }
 
+    /**
+     * Checks if the song is stereo and returns a boolean
+     * @return A boolean of if the song is stereo
+     */
     public boolean isStereo() {
         return this.isStereo;
     }

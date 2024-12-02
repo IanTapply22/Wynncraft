@@ -35,6 +35,11 @@ public enum NotePitch {
         this.pitch = pitch;
     }
 
+    /**
+     * Gets the pitch of a note
+     * @param note The number identifier for a note
+     * @return The floating point pitch of a note
+     */
     public static float getPitch(int note) {
         for (NotePitch notePitch : values()) {
             if (notePitch.note == note) {
