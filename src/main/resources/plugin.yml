@@ -133,3 +133,7 @@ commands:
     description: "Handles all housing related actions."
     usage: "/housing <command> <args>"
     aliases: [is]
+  # NBS Commands
+  nbs:
+    description: "Handles the testing and playing of NBS files."
+    usage: "/nbs <play|stop> <args>"
