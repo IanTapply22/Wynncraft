@@ -35,7 +35,7 @@ public class NbsStopCommand extends WynncraftCommand {
             NbsCore.player.destroy();
             sender.sendMessage("Stopped playing NBS song.");
         } catch(Exception e) {
-            sender.sendMessage("Could not stop playing NBS song.");
+            sender.sendMessage("NBS stop command failed with exception: " + e.getMessage());
         }
     }
 }

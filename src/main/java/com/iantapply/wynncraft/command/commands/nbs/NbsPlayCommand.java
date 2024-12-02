@@ -51,8 +51,7 @@ public class NbsPlayCommand extends WynncraftCommand {
             NbsCore.player.setPlaying(true);
             sender.sendMessage("Started playing NBS song: " + args[0]);
         } catch (Exception e) {
-            e.printStackTrace();
-            sender.sendMessage("The provided file does not exist. Please provide a valid NBS file in the songs resource directory internally.");
+            sender.sendMessage("NBS play command failed with exception: " + e.getMessage());
         }
     }
 }
