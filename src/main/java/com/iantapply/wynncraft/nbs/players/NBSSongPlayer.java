@@ -70,8 +70,10 @@ public abstract class NBSSongPlayer {
                             }
                             this.playing = false;
                             this.tick = -1;
-                            NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
-                            songEndEvent.callEvent();
+                            Bukkit.getScheduler().runTask(Wynncraft.getInstance(), () -> {
+                                NBSSongEndEvent songEndEvent = new NBSSongEndEvent();
+                                songEndEvent.callEvent();
+                            });
                             if (this.autoDestroy) {
                                 destroy();
                                 return;
