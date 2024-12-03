@@ -15,9 +15,8 @@ public class PlayerLeaveEvent implements Listener {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        PlayerModel playerModel = new PlayerModel();
+        PlayerModel playerModel = new PlayerModel(player.getUniqueId());
 
-        playerModel.setUuid(player.getUniqueId());
         playerModel.setOnline(false);
 
         try {

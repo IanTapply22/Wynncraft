@@ -61,6 +61,10 @@ public class PlayerModel implements Model {
         this.publicProfile = publicProfile;
     }
 
+    public PlayerModel(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     /**
      * Used only for running the migrate and revert methods
      */
@@ -166,10 +170,10 @@ public class PlayerModel implements Model {
                 DatabaseHelpers.safeGet(this.getActiveCharacter()),
                 DatabaseHelpers.safeGet(this.getNickname()),
                 DatabaseHelpers.safeGet(this.getUuid()),
-                DatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null), // Null check on Rank and its ID
+                DatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null),
                 DatabaseHelpers.safeGet(this.getRankBadge()),
                 DatabaseHelpers.safeGet(this.getLegacyRankColour() != null ? this.getLegacyRankColour().getContent() : null),
-                DatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null), // Null check on SupportRank and its ID
+                DatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null),
                 DatabaseHelpers.safeGet(this.getVeteran()),
                 DatabaseHelpers.safeGet(this.getFirstJoin()),
                 DatabaseHelpers.safeGet(this.getLastJoin()),

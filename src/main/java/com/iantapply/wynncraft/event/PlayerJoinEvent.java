@@ -15,13 +15,12 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        PlayerModel playerModel = new PlayerModel();
+        PlayerModel playerModel = new PlayerModel(player.getUniqueId());
         try {
             if (DatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null) {
                 playerModel.setUsername(player.getName());
                 playerModel.setOnline(true);
                 playerModel.setServer("WA3");
-                playerModel.setUuid(player.getUniqueId());
                 playerModel.setRank(NonPurchasableRank.PLAYER);
                 playerModel.setVeteran(false);
                 playerModel.setFirstJoin(new Timestamp(System.currentTimeMillis()));
@@ -32,8 +31,6 @@ public class PlayerJoinEvent implements Listener {
                 playerModel.database().disconnect();
             } else {
                 playerModel.setUsername(player.getName());
-                // gotcha! This needs to be here as it would violate the not-null constraint
-                playerModel.setUuid(player.getUniqueId());
                 playerModel.setOnline(true);
                 playerModel.setServer("WA3");
                 playerModel.setLastJoin(new Timestamp(System.currentTimeMillis()));
