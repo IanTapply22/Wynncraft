@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.rank;
 
 import com.iantapply.wynncraft.rank.benefits.ChampionBenefits;
+import com.iantapply.wynncraft.rank.benefits.PlayerBenefits;
 import com.iantapply.wynncraft.rank.benefits.RankBenefit;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -15,22 +16,23 @@ import net.kyori.adventure.text.format.NamedTextColor;
  */
 @Getter
 public enum NonPurchasableRank {
-    // TODO: Add player as non-purchasable rank
-    // TODO: Add player rank benefits
-    // TODO: Add full rank name and shortened rank
-    MEDIA(0, "MEDIA",
+    PLAYER(0, "Player", null,
+            "Players are the default players who join Wynncraft",
+            Component.text(""),
+            "com.wynncraft.rank.player", new PlayerBenefits()),
+    MEDIA(1, "Media", null,
             "Granted to those who record and post Wynncraft videos to YouTube or stream Wynncraft",
             Component.text("[", NamedTextColor.LIGHT_PURPLE)
             .append(Component.text("Media", NamedTextColor.DARK_PURPLE))
             .append(Component.text("]", NamedTextColor.LIGHT_PURPLE)),
             "com.wynncraft.rank.media", new ChampionBenefits()),
-    MODERATOR(1, "MODERATOR",
+    MODERATOR(2, "Moderator", "Mod",
             "If you need help or if you have a problem, you can ask them either in game or on the forums",
             Component.text("[", NamedTextColor.GOLD)
             .append(Component.text("Mod", NamedTextColor.YELLOW))
             .append(Component.text("]", NamedTextColor.GOLD)),
             "com.wynncraft.rank.mod", new ChampionBenefits()),
-    ADMIN(2, "ADMIN",
+    ADMINISTRATOR(3, "Administrator", "Admin",
             "Admins are either the owners or developer of Wynncraft",
             Component.text("[", NamedTextColor.DARK_RED)
             .append(Component.text("Admin", NamedTextColor.RED))
@@ -39,6 +41,7 @@ public enum NonPurchasableRank {
 
     private final Integer id;
     private final String name;
+    private final String shortenedName;
     private final String description;
     private final TextComponent chatDisplay;
     private final String permission;
@@ -53,9 +56,10 @@ public enum NonPurchasableRank {
      * @param permission The permission node of the rank
      * @param benefits The benefits of the rank
      */
-    NonPurchasableRank(Integer id, String name, String description, TextComponent chatDisplay, String permission, RankBenefit benefits) {
+    NonPurchasableRank(Integer id, String name, String shortenedName, String description, TextComponent chatDisplay, String permission, RankBenefit benefits) {
         this.id = id;
         this.name = name;
+        this.shortenedName = shortenedName;
         this.description = description;
         this.chatDisplay = chatDisplay;
         this.permission = permission;

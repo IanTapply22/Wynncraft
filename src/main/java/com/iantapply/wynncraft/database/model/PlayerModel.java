@@ -2,8 +2,7 @@ package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.DatabaseHelpers;
-import com.iantapply.wynncraft.database.constructor.GuildPlayer;
-import com.iantapply.wynncraft.database.constructor.LegacyRankColour;
+import com.iantapply.wynncraft.player.LegacyRankColour;
 import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
@@ -35,7 +34,6 @@ public class PlayerModel implements Model {
     private NonPurchasableRank rank; // Stored as the rank ID in the DB, but stored internally as a NonPurchasableRank
     private String rankBadge; // The URL path to the badge SVG in the Wynncraft CDN
     private LegacyRankColour legacyRankColour; // Stored in a LegacyRankColour object internally, but parsed in DB as JSON
-    private String shortenedRank; // The shortened name of the rank from the object
     private PurchasableRank supportRank; // The rank that determines the support level, stored in DB as string
     private Boolean veteran;
     private Timestamp firstJoin; // Also the created_at of the DB row. Type in DB is of timestamp
@@ -44,7 +42,7 @@ public class PlayerModel implements Model {
     private Boolean publicProfile;
 
     public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, NonPurchasableRank rank,
-                       String rankBadge, LegacyRankColour legacyRankColour, String shortenedRank, PurchasableRank supportRank, Boolean veteran,
+                       String rankBadge, LegacyRankColour legacyRankColour, PurchasableRank supportRank, Boolean veteran,
                        Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile) {
         this.username = username;
         this.online = online;
@@ -55,7 +53,6 @@ public class PlayerModel implements Model {
         this.rank = rank;
         this.rankBadge = rankBadge;
         this.legacyRankColour = legacyRankColour;
-        this.shortenedRank = shortenedRank;
         this.supportRank = supportRank;
         this.veteran = veteran;
         this.firstJoin = firstJoin;
@@ -151,23 +148,60 @@ public class PlayerModel implements Model {
         return true;
     }
 
+    // TODO: Redo populate method
     @Override
     public void populate() throws SQLException {
-        // Copy column names to a string array
+        // Extract column names and values
         ArrayList<String> columnNamesList = new ArrayList<>();
         for (Column column : columns()) {
             columnNamesList.add(column.getName());
         }
         String[] columnNames = columnNamesList.toArray(new String[0]);
 
-        // Copy values in order to string array
-        Object[] values = new Object[]{ this.getUsername(), this.getOnline().toString(), this.getServer(), this.getActiveCharacter(),
-                                        this.getNickname(), this.getUuid(), this.getRank().getId().toString(), this.getRankBadge(), this.getLegacyRankColour().toString(),
-                                        this.getSupportRank().getId().toString(), this.getVeteran().toString(), this.getFirstJoin(), this.getLastJoin(),
-                                        this.getForumLink().toString(), this.getPublicProfile().toString() };
+        // Object array with a utility method for null checks
+        Object[] values = new Object[]{
+                DatabaseHelpers.safeGet(this.getUsername()),
+                DatabaseHelpers.safeGet(this.getOnline()),
+                DatabaseHelpers.safeGet(this.getServer()),
+                DatabaseHelpers.safeGet(this.getActiveCharacter()),
+                DatabaseHelpers.safeGet(this.getNickname()),
+                DatabaseHelpers.safeGet(this.getUuid()),
+                DatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null), // Null check on Rank and its ID
+                DatabaseHelpers.safeGet(this.getRankBadge()),
+                DatabaseHelpers.safeGet(this.getLegacyRankColour() != null ? this.getLegacyRankColour().getContent() : null),
+                DatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null), // Null check on SupportRank and its ID
+                DatabaseHelpers.safeGet(this.getVeteran()),
+                DatabaseHelpers.safeGet(this.getFirstJoin()),
+                DatabaseHelpers.safeGet(this.getLastJoin()),
+                DatabaseHelpers.safeGet(this.getForumLink()),
+                DatabaseHelpers.safeGet(this.getPublicProfile())
+        };
 
         Connection connection = this.database().connect(true);
-        DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
-        this.database().disconnect();
+
+        try {
+            // Check if a row with the same UUID exists
+            String condition = "uuid = CAST(? AS UUID)";
+            String[] existingRow = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+
+            if (existingRow != null) {
+                // Update only the columns that have changed, and avoid overwriting with null values
+                for (int i = 0; i < columnNames.length; i++) {
+                    String columnName = columnNames[i];
+                    Object currentValue = values[i];
+                    String databaseValue = existingRow[i];
+
+                    // Only update if the current value is not null and is different from the database value
+                    if (currentValue != null && !currentValue.toString().equals(databaseValue)) {
+                        DatabaseHelpers.updateColumnValue(connection, this.table(), columnName, currentValue, condition, this.getUuid());
+                    }
+                }
+            } else {
+                // Insert a new row if none exists
+                DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
+            }
+        } finally {
+            this.database().disconnect();
+        }
     }
 }
