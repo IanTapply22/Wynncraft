@@ -1,32 +1,67 @@
 package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
+import com.iantapply.wynncraft.database.DatabaseHelpers;
+import com.iantapply.wynncraft.database.constructor.GuildPlayer;
+import com.iantapply.wynncraft.database.constructor.LegacyRankColour;
+import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.table.Column;
+import com.iantapply.wynncraft.database.table.DataType;
 import com.iantapply.wynncraft.rank.NonPurchasableRank;
 import com.iantapply.wynncraft.rank.PurchasableRank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * A model that is used to handle and store the base profile data of a
  * player who is registered on the server.
+ * <p>
+ * All profile related data is stored in the profiles table on a per-profile basis
  */
 @Getter @Setter
 public class PlayerModel implements Model {
-    private String uuid;
-    /* These are stored separately to give players permissions based on things that other ranks doesn't have **/
-    private PurchasableRank purchasedRank;
-    private NonPurchasableRank nonPurchasedRank;
-    private double combatLevelXp; // The amount of XP the player has towards their next combat level, this will be converted to a level in the service
-    private String classes; // The profiles the player has on their account, this is stored as a JSON string and only has IDs
+    private String username;
+    private Boolean online;
+    private String server;
+    private UUID activeCharacter; // Stored as UUID internally, but stored as String in DB
+    private String nickname;
+    private UUID uuid; // Shouldn't change and should be the main source of ID
+    private NonPurchasableRank rank; // Stored as the rank ID in the DB, but stored internally as a NonPurchasableRank
+    private String rankBadge; // The URL path to the badge SVG in the Wynncraft CDN
+    private LegacyRankColour legacyRankColour; // Stored in a LegacyRankColour object internally, but parsed in DB as JSON
+    private String shortenedRank; // The shortened name of the rank from the object
+    private PurchasableRank supportRank; // The rank that determines the support level, stored in DB as string
+    private Boolean veteran;
+    private Timestamp firstJoin; // Also the created_at of the DB row. Type in DB is of timestamp
+    private Timestamp lastJoin; // Stored in DB as timestamp
+    private Integer forumLink; // The code used to link your forums account
+    private Boolean publicProfile;
 
-    public PlayerModel(PurchasableRank purchasableRank, NonPurchasableRank nonPurchasableRank, double combatLevelXp, String classes) {
-        this.purchasedRank = purchasableRank;
-        this.nonPurchasedRank = nonPurchasableRank;
-        this.combatLevelXp = combatLevelXp;
-        this.classes = classes;
+    public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, NonPurchasableRank rank,
+                       String rankBadge, LegacyRankColour legacyRankColour, String shortenedRank, PurchasableRank supportRank, Boolean veteran,
+                       Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile) {
+        this.username = username;
+        this.online = online;
+        this.server = server;
+        this.activeCharacter = activeCharacter;
+        this.nickname = nickname;
+        this.uuid = uuid;
+        this.rank = rank;
+        this.rankBadge = rankBadge;
+        this.legacyRankColour = legacyRankColour;
+        this.shortenedRank = shortenedRank;
+        this.supportRank = supportRank;
+        this.veteran = veteran;
+        this.firstJoin = firstJoin;
+        this.lastJoin = lastJoin;
+        this.forumLink = forumLink;
+        this.publicProfile = publicProfile;
     }
 
     /**
@@ -50,7 +85,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public Database database() {
-        return null;
+        return new WynncraftDatabase();
     }
 
     /**
@@ -59,7 +94,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String table() {
-        return null;
+        return "players";
     }
 
     /**
@@ -68,7 +103,24 @@ public class PlayerModel implements Model {
      */
     @Override
     public ArrayList<Column> columns() {
-        return null;
+        ArrayList<Column> columns = new ArrayList<>();
+        columns.add(new Column("username", DataType.TEXT));
+        columns.add(new Column("online", DataType.BOOLEAN));
+        columns.add(new Column("server", DataType.TEXT));
+        columns.add(new Column("activeCharacter", DataType.UUID));
+        columns.add(new Column("nickname", DataType.TEXT));
+        columns.add(new Column("uuid", DataType.UUID));
+        columns.add(new Column("rank", DataType.INTEGER)); // ID rather than name, this is parsed
+        columns.add(new Column("rankBadge", DataType.TEXT));
+        columns.add(new Column("legacyRankColour", DataType.JSON));
+        columns.add(new Column("supportRank", DataType.INTEGER)); // ID rather than name, this is parsed
+        columns.add(new Column("veteran", DataType.BOOLEAN));
+        columns.add(new Column("firstJoin", DataType.TIMESTAMP));
+        columns.add(new Column("lastJoin", DataType.TIMESTAMP));
+        columns.add(new Column("forumLink", DataType.INTEGER));
+        columns.add(new Column("publicProfile", DataType.BOOLEAN, "true"));
+
+        return columns;
     }
 
     /**
@@ -91,6 +143,31 @@ public class PlayerModel implements Model {
      */
     @Override
     public String version() {
-        return "1.0.0";
+        return "1.0.5";
+    }
+
+    @Override
+    public boolean automaticallyMigrate() {
+        return true;
+    }
+
+    @Override
+    public void populate() throws SQLException {
+        // Copy column names to a string array
+        ArrayList<String> columnNamesList = new ArrayList<>();
+        for (Column column : columns()) {
+            columnNamesList.add(column.getName());
+        }
+        String[] columnNames = columnNamesList.toArray(new String[0]);
+
+        // Copy values in order to string array
+        Object[] values = new Object[]{ this.getUsername(), this.getOnline().toString(), this.getServer(), this.getActiveCharacter(),
+                                        this.getNickname(), this.getUuid(), this.getRank().getId().toString(), this.getRankBadge(), this.getLegacyRankColour().toString(),
+                                        this.getSupportRank().getId().toString(), this.getVeteran().toString(), this.getFirstJoin(), this.getLastJoin(),
+                                        this.getForumLink().toString(), this.getPublicProfile().toString() };
+
+        Connection connection = this.database().connect(true);
+        DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
+        this.database().disconnect();
     }
 }

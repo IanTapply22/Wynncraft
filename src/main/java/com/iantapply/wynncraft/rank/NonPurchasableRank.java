@@ -15,6 +15,9 @@ import net.kyori.adventure.text.format.NamedTextColor;
  */
 @Getter
 public enum NonPurchasableRank {
+    // TODO: Add player as non-purchasable rank
+    // TODO: Add player rank benefits
+    // TODO: Add full rank name and shortened rank
     MEDIA(0, "MEDIA",
             "Granted to those who record and post Wynncraft videos to YouTube or stream Wynncraft",
             Component.text("[", NamedTextColor.LIGHT_PURPLE)

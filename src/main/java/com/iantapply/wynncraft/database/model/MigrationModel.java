@@ -1,13 +1,18 @@
 package com.iantapply.wynncraft.database.model;
 
 import com.iantapply.wynncraft.database.Database;
+import com.iantapply.wynncraft.database.DatabaseHelpers;
 import com.iantapply.wynncraft.database.database.MigrationsDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * A model that is used to track the versioning of models as they are migrated.
@@ -17,11 +22,11 @@ import java.util.ArrayList;
  */
 @Getter @Setter
 public class MigrationModel implements Model {
-    public String uuid;
+    public UUID uuid;
     public String version;
-    public String createdAt;
+    public Timestamp createdAt;
 
-    public MigrationModel(String uuid, String version, String createdAt) {
+    public MigrationModel(UUID uuid, String version, Timestamp createdAt) {
         this.uuid = uuid;
         this.version = version;
         this.createdAt = createdAt;
@@ -95,5 +100,22 @@ public class MigrationModel implements Model {
     @Override
     public String version() {
         return "1.0.0";
+    }
+
+    @Override
+    public void populate() throws SQLException {
+        // Copy column names to a string array
+        ArrayList<String> columnNamesList = new ArrayList<>();
+        for (Column column : columns()) {
+            columnNamesList.add(column.getName());
+        }
+        String[] columnNames = columnNamesList.toArray(new String[0]);
+
+        // Copy values in order to string array
+        Object[] values = new Object[]{ this.getUuid(), this.getVersion(), this.getCreatedAt() };
+
+        Connection connection = this.database().connect(true);
+        DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
+        this.database().disconnect();
     }
 }
