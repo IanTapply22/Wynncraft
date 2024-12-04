@@ -1,4 +1,4 @@
-package com.iantapply.wynncraft.event;
+package com.iantapply.wynncraft.event.minecraft;
 
 import com.iantapply.wynncraft.database.model.PlayerModel;
 import com.iantapply.wynncraft.logger.Logger;

@@ -2,8 +2,8 @@ package com.iantapply.wynncraft;
 
 import com.iantapply.wynncraft.command.CommandCore;
 import com.iantapply.wynncraft.database.DatabaseCore;
-import com.iantapply.wynncraft.event.PlayerJoinEvent;
-import com.iantapply.wynncraft.event.PlayerLeaveEvent;
+import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
+import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.nbs.NBSCore;
 import lombok.Getter;
