@@ -18,26 +18,19 @@ public class PlayerJoinEvent implements Listener {
         PlayerModel playerModel = new PlayerModel(player.getUniqueId());
         try {
             if (DatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null) {
-                playerModel.setUsername(player.getName());
-                playerModel.setOnline(true);
-                playerModel.setServer("WA3");
-                playerModel.setRank(NonPurchasableRank.PLAYER);
-                playerModel.setVeteran(false);
+                playerModel.setRank(NonPurchasableRank.PLAYER); // TODO: Fetch from ranks database
+                playerModel.setVeteran(false); // ignore: set, but means they had VIP before update
                 playerModel.setFirstJoin(new Timestamp(System.currentTimeMillis()));
-                playerModel.setLastJoin(new Timestamp(System.currentTimeMillis()));
                 playerModel.setPublicProfile(true);
-
-                playerModel.populate();
-                playerModel.database().disconnect();
-            } else {
-                playerModel.setUsername(player.getName());
-                playerModel.setOnline(true);
-                playerModel.setServer("WA3");
-                playerModel.setLastJoin(new Timestamp(System.currentTimeMillis()));
-
-                playerModel.populate();
-                playerModel.database().disconnect();
             }
+
+            playerModel.setUsername(player.getName());
+            playerModel.setOnline(true);
+            playerModel.setServer("WA3"); // TODO: Properly fetch from server config
+            playerModel.setLastJoin(new Timestamp(System.currentTimeMillis()));
+
+            playerModel.populate();
+            playerModel.database().disconnect();
         } catch (Exception e) {
             player.sendMessage("Could not execute query to database! Please see the console logs.");
             Logger.log(LoggingLevel.ERROR, String.format("Could not execute SQL query with error: %s", e.getMessage()));
