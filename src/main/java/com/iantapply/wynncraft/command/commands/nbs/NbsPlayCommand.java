@@ -44,6 +44,7 @@ public class NbsPlayCommand extends WynncraftCommand {
             InputStream inputStreamSong = getClass().getClassLoader().getResourceAsStream("songs/" + args[0]);
             NBSSong song = NBSFormatDecoder.parse(inputStreamSong);
             NbsCore.player = new PlayerOrientedSongPlayer(Wynncraft.getInstance().getNbsCore(), song);
+            NbsCore.player.setFadeStart((byte) 10);
             NbsCore.player.setPlayer(player);
             NbsCore.player.setSoundCategory(SoundCategory.RECORDS);
 

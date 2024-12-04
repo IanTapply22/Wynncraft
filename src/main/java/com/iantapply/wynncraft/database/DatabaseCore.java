@@ -2,6 +2,7 @@ package com.iantapply.wynncraft.database;
 
 import com.iantapply.wynncraft.database.model.MigrationModel;
 import com.iantapply.wynncraft.database.model.Model;
+import com.iantapply.wynncraft.database.model.PlayerModel;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class DatabaseCore {
      */
     public void initialize() {
         this.stageModel(new MigrationModel());
+        this.stageModel(new PlayerModel());
     }
 
     /**

@@ -2,7 +2,8 @@ package com.iantapply.wynncraft;
 
 import com.iantapply.wynncraft.command.CommandCore;
 import com.iantapply.wynncraft.database.DatabaseCore;
-import com.iantapply.wynncraft.event.PlayerJoinEvent;
+import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
+import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.nbs.NBSCore;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public final class Wynncraft extends JavaPlugin {
         this.nbsCore = new NBSCore();
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
 
         Logger.logStartup();
     }
