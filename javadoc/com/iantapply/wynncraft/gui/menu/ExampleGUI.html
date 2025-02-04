@@ -124,7 +124,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#borderItem(int)" class="member-name-link">borderItem</a><wbr>(int&nbsp;slot)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The border item that is used to create a border around the GUI</div>
+<div class="block">The item to add to the border</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cantPickup(com.iantapply.wynncraft.inventory.WynncraftItem,int)" class="member-name-link">cantPickup</a><wbr>(<a href="../../inventory/WynncraftItem.html" title="class in com.iantapply.wynncraft.inventory">WynncraftItem</a>&nbsp;currentItem,
@@ -261,15 +261,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="borderItem(int)">
 <h3>borderItem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></span>&nbsp;<span class="element-name">borderItem</span><wbr><span class="parameters">(int&nbsp;slot)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../WynncraftGUI.html#borderItem(int)">WynncraftGUI</a></code></span></div>
-<div class="block">The border item that is used to create a border around the GUI</div>
+<div class="block">The item to add to the border</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../WynncraftGUI.html#borderItem(int)">borderItem</a></code>&nbsp;in class&nbsp;<code><a href="../WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>slot</code> - The slot to add the border item to</dd>
 <dt>Returns:</dt>
-<dd>The border item as a WynncraftItem object</dd>
+<dd>The item that will fill the selected slot</dd>
 </dl>
 </section>
 </li>
@@ -300,7 +299,7 @@ loadScripts(document, 'script');</script>
 <dt>Specified by:</dt>
 <dd><code><a href="../WynncraftGUI.html#onClose(org.bukkit.entity.Player)">onClose</a></code>&nbsp;in class&nbsp;<code><a href="../WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>player</code> - </dd>
+<dd><code>player</code> - The player that closed the GUI</dd>
 </dl>
 </section>
 </li>
@@ -313,7 +312,7 @@ loadScripts(document, 'script');</script>
 <dt>Specified by:</dt>
 <dd><code><a href="../WynncraftGUI.html#open(org.bukkit.entity.Player)">open</a></code>&nbsp;in class&nbsp;<code><a href="../WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>player</code> - </dd>
+<dd><code>player</code> - The player that opened the GUI</dd>
 </dl>
 </section>
 </li>
