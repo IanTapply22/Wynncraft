@@ -1,0 +1,42 @@
+name: Publish Javadoc to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: jdk21-flat
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK ${{ vars.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ vars.JAVA_VERSION }}
+          distribution: ${{ vars.JAVA_DISTRIBUTION }}
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build with Gradle
+        run: ./gradlew javadoc
+
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: ${{ vars.JAVA_VERSION }}
+          target-folder: javadoc
+          project: gradle
