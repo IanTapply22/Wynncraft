@@ -37,18 +37,21 @@ public abstract class WynncraftGUI {
 
     /**
      * The filler item that is used to fill empty slots in the GUI
+     * @param slot The slot to add the border item to
      * @return The filler item as a WynncraftItem object
      */
     public abstract GUIClickableItem fillerItem(int slot);
 
     /**
      * The border item that is used to create a border around the GUI
+     * @param slot The slot to add the border item to
      * @return The border item as a WynncraftItem object
      */
     public abstract GUIClickableItem borderItem(int slot);
 
     /**
      * The item that is displayed in the GUI but can't be picked up
+     * @param item The item to remove the ability to pickup for
      * @param slot The slot that the item is in
      * @return The item as a WynncraftItem object
      */
@@ -64,11 +67,15 @@ public abstract class WynncraftGUI {
 
     /**
      * Determines what happens when the GUI is closed
+     *
+     * @param player The player to close the GUI menu for
      */
     public abstract void onClose(Player player);
 
     /**
      * Determines what happens when the GUI is opened
+     *
+     * @param player The player to open the GUI menu for
      */
     public abstract void open(Player player);
 
