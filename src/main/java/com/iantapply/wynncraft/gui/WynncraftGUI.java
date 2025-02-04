@@ -87,6 +87,8 @@ public abstract class WynncraftGUI {
     /**
      * Starts the GUI updater to update the GUI every 20 ticks
      * This should be executed upon the opening of the GUI
+     *
+     * @param plugin The plugin instance that will have the task time schedules thread attached to it
      */
     public void startUpdater(JavaPlugin plugin) {
         this.updater = Bukkit.getScheduler().runTaskTimer(plugin, this::update, 0, 20);

@@ -33,6 +33,8 @@ public interface NPC {
     /**
      * What should be done when the player interacts with the NPC
      * This is usually starting dialogue or a new quest
+     *
+     * @param player The player that executed the interaction
      */
     void onInteract(Player player);
 
@@ -101,6 +103,7 @@ public interface NPC {
     /**
      * Starts the dialogue sequence for the player when they interact with the NPC
      * @param player The player to start the dialogue for
+     * @param plugin The plugin instance to run the task scheduler on
      */
     default void startDialogue(Player player, Plugin plugin) {
         // Play the dialogues in order and for the length specified in seconds after the one before it is done

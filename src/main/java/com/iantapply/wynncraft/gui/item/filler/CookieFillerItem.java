@@ -12,6 +12,12 @@ import org.bukkit.inventory.meta.ItemMeta;
  * An example class to represent how a premade filler item can be created
  */
 public class CookieFillerItem {
+
+    /**
+     * The item to add as a filler
+     * @param slot The slot to add the filler item to
+     * @return The item that will fill the selected slot
+     */
     public static GUIClickableItem getItem(int slot) {
         return new GUIClickableItem() {
             @Override

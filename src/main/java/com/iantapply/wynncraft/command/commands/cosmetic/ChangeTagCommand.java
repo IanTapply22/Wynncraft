@@ -3,6 +3,9 @@ package com.iantapply.wynncraft.command.commands.cosmetic;
 import com.iantapply.wynncraft.command.WynncraftCommand;
 import org.bukkit.command.CommandSender;
 
+/**
+ * A command used to change the rank tag that appears in chat
+ */
 public class ChangeTagCommand extends WynncraftCommand {
     @Override
     public String name() {

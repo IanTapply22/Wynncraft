@@ -1,4 +1,6 @@
 package com.iantapply.wynncraft.rank.benefits;
 
-public class ChampionBenefits implements RankBenefit {
-}
+/**
+ * Contains the benefits that are bundled with the champion tier rank
+ */
+public class ChampionBenefits implements RankBenefit { }

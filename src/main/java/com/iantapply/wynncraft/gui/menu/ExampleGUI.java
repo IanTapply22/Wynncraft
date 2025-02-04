@@ -56,6 +56,11 @@ public class ExampleGUI extends WynncraftGUI {
         return CookieFillerItem.getItem(slot);
     }
 
+    /**
+     * The item to add to the border
+     * @param slot The slot to add the border item to
+     * @return The item that will fill the selected slot
+     */
     @Override
     public GUIClickableItem borderItem(int slot) {
         return BlackGlassPaneBorder.getItem(slot);
@@ -84,7 +89,7 @@ public class ExampleGUI extends WynncraftGUI {
     /**
      * Determines what happens when the GUI is closed
      *
-     * @param player
+     * @param player The player that closed the GUI
      */
     @Override
     public void onClose(Player player) {
@@ -94,7 +99,7 @@ public class ExampleGUI extends WynncraftGUI {
     /**
      * Determines what happens when the GUI is opened
      *
-     * @param player
+     * @param player The player that opened the GUI
      */
     @Override
     public void open(Player player) {

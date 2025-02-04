@@ -8,7 +8,6 @@ import java.util.Arrays;
  *
  * @author : $Author: brian $
  * @version : $Revision: 1.1 $
- *          <p>
  *          <hr><p><a href="http://www.mbari.org">
  *          The Monterey Bay Aquarium Research Institute (MBARI)</a> provides this
  *          documentation and code &quot;as is&quot;, with no warranty, express or

@@ -211,8 +211,8 @@ public class CraftingIngredient {
 
     /**
      * Helper functions to add and remove item from arrays
+     * @param range The positive effect range object that contains lore, NBT data, and other visual elements
      */
-
     public void addPositiveEffectRange(PositiveRange range) {
         this.positiveEffectRanges.add(range);
     }

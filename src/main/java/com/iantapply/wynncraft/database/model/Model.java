@@ -92,6 +92,8 @@ public interface Model {
 
     /**
      * Migrates the model on a table and creates the columns by default
+     *
+     * @param init Whether this is the initial round of migration and will migrate the model
      */
     default void migrate(boolean init) {
         if (init) {

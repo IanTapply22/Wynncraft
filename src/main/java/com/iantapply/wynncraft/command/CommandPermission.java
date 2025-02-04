@@ -7,10 +7,12 @@ import lombok.Getter;
  * <p>
  * The permission is formatted as "wynncraft.command.[command_name]" for simplicity.
  * Additionally, you can also assign required permission to also be a rank permission
- * <p>
  */
 @Getter
 public enum CommandPermission {
+    /**
+     * An example permission for a command to be used
+     */
     EXAMPLE("wynncraft.command.example");
 
     private final String permission;
