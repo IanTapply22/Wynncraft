@@ -13,9 +13,9 @@ public class VersionChecker {
     /**
      * Compares two version strings (e.g., "1.2.3" vs. "1.2.4").
      * Returns:
-     *  - A negative value if v1 < v2
+     *  - A negative value if v1 is less than v2
      *  - Zero if v1 == v2
-     *  - A positive value if v1 > v2
+     *  - A positive value if v1 greater than v2
      */
     public static int compareVersions(String v1, String v2) {
         String[] v1Parts = v1.split("\\.");
