@@ -31,6 +31,7 @@ com.iantapply.wynncraft.inventory.crafting.effects.base.positive
 com.iantapply.wynncraft.inventory.crafting.effects.negative
 com.iantapply.wynncraft.inventory.crafting.effects.positive
 com.iantapply.wynncraft.logger
+com.iantapply.wynncraft.metrics
 com.iantapply.wynncraft.nbs
 com.iantapply.wynncraft.nbs.enums
 com.iantapply.wynncraft.nbs.handling
