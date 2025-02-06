@@ -101,7 +101,7 @@ public abstract class NBSSongPlayer {
 
     /**
      * Gets the player list currently listening to the NBS song
-     * @return A List<String> object that contains the list of player names
+     * @return A List[String] object that contains the list of player names
      */
     public List<String> getPlayerList() {
         return Collections.unmodifiableList(this.playerList);

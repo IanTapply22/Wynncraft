@@ -1,5 +1,7 @@
 package com.iantapply.wynncraft.database.database;
 
+import com.iantapply.wynncraft.Wynncraft;
+import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.DatabaseInformation;
 import com.iantapply.wynncraft.logger.Logger;
@@ -10,6 +12,7 @@ import com.iantapply.wynncraft.logger.LoggingLevel;
  * and provides a connection to the data available in the database
  */
 public class WynncraftDatabase extends Database {
+    private final ConfigurationCore configurationCore = Wynncraft.getInstance().getConfigurationCore();
 
     /**
      * The information associated with the database
@@ -18,7 +21,12 @@ public class WynncraftDatabase extends Database {
      */
     @Override
     public DatabaseInformation databaseInformation() {
-        return new DatabaseInformation("localhost", "5432", "wynncraft", "Wynncraft Core", "root", "wynncraft");
+        return new DatabaseInformation(this.configurationCore.getString("WYNNCRAFT_DATABASE_ADDRESS"),
+                                        this.configurationCore.getString("WYNNCRAFT_DATABASE_PORT"),
+                                        this.configurationCore.getString("WYNNCRAFT_DATABASE_NAME"),
+                                        this.configurationCore.getString("WYNNCRAFT_DATABASE_DISPLAY_NAME"),
+                                        this.configurationCore.getString("WYNNCRAFT_DATABASE_USERNAME"),
+                                        this.configurationCore.getString("WYNNCRAFT_DATABASE_PASSWORD"));
     }
 
     /**

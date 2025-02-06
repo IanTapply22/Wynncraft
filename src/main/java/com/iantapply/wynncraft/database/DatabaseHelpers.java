@@ -59,6 +59,8 @@ public class DatabaseHelpers {
      * Finishes a query by executing the statement and closing it
      * @param queryStatement The statement to finish
      * @return The result of the query. An empty array if there is an SQL error that occurs
+     *
+     * @throws SQLException Throws an SQL exception if it can't execute the query because of a DB issue or SQL issue
      */
     public static String[] finishQuery(PreparedStatement queryStatement) throws SQLException {
         ResultSet resultSet = queryStatement.executeQuery();
@@ -345,6 +347,8 @@ public class DatabaseHelpers {
      * @param connection The database connection
      * @param table The name of the table to check for existence
      * @return A boolean indicating if the table exists. Returns false upon SQL error.
+     *
+     * @throws SQLException Throws an SQL exception if it can't execute the query because of a DB issue or SQL issue
      */
     public static boolean checkTableExists(Connection connection, String table) throws SQLException {
         // Use database metadata to check for the table's existence
@@ -461,6 +465,8 @@ public class DatabaseHelpers {
      * @param table The name of the table that the column appears in
      * @param column The name of the column to search for
      * @return Whether the column exists as a boolean. Returns false upon SQL error
+     *
+     * @throws SQLException Throws an SQL exception if it can't execute the query because of a DB issue or SQL issue
      */
     public static boolean checkColumnExists(Connection connection, String table, String column) throws SQLException {
         if (table == null || table.isEmpty() || column == null || column.isEmpty()) {

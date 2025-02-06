@@ -5,6 +5,10 @@ import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 
+/**
+ * A command that opens the character selector menu that cna be used to change
+ * to a different character/profile
+ */
 public class ClassCommand  extends WynncraftCommand {
     @Override
     public String name() {

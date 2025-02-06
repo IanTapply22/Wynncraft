@@ -33,6 +33,7 @@ public abstract class Database {
      *
      * @param silent Whether the database should be connected to silently not displaying
      *               non-fatal logged outputs.
+     * @return The connection that is used to interact with the DB. This will stay alive
      */
     public Connection connect(boolean silent) {
         try {

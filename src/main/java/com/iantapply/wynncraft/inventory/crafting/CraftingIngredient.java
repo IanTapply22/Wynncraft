@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.inventory.crafting;
 
-import com.iantapply.wynncraft.configuration.NBTTags;
+import com.iantapply.wynncraft.configuration.NBTTagConfigurations;
 import com.iantapply.wynncraft.inventory.WynncraftItem;
 import com.iantapply.wynncraft.inventory.crafting.effects.base.negative.NegativePossible;
 import com.iantapply.wynncraft.inventory.crafting.effects.base.negative.NegativeRange;
@@ -144,8 +144,8 @@ public class CraftingIngredient {
         }
 
         // Set NBT data for possible effects and requirements
-        this.item.setIntegerFlag(NBTTags.CraftingIngredient.CRAFTING_LVL_REQUIREMENT, this.minimumCraftingLevel);
-        this.item.setStringFlag(NBTTags.CraftingIngredient.REQUIRED_PROFESSION_IDS, String.join(",", requiredProfessions.toString()));
+        this.item.setIntegerFlag(NBTTagConfigurations.CraftingIngredient.CRAFTING_LVL_REQUIREMENT, this.minimumCraftingLevel);
+        this.item.setStringFlag(NBTTagConfigurations.CraftingIngredient.REQUIRED_PROFESSION_IDS, String.join(",", requiredProfessions.toString()));
 
         Component displayName = Component.text(this.name).color(NamedTextColor.GRAY)
                                 .append(this.tier.getDisplay());
@@ -211,8 +211,8 @@ public class CraftingIngredient {
 
     /**
      * Helper functions to add and remove item from arrays
+     * @param range The positive effect range object that contains lore, NBT data, and other visual elements
      */
-
     public void addPositiveEffectRange(PositiveRange range) {
         this.positiveEffectRanges.add(range);
     }

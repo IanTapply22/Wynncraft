@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft;
 
 import com.iantapply.wynncraft.command.CommandCore;
+import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.database.DatabaseCore;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
@@ -16,12 +17,17 @@ public final class Wynncraft extends JavaPlugin {
     @Getter
     public CommandCore commandCore;
     @Getter
+    public ConfigurationCore configurationCore;
+    @Getter
     public NBSCore nbsCore;
 
     @Override
     public void onEnable() {
         instance = this;
         Logger.logInitialization();
+
+        this.configurationCore = new ConfigurationCore(this);
+        this.configurationCore.initialize();
 
         DatabaseCore databaseCore = new DatabaseCore();
         databaseCore.initialize();
@@ -41,6 +47,6 @@ public final class Wynncraft extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        Logger.logShutdown();
     }
 }

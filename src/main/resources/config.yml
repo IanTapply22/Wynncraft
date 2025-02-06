@@ -1,0 +1,17 @@
+# The migrations database to record migration logging and tracking
+# This can have the same connection details as the Wynncraft database
+MIGRATIONS_DATABASE_ADDRESS: "localhost"
+MIGRATIONS_DATABASE_PORT: "5432"
+MIGRATIONS_DATABASE_USERNAME: "root"
+MIGRATIONS_DATABASE_PASSWORD: "wynncraft"
+MIGRATIONS_DATABASE_NAME: "migrations"
+MIGRATIONS_DATABASE_DISPLAY_NAME: "Migrations"
+
+# Hosts the tables that store all user data and data needed for the plugin to persist
+# This CAN be used for migrations, but it is recommended not to for a production server
+WYNNCRAFT_DATABASE_ADDRESS: "localhost"
+WYNNCRAFT_DATABASE_PORT: "5432"
+WYNNCRAFT_DATABASE_USERNAME: "root"
+WYNNCRAFT_DATABASE_PASSWORD: "wynncraft"
+WYNNCRAFT_DATABASE_NAME: "wynncraft"
+WYNNCRAFT_DATABASE_DISPLAY_NAME: "Wynncraft Core"

@@ -3,6 +3,9 @@ package com.iantapply.wynncraft.command.commands.game;
 import com.iantapply.wynncraft.command.WynncraftCommand;
 import org.bukkit.command.CommandSender;
 
+/**
+ * A command used to claim a thrown item bomb
+ */
 public class ClaimItemBombCommand extends WynncraftCommand {
     @Override
     public String name() {

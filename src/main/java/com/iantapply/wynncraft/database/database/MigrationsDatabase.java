@@ -1,5 +1,7 @@
 package com.iantapply.wynncraft.database.database;
 
+import com.iantapply.wynncraft.Wynncraft;
+import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.database.Database;
 import com.iantapply.wynncraft.database.DatabaseInformation;
 import com.iantapply.wynncraft.logger.Logger;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class MigrationsDatabase extends Database {
+    private final ConfigurationCore configurationCore = Wynncraft.getInstance().getConfigurationCore();
 
     /**
      * The information associated with the database
@@ -17,7 +20,12 @@ public class MigrationsDatabase extends Database {
      */
     @Override
     public DatabaseInformation databaseInformation() {
-        return new DatabaseInformation("localhost", "5432", "migrations", "Migrations", "root", "wynncraft");
+        return new DatabaseInformation(this.configurationCore.getString("MIGRATIONS_DATABASE_ADDRESS"),
+                                        this.configurationCore.getString("MIGRATIONS_DATABASE_PORT"),
+                                        this.configurationCore.getString("MIGRATIONS_DATABASE_NAME"),
+                                        this.configurationCore.getString("MIGRATIONS_DATABASE_DISPLAY_NAME"),
+                                        this.configurationCore.getString("MIGRATIONS_DATABASE_USERNAME"),
+                                        this.configurationCore.getString("MIGRATIONS_DATABASE_PASSWORD"));
     }
 
     /**

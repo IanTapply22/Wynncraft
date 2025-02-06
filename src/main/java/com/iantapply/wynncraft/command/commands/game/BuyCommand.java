@@ -5,6 +5,10 @@ import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 
+/**
+ * A command that opens the legacy gold coins menu that can be used to redeem items
+ * with the old currency used before September 2016.
+ */
 public class BuyCommand extends WynncraftCommand {
     @Override
     public String name() {

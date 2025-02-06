@@ -2,6 +2,9 @@ package com.iantapply.wynncraft.command.commands.cosmetic;
 
 import com.iantapply.wynncraft.Wynncraft;
 
+/**
+ * Handles staging all cosmetic related commands to the command core registry
+ */
 public class CosmeticCommandsCore {
 
     /**
