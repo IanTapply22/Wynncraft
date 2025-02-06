@@ -20,6 +20,9 @@ Aren't sure when a new release will be published or what's planned for this proj
 Currently, Wynncraft is designed as an AIO (all-in-one) plugin to promote ease-of-use and to make it a one-step process to install. With that being said, we are looking to diverge away from this system and split up modules into separate plugins to keep our codebase readable and clean. You can find a model of the module linkage flow chart below.
 ![wynncraft_module_linkage_flow_chart](.github/assets/wynncraft_module_linkage_flow_chart.png)
 
+## Support
+Have a question or need help using the plugin or the API? Come join our [discord](https://discord.gg/CFmhHMJD4u) for priority help and for constant updates.
+
 ## Contributing
 Before contributing to the project, please read the [Code of Conduct](https://github.com/IanTapply22/Wynncraft/blob/main/CODE_OF_CONDUCT.md)
 
