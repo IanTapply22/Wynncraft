@@ -2,10 +2,13 @@ package com.iantapply.wynncraft;
 
 import com.iantapply.wynncraft.command.CommandCore;
 import com.iantapply.wynncraft.configuration.ConfigurationCore;
+import com.iantapply.wynncraft.configuration.PluginConfigurations;
 import com.iantapply.wynncraft.database.DatabaseCore;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
 import com.iantapply.wynncraft.logger.Logger;
+import com.iantapply.wynncraft.metrics.Metrics;
+import com.iantapply.wynncraft.metrics.UpdateChecker;
 import com.iantapply.wynncraft.nbs.NBSCore;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -18,6 +21,8 @@ public final class Wynncraft extends JavaPlugin {
     public CommandCore commandCore;
     @Getter
     public ConfigurationCore configurationCore;
+    @Getter
+    public UpdateChecker updateChecker;
     @Getter
     public NBSCore nbsCore;
 
@@ -41,6 +46,11 @@ public final class Wynncraft extends JavaPlugin {
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
+
+        new Metrics(this, PluginConfigurations.BSTATS_PLUGIN_ID);
+
+        this.updateChecker = new UpdateChecker(this, PluginConfigurations.BSTATS_PLUGIN_ID);
+        this.updateChecker.check();
 
         Logger.logStartup();
     }

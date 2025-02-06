@@ -50,6 +50,22 @@ public class Logger {
     }
 
     /**
+     * Logs an update notification to the Bukkit console
+     */
+    public static void logUpdateNotificationConsole() {
+        log(LoggingLevel.INFO,"A new update is available for " + PluginConfigurations.NAME + " plugin");
+        log(LoggingLevel.INFO, "You can find the update at: https://hangar.papermc.io/GucciFox/Wynncraft");
+    }
+
+    /**
+     * Logs an unreleased plugin version notification to the Bukkit console
+     */
+    public static void logUnreleasedVersionNotification() {
+        log(LoggingLevel.INFO, "The version for the " + PluginConfigurations.NAME + " plugin is higher than latest version");
+        log(LoggingLevel.INFO, "You are currently running an unreleased version of the plugin that is NOT stable");
+    }
+
+    /**
      * Logs a shutdown message to the Bukkit console
      */
     public static void logShutdown() {

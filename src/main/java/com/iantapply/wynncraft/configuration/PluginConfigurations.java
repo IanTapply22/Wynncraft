@@ -6,6 +6,7 @@ public class PluginConfigurations {
     public static final String DEVELOPER_CREDITS = "iantapply";
     public static final String DESCRIPTION = "A Wynncraft recreation";
     public static final String MAIN_CONFIG_FILE = "config.yml";
+    public static final int BSTATS_PLUGIN_ID = 24674;
 
     /**
      * Checks if the server and plugin are running in PaperMC mode
