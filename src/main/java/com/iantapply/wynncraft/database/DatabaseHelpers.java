@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
  * Note: All warning in regard to unsafe SQL statements can be ignored, we are sanitizing
  * our queries before execution and none of the helpers are faced towards the consumers.
  */
+// TODO: Move safeget to util and clean up methods here
 public class DatabaseHelpers {
 
     /**
@@ -382,7 +383,6 @@ public class DatabaseHelpers {
 
             try (ResultSet resultSet = queryStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    // Fetch all columns of the row as a String array
                     int columnCount = resultSet.getMetaData().getColumnCount();
                     String[] row = new String[columnCount];
                     for (int i = 0; i < columnCount; i++) {
@@ -393,7 +393,46 @@ public class DatabaseHelpers {
             }
         }
 
-        // Return null if no row is found
+        return null;
+    }
+
+    /**
+     * Selects an entire and latest row from a table with the given condition.
+     *
+     * @param connection      The database connection to use.
+     * @param table           The table to select the row from.
+     * @param condition       The condition to check for when selecting a row (e.g., "uuid = ?").
+     * @param conditionValues The values to bind to the condition's placeholders.
+     * @return The row's data in a String array, or null if no row is found.
+     * @throws SQLException If an SQL error occurs.
+     */
+    public static String[] selectRowWithLatestCreatedAt(Connection connection, String table, String condition, Object... conditionValues) throws SQLException {
+        Pattern validIdentifierPattern = Pattern.compile("^[a-zA-Z0-9_]+$");
+
+        if (!validIdentifierPattern.matcher(table).matches()) {
+            throw new IllegalArgumentException("Table name contains invalid characters.");
+        }
+
+        // Add ORDER BY created_at DESC and LIMIT 1 to fetch the latest row
+        String query = "SELECT * FROM " + table + " WHERE " + condition + " ORDER BY created_at DESC LIMIT 1";
+
+        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+            for (int i = 0; i < conditionValues.length; i++) {
+                queryStatement.setObject(i + 1, conditionValues[i]);
+            }
+
+            try (ResultSet resultSet = queryStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int columnCount = resultSet.getMetaData().getColumnCount();
+                    String[] row = new String[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = resultSet.getString(i + 1);
+                    }
+                    return row;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -430,10 +469,14 @@ public class DatabaseHelpers {
      * @throws SQLException Throws an SQL exception if it can't execute the query because of a DB issue or SQL issue
      */
     public static boolean checkColumnExists(Connection connection, String table, String column) throws SQLException {
+        if (table == null || table.isEmpty() || column == null || column.isEmpty()) {
+            throw new IllegalArgumentException("Table or column name cannot be null or empty.");
+        }
+
         String query = "SELECT COUNT(*) FROM information_schema.columns " +
                 "WHERE table_schema = 'public' " +
-                "AND table_name = ? " +
-                "AND column_name = ?";
+                "AND LOWER(table_name) = LOWER(?) " +
+                "AND LOWER(column_name) = LOWER(?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, table);
@@ -472,5 +515,43 @@ public class DatabaseHelpers {
             statement.setString(1, defaultValue);
             statement.executeUpdate();
         }
+    }
+
+    public static void updateColumnValue(
+            Connection connection,
+            String table,
+            String columnToUpdate,
+            Object newValue,
+            String condition,
+            Object... conditionValues
+    ) throws SQLException {
+        // Validate the table and column names
+        Pattern validIdentifierPattern = Pattern.compile("^[a-zA-Z0-9_]+$");
+
+        if (!validIdentifierPattern.matcher(table).matches()) {
+            throw new IllegalArgumentException("Table name contains invalid characters.");
+        }
+        if (!validIdentifierPattern.matcher(columnToUpdate).matches()) {
+            throw new IllegalArgumentException("Column name contains invalid characters.");
+        }
+
+        // Build the SQL query
+        String query = "UPDATE " + table + " SET " + columnToUpdate + " = ? WHERE " + condition;
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            // Set the new value
+            statement.setObject(1, newValue);
+
+            // Set the condition parameters
+            for (int i = 0; i < conditionValues.length; i++) {
+                statement.setObject(i + 2, conditionValues[i]); // Offset by 2 because the first parameter is the new value
+            }
+
+            statement.executeUpdate();
+        }
+    }
+
+    public static <T> T safeGet(T value) {
+        return value != null ? value : null;
     }
 }

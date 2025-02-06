@@ -1,5 +1,6 @@
+version: "3.9"
 services:
-  db:
+  wynncraft-postgres:
     image: postgres
     restart: always
     ports:
@@ -12,3 +13,56 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - wynncraft-network
+
+  ## VELOCITY.TOML MUST BE CONFIGURED ALONGSIDE SERVERS ##
+  wynncraft-velocity-proxy:
+    image: itzg/mc-proxy
+    environment:
+      TYPE: VELOCITY
+      REPLACE_ENV_VARIABLES: "true"
+      SERVER_PORT: 25565
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./proxy:/server
+    networks:
+      - wynncraft-network
+
+  ## ALL SERVER SPIGOT.YML FILES AND PAPER-GLOBAL.YML FILES MUST BE CONFIGURED ##
+  wynncraft-lobby-server:
+    image: itzg/minecraft-server
+    environment:
+      TYPE: PAPER
+      VERSION: 1.21.3
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      SERVER_PORT: 26000
+    ports:
+      - "26000:26000"
+    volumes:
+      - ./lobby:/data
+    networks:
+      - wynncraft-network
+
+  wynncraft-main-server:
+    image: itzg/minecraft-server
+    environment:
+      TYPE: PAPER
+      VERSION: 1.21.3
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      SERVER_PORT: 27000
+    ports:
+      - "27000:27000"
+    volumes:
+      - ./main:/data
+    networks:
+      - wynncraft-network
+
+networks:
+  wynncraft-network:
+    driver: bridge

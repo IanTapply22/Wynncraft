@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Represents a model that contains various data on an object
@@ -60,6 +61,11 @@ public interface Model {
     String version();
 
     /**
+     * The method used to populate a row of data with this model in the table
+     */
+    void populate() throws SQLException;
+
+    /**
      * Whether the model should be migrated automatically upon creation or a modification.
      * @return A boolean representing if it should be able to automatically migrate. This
      * is by default false.
@@ -74,14 +80,17 @@ public interface Model {
      */
     default String migratedVersion() {
         Model migrationModel = new MigrationModel();
-        // Use model UUID as this is its ID and will remain static
         String uuidSearch = "uuid = CAST(? AS UUID)";
         try {
-            String[] migrationRow = DatabaseHelpers.selectRow(migrationModel.database().connect(true), migrationModel.table(), uuidSearch, this.uuid());
+            String[] migrationRow = DatabaseHelpers.selectRowWithLatestCreatedAt(
+                    migrationModel.database().connect(true),
+                    migrationModel.table(),
+                    uuidSearch,
+                    this.uuid()
+            );
             if (migrationRow == null) return "-1";
 
             migrationModel.database().disconnect();
-            // Pull migration version, the index is the order in which is appears in MigrationModel
             return migrationRow[1];
         } catch (SQLException e) {
             Logger.log(LoggingLevel.ERROR, String.format("Unable to select row for migrated version check: %s", e.getMessage()));
@@ -125,12 +134,18 @@ public interface Model {
                     try {
                         DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
                     } catch (SQLException e) {
+                        Logger.log(LoggingLevel.ERROR, String.format("Failed to create column: %s", e.getMessage()));
+                        this.database().disconnect();
+                        continue;
+                    }
+                } else {
+                    try {
+                        DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
+                    } catch (SQLException e) {
                         Logger.log(LoggingLevel.ERROR, String.format("Failed to create column with default value: %s", e.getMessage()));
                         this.database().disconnect();
                         continue;
                     }
-                    database().disconnect();
-                    continue;
                 }
 
                 // Create the column with a default value if there's one present
@@ -144,16 +159,12 @@ public interface Model {
             }
         }
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                .withZone(ZoneId.systemDefault());
-        String createdAt = formatter.format(timestamp.toInstant());
+        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
         try {
             // Update migration status in migrations table
-            MigrationModel migrationModel = new MigrationModel();
-            Connection connection = migrationModel.database().connect(true);
-            DatabaseHelpers.insertRow(connection, migrationModel.table(), new String[]{"uuid", "version", "created_at"}, new String[]{this.uuid(), this.version(), createdAt});
+            MigrationModel migrationModel = new MigrationModel(UUID.fromString(this.uuid()), this.version(), createdAt);
+            migrationModel.populate();
         } catch (SQLException e) {
             Logger.log(LoggingLevel.ERROR, String.format("Failed to insert row into database: %s", e.getMessage()));
         }
