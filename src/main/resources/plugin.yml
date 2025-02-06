@@ -1,5 +1,5 @@
 name: Wynncraft
-version: 1.2.0
+version: 1.3.0
 main: com.iantapply.wynncraft.Wynncraft
 description: A recreation of Wynncraft with the use of the Bukkit/Paper API to create a bundled plugin
 author: IanTapply22
