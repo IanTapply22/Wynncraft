@@ -69,7 +69,7 @@ loadScripts(document, 'script');</script>
 <li><a href="com/iantapply/wynncraft/database/model/package-tree.html">com.iantapply.wynncraft.database.model</a>, </li>
 <li><a href="com/iantapply/wynncraft/database/table/package-tree.html">com.iantapply.wynncraft.database.table</a>, </li>
 <li><a href="com/iantapply/wynncraft/entity/package-tree.html">com.iantapply.wynncraft.entity</a>, </li>
-<li><a href="com/iantapply/wynncraft/event/package-tree.html">com.iantapply.wynncraft.event</a>, </li>
+<li><a href="com/iantapply/wynncraft/event/minecraft/package-tree.html">com.iantapply.wynncraft.event.minecraft</a>, </li>
 <li><a href="com/iantapply/wynncraft/event/wynncraft/package-tree.html">com.iantapply.wynncraft.event.wynncraft</a>, </li>
 <li><a href="com/iantapply/wynncraft/event/wynncraft/nbs/package-tree.html">com.iantapply.wynncraft.event.wynncraft.nbs</a>, </li>
 <li><a href="com/iantapply/wynncraft/gui/package-tree.html">com.iantapply.wynncraft.gui</a>, </li>
@@ -96,6 +96,7 @@ loadScripts(document, 'script');</script>
 <li><a href="com/iantapply/wynncraft/npc/npcs/package-tree.html">com.iantapply.wynncraft.npc.npcs</a>, </li>
 <li><a href="com/iantapply/wynncraft/npc/types/package-tree.html">com.iantapply.wynncraft.npc.types</a>, </li>
 <li><a href="com/iantapply/wynncraft/party/package-tree.html">com.iantapply.wynncraft.party</a>, </li>
+<li><a href="com/iantapply/wynncraft/player/package-tree.html">com.iantapply.wynncraft.player</a>, </li>
 <li><a href="com/iantapply/wynncraft/quest/package-tree.html">com.iantapply.wynncraft.quest</a>, </li>
 <li><a href="com/iantapply/wynncraft/quest/objectives/package-tree.html">com.iantapply.wynncraft.quest.objectives</a>, </li>
 <li><a href="com/iantapply/wynncraft/quest/quests/package-tree.html">com.iantapply.wynncraft.quest.quests</a>, </li>
@@ -169,7 +170,6 @@ loadScripts(document, 'script');</script>
 </li>
 </ul>
 </li>
-<li class="circle">com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a> (implements com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a>)</li>
 <li class="circle">com.iantapply.wynncraft.npc.npcs.<a href="com/iantapply/wynncraft/npc/npcs/ExampleNPC.html" class="type-name-link" title="class in com.iantapply.wynncraft.npc.npcs">ExampleNPC</a> (implements com.iantapply.wynncraft.npc.<a href="com/iantapply/wynncraft/npc/NPC.html" title="interface in com.iantapply.wynncraft.npc">NPC</a>)</li>
 <li class="circle">com.iantapply.wynncraft.quest.objectives.<a href="com/iantapply/wynncraft/quest/objectives/ExampleObjective.html" class="type-name-link" title="class in com.iantapply.wynncraft.quest.objectives">ExampleObjective</a></li>
 <li class="circle">com.iantapply.wynncraft.quest.quests.<a href="com/iantapply/wynncraft/quest/quests/ExampleQuest.html" class="type-name-link" title="class in com.iantapply.wynncraft.quest.quests">ExampleQuest</a></li>
@@ -241,7 +241,9 @@ loadScripts(document, 'script');</script>
 </li>
 <li class="circle">com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/Party.html" class="type-name-link" title="class in com.iantapply.wynncraft.party">Party</a></li>
 <li class="circle">com.iantapply.wynncraft.command.commands.party.<a href="com/iantapply/wynncraft/command/commands/party/PartyCommandsCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.command.commands.party">PartyCommandsCore</a></li>
-<li class="circle">com.iantapply.wynncraft.event.<a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event">PlayerJoinEvent</a> (implements org.bukkit.event.Listener)</li>
+<li class="circle">com.iantapply.wynncraft.rank.benefits.<a href="com/iantapply/wynncraft/rank/benefits/PlayerBenefits.html" class="type-name-link" title="class in com.iantapply.wynncraft.rank.benefits">PlayerBenefits</a> (implements com.iantapply.wynncraft.rank.benefits.<a href="com/iantapply/wynncraft/rank/benefits/RankBenefit.html" title="interface in com.iantapply.wynncraft.rank.benefits">RankBenefit</a>)</li>
+<li class="circle">com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event.minecraft">PlayerJoinEvent</a> (implements org.bukkit.event.Listener)</li>
+<li class="circle">com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event.minecraft">PlayerLeaveEvent</a> (implements org.bukkit.event.Listener)</li>
 <li class="circle">com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a> (implements com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a>)</li>
 <li class="circle">org.bukkit.plugin.PluginBase (implements org.bukkit.plugin.Plugin)
 <ul>
@@ -270,6 +272,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">com.iantapply.wynncraft.inventory.crafting.effects.positive.<a href="com/iantapply/wynncraft/inventory/crafting/effects/positive/ValuePositive.html" class="type-name-link" title="class in com.iantapply.wynncraft.inventory.crafting.effects.positive">ValuePositive</a></li>
 </ul>
 </li>
+<li class="circle">com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ProfileModel.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.model">ProfileModel</a></li>
 <li class="circle">com.iantapply.wynncraft.quest.<a href="com/iantapply/wynncraft/quest/Quest.html" class="type-name-link" title="class in com.iantapply.wynncraft.quest">Quest</a></li>
 <li class="circle">com.iantapply.wynncraft.quest.<a href="com/iantapply/wynncraft/quest/QuestObjective.html" class="type-name-link" title="class in com.iantapply.wynncraft.quest">QuestObjective</a></li>
 <li class="circle">com.iantapply.wynncraft.command.commands.toggle.<a href="com/iantapply/wynncraft/command/commands/toggle/ToggleCommandsCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.command.commands.toggle">ToggleCommandsCore</a></li>
@@ -363,6 +366,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/WynncraftGUICore.html" class="type-name-link" title="class in com.iantapply.wynncraft.gui">WynncraftGUICore</a></li>
 <li class="circle">com.iantapply.wynncraft.entity.<a href="com/iantapply/wynncraft/entity/WynncraftHostileEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftHostileEntity</a></li>
 <li class="circle">com.iantapply.wynncraft.entity.<a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a></li>
+<li class="circle">com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/WynncraftPlayer.html" class="type-name-link" title="class in com.iantapply.wynncraft.player">WynncraftPlayer</a></li>
 <li class="circle">com.iantapply.wynncraft.entity.<a href="com/iantapply/wynncraft/entity/WynncraftQuestEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftQuestEntity</a></li>
 </ul>
 </li>
@@ -411,6 +415,7 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="class or interface in java.lang">Record</a>
 <ul>
+<li class="circle">com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" class="type-name-link" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></li>
 <li class="circle">com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyMessage.html" class="type-name-link" title="class in com.iantapply.wynncraft.party">PartyMessage</a></li>
 <li class="circle">com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyTeleportation.html" class="type-name-link" title="class in com.iantapply.wynncraft.party">PartyTeleportation</a></li>
 <li class="circle">com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/UpdateChecker.html" class="type-name-link" title="class in com.iantapply.wynncraft.metrics">UpdateChecker</a></li>

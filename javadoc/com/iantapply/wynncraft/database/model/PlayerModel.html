@@ -98,7 +98,9 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></span></div>
 <div class="block">A model that is used to handle and store the base profile data of a
- player who is registered on the server.</div>
+ player who is registered on the server.
+ <p>
+ All profile related data is stored in the profiles table on a per-profile basis</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -114,11 +116,24 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <div class="col-last even-row-color">
 <div class="block">Used only for running the migrate and revert methods</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.iantapply.wynncraft.rank.PurchasableRank,com.iantapply.wynncraft.rank.NonPurchasableRank,double,java.lang.String)" class="member-name-link">PlayerModel</a><wbr>(<a href="../../rank/PurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">PurchasableRank</a>&nbsp;purchasableRank,
- <a href="../../rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a>&nbsp;nonPurchasableRank,
- double&nbsp;combatLevelXp,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classes)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.NonPurchasableRank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.PurchasableRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean)" class="member-name-link">PlayerModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;online,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;server,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;activeCharacter,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nickname,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid,
+ <a href="../../rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a>&nbsp;rank,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rankBadge,
+ <a href="../../player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a>&nbsp;legacyRankColour,
+ <a href="../../rank/PurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">PurchasableRank</a>&nbsp;supportRank,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;veteran,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;firstJoin,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;lastJoin,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;forumLink,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID)" class="member-name-link">PlayerModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -133,20 +148,30 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;<a href="../table/Column.html" title="class in com.iantapply.wynncraft.database.table">Column</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#columns()" class="member-name-link">columns</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#automaticallyMigrate()" class="member-name-link">automaticallyMigrate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Whether the model should be migrated automatically upon creation or a modification.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;<a href="../table/Column.html" title="class in com.iantapply.wynncraft.database.table">Column</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#columns()" class="member-name-link">columns</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The columns that will appear in order and in the specified parent</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../Database.html" title="class in com.iantapply.wynncraft.database">Database</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#database()" class="member-name-link">database</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../Database.html" title="class in com.iantapply.wynncraft.database">Database</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#database()" class="member-name-link">database</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The database, or table that the model is the child of.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The name of the model, used in the initialization of the database and debugging</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#populate()" class="member-name-link">populate</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The method used to populate a row of data with this model in the table</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#table()" class="member-name-link">table</a>()</code></div>
@@ -172,7 +197,7 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.iantapply.wynncraft.database.model.Model">Methods inherited from interface&nbsp;com.iantapply.wynncraft.database.model.<a href="Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></h3>
-<code><a href="Model.html#automaticallyMigrate()">automaticallyMigrate</a>, <a href="Model.html#migrate(boolean)">migrate</a>, <a href="Model.html#migratedVersion()">migratedVersion</a>, <a href="Model.html#revert()">revert</a></code></div>
+<code><a href="Model.html#migrate(boolean)">migrate</a>, <a href="Model.html#migratedVersion()">migratedVersion</a>, <a href="Model.html#revert()">revert</a></code></div>
 </section>
 </li>
 </ul>
@@ -185,12 +210,29 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.iantapply.wynncraft.rank.PurchasableRank,com.iantapply.wynncraft.rank.NonPurchasableRank,double,java.lang.String)">
+<section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.NonPurchasableRank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.PurchasableRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean)">
 <h3>PlayerModel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerModel</span><wbr><span class="parameters">(<a href="../../rank/PurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">PurchasableRank</a>&nbsp;purchasableRank,
- <a href="../../rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a>&nbsp;nonPurchasableRank,
- double&nbsp;combatLevelXp,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classes)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerModel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;online,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;server,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;activeCharacter,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nickname,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid,
+ <a href="../../rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a>&nbsp;rank,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rankBadge,
+ <a href="../../player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a>&nbsp;legacyRankColour,
+ <a href="../../rank/PurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">PurchasableRank</a>&nbsp;supportRank,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;veteran,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;firstJoin,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;lastJoin,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;forumLink,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.util.UUID)">
+<h3>PlayerModel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerModel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid)</span></div>
 </section>
 </li>
 <li>
@@ -287,6 +329,36 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <dd><code><a href="Model.html#version()">version</a></code>&nbsp;in interface&nbsp;<code><a href="Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></code></dd>
 <dt>Returns:</dt>
 <dd>The version of the model as a string</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="automaticallyMigrate()">
+<h3>automaticallyMigrate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">automaticallyMigrate</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Model.html#automaticallyMigrate()">Model</a></code></span></div>
+<div class="block">Whether the model should be migrated automatically upon creation or a modification.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Model.html#automaticallyMigrate()">automaticallyMigrate</a></code>&nbsp;in interface&nbsp;<code><a href="Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></code></dd>
+<dt>Returns:</dt>
+<dd>A boolean representing if it should be able to automatically migrate. This
+ is by default false.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="populate()">
+<h3>populate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">populate</span>()
+              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Model.html#populate()">Model</a></code></span></div>
+<div class="block">The method used to populate a row of data with this model in the table</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Model.html#populate()">populate</a></code>&nbsp;in interface&nbsp;<code><a href="Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></code></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code></dd>
 </dl>
 </section>
 </li>

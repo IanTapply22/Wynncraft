@@ -124,7 +124,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/CraftingIngredient.html#addRequiredProfession(com.iantapply.wynncraft.inventory.crafting.CraftingProfession)" class="member-name-link">addRequiredProfession(CraftingProfession)</a> - Method in class com.iantapply.wynncraft.inventory.crafting.<a href="com/iantapply/wynncraft/inventory/crafting/CraftingIngredient.html" title="class in com.iantapply.wynncraft.inventory.crafting">CraftingIngredient</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html#ADMIN" class="member-name-link">ADMIN</a> - Enum constant in enum class com.iantapply.wynncraft.rank.<a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a></dt>
+<dt><a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html#ADMINISTRATOR" class="member-name-link">ADMINISTRATOR</a> - Enum constant in enum class com.iantapply.wynncraft.rank.<a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/Metrics.AdvancedBarChart.html#%3Cinit%3E(java.lang.String,java.util.concurrent.Callable)" class="member-name-link">AdvancedBarChart(String, Callable&lt;Map&lt;String, int[]&gt;&gt;)</a> - Constructor for class com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/Metrics.AdvancedBarChart.html" title="class in com.iantapply.wynncraft.metrics">Metrics.AdvancedBarChart</a></dt>
 <dd>
@@ -200,6 +200,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Whether the model should be migrated automatically upon creation or a modification.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#automaticallyMigrate()" class="member-name-link">automaticallyMigrate()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
@@ -356,10 +358,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">A representation of a column in a database table</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#columns()" class="member-name-link">columns()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The columns that will appear in order and in the specified parent</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#columns()" class="member-name-link">columns()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
 <div class="block">The columns that will appear in order and in the specified parent</div>
@@ -406,7 +404,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/entity/package-summary.html">com.iantapply.wynncraft.entity</a> - package com.iantapply.wynncraft.entity</dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/event/package-summary.html">com.iantapply.wynncraft.event</a> - package com.iantapply.wynncraft.event</dt>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/package-summary.html">com.iantapply.wynncraft.event.minecraft</a> - package com.iantapply.wynncraft.event.minecraft</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/event/wynncraft/package-summary.html">com.iantapply.wynncraft.event.wynncraft</a> - package com.iantapply.wynncraft.event.wynncraft</dt>
 <dd>&nbsp;</dd>
@@ -459,6 +457,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/npc/types/package-summary.html">com.iantapply.wynncraft.npc.types</a> - package com.iantapply.wynncraft.npc.types</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/party/package-summary.html">com.iantapply.wynncraft.party</a> - package com.iantapply.wynncraft.party</dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/player/package-summary.html">com.iantapply.wynncraft.player</a> - package com.iantapply.wynncraft.player</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/quest/package-summary.html">com.iantapply.wynncraft.quest</a> - package com.iantapply.wynncraft.quest</dt>
 <dd>&nbsp;</dd>
@@ -602,10 +602,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/rank/benefits/RankBenefit.html#dailyMobTotems()" class="member-name-link">dailyMobTotems()</a> - Method in interface com.iantapply.wynncraft.rank.benefits.<a href="com/iantapply/wynncraft/rank/benefits/RankBenefit.html" title="interface in com.iantapply.wynncraft.rank.benefits">RankBenefit</a></dt>
 <dd>
 <div class="block">The number of daily mob totems the player should receive</div>
-</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#database()" class="member-name-link">database()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The database, or table that the model is the child of.</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#database()" class="member-name-link">database()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
@@ -948,6 +944,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/logger/LoggingLevel.html#ERROR" class="member-name-link">ERROR</a> - Enum constant in enum class com.iantapply.wynncraft.logger.<a href="com/iantapply/wynncraft/logger/LoggingLevel.html" title="enum class in com.iantapply.wynncraft.logger">LoggingLevel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/CommandPermission.html#EXAMPLE" class="member-name-link">EXAMPLE</a> - Enum constant in enum class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/CommandPermission.html" title="enum class in com.iantapply.wynncraft.command">CommandPermission</a></dt>
@@ -967,17 +967,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html" class="type-name-link" title="class in com.iantapply.wynncraft.gui.menu">ExampleGUI</a> - Class in <a href="com/iantapply/wynncraft/gui/menu/package-summary.html">com.iantapply.wynncraft.gui.menu</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html#%3Cinit%3E()" class="member-name-link">ExampleGUI()</a> - Constructor for class com.iantapply.wynncraft.gui.menu.<a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html" title="class in com.iantapply.wynncraft.gui.menu">ExampleGUI</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a> - Class in <a href="com/iantapply/wynncraft/database/model/package-summary.html">com.iantapply.wynncraft.database.model</a></dt>
-<dd>
-<div class="block">Represents an example model that can be used to demonstrate
- how to create a model for the database.</div>
-</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#%3Cinit%3E()" class="member-name-link">ExampleModel()</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">Used only for running the migrate and revert methods</div>
-</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#%3Cinit%3E(java.lang.Integer,java.lang.String)" class="member-name-link">ExampleModel(Integer, String)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/npc/npcs/ExampleNPC.html" class="type-name-link" title="class in com.iantapply.wynncraft.npc.npcs">ExampleNPC</a> - Class in <a href="com/iantapply/wynncraft/npc/npcs/package-summary.html">com.iantapply.wynncraft.npc.npcs</a></dt>
 <dd>&nbsp;</dd>
@@ -1281,6 +1270,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the flag that is used to identify clickable item</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#getContent()" class="member-name-link">getContent()</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/utils/InstrumentUtils.html#getCustomInstrumentFirstIndex()" class="member-name-link">getCustomInstrumentFirstIndex()</a> - Static method in class com.iantapply.wynncraft.nbs.utils.<a href="com/iantapply/wynncraft/nbs/utils/InstrumentUtils.html" title="class in com.iantapply.wynncraft.nbs.utils">InstrumentUtils</a></dt>
 <dd>
 <div class="block">Gets the index number of the first instrument in the NBS file.</div>
@@ -1563,6 +1554,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/party/PartyTeleportation.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyTeleportation.html" title="class in com.iantapply.wynncraft.party">PartyTeleportation</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -1853,6 +1848,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Represents a landmark location in the game.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html" class="type-name-link" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a> - Record Class in <a href="com/iantapply/wynncraft/player/package-summary.html">com.iantapply.wynncraft.player</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">LegacyRankColour(String, String)</a> - Constructor for record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>LegacyRankColour</code> record class.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/rank/benefits/RankBenefit.html#lobbyFlightNoInvisibility()" class="member-name-link">lobbyFlightNoInvisibility()</a> - Method in interface com.iantapply.wynncraft.rank.benefits.<a href="com/iantapply/wynncraft/rank/benefits/RankBenefit.html" title="interface in com.iantapply.wynncraft.rank.benefits">RankBenefit</a></dt>
 <dd>
 <div class="block">Wether the player can fly in the Wynncraft pre-lobby with no invisibility</div>
@@ -1965,6 +1966,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#main()" class="member-name-link">main()</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>
+<div class="block">Returns the value of the <code>main</code> record component.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html#MAIN_CONFIG_FILE" class="member-name-link">MAIN_CONFIG_FILE</a> - Static variable in class com.iantapply.wynncraft.configuration.<a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html" title="class in com.iantapply.wynncraft.configuration">PluginConfigurations</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/cosmetic/ChangeTagCommand.html#maxArgs()" class="member-name-link">maxArgs()</a> - Method in class com.iantapply.wynncraft.command.commands.cosmetic.<a href="com/iantapply/wynncraft/command/commands/cosmetic/ChangeTagCommand.html" title="class in com.iantapply.wynncraft.command.commands.cosmetic">ChangeTagCommand</a></dt>
@@ -2180,7 +2185,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Used only for running the migrate and revert methods</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">MigrationModel(String, String, String)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
+<dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#%3Cinit%3E(java.util.UUID,java.lang.String,java.sql.Timestamp)" class="member-name-link">MigrationModel(UUID, String, Timestamp)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/database/MigrationsDatabase.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.database">MigrationsDatabase</a> - Class in <a href="com/iantapply/wynncraft/database/database/package-summary.html">com.iantapply.wynncraft.database.database</a></dt>
 <dd>&nbsp;</dd>
@@ -2501,10 +2506,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The name that is appended after the leading '/' character</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#name()" class="member-name-link">name()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The name of the model, used in the initialization of the database and debugging</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#name()" class="member-name-link">name()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
 <div class="block">The name of the model, used in the initialization of the database and debugging</div>
@@ -2792,7 +2793,9 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/iantapply/wynncraft/gui/GUIListener.html#onInventoryClick(org.bukkit.event.inventory.InventoryClickEvent)" class="member-name-link">onInventoryClick(InventoryClickEvent)</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/GUIListener.html" title="class in com.iantapply.wynncraft.gui">GUIListener</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html#onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent)" class="member-name-link">onPlayerJoin(PlayerJoinEvent)</a> - Method in class com.iantapply.wynncraft.event.<a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html" title="class in com.iantapply.wynncraft.event">PlayerJoinEvent</a></dt>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html#onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent)" class="member-name-link">onPlayerJoin(PlayerJoinEvent)</a> - Method in class com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html" title="class in com.iantapply.wynncraft.event.minecraft">PlayerJoinEvent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html#onPlayerLeave(org.bukkit.event.player.PlayerQuitEvent)" class="member-name-link">onPlayerLeave(PlayerQuitEvent)</a> - Method in class com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html" title="class in com.iantapply.wynncraft.event.minecraft">PlayerLeaveEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html#open(org.bukkit.entity.Player)" class="member-name-link">open(Player)</a> - Method in class com.iantapply.wynncraft.gui.menu.<a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html" title="class in com.iantapply.wynncraft.gui.menu">ExampleGUI</a></dt>
 <dd>
@@ -2948,9 +2951,19 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/nbs/NbsCore.html#player" class="member-name-link">player</a> - Static variable in class com.iantapply.wynncraft.command.commands.nbs.<a href="com/iantapply/wynncraft/command/commands/nbs/NbsCore.html" title="class in com.iantapply.wynncraft.command.commands.nbs">NbsCore</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event">PlayerJoinEvent</a> - Class in <a href="com/iantapply/wynncraft/event/package-summary.html">com.iantapply.wynncraft.event</a></dt>
+<dt><a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html#PLAYER" class="member-name-link">PLAYER</a> - Enum constant in enum class com.iantapply.wynncraft.rank.<a href="com/iantapply/wynncraft/rank/NonPurchasableRank.html" title="enum class in com.iantapply.wynncraft.rank">NonPurchasableRank</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html#%3Cinit%3E()" class="member-name-link">PlayerJoinEvent()</a> - Constructor for class com.iantapply.wynncraft.event.<a href="com/iantapply/wynncraft/event/PlayerJoinEvent.html" title="class in com.iantapply.wynncraft.event">PlayerJoinEvent</a></dt>
+<dt><a href="com/iantapply/wynncraft/rank/benefits/PlayerBenefits.html" class="type-name-link" title="class in com.iantapply.wynncraft.rank.benefits">PlayerBenefits</a> - Class in <a href="com/iantapply/wynncraft/rank/benefits/package-summary.html">com.iantapply.wynncraft.rank.benefits</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/rank/benefits/PlayerBenefits.html#%3Cinit%3E()" class="member-name-link">PlayerBenefits()</a> - Constructor for class com.iantapply.wynncraft.rank.benefits.<a href="com/iantapply/wynncraft/rank/benefits/PlayerBenefits.html" title="class in com.iantapply.wynncraft.rank.benefits">PlayerBenefits</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event.minecraft">PlayerJoinEvent</a> - Class in <a href="com/iantapply/wynncraft/event/minecraft/package-summary.html">com.iantapply.wynncraft.event.minecraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html#%3Cinit%3E()" class="member-name-link">PlayerJoinEvent()</a> - Constructor for class com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerJoinEvent.html" title="class in com.iantapply.wynncraft.event.minecraft">PlayerJoinEvent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html" class="type-name-link" title="class in com.iantapply.wynncraft.event.minecraft">PlayerLeaveEvent</a> - Class in <a href="com/iantapply/wynncraft/event/minecraft/package-summary.html">com.iantapply.wynncraft.event.minecraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html#%3Cinit%3E()" class="member-name-link">PlayerLeaveEvent()</a> - Constructor for class com.iantapply.wynncraft.event.minecraft.<a href="com/iantapply/wynncraft/event/minecraft/PlayerLeaveEvent.html" title="class in com.iantapply.wynncraft.event.minecraft">PlayerLeaveEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html#playerList" class="member-name-link">playerList</a> - Variable in class com.iantapply.wynncraft.nbs.players.<a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html" title="class in com.iantapply.wynncraft.nbs.players">NBSSongPlayer</a></dt>
 <dd>&nbsp;</dd>
@@ -2963,7 +2976,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Used only for running the migrate and revert methods</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#%3Cinit%3E(com.iantapply.wynncraft.rank.PurchasableRank,com.iantapply.wynncraft.rank.NonPurchasableRank,double,java.lang.String)" class="member-name-link">PlayerModel(PurchasableRank, NonPurchasableRank, double, String)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
+<dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#%3Cinit%3E(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.NonPurchasableRank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.PurchasableRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean)" class="member-name-link">PlayerModel(String, Boolean, String, UUID, String, UUID, NonPurchasableRank, String, LegacyRankColour, PurchasableRank, Boolean, Timestamp, Timestamp, Integer, Boolean)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#%3Cinit%3E(java.util.UUID)" class="member-name-link">PlayerModel(UUID)</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/players/PlayerOrientedSongPlayer.html" class="type-name-link" title="class in com.iantapply.wynncraft.nbs.players">PlayerOrientedSongPlayer</a> - Class in <a href="com/iantapply/wynncraft/nbs/players/package-summary.html">com.iantapply.wynncraft.nbs.players</a></dt>
 <dd>&nbsp;</dd>
@@ -2991,6 +3006,14 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html#%3Cinit%3E()" class="member-name-link">PluginConfigurations()</a> - Constructor for class com.iantapply.wynncraft.configuration.<a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html" title="class in com.iantapply.wynncraft.configuration">PluginConfigurations</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#populate()" class="member-name-link">populate()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/Model.html#populate()" class="member-name-link">populate()</a> - Method in interface com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></dt>
+<dd>
+<div class="block">The method used to populate a row of data with this model in the table</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#populate()" class="member-name-link">populate()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositivePossible.html" class="type-name-link" title="class in com.iantapply.wynncraft.inventory.crafting.effects.base.positive">PositivePossible</a> - Class in <a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/package-summary.html">com.iantapply.wynncraft.inventory.crafting.effects.base.positive</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositivePossible.html#%3Cinit%3E()" class="member-name-link">PositivePossible()</a> - Constructor for class com.iantapply.wynncraft.inventory.crafting.effects.base.positive.<a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositivePossible.html" title="class in com.iantapply.wynncraft.inventory.crafting.effects.base.positive">PositivePossible</a></dt>
@@ -3002,6 +3025,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositiveValue.html" class="type-name-link" title="class in com.iantapply.wynncraft.inventory.crafting.effects.base.positive">PositiveValue</a> - Class in <a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/package-summary.html">com.iantapply.wynncraft.inventory.crafting.effects.base.positive</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositiveValue.html#%3Cinit%3E()" class="member-name-link">PositiveValue()</a> - Constructor for class com.iantapply.wynncraft.inventory.crafting.effects.base.positive.<a href="com/iantapply/wynncraft/inventory/crafting/effects/base/positive/PositiveValue.html" title="class in com.iantapply.wynncraft.inventory.crafting.effects.base.positive">PositiveValue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/ProfileModel.html" class="type-name-link" title="class in com.iantapply.wynncraft.database.model">ProfileModel</a> - Class in <a href="com/iantapply/wynncraft/database/model/package-summary.html">com.iantapply.wynncraft.database.model</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/database/model/ProfileModel.html#%3Cinit%3E()" class="member-name-link">ProfileModel()</a> - Constructor for class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ProfileModel.html" title="class in com.iantapply.wynncraft.database.model">ProfileModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/party/Party.html#promote(org.bukkit.entity.Player)" class="member-name-link">promote(Player)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/Party.html" title="class in com.iantapply.wynncraft.party">Party</a></dt>
 <dd>
@@ -3152,11 +3179,17 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#safeGet(T)" class="member-name-link">safeGet(T)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/inventory/crafting/CraftingProfession.html#SCRIBING" class="member-name-link">SCRIBING</a> - Enum constant in enum class com.iantapply.wynncraft.inventory.crafting.<a href="com/iantapply/wynncraft/inventory/crafting/CraftingProfession.html" title="enum class in com.iantapply.wynncraft.inventory.crafting">CraftingProfession</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#selectRow(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRow(Connection, String, String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
 <dd>
 <div class="block">Selects an entire row from a table with the given condition.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#selectRowWithLatestCreatedAt(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRowWithLatestCreatedAt(Connection, String, String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
+<dd>
+<div class="block">Selects an entire and latest row from a table with the given condition.</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/party/PartyMessage.html#sendLocationTeleportMessage(com.iantapply.wynncraft.world.LandmarkLocation)" class="member-name-link">sendLocationTeleportMessage(LandmarkLocation)</a> - Method in record class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyMessage.html" title="class in com.iantapply.wynncraft.party">PartyMessage</a></dt>
 <dd>
@@ -3362,6 +3395,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/game/StreamCommand.html#%3Cinit%3E()" class="member-name-link">StreamCommand()</a> - Constructor for class com.iantapply.wynncraft.command.commands.game.<a href="com/iantapply/wynncraft/command/commands/game/StreamCommand.html" title="class in com.iantapply.wynncraft.command.commands.game">StreamCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#sub()" class="member-name-link">sub()</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>
+<div class="block">Returns the value of the <code>sub</code> record component.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/friend/FriendCommand.html#subcommands()" class="member-name-link">subcommands()</a> - Method in class com.iantapply.wynncraft.command.commands.friend.<a href="com/iantapply/wynncraft/command/commands/friend/FriendCommand.html" title="class in com.iantapply.wynncraft.command.commands.friend">FriendCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/guild/GuildCommand.html#subcommands()" class="member-name-link">subcommands()</a> - Method in class com.iantapply.wynncraft.command.commands.guild.<a href="com/iantapply/wynncraft/command/commands/guild/GuildCommand.html" title="class in com.iantapply.wynncraft.command.commands.guild">GuildCommand</a></dt>
@@ -3549,10 +3586,6 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#table()" class="member-name-link">table()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The table the migration will be run on inside the parent</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#table()" class="member-name-link">table()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
 <div class="block">The table the migration will be run on inside the parent</div>
@@ -3623,6 +3656,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/player/LegacyRankColour.html#toString()" class="member-name-link">toString()</a> - Method in record class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/LegacyRankColour.html" title="class in com.iantapply.wynncraft.player">LegacyRankColour</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/game/TotemsCommand.html" class="type-name-link" title="class in com.iantapply.wynncraft.command.commands.game">TotemsCommand</a> - Class in <a href="com/iantapply/wynncraft/command/commands/game/package-summary.html">com.iantapply.wynncraft.command.commands.game</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/game/TotemsCommand.html#%3Cinit%3E()" class="member-name-link">TotemsCommand()</a> - Constructor for class com.iantapply.wynncraft.command.commands.game.<a href="com/iantapply/wynncraft/command/commands/game/TotemsCommand.html" title="class in com.iantapply.wynncraft.command.commands.game">TotemsCommand</a></dt>
@@ -3672,6 +3709,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>UpdateChecker</code> record class.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#updateColumnValue(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object,java.lang.String,java.lang.Object...)" class="member-name-link">updateColumnValue(Connection, String, String, Object, String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#updateRow(java.sql.Connection,java.lang.String,java.lang.String%5B%5D,java.lang.Object%5B%5D,java.lang.String,java.lang.Object...)" class="member-name-link">updateRow(Connection, String, String[], Object[], String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
 <dd>
 <div class="block">Updates a row in a table with the given columns and values.</div>
@@ -3682,10 +3721,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#uuid" class="member-name-link">uuid</a> - Variable in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#uuid()" class="member-name-link">uuid()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The UUID of the model.</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#uuid()" class="member-name-link">uuid()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
 <div class="block">The UUID of the model.</div>
@@ -3876,11 +3911,6 @@ the order they are declared.</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#version" class="member-name-link">version</a> - Variable in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/database/model/ExampleModel.html#version()" class="member-name-link">version()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/ExampleModel.html" title="class in com.iantapply.wynncraft.database.model">ExampleModel</a></dt>
-<dd>
-<div class="block">The version of the model, should be updated when changes have been
- made to the model that require a database migration.</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/MigrationModel.html#version()" class="member-name-link">version()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/MigrationModel.html" title="class in com.iantapply.wynncraft.database.model">MigrationModel</a></dt>
 <dd>
 <div class="block">The version of the model, should be updated when changes have been
@@ -4013,6 +4043,12 @@ the order they are declared.</div>
 <dt><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a> - Class in <a href="com/iantapply/wynncraft/entity/package-summary.html">com.iantapply.wynncraft.entity</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html#%3Cinit%3E()" class="member-name-link">WynncraftPassiveEntity()</a> - Constructor for class com.iantapply.wynncraft.entity.<a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/player/WynncraftPlayer.html" class="type-name-link" title="class in com.iantapply.wynncraft.player">WynncraftPlayer</a> - Class in <a href="com/iantapply/wynncraft/player/package-summary.html">com.iantapply.wynncraft.player</a></dt>
+<dd>
+<div class="block">The object that stores all player data needed when the player joins the server</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/player/WynncraftPlayer.html#%3Cinit%3E()" class="member-name-link">WynncraftPlayer()</a> - Constructor for class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/WynncraftPlayer.html" title="class in com.iantapply.wynncraft.player">WynncraftPlayer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/entity/WynncraftQuestEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftQuestEntity</a> - Class in <a href="com/iantapply/wynncraft/entity/package-summary.html">com.iantapply.wynncraft.entity</a></dt>
 <dd>&nbsp;</dd>
