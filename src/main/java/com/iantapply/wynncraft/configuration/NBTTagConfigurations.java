@@ -3,7 +3,7 @@ package com.iantapply.wynncraft.configuration;
 /**
  * A class that holds the configuration for commonly used NBT tags on item
  */
-public class NBTTags {
+public class NBTTagConfigurations {
 
     public static class CraftingIngredient {
         public static final String CRAFTING_LVL_REQUIREMENT = "craftingLvlRequirement"; // This can be stored as an int for simplicity

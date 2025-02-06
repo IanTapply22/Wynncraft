@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.logger;
 
-import com.iantapply.wynncraft.configuration.Plugin;
+import com.iantapply.wynncraft.configuration.PluginConfigurations;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 
@@ -45,14 +45,14 @@ public class Logger {
      */
     public static void logStartup() {
         log(LoggingLevel.INFO, "Wynncraft core plugin has initialized");
-        log(LoggingLevel.INFO, "Version: " + Plugin.VERSION);
-        log(LoggingLevel.INFO, "Developers: " + Plugin.DEVELOPER_CREDITS);
+        log(LoggingLevel.INFO, "Version: " + PluginConfigurations.VERSION);
+        log(LoggingLevel.INFO, "Developers: " + PluginConfigurations.DEVELOPER_CREDITS);
     }
 
     /**
      * Logs a shutdown message to the Bukkit console
      */
     public static void logShutdown() {
-        log(LoggingLevel.INFO, "WynnCraft core plugin has been shutdown gracefully");
+        log(LoggingLevel.INFO, "Wynncraft core plugin has been shutdown gracefully");
     }
 }
