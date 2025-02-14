@@ -1,5 +1,6 @@
 com.iantapply.wynncraft
 com.iantapply.wynncraft.command
+com.iantapply.wynncraft.command.commands.administrator
 com.iantapply.wynncraft.command.commands.cosmetic
 com.iantapply.wynncraft.command.commands.friend
 com.iantapply.wynncraft.command.commands.game
