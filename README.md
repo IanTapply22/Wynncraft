@@ -13,6 +13,11 @@ Great question! This repository does not contain a license at this point of time
 
 It currently does contain a license though to ensure that the code is not used in a malicious way and that the liability doesn't fall onto contributors or the author of this repository. This repository currently falls under the [MIT License](https://github.com/IanTapply22/Wynncraft/blob/main/LICENSE.md)
 
+## Why Can I See Unicode Characters?
+The Unicode characters are used within the plugin as they are sourced directly from the actual Wynncraft server resource pack. To ensure full compatibility, please use the official Wynncraft resource pack.
+
+Information on how to obtain the resource pack will not be provided and will not be discussed in this repository. Please do not ask for the resource pack or any other Wynncraft assets.
+
 ## Roadmap and Progress
 Aren't sure when a new release will be published or what's planned for this project? Please see the [Project Board/Planner](https://github.com/users/IanTapply22/projects/8) to view the progress, roadmap, backlog, and reported bugs associated with the project. The board is updated frequently and is the go-to place to view the status of this project.
 

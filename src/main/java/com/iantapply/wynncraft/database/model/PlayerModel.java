@@ -6,8 +6,8 @@ import com.iantapply.wynncraft.player.LegacyRankColour;
 import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.database.table.DataType;
-import com.iantapply.wynncraft.rank.NonPurchasableRank;
-import com.iantapply.wynncraft.rank.PurchasableRank;
+import com.iantapply.wynncraft.rank.Rank;
+import com.iantapply.wynncraft.rank.SupportRank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,18 +31,18 @@ public class PlayerModel implements Model {
     private UUID activeCharacter; // Stored as UUID internally, but stored as String in DB
     private String nickname;
     private UUID uuid; // Shouldn't change and should be the main source of ID
-    private NonPurchasableRank rank; // Stored as the rank ID in the DB, but stored internally as a NonPurchasableRank
+    private Rank rank; // Stored as the rank ID in the DB, but stored internally as a NonPurchasableRank
     private String rankBadge; // The URL path to the badge SVG in the Wynncraft CDN
     private LegacyRankColour legacyRankColour; // Stored in a LegacyRankColour object internally, but parsed in DB as JSON
-    private PurchasableRank supportRank; // The rank that determines the support level, stored in DB as string
+    private SupportRank supportRank; // The rank that determines the support level, stored in DB as string
     private Boolean veteran;
     private Timestamp firstJoin; // Also the created_at of the DB row. Type in DB is of timestamp
     private Timestamp lastJoin; // Stored in DB as timestamp
     private Integer forumLink; // The code used to link your forums account
     private Boolean publicProfile;
 
-    public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, NonPurchasableRank rank,
-                       String rankBadge, LegacyRankColour legacyRankColour, PurchasableRank supportRank, Boolean veteran,
+    public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, Rank rank,
+                       String rankBadge, LegacyRankColour legacyRankColour, SupportRank supportRank, Boolean veteran,
                        Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile) {
         this.username = username;
         this.online = online;
@@ -152,6 +152,38 @@ public class PlayerModel implements Model {
         return true;
     }
 
+    @Override
+    public Object getModelValue(String key) throws SQLException {
+        // Get the value from the database
+        Connection connection = this.database().connect(true);
+        String condition = "uuid = CAST(? AS UUID)";
+        String[] row = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+        this.database().disconnect();
+
+        // Find column index
+        int index = -1;
+        for (int i = 0; i < this.columns().size(); i++) {
+            if (this.columns().get(i).getName().equalsIgnoreCase(key)) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new SQLException("Column not found: " + key);
+        }
+
+        if (row == null) {
+            return null;
+        }
+
+        // Convert the retrieved value to the correct type
+        Object value = row[index];
+
+        // Cast properly based on expected return type
+        return DatabaseHelpers.parseValue(value, this.columns().get(index).getType());
+    }
+
     // TODO: Redo populate method
     @Override
     public void populate() throws SQLException {
@@ -195,8 +227,8 @@ public class PlayerModel implements Model {
                     Object currentValue = values[i];
                     String databaseValue = existingRow[i];
 
-                    // Only update if the current value is not null and is different from the database value
-                    if (currentValue != null && !currentValue.toString().equals(databaseValue)) {
+                    // Only update if the current value is different from the database value
+                    if (currentValue == null || !currentValue.toString().equals(databaseValue)) {
                         DatabaseHelpers.updateColumnValue(connection, this.table(), columnName, currentValue, condition, this.getUuid());
                     }
                 }

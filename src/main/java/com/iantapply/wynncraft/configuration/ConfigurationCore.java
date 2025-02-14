@@ -88,7 +88,7 @@ public class ConfigurationCore {
             return false;
         }
 
-        if (!configuration.getBoolean(path)) {
+        if (configuration.get(path) == null) {
             Logger.log(LoggingLevel.WARNING, String.format("Configuration %s is null in %s. Please set the value.", PluginConfigurations.MAIN_CONFIG_FILE, path));
             return false;
         }

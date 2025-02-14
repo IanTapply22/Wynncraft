@@ -15,3 +15,9 @@ WYNNCRAFT_DATABASE_USERNAME: "root"
 WYNNCRAFT_DATABASE_PASSWORD: "wynncraft"
 WYNNCRAFT_DATABASE_NAME: "wynncraft"
 WYNNCRAFT_DATABASE_DISPLAY_NAME: "Wynncraft Core"
+
+# The ID of the server instance that this plugin is running on. This should vary between servers
+WYNNCRAFT_SERVER_INSTANCE_ID: "WA3"
+
+# Development mode; Determines whether development features should be enabled for the instance
+DEVELOPMENT_MODE: FALSE

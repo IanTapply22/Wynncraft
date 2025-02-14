@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.database;
 
 import com.iantapply.wynncraft.database.table.Column;
+import com.iantapply.wynncraft.database.table.DataType;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
@@ -8,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
@@ -553,5 +555,23 @@ public class DatabaseHelpers {
 
     public static <T> T safeGet(T value) {
         return value != null ? value : null;
+    }
+
+    /**
+     * Helper method to parse database values to correct Java types.
+     */
+    public static Object parseValue(Object value, DataType type) {
+        if (value == null) return null;
+        String strValue = value.toString();
+
+        return switch (type) {
+            case TEXT -> strValue;
+            case BOOLEAN -> Boolean.parseBoolean(strValue);
+            case INTEGER -> Integer.parseInt(strValue);
+            case UUID -> UUID.fromString(strValue);
+            case TIMESTAMP -> Timestamp.valueOf(strValue);
+            case JSON -> strValue; // TODO: Properly parse JSON
+            default -> throw new IllegalArgumentException("Unsupported data type: " + type);
+        };
     }
 }

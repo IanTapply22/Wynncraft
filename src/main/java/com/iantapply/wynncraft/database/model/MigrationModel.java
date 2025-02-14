@@ -103,6 +103,38 @@ public class MigrationModel implements Model {
     }
 
     @Override
+    public Object getModelValue(String column) throws SQLException {
+        // Get the value from the database
+        Connection connection = this.database().connect(true);
+        String condition = "uuid = CAST(? AS UUID)";
+        String[] row = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+        this.database().disconnect();
+
+        // Find column index
+        int index = -1;
+        for (int i = 0; i < this.columns().size(); i++) {
+            if (this.columns().get(i).getName().equalsIgnoreCase(column)) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new SQLException("Column not found: " + column);
+        }
+
+        if (row == null) {
+            return null;
+        }
+
+        // Convert the retrieved value to the correct type
+        Object value = row[index];
+
+        // Cast properly based on expected return type
+        return DatabaseHelpers.parseValue(value, this.columns().get(index).getType());
+    }
+
+    @Override
     public void populate() throws SQLException {
         // Copy column names to a string array
         ArrayList<String> columnNamesList = new ArrayList<>();

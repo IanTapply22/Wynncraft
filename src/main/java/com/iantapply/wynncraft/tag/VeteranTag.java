@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.tag;
 
-import com.iantapply.wynncraft.rank.PurchasableRank;
+import com.iantapply.wynncraft.rank.SupportRank;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -14,23 +14,23 @@ import net.kyori.adventure.text.format.NamedTextColor;
 public enum VeteranTag {
     VIP_VETERAN(0, "VIP Veteran", Component.text("[", NamedTextColor.DARK_GREEN)
             .append(Component.text("Vet", NamedTextColor.GREEN))
-            .append(Component.text("]", NamedTextColor.DARK_GREEN)), PurchasableRank.VIP),
+            .append(Component.text("]", NamedTextColor.DARK_GREEN)), SupportRank.VIP),
     VIP_PLUS_VETERAN(1, "VIP+ Veteran", Component.text("[", NamedTextColor.AQUA)
             .append(Component.text("Vet", NamedTextColor.DARK_AQUA))
-            .append(Component.text("]", NamedTextColor.AQUA)), PurchasableRank.VIP_PLUS),
+            .append(Component.text("]", NamedTextColor.AQUA)), SupportRank.VIP_PLUS),
     HERO_VETERAN(2, "Hero Veteran", Component.text("[", NamedTextColor.DARK_PURPLE)
             .append(Component.text("Vet", NamedTextColor.LIGHT_PURPLE))
-            .append(Component.text("]", NamedTextColor.DARK_PURPLE)), PurchasableRank.HERO),
+            .append(Component.text("]", NamedTextColor.DARK_PURPLE)), SupportRank.HERO),
     CHAMPION_VETERAN(3, "Champion Veteran", Component.text("[", NamedTextColor.YELLOW)
             .append(Component.text("|", NamedTextColor.AQUA))
             .append(Component.text("Vet", NamedTextColor.GOLD))
             .append(Component.text("|", NamedTextColor.AQUA))
-            .append(Component.text("]", NamedTextColor.YELLOW)), PurchasableRank.CHAMPION);
+            .append(Component.text("]", NamedTextColor.YELLOW)), SupportRank.CHAMPION);
 
     private final Integer id;
     private final String name;
     private final TextComponent chatDisplay;
-    private final PurchasableRank connectedRank;
+    private final SupportRank connectedRank;
 
     /**
      * Creates a new veteran tag that can be applied to the player if
@@ -40,7 +40,7 @@ public enum VeteranTag {
      * @param chatDisplay The final displayed chat tag of the veteran tag
      * @param connectedRank The rank that the veteran tag is connected to
      */
-    VeteranTag(Integer id, String name, TextComponent chatDisplay, PurchasableRank connectedRank) {
+    VeteranTag(Integer id, String name, TextComponent chatDisplay, SupportRank connectedRank) {
         this.id = id;
         this.name = name;
         this.chatDisplay = chatDisplay;

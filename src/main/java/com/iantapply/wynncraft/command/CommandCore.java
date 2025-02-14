@@ -1,5 +1,7 @@
 package com.iantapply.wynncraft.command;
 
+import com.iantapply.wynncraft.Wynncraft;
+import com.iantapply.wynncraft.command.commands.administrator.AdministratorCommandsCore;
 import com.iantapply.wynncraft.command.commands.cosmetic.CosmeticCommandsCore;
 import com.iantapply.wynncraft.command.commands.friend.FriendCommandsCore;
 import com.iantapply.wynncraft.command.commands.game.GameCommandsCore;
@@ -11,8 +13,8 @@ import com.iantapply.wynncraft.command.commands.party.PartyCommandsCore;
 import com.iantapply.wynncraft.command.commands.toggle.ToggleCommandsCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
-import com.iantapply.wynncraft.rank.NonPurchasableRank;
-import com.iantapply.wynncraft.rank.PurchasableRank;
+import com.iantapply.wynncraft.rank.Rank;
+import com.iantapply.wynncraft.rank.SupportRank;
 import lombok.Getter;
 import lombok.Setter;
 import net.kyori.adventure.text.Component;
@@ -66,6 +68,7 @@ public class CommandCore implements CommandExecutor {
         GuildCommandsCore guildCommandsCore = new GuildCommandsCore();
         CosmeticCommandsCore cosmeticCommandsCore = new CosmeticCommandsCore();
         ToggleCommandsCore toggleCommandsCore = new ToggleCommandsCore();
+        AdministratorCommandsCore administratorCommandsCore = new AdministratorCommandsCore();
 
         NbsCore nbsCore = new NbsCore();
 
@@ -77,6 +80,8 @@ public class CommandCore implements CommandExecutor {
         guildCommandsCore.initialize();
         cosmeticCommandsCore.initialize();
         toggleCommandsCore.initialize();
+        administratorCommandsCore.initialize();
+
         nbsCore.initialize();
     }
 
@@ -208,6 +213,11 @@ public class CommandCore implements CommandExecutor {
     public boolean isValidExecution(WynncraftCommand command, CommandSender sender, int argsLength) {
         if (!this.hasPermission(sender, command)) return false;
         if (!this.isPlayer(sender) && command.isPlayerOnly()) return false;
+        if (command.isDevelopment() && !Wynncraft.getInstance().getConfigurationCore().getBoolean("DEVELOPMENT_MODE")) {
+            sender.sendMessage(Component.text("This command is in development and should not be used in production.")
+                    .color(NamedTextColor.RED));
+            return false;
+        }
 
         if ((argsLength) < command.minArgs() || (argsLength) > command.maxArgs()) {
             sender.sendMessage(Component.text("Incorrect usage. The correct syntax is '/" + command.syntax() + "'. Please try again.")
@@ -217,6 +227,7 @@ public class CommandCore implements CommandExecutor {
         return true;
     }
 
+    // TODO: Redo permission handling
     /**
      * Checks if the sender has the required permissions to execute the command
      * @param sender The sender of the command
@@ -232,14 +243,14 @@ public class CommandCore implements CommandExecutor {
         }
 
         // Check if the sender has the required non-purchasable ranks to execute the command
-        for (NonPurchasableRank rank : command.requiredNonPurchasableRanks()) {
+        for (Rank rank : command.requiredRanks()) {
             if (!sender.hasPermission(rank.getPermission())) {
                 return false;
             }
         }
 
         // Check if the sender has the required purchasable ranks to execute the command
-        for (PurchasableRank rank : command.requiredPurchasableRanks()) {
+        for (SupportRank rank : command.requiredSupportRanks()) {
             if (!sender.hasPermission(rank.getPermission())) {
                 return false;
             }

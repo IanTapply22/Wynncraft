@@ -4,26 +4,26 @@ import com.iantapply.wynncraft.command.CommandCore;
 import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.configuration.PluginConfigurations;
 import com.iantapply.wynncraft.database.DatabaseCore;
+import com.iantapply.wynncraft.event.minecraft.PlayerChatEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.metrics.Metrics;
 import com.iantapply.wynncraft.metrics.UpdateChecker;
 import com.iantapply.wynncraft.nbs.NBSCore;
+import com.iantapply.wynncraft.player.PlayerCore;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class Wynncraft extends JavaPlugin {
     @Getter
     public static Wynncraft instance;
-    @Getter
     public CommandCore commandCore;
-    @Getter
+    public PlayerCore playerCore;
     public ConfigurationCore configurationCore;
-    @Getter
     public UpdateChecker updateChecker;
-    @Getter
     public NBSCore nbsCore;
 
     @Override
@@ -42,10 +42,14 @@ public final class Wynncraft extends JavaPlugin {
         this.commandCore.initialize();
         this.commandCore.registerCommands();
 
+        this.playerCore = new PlayerCore(this, Bukkit.getOnlinePlayers());
+        this.playerCore.initialize();
+
         this.nbsCore = new NBSCore();
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
 
         new Metrics(this, PluginConfigurations.BSTATS_PLUGIN_ID);
 

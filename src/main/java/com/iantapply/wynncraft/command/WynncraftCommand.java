@@ -1,8 +1,8 @@
 package com.iantapply.wynncraft.command;
 
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
-import com.iantapply.wynncraft.rank.NonPurchasableRank;
-import com.iantapply.wynncraft.rank.PurchasableRank;
+import com.iantapply.wynncraft.rank.Rank;
+import com.iantapply.wynncraft.rank.SupportRank;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public abstract class WynncraftCommand {
      * The non-purchasable ranks that are required to execute the command
      * @return The non-purchasable ranks
      */
-    public ArrayList<NonPurchasableRank> requiredNonPurchasableRanks() {
+    public ArrayList<Rank> requiredRanks() {
         return new ArrayList<>();
     }
 
@@ -76,7 +76,7 @@ public abstract class WynncraftCommand {
      * The purchasable ranks that are required to execute the command
      * @return The purchasable ranks
      */
-    public ArrayList<PurchasableRank> requiredPurchasableRanks() {
+    public ArrayList<SupportRank> requiredSupportRanks() {
         return new ArrayList<>();
     }
 
@@ -95,6 +95,12 @@ public abstract class WynncraftCommand {
     public WynncraftEvent getTriggerEvent() {
         return null;
     };
+
+    /**
+     * Whether the command is in development and should not be used in production
+     * @return A boolean to determine if the command is in development
+     */
+    public boolean isDevelopment() { return false;}
 
     /**
      * The method that is called when the command is executed

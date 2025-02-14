@@ -6,11 +6,8 @@ import com.iantapply.wynncraft.database.table.Column;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -64,6 +61,11 @@ public interface Model {
      * The method used to populate a row of data with this model in the table
      */
     void populate() throws SQLException;
+
+    /**
+     * Used to retrieve a value from the DB in relation to the primary key
+     */
+    Object getModelValue(String key) throws SQLException;
 
     /**
      * Whether the model should be migrated automatically upon creation or a modification.
