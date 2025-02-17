@@ -7,6 +7,7 @@ import com.iantapply.wynncraft.database.DatabaseCore;
 import com.iantapply.wynncraft.event.minecraft.PlayerChatEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
+import com.iantapply.wynncraft.item.ItemCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.metrics.Metrics;
 import com.iantapply.wynncraft.metrics.UpdateChecker;
@@ -25,6 +26,7 @@ public final class Wynncraft extends JavaPlugin {
     public ConfigurationCore configurationCore;
     public UpdateChecker updateChecker;
     public NBSCore nbsCore;
+    public ItemCore itemCore;
 
     @Override
     public void onEnable() {
@@ -46,6 +48,9 @@ public final class Wynncraft extends JavaPlugin {
         this.playerCore.initialize();
 
         this.nbsCore = new NBSCore();
+
+        this.itemCore = new ItemCore(this);
+        this.itemCore.initialize();
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);

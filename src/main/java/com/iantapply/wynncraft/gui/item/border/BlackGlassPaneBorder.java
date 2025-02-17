@@ -1,7 +1,6 @@
 package com.iantapply.wynncraft.gui.item.border;
 
 import com.iantapply.wynncraft.gui.GUIClickableItem;
-import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -31,8 +30,8 @@ public class BlackGlassPaneBorder {
             }
 
             @Override
-            public WynncraftNBTItem getItem() {
-                WynncraftNBTItem item = new WynncraftNBTItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
+            public ItemStack getItem() {
+                ItemStack item = new ItemStack(new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
                 ItemMeta meta = item.getItemMeta();
                 meta.displayName(Component.text(" "));
                 item.setItemMeta(meta);

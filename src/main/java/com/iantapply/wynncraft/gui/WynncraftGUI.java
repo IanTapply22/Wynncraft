@@ -1,11 +1,11 @@
 package com.iantapply.wynncraft.gui;
 
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
-import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -55,7 +55,7 @@ public abstract class WynncraftGUI {
      * @param slot The slot that the item is in
      * @return The item as a WynncraftItem object
      */
-    public abstract GUIClickableItem cantPickup(WynncraftNBTItem item, int slot);
+    public abstract GUIClickableItem cantPickup(ItemStack item, int slot);
 
     /**
      * The event that is fired when the GUI is opened or triggered
@@ -107,7 +107,7 @@ public abstract class WynncraftGUI {
      * @param item The item to add
      */
     public void addItem(GUIClickableItem item) {
-        inventory().setItem(item.getSlot(), item.getFinalizedItem().getItem());
+        inventory().setItem(item.getSlot(), item.getFinalizedItem());
     }
 
     /**

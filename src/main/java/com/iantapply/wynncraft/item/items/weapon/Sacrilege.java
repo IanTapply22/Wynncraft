@@ -19,11 +19,22 @@ import com.iantapply.wynncraft.item.requirements.ClassRequirement;
 import com.iantapply.wynncraft.item.requirements.ItemRequirements;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Sacrilege extends WynncraftWeapon {
     @Override
     public String internalName() {
         return "Sacrilege";
+    }
+
+    @Override
+    public UUID uuid() {
+        return UUID.fromString("98c8da6d-4723-4f9d-8f04-ab5eef6aea42");
+    }
+
+    @Override
+    public String version() {
+        return "1.0.0.0";
     }
 
     @Override

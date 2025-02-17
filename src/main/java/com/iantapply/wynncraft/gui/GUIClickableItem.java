@@ -1,7 +1,8 @@
 package com.iantapply.wynncraft.gui;
 
-import com.iantapply.wynncraft.item.WynncraftNBTItem;
+import com.iantapply.wynncraft.item.WynncraftItemMeta;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -26,9 +27,9 @@ public abstract class GUIClickableItem {
      * Gets the finalized item with the GUI NBT data attached
      * @return The finalized item
      */
-    public WynncraftNBTItem getFinalizedItem() {
-        WynncraftNBTItem item = getItem();
-        item.setStringFlag(GUIHelpers.getClickableItemFlag(), uuid);
+    public ItemStack getFinalizedItem() {
+        ItemStack item = getItem();
+        WynncraftItemMeta.setStringFlag(GUIHelpers.getClickableItemFlag(), uuid, item.getItemMeta());
         return item;
     }
 
@@ -48,7 +49,7 @@ public abstract class GUIClickableItem {
      * The item that is displayed in the GUI
      * @return The item as a WynncraftItem object
      */
-    public abstract WynncraftNBTItem getItem();
+    public abstract ItemStack getItem();
 
     /**
      * Whether the item can be picked up

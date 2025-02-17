@@ -1,10 +1,10 @@
 package com.iantapply.wynncraft.command.commands.administrator;
 
 import com.iantapply.wynncraft.command.WynncraftCommand;
-import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import com.iantapply.wynncraft.item.items.weapon.Sacrilege;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class GiveMeCommand extends WynncraftCommand {
     @Override
@@ -45,9 +45,9 @@ public class GiveMeCommand extends WynncraftCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        WynncraftNBTItem item = new Sacrilege().build();
+        ItemStack item = new Sacrilege().build(null);
 
-        player.getInventory().addItem(item.getItem());
+        player.getInventory().addItem(item);
 
         player.sendMessage("You have been given the configured item");
     }

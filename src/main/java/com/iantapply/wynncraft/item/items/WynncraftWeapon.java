@@ -1,13 +1,11 @@
 package com.iantapply.wynncraft.item.items;
 
-import com.iantapply.wynncraft.item.WynncraftNBTItem;
+import com.iantapply.wynncraft.item.WynncraftItemMeta;
 import com.iantapply.wynncraft.item.base.BaseStat;
 import com.iantapply.wynncraft.item.enums.DropRestriction;
 import com.iantapply.wynncraft.item.icon.ItemIconFormat;
 import com.iantapply.wynncraft.item.enums.stat.WeaponDamageBase;
 import com.iantapply.wynncraft.item.enums.tier.ItemRarity;
-import com.iantapply.wynncraft.item.icon.ItemIcon;
-import com.iantapply.wynncraft.item.enums.ItemType;
 import com.iantapply.wynncraft.item.enums.advanced.AttackSpeed;
 import com.iantapply.wynncraft.item.enums.advanced.WeaponType;
 import com.iantapply.wynncraft.item.identification.Identification;
@@ -30,17 +28,11 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Random;
 import java.util.UUID;
 
 public abstract class WynncraftWeapon extends WynncraftItem {
 
-    public abstract String internalName();
-
-    public abstract ItemType type();
-
-    public abstract ItemIcon icon();
-
-    // Weapon keys only
     public abstract WeaponType weaponType();
 
     public abstract AttackSpeed attackSpeed();
@@ -80,8 +72,11 @@ public abstract class WynncraftWeapon extends WynncraftItem {
     }
 
     @Override
-    // TODO: Store data on NBT of item when it is identified and alike
-    public WynncraftNBTItem build() {
+    // TODO: Randomize lore and stored values rather than putting range
+    // TODO: Store data on PDC of item when it is identified and alike
+    // TODO: Store UUID of internal item
+    // TODO: Store version of item to prevent outdated items from being used and to update
+    public ItemStack build(ItemStack currentItem) {
         /* Colour of item envelope text */
         NamedTextColor itemColor = this.rarity().getColor();
 
@@ -112,8 +107,8 @@ public abstract class WynncraftWeapon extends WynncraftItem {
         /* Marked as experimental, but removes item attributes */
         itemIcon.unsetData(DataComponentTypes.ATTRIBUTE_MODIFIERS);
 
-        WynncraftNBTItem weapon = new WynncraftNBTItem(itemIcon);
-        ItemMeta meta = weapon.getItem().getItemMeta();
+        ItemStack weapon = new ItemStack(itemIcon);
+        ItemMeta meta = weapon.getItemMeta();
 
         /* Set name of weapon */
         meta.displayName(Component.text(this.internalName()).color(itemColor).decoration(TextDecoration.ITALIC, false));
@@ -131,6 +126,7 @@ public abstract class WynncraftWeapon extends WynncraftItem {
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)); // Starts the damage section in envelope
 
         /* Set weapon damage section */
+        // Note: These don't need to be stored to persist as they are the same for every item
         for (BaseStat base : this.bases()) {
             WeaponDamageBase baseType = base.getBase();
 
@@ -159,18 +155,29 @@ public abstract class WynncraftWeapon extends WynncraftItem {
         }
 
         /* Set average DPS */
-        lore.add(Component.text("   ")
-                .append(Component.text("Average DPS: "))
-                .color(NamedTextColor.DARK_GRAY)
-                .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(this.averageDPS())
-                        .color(NamedTextColor.GRAY)
-                        .decoration(TextDecoration.ITALIC, false)));
+        // TODO: Do proper handling of average DPS and calculate it properly
+        if (currentItem == null || WynncraftItemMeta.getIntegerFlag("averageDps", currentItem.getItemMeta()) == -1) {
+            lore.add(Component.text("   ")
+                    .append(Component.text("Average DPS: "))
+                    .color(NamedTextColor.DARK_GRAY)
+                    .decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(this.averageDPS())
+                            .color(NamedTextColor.GRAY)
+                            .decoration(TextDecoration.ITALIC, false)));
+            WynncraftItemMeta.setIntegerFlag("averageDps", this.averageDPS(), meta);
+        } else {
+            lore.add(Component.text("   ")
+                    .append(Component.text("Average DPS: "))
+                    .color(NamedTextColor.DARK_GRAY)
+                    .decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(WynncraftItemMeta.getIntegerFlag("averageDps", currentItem.getItemMeta()))
+                            .color(NamedTextColor.GRAY)
+                            .decoration(TextDecoration.ITALIC, false)));
+        }
 
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)); // Starts the requirements section in envelope
 
         /* All requirements are initialized as not met and will update upon being held by a player. */
-
         lore.add(Component.text(String.format("Class Req: %s", this.requirements().getClassRequirement().getLore()))
                 .color(NamedTextColor.GRAY)
                 .decoration(TextDecoration.ITALIC, false));
@@ -193,6 +200,7 @@ public abstract class WynncraftWeapon extends WynncraftItem {
             }
         }
 
+        // Note: These don't persist in a PDC as they are the same for every item (raw values)
         if (!this.rawIdentifications().isEmpty()) {
             lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)); // Start of raw identifications
 
@@ -212,30 +220,51 @@ public abstract class WynncraftWeapon extends WynncraftItem {
             }
         }
 
+        /* Set identifications */
+        // TODO: Use suffix for stats; or force suffix in stat enum
         if (!this.identifications().isEmpty()) {
-            lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)); // Start of regular identifications
+            lore.add(Component.empty().decoration(TextDecoration.ITALIC, false));
 
-            /* Set identifications */
             for (Identification identification : this.identifications()) {
-                if (identification.getMin() < 0) {
-                    lore.add(Component.text(identification.getMin()).decoration(TextDecoration.ITALIC, false)
-                            .color(NamedTextColor.RED).append(Component.text(" to ").color(NamedTextColor.DARK_RED)).append(Component.text(String.format("%s%s ", identification.getMax(), identification.getUnit().getSuffix()))
-                                    .color(NamedTextColor.RED).append(Component.text(identification.getIdentification().formattedStatName()).color(NamedTextColor.GRAY))
-                                    .decoration(TextDecoration.ITALIC, false)));
+
+                // Roll random value if it doesn't exist, or use the existing value
+                int value;
+                if (currentItem != null && WynncraftItemMeta.getIntegerFlag(identification.getIdentification().name(), currentItem.getItemMeta()) != -1) {
+                    value = WynncraftItemMeta.getIntegerFlag(identification.getIdentification().name(), currentItem.getItemMeta());
                 } else {
-                    lore.add(Component.text(String.format("+%s", identification.getMin())).decoration(TextDecoration.ITALIC, false)
-                            .color(NamedTextColor.GREEN).append(Component.text(" to ").color(NamedTextColor.DARK_GREEN)).append(Component.text(String.format("+%s%s ", identification.getMax(), identification.getUnit().getSuffix()))
+                    Random random = new Random();
+                    value = random.nextInt(identification.getMax() - identification.getMin()) + identification.getMin();
+                }
+
+                WynncraftItemMeta.setIntegerFlag(identification.getIdentification().name(), value, meta);
+
+                // Set lore as appropriate
+                if (identification.getMin() < 0) {
+                    lore.add(Component.text(String.format("%s%s ", value, identification.getUnit().getSuffix()))
+                                    .color(NamedTextColor.RED).append(Component.text(identification.getIdentification().formattedStatName()).color(NamedTextColor.GRAY))
+                                    .decoration(TextDecoration.ITALIC, false));
+                } else {
+                    lore.add(Component.text(String.format("+%s%s ", value, identification.getUnit().getSuffix()))
                                     .color(NamedTextColor.GREEN).append(Component.text(identification.getIdentification().formattedStatName()).color(NamedTextColor.GRAY))
-                                    .decoration(TextDecoration.ITALIC, false)));
+                                    .decoration(TextDecoration.ITALIC, false));
                 }
             }
         }
 
+        /* Set powder slots */
         if (this.powderSlots() > 0) {
-            lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)); // Start of powder slots
+            lore.add(Component.empty().decoration(TextDecoration.ITALIC, false));
 
-            /* Set powder slots */
-            lore.add(Component.text(String.format("[%s] Powder Slots", this.powderSlots()))
+            int powderSlotsAvailable;
+            if (currentItem == null || WynncraftItemMeta.getIntegerFlag("powderSlotsAvailable", currentItem.getItemMeta()) == -1) {
+                powderSlotsAvailable = this.powderSlots();
+                WynncraftItemMeta.setIntegerFlag("powderSlotsAvailable", powderSlotsAvailable, meta);
+            } else {
+                WynncraftItemMeta.setIntegerFlag("powderSlotsAvailable", WynncraftItemMeta.getIntegerFlag("powderSlotsAvailable", currentItem.getItemMeta()), meta);
+                powderSlotsAvailable = WynncraftItemMeta.getIntegerFlag("powderSlotsAvailable", currentItem.getItemMeta());
+            }
+
+            lore.add(Component.text(String.format("[%s/%s] Powder Slots", this.powderSlots() - powderSlotsAvailable, this.powderSlots()))
                     .color(NamedTextColor.GRAY)
                     .decoration(TextDecoration.ITALIC, false));
         }
@@ -256,7 +285,11 @@ public abstract class WynncraftWeapon extends WynncraftItem {
 
         /* Finalize the lore */
         meta.lore(lore);
-        weapon.getItem().setItemMeta(meta);
+        WynncraftItemMeta.setStringFlag("uuid", this.uuid().toString(), meta);
+        WynncraftItemMeta.setStringFlag("version", this.version(), meta);
+        weapon.setItemMeta(meta);
+
+        Logger.log(LoggingLevel.INFO, "Built new weapon: " + weapon.getPersistentDataContainer().getKeys());
 
         return weapon;
     }
