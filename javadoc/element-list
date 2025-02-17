@@ -36,6 +36,7 @@ com.iantapply.wynncraft.item.items.weapon
 com.iantapply.wynncraft.item.majorId
 com.iantapply.wynncraft.item.majorId.id
 com.iantapply.wynncraft.item.requirements
+com.iantapply.wynncraft.item.util
 com.iantapply.wynncraft.logger
 com.iantapply.wynncraft.metrics
 com.iantapply.wynncraft.nbs

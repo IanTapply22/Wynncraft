@@ -313,16 +313,18 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html#BSTATS_PLUGIN_ID" class="member-name-link">BSTATS_PLUGIN_ID</a> - Static variable in class com.iantapply.wynncraft.configuration.<a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html" title="class in com.iantapply.wynncraft.configuration">PluginConfigurations</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#build()" class="member-name-link">build()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
-<dd>
-<div class="block">Used for building the Wynncraft item with NBT data.</div>
-</dd>
-<dt><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html#build()" class="member-name-link">build()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/Metrics.JsonObjectBuilder.html#build()" class="member-name-link">build()</a> - Method in class com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/Metrics.JsonObjectBuilder.html" title="class in com.iantapply.wynncraft.metrics">Metrics.JsonObjectBuilder</a></dt>
 <dd>
 <div class="block">Builds the JSON string and invalidates this builder.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#build(org.bukkit.inventory.ItemStack)" class="member-name-link">build(ItemStack)</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">Used for building the Wynncraft item with PDC data
+ This will rebuild lore if PDC data exists or will initially create it if it doesn't
+ This includes lore and the entire visuals and properties of the item.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html#build(org.bukkit.inventory.ItemStack)" class="member-name-link">build(ItemStack)</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/tag/StaffTag.html#BUILD" class="member-name-link">BUILD</a> - Enum constant in enum class com.iantapply.wynncraft.tag.<a href="com/iantapply/wynncraft/tag/StaffTag.html" title="enum class in com.iantapply.wynncraft.tag">StaffTag</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#buildDatabaseUrl(com.iantapply.wynncraft.database.DatabaseInformation)" class="member-name-link">buildDatabaseUrl(DatabaseInformation)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
@@ -362,9 +364,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Whether the item can be picked up</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html#cantPickup(com.iantapply.wynncraft.item.WynncraftNBTItem,int)" class="member-name-link">cantPickup(WynncraftNBTItem, int)</a> - Method in class com.iantapply.wynncraft.gui.menu.<a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html" title="class in com.iantapply.wynncraft.gui.menu">ExampleGUI</a></dt>
+<dt><a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html#cantPickup(org.bukkit.inventory.ItemStack,int)" class="member-name-link">cantPickup(ItemStack, int)</a> - Method in class com.iantapply.wynncraft.gui.menu.<a href="com/iantapply/wynncraft/gui/menu/ExampleGUI.html" title="class in com.iantapply.wynncraft.gui.menu">ExampleGUI</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/gui/WynncraftGUI.html#cantPickup(com.iantapply.wynncraft.item.WynncraftNBTItem,int)" class="member-name-link">cantPickup(WynncraftNBTItem, int)</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></dt>
+<dt><a href="com/iantapply/wynncraft/gui/WynncraftGUI.html#cantPickup(org.bukkit.inventory.ItemStack,int)" class="member-name-link">cantPickup(ItemStack, int)</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></dt>
 <dd>
 <div class="block">The item that is displayed in the GUI but can't be picked up</div>
 </dd>
@@ -541,6 +543,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/item/majorId/id/package-summary.html">com.iantapply.wynncraft.item.majorId.id</a> - package com.iantapply.wynncraft.item.majorId.id</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/requirements/package-summary.html">com.iantapply.wynncraft.item.requirements</a> - package com.iantapply.wynncraft.item.requirements</dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/util/package-summary.html">com.iantapply.wynncraft.item.util</a> - package com.iantapply.wynncraft.item.util</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/logger/package-summary.html">com.iantapply.wynncraft.logger</a> - package com.iantapply.wynncraft.logger</dt>
 <dd>&nbsp;</dd>
@@ -1435,10 +1439,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a boolean from the configuration file via a path to the name of the configuration</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#getBooleanFlag(java.lang.String)" class="member-name-link">getBooleanFlag(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
-<dd>
-<div class="block">Gets a boolean flag from the NBT data of the item</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/world/LandmarkLocation.html#getBukkitLocation(org.bukkit.World)" class="member-name-link">getBukkitLocation(World)</a> - Method in enum class com.iantapply.wynncraft.world.<a href="com/iantapply/wynncraft/world/LandmarkLocation.html" title="enum class in com.iantapply.wynncraft.world">LandmarkLocation</a></dt>
 <dd>
 <div class="block">Gets the location as a Bukkit location with the current
@@ -1489,10 +1489,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a double from the configuration file via a path to the name of the configuration</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#getDoubleFlag(java.lang.String)" class="member-name-link">getDoubleFlag(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
-<dd>
-<div class="block">Gets a double flag from the NBT data of the item</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/gui/GUIClickableItem.html#getFinalizedItem()" class="member-name-link">getFinalizedItem()</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></dt>
 <dd>
 <div class="block">Gets the finalized item with the GUI NBT data attached</div>
@@ -1513,7 +1509,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets an integer from the configuration file via a path to the name of the configuration</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#getIntegerFlag(java.lang.String)" class="member-name-link">getIntegerFlag(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#getIntegerFlag(java.lang.String,org.bukkit.inventory.meta.ItemMeta)" class="member-name-link">getIntegerFlag(String, ItemMeta)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
 <div class="block">Gets an integer flag from the NBT data of the item</div>
 </dd>
@@ -1528,6 +1524,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/gui/item/filler/CookieFillerItem.html#getItem(int)" class="member-name-link">getItem(int)</a> - Static method in class com.iantapply.wynncraft.gui.item.filler.<a href="com/iantapply/wynncraft/gui/item/filler/CookieFillerItem.html" title="class in com.iantapply.wynncraft.gui.item.filler">CookieFillerItem</a></dt>
 <dd>
 <div class="block">The item to add as a filler</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/ItemCore.html#getItemByUUID(java.lang.String)" class="member-name-link">getItemByUUID(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/ItemCore.html" title="class in com.iantapply.wynncraft.item">ItemCore</a></dt>
+<dd>
+<div class="block">Gets an item in the sytsem by its UUID, the UUID never changes</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/world/LandmarkLocation.html#getLocationX()" class="member-name-link">getLocationX()</a> - Method in enum class com.iantapply.wynncraft.world.<a href="com/iantapply/wynncraft/world/LandmarkLocation.html" title="enum class in com.iantapply.wynncraft.world">LandmarkLocation</a></dt>
 <dd>
@@ -1583,6 +1583,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a note inside the NBS layer</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#getPersistentDataContainer(org.bukkit.inventory.ItemStack)" class="member-name-link">getPersistentDataContainer(ItemStack)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
+<dd>
+<div class="block">Gets the PersistentDataContainer of the item</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/enums/NotePitch.html#getPitch(int)" class="member-name-link">getPitch(int)</a> - Static method in enum class com.iantapply.wynncraft.nbs.enums.<a href="com/iantapply/wynncraft/nbs/enums/NotePitch.html" title="enum class in com.iantapply.wynncraft.nbs.enums">NotePitch</a></dt>
 <dd>
 <div class="block">Gets the pitch of a note</div>
@@ -1621,7 +1625,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a string from the configuration file via a path to the name of the configuration</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#getStringFlag(java.lang.String)" class="member-name-link">getStringFlag(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#getStringFlag(java.lang.String,org.bukkit.inventory.meta.ItemMeta)" class="member-name-link">getStringFlag(String, ItemMeta)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
 <div class="block">Gets a string flag from the NBT data of the item</div>
 </dd>
@@ -1752,9 +1756,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#hasKey(java.lang.String)" class="member-name-link">hasKey(String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#hasKey(java.lang.String,org.bukkit.inventory.meta.ItemMeta)" class="member-name-link">hasKey(String, ItemMeta)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
-<div class="block">Checks if the item has a key in its NBT data</div>
+<div class="block">Checks if a flag exists in the NBT data of the item</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/command/CommandCore.html#hasPermission(org.bukkit.command.CommandSender,com.iantapply.wynncraft.command.WynncraftCommand)" class="member-name-link">hasPermission(CommandSender, WynncraftCommand)</a> - Method in class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/CommandCore.html" title="class in com.iantapply.wynncraft.command">CommandCore</a></dt>
 <dd>
@@ -1854,8 +1858,10 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html#icon()" class="member-name-link">icon()</a> - Method in class com.iantapply.wynncraft.item.items.weapon.<a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html" title="class in com.iantapply.wynncraft.item.items.weapon">Sacrilege</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html#icon()" class="member-name-link">icon()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#icon()" class="member-name-link">icon()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">The icon of the item, this is what the physical item is</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/item/majorId/id/AlterEgo.html#id()" class="member-name-link">id()</a> - Method in class com.iantapply.wynncraft.item.majorId.id.<a href="com/iantapply/wynncraft/item/majorId/id/AlterEgo.html" title="class in com.iantapply.wynncraft.item.majorId.id">AlterEgo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/majorId/id/Coagulate.html#id()" class="member-name-link">id()</a> - Method in class com.iantapply.wynncraft.item.majorId.id.<a href="com/iantapply/wynncraft/item/majorId/id/Coagulate.html" title="class in com.iantapply.wynncraft.item.majorId.id">Coagulate</a></dt>
@@ -2006,6 +2012,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Initializes the database core by staging all models that are to
  be activated or registered.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/item/ItemCore.html#initialize()" class="member-name-link">initialize()</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/ItemCore.html" title="class in com.iantapply.wynncraft.item">ItemCore</a></dt>
+<dd>
+<div class="block">Initializes and stages all items</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/npc/NPC.html#initialize()" class="member-name-link">initialize()</a> - Method in interface com.iantapply.wynncraft.npc.<a href="com/iantapply/wynncraft/npc/NPC.html" title="interface in com.iantapply.wynncraft.npc">NPC</a></dt>
 <dd>
 <div class="block">Contains any of the initialization code for the NPC previously to spawning</div>
@@ -2046,8 +2056,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html#internalName()" class="member-name-link">internalName()</a> - Method in class com.iantapply.wynncraft.item.items.weapon.<a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html" title="class in com.iantapply.wynncraft.item.items.weapon">Sacrilege</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html#internalName()" class="member-name-link">internalName()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#internalName()" class="member-name-link">internalName()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">The internal name of the item, this is also what's displayed on the item</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/utils/Interpolator.html#interpLinear(double%5B%5D,double)" class="member-name-link">interpLinear(double[], double)</a> - Static method in class com.iantapply.wynncraft.nbs.utils.<a href="com/iantapply/wynncraft/nbs/utils/Interpolator.html" title="class in com.iantapply.wynncraft.nbs.utils">Interpolator</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/utils/Interpolator.html#interpLinear(double%5B%5D,double%5B%5D,double%5B%5D)" class="member-name-link">interpLinear(double[], double[], double[])</a> - Static method in class com.iantapply.wynncraft.nbs.utils.<a href="com/iantapply/wynncraft/nbs/utils/Interpolator.html" title="class in com.iantapply.wynncraft.nbs.utils">Interpolator</a></dt>
@@ -2083,6 +2095,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html#isLoop()" class="member-name-link">isLoop()</a> - Method in class com.iantapply.wynncraft.nbs.players.<a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html" title="class in com.iantapply.wynncraft.nbs.players">NBSSongPlayer</a></dt>
 <dd>
 <div class="block">Checks if the song is currently in loop mode</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/util/VersionUtil.html#isLowerLatestVersion(java.lang.String,java.lang.String)" class="member-name-link">isLowerLatestVersion(String, String)</a> - Static method in class com.iantapply.wynncraft.item.util.<a href="com/iantapply/wynncraft/item/util/VersionUtil.html" title="class in com.iantapply.wynncraft.item.util">VersionUtil</a></dt>
+<dd>
+<div class="block">Check if the current version is lower than the latest version</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/command/CommandCore.html#isPlayer(org.bukkit.command.CommandSender)" class="member-name-link">isPlayer(CommandSender)</a> - Method in class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/CommandCore.html" title="class in com.iantapply.wynncraft.command">CommandCore</a></dt>
 <dd>
@@ -2122,9 +2138,13 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/rank/Rank.html#ITEM_MAKER" class="member-name-link">ITEM_MAKER</a> - Enum constant in enum class com.iantapply.wynncraft.rank.<a href="com/iantapply/wynncraft/rank/Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/ItemCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.item">ItemCore</a> - Class in <a href="com/iantapply/wynncraft/item/package-summary.html">com.iantapply.wynncraft.item</a></dt>
+<dt><a href="com/iantapply/wynncraft/Wynncraft.html#itemCore" class="member-name-link">itemCore</a> - Variable in class com.iantapply.wynncraft.<a href="com/iantapply/wynncraft/Wynncraft.html" title="class in com.iantapply.wynncraft">Wynncraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/ItemCore.html#%3Cinit%3E()" class="member-name-link">ItemCore()</a> - Constructor for class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/ItemCore.html" title="class in com.iantapply.wynncraft.item">ItemCore</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/ItemCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.item">ItemCore</a> - Class in <a href="com/iantapply/wynncraft/item/package-summary.html">com.iantapply.wynncraft.item</a></dt>
+<dd>
+<div class="block">Handles all registration and enabling of items, this is the core of the item system, the registry.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/ItemCore.html#%3Cinit%3E(com.iantapply.wynncraft.Wynncraft)" class="member-name-link">ItemCore(Wynncraft)</a> - Constructor for class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/ItemCore.html" title="class in com.iantapply.wynncraft.item">ItemCore</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/gui/GUIClickableItem.html#itemData" class="member-name-link">itemData</a> - Static variable in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></dt>
 <dd>&nbsp;</dd>
@@ -3746,10 +3766,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets if the song should auto-destroy after playing the entirety of an NBS song</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#setBooleanFlag(java.lang.String,boolean)" class="member-name-link">setBooleanFlag(String, boolean)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
-<dd>
-<div class="block">Sets a boolean flag in the NBT data of the item</div>
-</dd>
 <dt><a href="com/iantapply/wynncraft/gui/WynncraftGUI.html#setBorder()" class="member-name-link">setBorder()</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></dt>
 <dd>
 <div class="block">Sets a border around the GUI with a specific item</div>
@@ -3762,11 +3778,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the dialogues of the NPC to the given array of dialogues</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#setDoubleFlag(java.lang.String,double)" class="member-name-link">setDoubleFlag(String, double)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
-<dd>
-<div class="block">Sets a double flag in the NBT data of the item</div>
-</dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#setIntegerFlag(java.lang.String,int)" class="member-name-link">setIntegerFlag(String, int)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#setIntegerFlag(java.lang.String,int,org.bukkit.inventory.meta.ItemMeta)" class="member-name-link">setIntegerFlag(String, int, ItemMeta)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
 <div class="block">Sets an integer flag in the NBT data of the item</div>
 </dd>
@@ -3790,7 +3802,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/administrator/SetRankCommand.html#%3Cinit%3E()" class="member-name-link">SetRankCommand()</a> - Constructor for class com.iantapply.wynncraft.command.commands.administrator.<a href="com/iantapply/wynncraft/command/commands/administrator/SetRankCommand.html" title="class in com.iantapply.wynncraft.command.commands.administrator">SetRankCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#setStringFlag(java.lang.String,java.lang.String)" class="member-name-link">setStringFlag(String, String)</a> - Method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#setStringFlag(java.lang.String,java.lang.String,org.bukkit.inventory.meta.ItemMeta)" class="member-name-link">setStringFlag(String, String, ItemMeta)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
 <div class="block">Sets a string flag in the NBT data of the item</div>
 </dd>
@@ -4257,8 +4269,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html#type()" class="member-name-link">type()</a> - Method in class com.iantapply.wynncraft.item.items.weapon.<a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html" title="class in com.iantapply.wynncraft.item.items.weapon">Sacrilege</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html#type()" class="member-name-link">type()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#type()" class="member-name-link">type()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">The type of item it is, this will determine the handling of the item</div>
+</dd>
 </dl>
 <h2 class="title" id="I:U">U</h2>
 <dl class="index">
@@ -4323,6 +4337,12 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/database/model/PlayerModel.html#uuid()" class="member-name-link">uuid()</a> - Method in class com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/PlayerModel.html" title="class in com.iantapply.wynncraft.database.model">PlayerModel</a></dt>
 <dd>
 <div class="block">The UUID of the model.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html#uuid()" class="member-name-link">uuid()</a> - Method in class com.iantapply.wynncraft.item.items.weapon.<a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html" title="class in com.iantapply.wynncraft.item.items.weapon">Sacrilege</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#uuid()" class="member-name-link">uuid()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">The UUID of the item, this should differ from every other item and should be unique</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/database/table/DataType.html#UUID" class="member-name-link">UUID</a> - Enum constant in enum class com.iantapply.wynncraft.database.table.<a href="com/iantapply/wynncraft/database/table/DataType.html" title="enum class in com.iantapply.wynncraft.database.table">DataType</a></dt>
 <dd>&nbsp;</dd>
@@ -4625,11 +4645,23 @@ the order they are declared.</div>
 <div class="block">The version of the model, should be updated when changes have been
  made to the model that require a database migration.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html#version()" class="member-name-link">version()</a> - Method in class com.iantapply.wynncraft.item.items.weapon.<a href="com/iantapply/wynncraft/item/items/weapon/Sacrilege.html" title="class in com.iantapply.wynncraft.item.items.weapon">Sacrilege</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#version()" class="member-name-link">version()</a> - Method in class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
+<dd>
+<div class="block">The latest version of the item.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html#VERSION" class="member-name-link">VERSION</a> - Static variable in class com.iantapply.wynncraft.configuration.<a href="com/iantapply/wynncraft/configuration/PluginConfigurations.html" title="class in com.iantapply.wynncraft.configuration">PluginConfigurations</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/VersionChecker.html" class="type-name-link" title="class in com.iantapply.wynncraft.metrics">VersionChecker</a> - Class in <a href="com/iantapply/wynncraft/metrics/package-summary.html">com.iantapply.wynncraft.metrics</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/VersionChecker.html#%3Cinit%3E()" class="member-name-link">VersionChecker()</a> - Constructor for class com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/VersionChecker.html" title="class in com.iantapply.wynncraft.metrics">VersionChecker</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/item/util/VersionUtil.html" class="type-name-link" title="class in com.iantapply.wynncraft.item.util">VersionUtil</a> - Class in <a href="com/iantapply/wynncraft/item/util/package-summary.html">com.iantapply.wynncraft.item.util</a></dt>
+<dd>
+<div class="block">Handles all version utilities for items</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/item/util/VersionUtil.html#%3Cinit%3E()" class="member-name-link">VersionUtil()</a> - Constructor for class com.iantapply.wynncraft.item.util.<a href="com/iantapply/wynncraft/item/util/VersionUtil.html" title="class in com.iantapply.wynncraft.item.util">VersionUtil</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/nbs/utils/VersionUtils.html" class="type-name-link" title="class in com.iantapply.wynncraft.nbs.utils">VersionUtils</a> - Class in <a href="com/iantapply/wynncraft/nbs/utils/package-summary.html">com.iantapply.wynncraft.nbs.utils</a></dt>
 <dd>&nbsp;</dd>
@@ -4768,15 +4800,12 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html#%3Cinit%3E()" class="member-name-link">WynncraftItem()</a> - Constructor for class com.iantapply.wynncraft.item.items.<a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" class="type-name-link" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a> - Class in <a href="com/iantapply/wynncraft/item/package-summary.html">com.iantapply.wynncraft.item</a></dt>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" class="type-name-link" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a> - Class in <a href="com/iantapply/wynncraft/item/package-summary.html">com.iantapply.wynncraft.item</a></dt>
 <dd>
-<div class="block">An extension of an Item with the utilities to manage NBT
- data easier and more efficiently</div>
+<div class="block">Handles all interactions with the PDC data of an items meta</div>
 </dd>
-<dt><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html#%3Cinit%3E(org.bukkit.inventory.ItemStack)" class="member-name-link">WynncraftNBTItem(ItemStack)</a> - Constructor for class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></dt>
-<dd>
-<div class="block">Creates a new WynncraftItem with NBT data from an existing ItemStack</div>
-</dd>
+<dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#%3Cinit%3E()" class="member-name-link">WynncraftItemMeta()</a> - Constructor for class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" class="type-name-link" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a> - Class in <a href="com/iantapply/wynncraft/entity/package-summary.html">com.iantapply.wynncraft.entity</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html#%3Cinit%3E()" class="member-name-link">WynncraftPassiveEntity()</a> - Constructor for class com.iantapply.wynncraft.entity.<a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a></dt>

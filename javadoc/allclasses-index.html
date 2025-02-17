@@ -308,7 +308,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Static methods for doing useful math</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/ItemCore.html" title="class in com.iantapply.wynncraft.item">ItemCore</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Handles all registration and enabling of items, this is the core of the item system, the registry.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/icon/ItemIcon.html" title="class in com.iantapply.wynncraft.item.icon">ItemIcon</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/icon/ItemIconAttributeValue.html" title="class in com.iantapply.wynncraft.item.icon">ItemIconAttributeValue</a></div>
@@ -600,71 +602,74 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/metrics/VersionChecker.html" title="class in com.iantapply.wynncraft.metrics">VersionChecker</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/nbs/utils/VersionUtils.html" title="class in com.iantapply.wynncraft.nbs.utils">VersionUtils</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/tag/VeteranTag.html" title="enum class in com.iantapply.wynncraft.tag">VeteranTag</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/util/VersionUtil.html" title="class in com.iantapply.wynncraft.item.util">VersionUtil</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Handles all version utilities for items</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/nbs/utils/VersionUtils.html" title="class in com.iantapply.wynncraft.nbs.utils">VersionUtils</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/tag/VeteranTag.html" title="enum class in com.iantapply.wynncraft.tag">VeteranTag</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
 <div class="block">The different veteran tags that can be applied to a player based on
  their previous rank on Wynncraft prior to August 1, 2024 (the 1.12 update)</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/npc/types/Villager.html" title="class in com.iantapply.wynncraft.npc.types">Villager</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/rank/benefits/VIPBenefits.html" title="class in com.iantapply.wynncraft.rank.benefits">VIPBenefits</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/npc/types/Villager.html" title="class in com.iantapply.wynncraft.npc.types">Villager</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/rank/benefits/VIPPlusBenefits.html" title="class in com.iantapply.wynncraft.rank.benefits">VIPPlusBenefits</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/rank/benefits/VIPBenefits.html" title="class in com.iantapply.wynncraft.rank.benefits">VIPBenefits</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/item/enums/stat/WeaponDamageBase.html" title="enum class in com.iantapply.wynncraft.item.enums.stat">WeaponDamageBase</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/item/enums/advanced/WeaponType.html" title="enum class in com.iantapply.wynncraft.item.enums.advanced">WeaponType</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/rank/benefits/VIPPlusBenefits.html" title="class in com.iantapply.wynncraft.rank.benefits">VIPPlusBenefits</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/item/enums/stat/WeaponDamageBase.html" title="enum class in com.iantapply.wynncraft.item.enums.stat">WeaponDamageBase</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/world/WorldLocation.html" title="enum class in com.iantapply.wynncraft.world">WorldLocation</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/item/enums/advanced/WeaponType.html" title="enum class in com.iantapply.wynncraft.item.enums.advanced">WeaponType</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="com/iantapply/wynncraft/world/WorldLocation.html" title="enum class in com.iantapply.wynncraft.world">WorldLocation</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
 <div class="block">Represents a world location in the game.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/Wynncraft.html" title="class in com.iantapply.wynncraft">Wynncraft</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftBoss.html" title="class in com.iantapply.wynncraft.entity">WynncraftBoss</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/Wynncraft.html" title="class in com.iantapply.wynncraft">Wynncraft</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/command/WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftBoss.html" title="class in com.iantapply.wynncraft.entity">WynncraftBoss</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/command/WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Represents a command that can be executed by a player or console</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/database/database/WynncraftDatabase.html" title="class in com.iantapply.wynncraft.database.database">WynncraftDatabase</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/database/database/WynncraftDatabase.html" title="class in com.iantapply.wynncraft.database.database">WynncraftDatabase</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">The Wynncraft database object that connects to the Wynncraft database
  and provides a connection to the data available in the database</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/event/wynncraft/WynncraftEvent.html" title="class in com.iantapply.wynncraft.event.wynncraft">WynncraftEvent</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/gui/WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/event/wynncraft/WynncraftEvent.html" title="class in com.iantapply.wynncraft.event.wynncraft">WynncraftEvent</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/gui/WynncraftGUI.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUI</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">The WynncraftGUI class is an abstract class that is used to create custom GUIs
  for the Wynncraft server easily and flawlessly.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/gui/WynncraftGUICore.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUICore</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/gui/WynncraftGUICore.html" title="class in com.iantapply.wynncraft.gui">WynncraftGUICore</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A class with utilities to manage the core functionality regarding
  GUIs registered and used on the Wynncraft server.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftHostileEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftHostileEntity</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftHostileEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftHostileEntity</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/items/WynncraftItem.html" title="class in com.iantapply.wynncraft.item.items">WynncraftItem</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/WynncraftNBTItem.html" title="class in com.iantapply.wynncraft.item">WynncraftNBTItem</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">An extension of an Item with the utilities to manage NBT
- data easier and more efficiently</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Handles all interactions with the PDC data of an items meta</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/player/WynncraftPlayer.html" title="class in com.iantapply.wynncraft.player">WynncraftPlayer</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftPassiveEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftPassiveEntity</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/player/WynncraftPlayer.html" title="class in com.iantapply.wynncraft.player">WynncraftPlayer</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A class to interact with a player based on their stored Wynncraft player data model</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftQuestEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftQuestEntity</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/entity/WynncraftQuestEntity.html" title="class in com.iantapply.wynncraft.entity">WynncraftQuestEntity</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/iantapply/wynncraft/item/items/WynncraftWeapon.html" title="class in com.iantapply.wynncraft.item.items">WynncraftWeapon</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 </div>
 </div>
 </div>
