@@ -4,7 +4,7 @@ import com.iantapply.wynncraft.gui.GUIClickableItem;
 import com.iantapply.wynncraft.gui.WynncraftGUI;
 import com.iantapply.wynncraft.gui.item.border.BlackGlassPaneBorder;
 import com.iantapply.wynncraft.gui.item.filler.CookieFillerItem;
-import com.iantapply.wynncraft.inventory.WynncraftItem;
+import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -67,7 +67,7 @@ public class ExampleGUI extends WynncraftGUI {
     }
 
     @Override
-    public GUIClickableItem cantPickup(WynncraftItem currentItem, int slot) {
+    public GUIClickableItem cantPickup(WynncraftNBTItem currentItem, int slot) {
         return new GUIClickableItem() {
             @Override
             public void run(InventoryClickEvent event) {
@@ -80,7 +80,7 @@ public class ExampleGUI extends WynncraftGUI {
             }
 
             @Override
-            public WynncraftItem getItem() {
+            public WynncraftNBTItem getItem() {
                 return currentItem;
             }
         };

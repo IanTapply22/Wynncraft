@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.gui.item.filler;
 
 import com.iantapply.wynncraft.gui.GUIClickableItem;
-import com.iantapply.wynncraft.inventory.WynncraftItem;
+import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -31,8 +31,8 @@ public class CookieFillerItem {
             }
 
             @Override
-            public WynncraftItem getItem() {
-                WynncraftItem item = new WynncraftItem(new ItemStack(Material.COOKIE));
+            public WynncraftNBTItem getItem() {
+                WynncraftNBTItem item = new WynncraftNBTItem(new ItemStack(Material.COOKIE));
                 ItemMeta meta = item.getItemMeta();
                 meta.displayName(Component.text(" "));
                 item.setItemMeta(meta);

@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.gui;
 
-import com.iantapply.wynncraft.inventory.WynncraftItem;
+import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +17,7 @@ public class GUIListener implements Listener {
             return;
         }
 
-        WynncraftItem item = (WynncraftItem) event.getCurrentItem();
+        WynncraftNBTItem item = (WynncraftNBTItem) event.getCurrentItem();
 
         if (item.getType() != Material.AIR) {
             return;

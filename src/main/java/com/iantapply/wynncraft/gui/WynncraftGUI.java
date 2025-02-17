@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.gui;
 
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
-import com.iantapply.wynncraft.inventory.WynncraftItem;
+import com.iantapply.wynncraft.item.WynncraftNBTItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -55,7 +55,7 @@ public abstract class WynncraftGUI {
      * @param slot The slot that the item is in
      * @return The item as a WynncraftItem object
      */
-    public abstract GUIClickableItem cantPickup(WynncraftItem item, int slot);
+    public abstract GUIClickableItem cantPickup(WynncraftNBTItem item, int slot);
 
     /**
      * The event that is fired when the GUI is opened or triggered

@@ -144,3 +144,6 @@ commands:
   setsupportrank:
     description: "Sets the support rank of the player"
     usage: "/setsupportrank <rank ID>"
+  giveme:
+    description: "Gives the player the internally configured item"
+    usage: "/giveme"

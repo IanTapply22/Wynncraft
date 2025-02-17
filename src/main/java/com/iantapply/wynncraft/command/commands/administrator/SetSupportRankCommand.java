@@ -6,13 +6,11 @@ import com.iantapply.wynncraft.database.model.PlayerModel;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.player.WynncraftPlayer;
-import com.iantapply.wynncraft.rank.Rank;
 import com.iantapply.wynncraft.rank.SupportRank;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class SetSupportRankCommand extends WynncraftCommand {
     @Override

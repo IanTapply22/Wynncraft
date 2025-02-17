@@ -196,6 +196,7 @@ public class CommandCore implements CommandExecutor {
 
                     sender.sendMessage(errorMessage);
                     Logger.log(LoggingLevel.ERROR, "An error occurred while executing the command '" + wynncraftCommand.name() + "'. Incorrect usage, the correct syntax is '" + wynncraftCommand.syntax() + "'. Please try again.");
+                    e.printStackTrace();
                 }
                 return true;
             }
