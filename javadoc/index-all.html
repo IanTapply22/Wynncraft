@@ -100,6 +100,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The additional amount of region limits the player is allowed</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#addParty(com.iantapply.wynncraft.party.Party)" class="member-name-link">addParty(Party)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Adds a party instance to the parties Arraylist</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/party/Party.html#addPartyMember(org.bukkit.entity.Player)" class="member-name-link">addPartyMember(Player)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/Party.html" title="class in com.iantapply.wynncraft.party">Party</a></dt>
 <dd>
 <div class="block">Adds a new player to the party and abides by the party player limit</div>
@@ -1583,6 +1587,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a note inside the NBS layer</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#getParty(java.util.UUID)" class="member-name-link">getParty(UUID)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Gets a party instance from the parties ArrayList via the UUID of the party</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#getParty(org.bukkit.entity.Player)" class="member-name-link">getParty(Player)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Gets a party instance from the parties ArrayList via the party leader reference.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html#getPersistentDataContainer(org.bukkit.inventory.ItemStack)" class="member-name-link">getPersistentDataContainer(ItemStack)</a> - Static method in class com.iantapply.wynncraft.item.<a href="com/iantapply/wynncraft/item/WynncraftItemMeta.html" title="class in com.iantapply.wynncraft.item">WynncraftItemMeta</a></dt>
 <dd>
 <div class="block">Gets the PersistentDataContainer of the item</div>
@@ -1594,6 +1606,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/player/PlayerCore.html#getPlayer(java.util.UUID)" class="member-name-link">getPlayer(UUID)</a> - Method in class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/PlayerCore.html" title="class in com.iantapply.wynncraft.player">PlayerCore</a></dt>
 <dd>
 <div class="block">Gets a WynncraftPlayer object instance of the specified players UUID.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/command/WynncraftCommand.html#getPlayer(org.bukkit.command.CommandSender)" class="member-name-link">getPlayer(CommandSender)</a> - Method in class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></dt>
+<dd>
+<div class="block">Gets the player from the command sender if the command is player only</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html#getPlayerList()" class="member-name-link">getPlayerList()</a> - Method in class com.iantapply.wynncraft.nbs.players.<a href="com/iantapply/wynncraft/nbs/players/NBSSongPlayer.html" title="class in com.iantapply.wynncraft.nbs.players">NBSSongPlayer</a></dt>
 <dd>
@@ -2109,6 +2125,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/command/commands/administrator/SetRankCommand.html#isPlayerOnly()" class="member-name-link">isPlayerOnly()</a> - Method in class com.iantapply.wynncraft.command.commands.administrator.<a href="com/iantapply/wynncraft/command/commands/administrator/SetRankCommand.html" title="class in com.iantapply.wynncraft.command.commands.administrator">SetRankCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/administrator/SetSupportRankCommand.html#isPlayerOnly()" class="member-name-link">isPlayerOnly()</a> - Method in class com.iantapply.wynncraft.command.commands.administrator.<a href="com/iantapply/wynncraft/command/commands/administrator/SetSupportRankCommand.html" title="class in com.iantapply.wynncraft.command.commands.administrator">SetSupportRankCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/command/commands/party/PartyCreateCommand.html#isPlayerOnly()" class="member-name-link">isPlayerOnly()</a> - Method in class com.iantapply.wynncraft.command.commands.party.<a href="com/iantapply/wynncraft/command/commands/party/PartyCreateCommand.html" title="class in com.iantapply.wynncraft.command.commands.party">PartyCreateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/WynncraftCommand.html#isPlayerOnly()" class="member-name-link">isPlayerOnly()</a> - Method in class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></dt>
 <dd>
@@ -3267,6 +3285,20 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/party/PartyCommandsCore.html#%3Cinit%3E()" class="member-name-link">PartyCommandsCore()</a> - Constructor for class com.iantapply.wynncraft.command.commands.party.<a href="com/iantapply/wynncraft/command/commands/party/PartyCommandsCore.html" title="class in com.iantapply.wynncraft.command.commands.party">PartyCommandsCore</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/Wynncraft.html#partyCore" class="member-name-link">partyCore</a> - Variable in class com.iantapply.wynncraft.<a href="com/iantapply/wynncraft/Wynncraft.html" title="class in com.iantapply.wynncraft">Wynncraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.party">PartyCore</a> - Class in <a href="com/iantapply/wynncraft/party/package-summary.html">com.iantapply.wynncraft.party</a></dt>
+<dd>
+<div class="block">Handles all party instances within Wynncraft.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#%3Cinit%3E(com.iantapply.wynncraft.Wynncraft)" class="member-name-link">PartyCore(Wynncraft)</a> - Constructor for class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">The main constructor for creating the party core instance.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#%3Cinit%3E(com.iantapply.wynncraft.Wynncraft,java.util.ArrayList)" class="member-name-link">PartyCore(Wynncraft, ArrayList&lt;Party&gt;)</a> - Constructor for class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">The main constructor for creating the party core instance.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/party/PartyCreateCommand.html" class="type-name-link" title="class in com.iantapply.wynncraft.command.commands.party">PartyCreateCommand</a> - Class in <a href="com/iantapply/wynncraft/command/commands/party/package-summary.html">com.iantapply.wynncraft.command.commands.party</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/command/commands/party/PartyCreateCommand.html#%3Cinit%3E()" class="member-name-link">PartyCreateCommand()</a> - Constructor for class com.iantapply.wynncraft.command.commands.party.<a href="com/iantapply/wynncraft/command/commands/party/PartyCreateCommand.html" title="class in com.iantapply.wynncraft.command.commands.party">PartyCreateCommand</a></dt>
@@ -3405,6 +3437,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/iantapply/wynncraft/nbs/players/PlayerOrientedSongPlayer.html#playTick(org.bukkit.entity.Player,int)" class="member-name-link">playTick(Player, int)</a> - Method in class com.iantapply.wynncraft.nbs.players.<a href="com/iantapply/wynncraft/nbs/players/PlayerOrientedSongPlayer.html" title="class in com.iantapply.wynncraft.nbs.players">PlayerOrientedSongPlayer</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/command/WynncraftCommand.html#plugin()" class="member-name-link">plugin()</a> - Method in class com.iantapply.wynncraft.command.<a href="com/iantapply/wynncraft/command/WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></dt>
+<dd>
+<div class="block">The instance of the Wynncraft plugin.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/UpdateChecker.html#plugin()" class="member-name-link">plugin()</a> - Method in record class com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/UpdateChecker.html" title="class in com.iantapply.wynncraft.metrics">UpdateChecker</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./com/iantapply/wynncraft/metrics/UpdateChecker.html#param-plugin"><code>plugin</code></a> record component.</div>
@@ -3594,6 +3630,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/npc/NPC.html#removeDialogue(com.iantapply.wynncraft.npc.Dialogue)" class="member-name-link">removeDialogue(Dialogue)</a> - Method in interface com.iantapply.wynncraft.npc.<a href="com/iantapply/wynncraft/npc/NPC.html" title="interface in com.iantapply.wynncraft.npc">NPC</a></dt>
 <dd>
 <div class="block">Removes a dialogue from the NPC</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#removeParty(java.util.UUID)" class="member-name-link">removeParty(UUID)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Removes a party from the parties ArrayList via the UUID of the party</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#removeParty(org.bukkit.entity.Player)" class="member-name-link">removeParty(Player)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Removes a party from the parties ArrayList via the party leader reference.</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/party/Party.html#removePartyMember(org.bukkit.entity.Player)" class="member-name-link">removePartyMember(Player)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/Party.html" title="class in com.iantapply.wynncraft.party">Party</a></dt>
 <dd>
@@ -4314,6 +4358,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#updateColumnValue(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object,java.lang.String,java.lang.Object...)" class="member-name-link">updateColumnValue(Connection, String, String, Object, String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/party/PartyCore.html#updateParty(com.iantapply.wynncraft.party.Party)" class="member-name-link">updateParty(Party)</a> - Method in class com.iantapply.wynncraft.party.<a href="com/iantapply/wynncraft/party/PartyCore.html" title="class in com.iantapply.wynncraft.party">PartyCore</a></dt>
+<dd>
+<div class="block">Updates a currently existing registered party instance in the registry.</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/player/PlayerCore.html#updatePlayer(java.util.UUID,com.iantapply.wynncraft.database.model.PlayerModel)" class="member-name-link">updatePlayer(UUID, PlayerModel)</a> - Method in class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/PlayerCore.html" title="class in com.iantapply.wynncraft.player">PlayerCore</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/DatabaseHelpers.html#updateRow(java.sql.Connection,java.lang.String,java.lang.String%5B%5D,java.lang.Object%5B%5D,java.lang.String,java.lang.Object...)" class="member-name-link">updateRow(Connection, String, String[], Object[], String, Object...)</a> - Static method in class com.iantapply.wynncraft.database.<a href="com/iantapply/wynncraft/database/DatabaseHelpers.html" title="class in com.iantapply.wynncraft.database">DatabaseHelpers</a></dt>

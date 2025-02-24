@@ -132,24 +132,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The method that is called when the command is executed</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxArgs()" class="member-name-link">maxArgs</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPlayerOnly()" class="member-name-link">isPlayerOnly</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The maximum amount of arguments that are required to execute the command</div>
+<div class="block">Whether the command can only be executed by a player</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#minArgs()" class="member-name-link">minArgs</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxArgs()" class="member-name-link">maxArgs</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The maximum amount of arguments that are required to execute the command</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#minArgs()" class="member-name-link">minArgs</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The minimum amount of arguments that are required to execute the command</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The name that is appended after the leading '/' character</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#syntax()" class="member-name-link">syntax</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#syntax()" class="member-name-link">syntax</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The syntax of the command to display in the help menu and other places
  This should be in the format of "command [args]"</div>
 </div>
@@ -158,7 +163,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.iantapply.wynncraft.command.WynncraftCommand">Methods inherited from class&nbsp;com.iantapply.wynncraft.command.<a href="../../WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></h3>
-<code><a href="../../WynncraftCommand.html#aliases()">aliases</a>, <a href="../../WynncraftCommand.html#getTriggerEvent()">getTriggerEvent</a>, <a href="../../WynncraftCommand.html#isDevelopment()">isDevelopment</a>, <a href="../../WynncraftCommand.html#isPlayerOnly()">isPlayerOnly</a>, <a href="../../WynncraftCommand.html#requiredCommandPermissions()">requiredCommandPermissions</a>, <a href="../../WynncraftCommand.html#requiredRanks()">requiredRanks</a>, <a href="../../WynncraftCommand.html#requiredSupportRanks()">requiredSupportRanks</a>, <a href="../../WynncraftCommand.html#subcommands()">subcommands</a></code></div>
+<code><a href="../../WynncraftCommand.html#aliases()">aliases</a>, <a href="../../WynncraftCommand.html#getPlayer(org.bukkit.command.CommandSender)">getPlayer</a>, <a href="../../WynncraftCommand.html#getTriggerEvent()">getTriggerEvent</a>, <a href="../../WynncraftCommand.html#isDevelopment()">isDevelopment</a>, <a href="../../WynncraftCommand.html#plugin()">plugin</a>, <a href="../../WynncraftCommand.html#requiredCommandPermissions()">requiredCommandPermissions</a>, <a href="../../WynncraftCommand.html#requiredRanks()">requiredRanks</a>, <a href="../../WynncraftCommand.html#requiredSupportRanks()">requiredSupportRanks</a>, <a href="../../WynncraftCommand.html#subcommands()">subcommands</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -255,6 +260,20 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../../WynncraftCommand.html#maxArgs()">maxArgs</a></code>&nbsp;in class&nbsp;<code><a href="../../WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></code></dd>
 <dt>Returns:</dt>
 <dd>The maximum amount of arguments</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isPlayerOnly()">
+<h3>isPlayerOnly</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPlayerOnly</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../../WynncraftCommand.html#isPlayerOnly()">WynncraftCommand</a></code></span></div>
+<div class="block">Whether the command can only be executed by a player</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../../WynncraftCommand.html#isPlayerOnly()">isPlayerOnly</a></code>&nbsp;in class&nbsp;<code><a href="../../WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a></code></dd>
+<dt>Returns:</dt>
+<dd>A boolean to determine if the command is player executable only</dd>
 </dl>
 </section>
 </li>
