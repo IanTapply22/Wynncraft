@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.command.commands.party;
 
 import com.iantapply.wynncraft.command.WynncraftCommand;
+import com.iantapply.wynncraft.party.Party;
 import org.bukkit.command.CommandSender;
 
 public class PartyCreateCommand extends WynncraftCommand {
@@ -30,7 +31,13 @@ public class PartyCreateCommand extends WynncraftCommand {
     }
 
     @Override
+    public boolean isPlayerOnly() { return true; }
+
+    @Override
     public void execute(CommandSender sender, String[] args) {
-        sender.sendMessage("This is the party create command!");
+        // TODO: Properly implement party commands
+        Party party = new Party(this.getPlayer(sender));
+        this.plugin().getPartyCore().addParty(party);
+        sender.sendMessage("You have created a party!");
     }
 }

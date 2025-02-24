@@ -1,9 +1,13 @@
 package com.iantapply.wynncraft.command;
 
+import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
+import com.iantapply.wynncraft.logger.Logger;
+import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.Rank;
 import com.iantapply.wynncraft.rank.SupportRank;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
@@ -11,6 +15,13 @@ import java.util.ArrayList;
  * Represents a command that can be executed by a player or console
  */
 public abstract class WynncraftCommand {
+
+    /**
+     * The instance of the Wynncraft plugin. Used for configurations or to comply with registries
+     * @return The instance of the Wynncraft plugin
+     */
+    public final Wynncraft plugin() { return Wynncraft.getInstance(); }
+
     /**
      * The name that is appended after the leading '/' character
      * @return The name
@@ -101,6 +112,18 @@ public abstract class WynncraftCommand {
      * @return A boolean to determine if the command is in development
      */
     public boolean isDevelopment() { return false;}
+
+    /**
+     * Gets the player from the command sender if the command is player only
+     * @param sender The sender of the command
+     * @return The player if the command is player only, otherwise it is null and not cast into player object
+     */
+    public Player getPlayer(CommandSender sender) {
+        if (this.isPlayerOnly()) return (Player) sender;
+
+        Logger.log(LoggingLevel.ERROR, String.format("The command %s is not marked as player only and attempted to cast a non-player object into player.", this.name()));
+        return null;
+    }
 
     /**
      * The method that is called when the command is executed

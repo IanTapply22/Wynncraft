@@ -5,12 +5,14 @@ import lombok.Setter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Represents a party that can move players together and have private chat capabilities
  */
 @Getter @Setter
 public class Party {
+    private UUID uuid = UUID.randomUUID();
     private PartyMessage partyMessage;
     private PartyTeleportation partyTeleportation;
 
@@ -71,6 +73,7 @@ public class Party {
      * remove it from the leaders and members party list
      */
     public void disband() {
+        // TODO: Automatically send disband message
         this.partyMembers.clear();
     }
 
