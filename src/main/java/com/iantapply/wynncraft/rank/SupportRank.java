@@ -17,7 +17,7 @@ public enum SupportRank {
     VIP(0, "Vip", Component.text("\uE00F").color(NamedTextColor.DARK_GREEN)
             .font(Key.key("minecraft:rank")),
             "com.wynncraft.rank.vip", new VIPBenefits(), "8.99"),
-    VIP_PLUS(1, "VIP_PLUS", Component.text("\uE010").color(NamedTextColor.BLUE)
+    VIP_PLUS(1, "Vip Plus", Component.text("\uE010").color(NamedTextColor.BLUE)
             .font(Key.key("minecraft:rank")),
             "com.wynncraft.rank.vip_plus", new VIPPlusBenefits(), "27.99"),
     HERO(2, "Hero", Component.text("\uE007").color(NamedTextColor.DARK_PURPLE)

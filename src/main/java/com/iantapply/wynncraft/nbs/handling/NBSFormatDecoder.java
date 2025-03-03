@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Credit to the project https://github.com/koca2000/NoteBlockAPI and @koca2000 for the decoding of the NBS files in this system
+ * Credit to the project <a href="https://github.com/koca2000/NoteBlockAPI">NoteBlockAPI</a> and @koca2000 for the decoding of the NBS files in this system
  */
 public class NBSFormatDecoder {
 

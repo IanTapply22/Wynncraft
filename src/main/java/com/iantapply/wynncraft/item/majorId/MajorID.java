@@ -1,5 +1,7 @@
 package com.iantapply.wynncraft.item.majorId;
 
+import org.bukkit.entity.Player;
+
 public abstract class MajorID {
 
     public abstract int id();
@@ -8,5 +10,5 @@ public abstract class MajorID {
 
     public abstract String description();
 
-    // TODO: Create methods that will be the functionality of the major ID
+    public void execute(Player player) {}
 }
