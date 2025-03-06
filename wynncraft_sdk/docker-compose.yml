@@ -1,6 +1,37 @@
 version: "3.9"
 services:
+  wynncraft-grafana:
+    container_name: wynncraft-grafana
+    image: grafana/grafana-enterprise
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana:/var/lib/grafana
+    networks:
+      - wynncraft-network
+
+  wynncraft-mongo:
+    container_name: wynncraft-mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: wynncraft
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - wynncraft-network
+
   wynncraft-postgres:
+    container_name: wynncraft-postgres
     image: postgres
     restart: always
     ports:
@@ -20,6 +51,7 @@ services:
 
   ## VELOCITY.TOML MUST BE CONFIGURED ALONGSIDE SERVERS ##
   wynncraft-velocity-proxy:
+    container_name: wynncraft-velocity-proxy
     image: itzg/mc-proxy
     environment:
       TYPE: VELOCITY
@@ -34,6 +66,7 @@ services:
 
   ## ALL SERVER SPIGOT.YML FILES AND PAPER-GLOBAL.YML FILES MUST BE CONFIGURED ##
   wynncraft-lobby-server:
+    container_name: wynncraft-lobby-server
     image: itzg/minecraft-server
     environment:
       TYPE: PAPER
@@ -49,6 +82,7 @@ services:
       - wynncraft-network
 
   wynncraft-main-server:
+    container_name: wynncraft-main-server
     image: itzg/minecraft-server
     environment:
       TYPE: PAPER
