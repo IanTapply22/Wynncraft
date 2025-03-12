@@ -1,11 +1,11 @@
 package com.iantapply.wynncraft.database.model;
 
-import com.iantapply.wynncraft.database.Database;
-import com.iantapply.wynncraft.database.DatabaseHelpers;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
+import com.iantapply.wynncraft.database.pgsql.table.DataType;
 import com.iantapply.wynncraft.player.LegacyRankColour;
 import com.iantapply.wynncraft.database.database.WynncraftDatabase;
-import com.iantapply.wynncraft.database.table.Column;
-import com.iantapply.wynncraft.database.table.DataType;
+import com.iantapply.wynncraft.database.pgsql.table.Column;
 import com.iantapply.wynncraft.rank.Rank;
 import com.iantapply.wynncraft.rank.SupportRank;
 import lombok.Getter;
@@ -85,7 +85,7 @@ public class PlayerModel implements Model {
      * @return The Database object of the table
      */
     @Override
-    public Database database() {
+    public PGSQLDatabase database() {
         return new WynncraftDatabase();
     }
 
@@ -157,7 +157,7 @@ public class PlayerModel implements Model {
         // Get the value from the database
         Connection connection = this.database().connect(true);
         String condition = "uuid = CAST(? AS UUID)";
-        String[] row = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+        String[] row = PGSQLDatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
         this.database().disconnect();
 
         // Find column index
@@ -181,7 +181,7 @@ public class PlayerModel implements Model {
         Object value = row[index];
 
         // Cast properly based on expected return type
-        return DatabaseHelpers.parseValue(value, this.columns().get(index).getType());
+        return PGSQLDatabaseHelpers.parseValue(value, this.columns().get(index).getType());
     }
 
     // TODO: Redo populate method
@@ -196,21 +196,21 @@ public class PlayerModel implements Model {
 
         // Object array with a utility method for null checks
         Object[] values = new Object[]{
-                DatabaseHelpers.safeGet(this.getUsername()),
-                DatabaseHelpers.safeGet(this.getOnline()),
-                DatabaseHelpers.safeGet(this.getServer()),
-                DatabaseHelpers.safeGet(this.getActiveCharacter()),
-                DatabaseHelpers.safeGet(this.getNickname()),
-                DatabaseHelpers.safeGet(this.getUuid()),
-                DatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null),
-                DatabaseHelpers.safeGet(this.getRankBadge()),
-                DatabaseHelpers.safeGet(this.getLegacyRankColour() != null ? this.getLegacyRankColour().getContent() : null),
-                DatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null),
-                DatabaseHelpers.safeGet(this.getVeteran()),
-                DatabaseHelpers.safeGet(this.getFirstJoin()),
-                DatabaseHelpers.safeGet(this.getLastJoin()),
-                DatabaseHelpers.safeGet(this.getForumLink()),
-                DatabaseHelpers.safeGet(this.getPublicProfile())
+                PGSQLDatabaseHelpers.safeGet(this.getUsername()),
+                PGSQLDatabaseHelpers.safeGet(this.getOnline()),
+                PGSQLDatabaseHelpers.safeGet(this.getServer()),
+                PGSQLDatabaseHelpers.safeGet(this.getActiveCharacter()),
+                PGSQLDatabaseHelpers.safeGet(this.getNickname()),
+                PGSQLDatabaseHelpers.safeGet(this.getUuid()),
+                PGSQLDatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null),
+                PGSQLDatabaseHelpers.safeGet(this.getRankBadge()),
+                PGSQLDatabaseHelpers.safeGet(this.getLegacyRankColour() != null ? this.getLegacyRankColour().getContent() : null),
+                PGSQLDatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null),
+                PGSQLDatabaseHelpers.safeGet(this.getVeteran()),
+                PGSQLDatabaseHelpers.safeGet(this.getFirstJoin()),
+                PGSQLDatabaseHelpers.safeGet(this.getLastJoin()),
+                PGSQLDatabaseHelpers.safeGet(this.getForumLink()),
+                PGSQLDatabaseHelpers.safeGet(this.getPublicProfile())
         };
 
         Connection connection = this.database().connect(true);
@@ -218,7 +218,7 @@ public class PlayerModel implements Model {
         try {
             // Check if a row with the same UUID exists
             String condition = "uuid = CAST(? AS UUID)";
-            String[] existingRow = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+            String[] existingRow = PGSQLDatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
 
             if (existingRow != null) {
                 // Update only the columns that have changed, and avoid overwriting with null values
@@ -229,12 +229,12 @@ public class PlayerModel implements Model {
 
                     // Only update if the current value is different from the database value
                     if (currentValue == null || !currentValue.toString().equals(databaseValue)) {
-                        DatabaseHelpers.updateColumnValue(connection, this.table(), columnName, currentValue, condition, this.getUuid());
+                        PGSQLDatabaseHelpers.updateColumnValue(connection, this.table(), columnName, currentValue, condition, this.getUuid());
                     }
                 }
             } else {
                 // Insert a new row if none exists
-                DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
+                PGSQLDatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
             }
         } finally {
             this.database().disconnect();

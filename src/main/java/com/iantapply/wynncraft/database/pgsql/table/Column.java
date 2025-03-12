@@ -1,4 +1,4 @@
-package com.iantapply.wynncraft.database.table;
+package com.iantapply.wynncraft.database.pgsql.table;
 
 import lombok.Getter;
 import lombok.Setter;

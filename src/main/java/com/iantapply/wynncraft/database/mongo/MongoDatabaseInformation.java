@@ -1,4 +1,4 @@
 package com.iantapply.wynncraft.database.mongo;
 
-public class DatabaseInformation {
+public class MongoDatabaseInformation {
 }

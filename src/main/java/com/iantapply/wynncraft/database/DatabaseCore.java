@@ -3,6 +3,7 @@ package com.iantapply.wynncraft.database;
 import com.iantapply.wynncraft.database.model.MigrationModel;
 import com.iantapply.wynncraft.database.model.Model;
 import com.iantapply.wynncraft.database.model.PlayerModel;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
@@ -60,7 +61,7 @@ public class DatabaseCore {
             Connection connection = model.database().connect(true);
             // Check if table does not exist, if not then create the blank table
             try {
-                if (!DatabaseHelpers.checkTableExists(connection, model.table())) {
+                if (!PGSQLDatabaseHelpers.checkTableExists(connection, model.table())) {
                     Logger.log(LoggingLevel.INFO, String.format("Initial running of migration, automatically migrating and creating table %s...", model.table()));
                     model.migrate(true);
                     Logger.log(LoggingLevel.INFO, String.format("Migrated and registered %s", model.name()));

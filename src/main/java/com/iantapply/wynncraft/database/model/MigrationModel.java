@@ -1,10 +1,10 @@
 package com.iantapply.wynncraft.database.model;
 
-import com.iantapply.wynncraft.database.Database;
-import com.iantapply.wynncraft.database.DatabaseHelpers;
 import com.iantapply.wynncraft.database.database.MigrationsDatabase;
-import com.iantapply.wynncraft.database.table.Column;
-import com.iantapply.wynncraft.database.table.DataType;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
+import com.iantapply.wynncraft.database.pgsql.table.Column;
+import com.iantapply.wynncraft.database.pgsql.table.DataType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,7 +52,7 @@ public class MigrationModel implements Model {
      * @return The Database object of the table
      */
     @Override
-    public Database database() {
+    public PGSQLDatabase database() {
         return new MigrationsDatabase();
     }
 
@@ -107,7 +107,7 @@ public class MigrationModel implements Model {
         // Get the value from the database
         Connection connection = this.database().connect(true);
         String condition = "uuid = CAST(? AS UUID)";
-        String[] row = DatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
+        String[] row = PGSQLDatabaseHelpers.selectRow(connection, this.table(), condition, this.getUuid());
         this.database().disconnect();
 
         // Find column index
@@ -131,7 +131,7 @@ public class MigrationModel implements Model {
         Object value = row[index];
 
         // Cast properly based on expected return type
-        return DatabaseHelpers.parseValue(value, this.columns().get(index).getType());
+        return PGSQLDatabaseHelpers.parseValue(value, this.columns().get(index).getType());
     }
 
     @Override
@@ -147,7 +147,7 @@ public class MigrationModel implements Model {
         Object[] values = new Object[]{ this.getUuid(), this.getVersion(), this.getCreatedAt() };
 
         Connection connection = this.database().connect(true);
-        DatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
+        PGSQLDatabaseHelpers.insertRow(connection, this.table(), columnNames, values);
         this.database().disconnect();
     }
 }

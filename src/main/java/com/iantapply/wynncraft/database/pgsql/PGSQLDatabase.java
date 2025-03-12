@@ -1,5 +1,6 @@
-package com.iantapply.wynncraft.database;
+package com.iantapply.wynncraft.database.pgsql;
 
+import com.iantapply.wynncraft.database.PGSQLDatabaseInformation;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
@@ -11,14 +12,14 @@ import java.sql.SQLException;
  * Represents a database, its information, and the connection involved
  * with the object
  */
-public abstract class Database {
+public abstract class PGSQLDatabase {
     Connection connection;
 
     /**
      * The information associated with the database
      * @return The information as a DatabaseInformation object
      */
-    public abstract DatabaseInformation databaseInformation();
+    public abstract PGSQLDatabaseInformation databaseInformation();
 
     /**
      * The connection that is used to execute queries on the database table
@@ -46,7 +47,7 @@ public abstract class Database {
         if (this.connection != null) return this.connection;
 
         // Build the database connection URL based off of the database information
-        String connectionUrl = DatabaseHelpers.buildDatabaseUrl(databaseInformation());
+        String connectionUrl = PGSQLDatabaseHelpers.buildDatabaseUrl(databaseInformation());
 
         // Attempt to connect
         try {
@@ -55,10 +56,10 @@ public abstract class Database {
             Logger.log(LoggingLevel.ERROR, "Failed to connect to database: " + e.getMessage());
             Logger.log(LoggingLevel.INFO, "Attempting to create database...");
 
-            String fallbackUrl = DatabaseHelpers.buildDatabaseUrl(databaseInformation(), true);
+            String fallbackUrl = PGSQLDatabaseHelpers.buildDatabaseUrl(databaseInformation(), true);
 
             try (Connection fallbackConnection = DriverManager.getConnection(fallbackUrl, databaseInformation().getUsername(), databaseInformation().getPassword())) {
-                DatabaseHelpers.createDatabase(fallbackConnection, databaseInformation().getName());
+                PGSQLDatabaseHelpers.createDatabase(fallbackConnection, databaseInformation().getName());
             } catch (SQLException fallbackException) {
                 Logger.log(LoggingLevel.ERROR, "Failed to create database: " + fallbackException.getMessage());
                 return null;
