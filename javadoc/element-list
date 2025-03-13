@@ -13,8 +13,11 @@ com.iantapply.wynncraft.command.commands.toggle
 com.iantapply.wynncraft.configuration
 com.iantapply.wynncraft.database
 com.iantapply.wynncraft.database.database
+com.iantapply.wynncraft.database.influx
 com.iantapply.wynncraft.database.model
-com.iantapply.wynncraft.database.table
+com.iantapply.wynncraft.database.mongo
+com.iantapply.wynncraft.database.pgsql
+com.iantapply.wynncraft.database.pgsql.table
 com.iantapply.wynncraft.entity
 com.iantapply.wynncraft.event.minecraft
 com.iantapply.wynncraft.event.wynncraft
