@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.database.model;
 
-import com.iantapply.wynncraft.database.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.database.pgsql.table.Column;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;

@@ -2,8 +2,8 @@ package com.iantapply.wynncraft.player;
 
 import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.configuration.ConfigurationCore;
-import com.iantapply.wynncraft.database.DatabaseHelpers;
 import com.iantapply.wynncraft.database.model.PlayerModel;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.rank.Rank;
@@ -53,7 +53,7 @@ public class PlayerCore {
         ConfigurationCore configurationCore = Wynncraft.getInstance().getConfigurationCore();
         try {
             // Sets the player up if they aren't in the database
-            if (DatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null) {
+            if (PGSQLDatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null) {
                 playerModel.setRank(Rank.PLAYER);
 
                 playerModel.setVeteran(false); // ignore: set, but means they had VIP before update

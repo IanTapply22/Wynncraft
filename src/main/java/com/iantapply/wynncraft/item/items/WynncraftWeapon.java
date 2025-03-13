@@ -85,7 +85,7 @@ public abstract class WynncraftWeapon extends WynncraftItem {
         switch (icon().getFormat()) {
             case ItemIconFormat.ATTRIBUTE -> {
                 itemIcon = new ItemStack(this.icon().getAttributeValue().getMaterial());
-                itemIcon.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData(this.icon().getAttributeValue().getCustomModelData()));
+                itemIcon.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addFloat(this.icon().getAttributeValue().getCustomModelData()).build());
             }
             case ItemIconFormat.SKIN -> {
                 itemIcon = new ItemStack(Material.PLAYER_HEAD);
@@ -288,8 +288,6 @@ public abstract class WynncraftWeapon extends WynncraftItem {
         WynncraftItemMeta.setStringFlag("uuid", this.uuid().toString(), meta);
         WynncraftItemMeta.setStringFlag("version", this.version(), meta);
         weapon.setItemMeta(meta);
-
-        Logger.log(LoggingLevel.INFO, "Built new weapon: " + weapon.getPersistentDataContainer().getKeys());
 
         return weapon;
     }
