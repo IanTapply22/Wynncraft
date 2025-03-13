@@ -1,8 +1,8 @@
 package com.iantapply.wynncraft.database.model;
 
-import com.iantapply.wynncraft.database.Database;
-import com.iantapply.wynncraft.database.DatabaseHelpers;
-import com.iantapply.wynncraft.database.table.Column;
+import com.iantapply.wynncraft.database.PGSQLDatabaseHelpers;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
+import com.iantapply.wynncraft.database.pgsql.table.Column;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
@@ -28,7 +28,7 @@ public interface Model {
      * the parent of the model.
      * @return The Database object of the table
      */
-    Database database();
+    PGSQLDatabase database();
 
     /**
      * The table the migration will be run on inside the parent
@@ -84,7 +84,7 @@ public interface Model {
         Model migrationModel = new MigrationModel();
         String uuidSearch = "uuid = CAST(? AS UUID)";
         try {
-            String[] migrationRow = DatabaseHelpers.selectRowWithLatestCreatedAt(
+            String[] migrationRow = PGSQLDatabaseHelpers.selectRowWithLatestCreatedAt(
                     migrationModel.database().connect(true),
                     migrationModel.table(),
                     uuidSearch,
@@ -110,7 +110,7 @@ public interface Model {
         if (init) {
             // If it is initial run, we need a table so we will migrate automatically
             try {
-                DatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
+                PGSQLDatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
             } catch (Exception e) {
                 Logger.log(LoggingLevel.ERROR, String.format("Creating table for migration failed. Skipping migration with error: %s", e.getMessage()));
                 this.database().disconnect();
@@ -124,7 +124,7 @@ public interface Model {
                 // In the case you want to change the type and change the data in a column you must use a manual query
                 // TODO: Migrations support for custom data manipulation
                 try {
-                    if (DatabaseHelpers.checkColumnExists(this.database().connect(true), this.table(), column.getName())) continue;
+                    if (PGSQLDatabaseHelpers.checkColumnExists(this.database().connect(true), this.table(), column.getName())) continue;
                 } catch (SQLException e) {
                     Logger.log(LoggingLevel.ERROR, String.format("Failed to check if column exists for database table: %s", e.getMessage()));
                     this.database().disconnect();
@@ -134,7 +134,7 @@ public interface Model {
                 // Catch clause to catch if there's no default value
                 if (column.getDefaultValue() == null) {
                     try {
-                        DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
+                        PGSQLDatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType());
                     } catch (SQLException e) {
                         Logger.log(LoggingLevel.ERROR, String.format("Failed to create column: %s", e.getMessage()));
                         this.database().disconnect();
@@ -142,7 +142,7 @@ public interface Model {
                     }
                 } else {
                     try {
-                        DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
+                        PGSQLDatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
                     } catch (SQLException e) {
                         Logger.log(LoggingLevel.ERROR, String.format("Failed to create column with default value: %s", e.getMessage()));
                         this.database().disconnect();
@@ -152,7 +152,7 @@ public interface Model {
 
                 // Create the column with a default value if there's one present
                 try {
-                    DatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
+                    PGSQLDatabaseHelpers.createColumn(database().connect(true), table(), column.getName(), column.getType().getType(), column.getDefaultValue());
                 } catch (SQLException e) {
                     Logger.log(LoggingLevel.ERROR, String.format("Failed to create column for table: %s", e.getMessage()));
                     database().disconnect();

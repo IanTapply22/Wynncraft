@@ -41,7 +41,7 @@ publishing {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
     implementation "net.kyori:adventure-api:4.17.0"
 
     compileOnly 'org.projectlombok:lombok:1.18.32'
@@ -55,6 +55,8 @@ dependencies {
 
     implementation 'org.postgresql:postgresql:42.7.4'
     implementation 'org.incendo:cloud-paper:2.0.0-beta.10'
+
+    implementation "com.influxdb:influxdb-client-java:7.2.0"
 }
 
 tasks {

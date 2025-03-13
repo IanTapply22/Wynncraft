@@ -8,7 +8,7 @@ import lombok.Setter;
  * create a connection to a database
  */
 @Getter @Setter
-public class DatabaseInformation {
+public class PGSQLDatabaseInformation {
     /** General information **/
     private String displayName;
 
@@ -33,7 +33,7 @@ public class DatabaseInformation {
      * @param username The username to connect to the database
      * @param password The password to connect to the database
      */
-    public DatabaseInformation(String urlPrefix, String host, String port, String name, String displayName, String username, String password) {
+    public PGSQLDatabaseInformation(String urlPrefix, String host, String port, String name, String displayName, String username, String password) {
         this.urlPrefix = urlPrefix;
         this.host = host;
         this.port = port;
@@ -52,7 +52,7 @@ public class DatabaseInformation {
      * @param username The username to connect to the database
      * @param password The password to connect to the database
      */
-    public DatabaseInformation(String host, String port, String name, String displayName, String username, String password) {
+    public PGSQLDatabaseInformation(String host, String port, String name, String displayName, String username, String password) {
         this.host = host;
         this.port = port;
         this.name = name;
@@ -69,7 +69,7 @@ public class DatabaseInformation {
      * @param username The username to connect to the database
      * @param password The password to connect to the database
      */
-    public DatabaseInformation(String host, String name, String displayName, String username, String password) {
+    public PGSQLDatabaseInformation(String host, String name, String displayName, String username, String password) {
         this.host = host;
         this.name = name;
         this.displayName = displayName;
@@ -84,7 +84,7 @@ public class DatabaseInformation {
      * @param username The username to connect to the database
      * @param password The password to connect to the database
      */
-    public DatabaseInformation(String name, String displayName, String username, String password) {
+    public PGSQLDatabaseInformation(String name, String displayName, String username, String password) {
         this.name = name;
         this.displayName = displayName;
         this.username = username;
@@ -96,7 +96,7 @@ public class DatabaseInformation {
      * @param name The name of the database
      * @param displayName The display name of the database
      */
-    public DatabaseInformation(String name, String displayName) {
+    public PGSQLDatabaseInformation(String name, String displayName) {
         this.name = name;
         this.displayName = displayName;
     }

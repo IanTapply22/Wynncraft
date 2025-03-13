@@ -1,7 +1,7 @@
-package com.iantapply.wynncraft.database;
+package com.iantapply.wynncraft.database.pgsql;
 
-import com.iantapply.wynncraft.database.table.Column;
-import com.iantapply.wynncraft.database.table.DataType;
+import com.iantapply.wynncraft.database.pgsql.table.Column;
+import com.iantapply.wynncraft.database.pgsql.table.DataType;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 
@@ -21,14 +21,14 @@ import java.util.regex.Pattern;
  * our queries before execution and none of the helpers are faced towards the consumers.
  */
 // TODO: Move safeget to util and clean up methods here
-public class DatabaseHelpers {
+public class PGSQLDatabaseHelpers {
 
     /**
      * Builds a database URL from the given database information
      * @param databaseInformation The information to build the URL from
      * @return The built URL as a string
      */
-    public static String buildDatabaseUrl(DatabaseInformation databaseInformation) {
+    public static String buildDatabaseUrl(com.iantapply.wynncraft.database.PGSQLDatabaseInformation databaseInformation) {
         return String.format("%s%s:%s/%s", databaseInformation.getUrlPrefix(), databaseInformation.getHost(), databaseInformation.getPort(), databaseInformation.getName());
     }
 
@@ -39,7 +39,7 @@ public class DatabaseHelpers {
      * @param fallbackDatabase Whether the database is the fallback database
      * @return The built URL as a string
      */
-    public static String buildDatabaseUrl(DatabaseInformation databaseInformation, boolean fallbackDatabase) {
+    public static String buildDatabaseUrl(com.iantapply.wynncraft.database.PGSQLDatabaseInformation databaseInformation, boolean fallbackDatabase) {
         String databaseName = fallbackDatabase ? databaseInformation.getFallbackName() : databaseInformation.getName();
         return String.format("%s%s:%s/%s", databaseInformation.getUrlPrefix(), databaseInformation.getHost(), databaseInformation.getPort(), databaseName);
     }
@@ -94,13 +94,13 @@ public class DatabaseHelpers {
         try {
             Class<?> databaseClass = Class.forName(String.format("com.iantapply.wynncraft.database.database.%s", databaseClassName));
 
-            if (!Database.class.isAssignableFrom(databaseClass)) {
+            if (!PGSQLDatabase.class.isAssignableFrom(databaseClass)) {
                 Logger.log(LoggingLevel.ERROR, "The provided class does not extend the Database base class.");
                 return;
             }
 
             Constructor<?> constructor = databaseClass.getDeclaredConstructor();
-            Database databaseInstance = (Database) constructor.newInstance();
+            PGSQLDatabase databaseInstance = (PGSQLDatabase) constructor.newInstance();
 
             try (Connection connection = databaseInstance.connection();
                  Statement statement = connection.createStatement()) {

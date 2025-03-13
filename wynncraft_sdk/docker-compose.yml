@@ -1,0 +1,125 @@
+services:
+  wynncraft-grafana:
+    container_name: wynncraft-grafana
+    image: grafana/grafana-enterprise
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana:/var/lib/grafana
+    networks:
+      - wynncraft-network
+
+  wynncraft-influxdb:
+    container_name: wynncraft-influxdb
+    image: influxdb:2
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: wynncraft
+      DOCKER_INFLUXDB_INIT_PASSWORD: wynncraft
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: Dv96E;3Vumr7u_+88£xK(5MO;?N,(6U?h-k"$KL;@u,#;6plFR
+      DOCKER_INFLUXDB_INIT_ORG: wynncraft
+      DOCKER_INFLUXDB_INIT_BUCKET: wynncraft
+    volumes:
+      - type: volume
+        source: wynncraft-influxdb-data
+        target: /var/lib/influxdb2
+      - type: volume
+        source: wynncraft-influxdb-config
+        target: /etc/influxdb2
+
+  wynncraft-mongo:
+    container_name: wynncraft-mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: wynncraft
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - wynncraft-network
+
+  wynncraft-postgres:
+    container_name: wynncraft-postgres
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: wynncraft
+      POSTGRES_USER: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - wynncraft-network
+
+  ## VELOCITY.TOML MUST BE CONFIGURED ALONGSIDE SERVERS ##
+  wynncraft-velocity-proxy:
+    container_name: wynncraft-velocity-proxy
+    image: itzg/mc-proxy
+    environment:
+      TYPE: VELOCITY
+      REPLACE_ENV_VARIABLES: "true"
+      SERVER_PORT: 25565
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./proxy:/server
+    networks:
+      - wynncraft-network
+
+  ## ALL SERVER SPIGOT.YML FILES AND PAPER-GLOBAL.YML FILES MUST BE CONFIGURED ##
+  wynncraft-lobby-server:
+    container_name: wynncraft-lobby-server
+    image: itzg/minecraft-server
+    environment:
+      TYPE: PAPER
+      VERSION: 1.21.3
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      SERVER_PORT: 26000
+    ports:
+      - "26000:26000"
+    volumes:
+      - ./lobby:/data
+    networks:
+      - wynncraft-network
+
+  wynncraft-main-server:
+    container_name: wynncraft-main-server
+    image: itzg/minecraft-server
+    environment:
+      TYPE: PAPER
+      VERSION: 1.21.3
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      SERVER_PORT: 27000
+    ports:
+      - "27000:27000"
+    volumes:
+      - ./main:/data
+    networks:
+      - wynncraft-network
+
+networks:
+  wynncraft-network:
+    driver: bridge
+
+volumes:
+  wynncraft-influxdb-data:
+  wynncraft-influxdb-config:

@@ -16,6 +16,15 @@ WYNNCRAFT_DATABASE_PASSWORD: "wynncraft"
 WYNNCRAFT_DATABASE_NAME: "wynncraft"
 WYNNCRAFT_DATABASE_DISPLAY_NAME: "Wynncraft Core"
 
+# The InfluxDB instance that the plugin should use to store data
+# Connection details are provided here, but are specified in the Docker Compose
+# ORG and BUCKET are NOT to be relied upon during connection
+WYNNCRAFT_INFLUX_ADDRESS: "localhost"
+WYNNCRAFT_INFLUX_PORT: 8086
+WYNNCRAFT_INFLUX_TOKEN: 'Dv96E;3Vumr7u_+88£xK(5MO;?N,(6U?h-k"$KL;@u,#;6plFR'
+WYNNCRAFT_INFLUX_ORG: "wynncraft"
+WYNNCRAFT_INFLUX_BUCKET: "wynncraft"
+
 # The ID of the server instance that this plugin is running on. This should vary between servers
 WYNNCRAFT_SERVER_INSTANCE_ID: "WA3"
 

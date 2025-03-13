@@ -1,7 +1,7 @@
 package com.iantapply.wynncraft.database.database;
 
-import com.iantapply.wynncraft.database.Database;
-import com.iantapply.wynncraft.database.DatabaseInformation;
+import com.iantapply.wynncraft.database.PGSQLDatabaseInformation;
+import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Setter;
  * An example implementation of a database object that connects to a database
  */
 @Setter @Getter
-public class ExampleDatabase extends Database {
+public class ExampleDatabase extends PGSQLDatabase {
 
     /**
      * The information associated with the database
@@ -19,8 +19,8 @@ public class ExampleDatabase extends Database {
      * @return The information as a DatabaseInformation object
      */
     @Override
-    public DatabaseInformation databaseInformation() {
-        return new DatabaseInformation("localhost", "1111", "example", "Example", "root", "");
+    public PGSQLDatabaseInformation databaseInformation() {
+        return new PGSQLDatabaseInformation("localhost", "1111", "example", "Example", "root", "");
     }
 
     /**
