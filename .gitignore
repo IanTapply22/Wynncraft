@@ -6,6 +6,8 @@ wynncraft_sdk/lobby
 wynncraft_sdk/main
 wynncraft_sdk/postgres
 wynncraft_sdk/proxy
+wynncraft_sdk/mongo
+wynncraft_sdk/grafana
 
 # User-specific stuff
 .idea/

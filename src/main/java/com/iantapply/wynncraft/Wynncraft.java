@@ -4,6 +4,7 @@ import com.iantapply.wynncraft.command.CommandCore;
 import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.configuration.PluginConfigurations;
 import com.iantapply.wynncraft.database.DatabaseCore;
+import com.iantapply.wynncraft.database.influx.InfluxDatabaseCore;
 import com.iantapply.wynncraft.event.minecraft.PlayerChatEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
@@ -26,6 +27,7 @@ public final class Wynncraft extends JavaPlugin {
     public PlayerCore playerCore;
     public ConfigurationCore configurationCore;
     public UpdateChecker updateChecker;
+    public InfluxDatabaseCore influxDatabaseCore;
     public NBSCore nbsCore;
     public ItemCore itemCore;
     public PartyCore partyCore;
@@ -41,6 +43,10 @@ public final class Wynncraft extends JavaPlugin {
         DatabaseCore databaseCore = new DatabaseCore();
         databaseCore.initialize();
         databaseCore.registerModels();
+
+        this.influxDatabaseCore = new InfluxDatabaseCore();
+        this.influxDatabaseCore.stageInfluxDatabases();
+        this.influxDatabaseCore.registerDatabases();
 
         this.commandCore = new CommandCore(this);
         this.commandCore.initialize();
@@ -70,6 +76,8 @@ public final class Wynncraft extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        this.influxDatabaseCore.unregisterDatabases();
+
         Logger.logShutdown();
     }
 }

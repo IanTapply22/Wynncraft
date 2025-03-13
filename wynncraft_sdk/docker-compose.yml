@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   wynncraft-grafana:
     container_name: wynncraft-grafana
@@ -10,6 +9,26 @@ services:
       - ./grafana:/var/lib/grafana
     networks:
       - wynncraft-network
+
+  wynncraft-influxdb:
+    container_name: wynncraft-influxdb
+    image: influxdb:2
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: wynncraft
+      DOCKER_INFLUXDB_INIT_PASSWORD: wynncraft
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: Dv96E;3Vumr7u_+88£xK(5MO;?N,(6U?h-k"$KL;@u,#;6plFR
+      DOCKER_INFLUXDB_INIT_ORG: wynncraft
+      DOCKER_INFLUXDB_INIT_BUCKET: wynncraft
+    volumes:
+      - type: volume
+        source: wynncraft-influxdb-data
+        target: /var/lib/influxdb2
+      - type: volume
+        source: wynncraft-influxdb-config
+        target: /etc/influxdb2
 
   wynncraft-mongo:
     container_name: wynncraft-mongo
@@ -100,3 +119,7 @@ services:
 networks:
   wynncraft-network:
     driver: bridge
+
+volumes:
+  wynncraft-influxdb-data:
+  wynncraft-influxdb-config:
