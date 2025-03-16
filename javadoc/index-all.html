@@ -446,6 +446,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Closes a GUI for the specified player</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html#closeServerInstance()" class="member-name-link">closeServerInstance()</a> - Method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a></dt>
+<dd>
+<div class="block">Closes the HTTP server CDN instance</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/tag/StaffTag.html#CMD" class="member-name-link">CMD</a> - Enum constant in enum class com.iantapply.wynncraft.tag.<a href="com/iantapply/wynncraft/tag/StaffTag.html" title="enum class in com.iantapply.wynncraft.tag">StaffTag</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/item/majorId/id/Coagulate.html" class="type-name-link" title="class in com.iantapply.wynncraft.item.majorId.id">Coagulate</a> - Class in <a href="com/iantapply/wynncraft/item/majorId/id/package-summary.html">com.iantapply.wynncraft.item.majorId.id</a></dt>
@@ -582,6 +586,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/npc/types/package-summary.html">com.iantapply.wynncraft.npc.types</a> - package com.iantapply.wynncraft.npc.types</dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/package-summary.html">com.iantapply.wynncraft.pack</a> - package com.iantapply.wynncraft.pack</dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/party/package-summary.html">com.iantapply.wynncraft.party</a> - package com.iantapply.wynncraft.party</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/player/package-summary.html">com.iantapply.wynncraft.player</a> - package com.iantapply.wynncraft.player</dt>
@@ -675,6 +681,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/database/pgsql/PGSQLDatabaseHelpers.html#createDatabase(java.sql.Connection,java.lang.String)" class="member-name-link">createDatabase(Connection, String)</a> - Static method in class com.iantapply.wynncraft.database.pgsql.<a href="com/iantapply/wynncraft/database/pgsql/PGSQLDatabaseHelpers.html" title="class in com.iantapply.wynncraft.database.pgsql">PGSQLDatabaseHelpers</a></dt>
 <dd>
 <div class="block">Creates a database with the given database name.</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html#createServerContexts()" class="member-name-link">createServerContexts()</a> - Method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a></dt>
+<dd>
+<div class="block">Creates the server contexts for the resource pack CDN</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html#createServerInstance()" class="member-name-link">createServerInstance()</a> - Method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a></dt>
+<dd>
+<div class="block">Starts the base server instance on the specified port without contexts</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/database/pgsql/PGSQLDatabaseHelpers.html#createTable(java.sql.Connection,java.lang.String,java.util.ArrayList)" class="member-name-link">createTable(Connection, String, ArrayList&lt;Column&gt;)</a> - Static method in class com.iantapply.wynncraft.database.pgsql.<a href="com/iantapply/wynncraft/database/pgsql/PGSQLDatabaseHelpers.html" title="class in com.iantapply.wynncraft.database.pgsql">PGSQLDatabaseHelpers</a></dt>
 <dd>
@@ -1465,6 +1479,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets a double from the configuration file via a path to the name of the configuration</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html#getFileFromDirectory(java.lang.String)" class="member-name-link">getFileFromDirectory(String)</a> - Static method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html" title="class in com.iantapply.wynncraft.pack">ResourcePackHelpers</a></dt>
+<dd>
+<div class="block">Gets a file with a hex hash from the uploaded directory</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html#getFileSha1Hash(java.lang.String)" class="member-name-link">getFileSha1Hash(String)</a> - Static method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html" title="class in com.iantapply.wynncraft.pack">ResourcePackHelpers</a></dt>
+<dd>
+<div class="block">Gets the SHA1 hash of a file</div>
+</dd>
 <dt><a href="com/iantapply/wynncraft/gui/GUIClickableItem.html#getFinalizedItem()" class="member-name-link">getFinalizedItem()</a> - Method in class com.iantapply.wynncraft.gui.<a href="com/iantapply/wynncraft/gui/GUIClickableItem.html" title="class in com.iantapply.wynncraft.gui">GUIClickableItem</a></dt>
 <dd>
 <div class="block">Gets the finalized item with the GUI NBT data attached</div>
@@ -1740,6 +1762,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHandler.html#handle(com.sun.net.httpserver.HttpExchange)" class="member-name-link">handle(HttpExchange)</a> - Method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackHandler.html" title="class in com.iantapply.wynncraft.pack">ResourcePackHandler</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/metrics/UpdateChecker.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class com.iantapply.wynncraft.metrics.<a href="com/iantapply/wynncraft/metrics/UpdateChecker.html" title="class in com.iantapply.wynncraft.metrics">UpdateChecker</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
@@ -2050,6 +2074,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/iantapply/wynncraft/npc/NPC.html#initialize()" class="member-name-link">initialize()</a> - Method in interface com.iantapply.wynncraft.npc.<a href="com/iantapply/wynncraft/npc/NPC.html" title="interface in com.iantapply.wynncraft.npc">NPC</a></dt>
 <dd>
 <div class="block">Contains any of the initialization code for the NPC previously to spawning</div>
+</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html#initialize()" class="member-name-link">initialize()</a> - Method in class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a></dt>
+<dd>
+<div class="block">Initializes the resource pack core instance creates the CDN server instance and contexts</div>
 </dd>
 <dt><a href="com/iantapply/wynncraft/player/PlayerCore.html#initialize()" class="member-name-link">initialize()</a> - Method in class com.iantapply.wynncraft.player.<a href="com/iantapply/wynncraft/player/PlayerCore.html" title="class in com.iantapply.wynncraft.player">PlayerCore</a></dt>
 <dd>
@@ -3780,6 +3808,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./com/iantapply/wynncraft/metrics/UpdateChecker.html#param-resourceId"><code>resourceId</code></a> record component.</div>
 </dd>
+<dt><a href="com/iantapply/wynncraft/Wynncraft.html#resourcePackCore" class="member-name-link">resourcePackCore</a> - Variable in class com.iantapply.wynncraft.<a href="com/iantapply/wynncraft/Wynncraft.html" title="class in com.iantapply.wynncraft">Wynncraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" class="type-name-link" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a> - Class in <a href="com/iantapply/wynncraft/pack/package-summary.html">com.iantapply.wynncraft.pack</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackCore.html#%3Cinit%3E(int)" class="member-name-link">ResourcePackCore(int)</a> - Constructor for class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackCore.html" title="class in com.iantapply.wynncraft.pack">ResourcePackCore</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHandler.html" class="type-name-link" title="class in com.iantapply.wynncraft.pack">ResourcePackHandler</a> - Class in <a href="com/iantapply/wynncraft/pack/package-summary.html">com.iantapply.wynncraft.pack</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHandler.html#%3Cinit%3E()" class="member-name-link">ResourcePackHandler()</a> - Constructor for class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackHandler.html" title="class in com.iantapply.wynncraft.pack">ResourcePackHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html" class="type-name-link" title="class in com.iantapply.wynncraft.pack">ResourcePackHelpers</a> - Class in <a href="com/iantapply/wynncraft/pack/package-summary.html">com.iantapply.wynncraft.pack</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html#%3Cinit%3E()" class="member-name-link">ResourcePackHelpers()</a> - Constructor for class com.iantapply.wynncraft.pack.<a href="com/iantapply/wynncraft/pack/ResourcePackHelpers.html" title="class in com.iantapply.wynncraft.pack">ResourcePackHelpers</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/iantapply/wynncraft/database/model/Model.html#revert()" class="member-name-link">revert()</a> - Method in interface com.iantapply.wynncraft.database.model.<a href="com/iantapply/wynncraft/database/model/Model.html" title="interface in com.iantapply.wynncraft.database.model">Model</a></dt>
 <dd>
 <div class="block">Reverts the migration to the specified state</div>
