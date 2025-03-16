@@ -25,6 +25,17 @@ WYNNCRAFT_INFLUX_TOKEN: 'Dv96E;3Vumr7u_+88£xK(5MO;?N,(6U?h-k"$KL;@u,#;6plFR'
 WYNNCRAFT_INFLUX_ORG: "wynncraft"
 WYNNCRAFT_INFLUX_BUCKET: "wynncraft"
 
+# Resource pack file details to apply to all players
+WYNNCRAFT_RESOURCE_ACTIVE_PACK_TYPE: "PRODUCTION" # PRODUCTION or DEVELOPMENT
+WYNNCRAFT_RESOURCE_ACTIVE_PACK_ID: "000000000000000000000000000000000000" # ID of resource pack stored in CDN
+WYNNCRAFT_RESOURCE_PACK_UUID: "00000000-0000-0000-0000-000000000000" # UUID of resource pack itself, this can be random but must change when the pack changes
+# The context, or URI that the resource pack is hosted under in the CDN
+WYNNCRAFT_RESOURCE_PACK_CONTEXT: "/resource-pack/"
+WYNNCRAFT_CDN_SERVER_SSL: FALSE # True determines usage of https, false determines usage of http
+WYNNCRAFT_CDN_SERVER_HOST: "localhost"
+WYNNCRAFT_CDN_SERVER_PORT: 2873
+WYNNCRAFT_FORCE_RESOURCE_PACK: FALSE
+
 # The ID of the server instance that this plugin is running on. This should vary between servers
 WYNNCRAFT_SERVER_INSTANCE_ID: "WA3"
 

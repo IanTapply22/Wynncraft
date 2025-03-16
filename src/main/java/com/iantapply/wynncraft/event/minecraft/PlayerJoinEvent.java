@@ -3,10 +3,15 @@ import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.item.WynncraftItemMeta;
 import com.iantapply.wynncraft.item.items.WynncraftItem;
 import com.iantapply.wynncraft.item.util.VersionUtil;
+import net.kyori.adventure.resource.ResourcePackInfo;
+import net.kyori.adventure.resource.ResourcePackRequest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+
+import java.net.URI;
+import java.util.UUID;
 
 public class PlayerJoinEvent implements Listener {
 
@@ -33,5 +38,13 @@ public class PlayerJoinEvent implements Listener {
                 player.getInventory().setItem(i, updatedItem);
             }
         }
+
+        /* Send resource pack to player and configure it */
+        UUID resourcePackUUID = UUID.fromString(Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_RESOURCE_PACK_UUID"));
+        String resourcePackURIFile = String.format("%s_%s", Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_RESOURCE_ACTIVE_PACK_TYPE"), Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_RESOURCE_ACTIVE_PACK_ID"));
+        String uriPrefix = Wynncraft.getInstance().getConfigurationCore().getBoolean("WYNNCRAFT_CDN_SERVER_SSL") ? "https" : "http";
+        URI resourcePackURI = URI.create(String.format("%s://%s:%s%s%s", uriPrefix, Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_CDN_SERVER_HOST"), Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_CDN_SERVER_PORT"), Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_RESOURCE_PACK_CONTEXT"), resourcePackURIFile));
+        boolean forceResourcePack = Wynncraft.getInstance().getConfigurationCore().getBoolean("WYNNCRAFT_FORCE_RESOURCE_PACK");
+        player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(ResourcePackInfo.resourcePackInfo(resourcePackUUID, resourcePackURI, "")).required(forceResourcePack).build());
     }
 }

@@ -13,6 +13,7 @@ import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.metrics.Metrics;
 import com.iantapply.wynncraft.metrics.UpdateChecker;
 import com.iantapply.wynncraft.nbs.NBSCore;
+import com.iantapply.wynncraft.pack.ResourcePackCore;
 import com.iantapply.wynncraft.party.PartyCore;
 import com.iantapply.wynncraft.player.PlayerCore;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public final class Wynncraft extends JavaPlugin {
     public NBSCore nbsCore;
     public ItemCore itemCore;
     public PartyCore partyCore;
+    public ResourcePackCore resourcePackCore;
 
     @Override
     public void onEnable() {
@@ -62,6 +64,9 @@ public final class Wynncraft extends JavaPlugin {
 
         this.partyCore = new PartyCore(this);
 
+        this.resourcePackCore = new ResourcePackCore(this.getConfigurationCore().getInteger("WYNNCRAFT_CDN_SERVER_PORT"));
+        this.resourcePackCore.initialize();
+
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
@@ -77,6 +82,7 @@ public final class Wynncraft extends JavaPlugin {
     @Override
     public void onDisable() {
         this.influxDatabaseCore.unregisterDatabases();
+        this.resourcePackCore.closeServerInstance();
 
         Logger.logShutdown();
     }

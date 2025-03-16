@@ -111,6 +111,7 @@ services:
       SERVER_PORT: 27000
     ports:
       - "27000:27000"
+      - "2873:2873"
     volumes:
       - ./main:/data
     networks:
