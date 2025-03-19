@@ -36,8 +36,14 @@ WYNNCRAFT_CDN_SERVER_HOST: "localhost"
 WYNNCRAFT_CDN_SERVER_PORT: 2873
 WYNNCRAFT_FORCE_RESOURCE_PACK: FALSE
 
-# The ID of the server instance that this plugin is running on. This should vary between servers
-WYNNCRAFT_SERVER_INSTANCE_ID: "WA3"
+# Instancing and world configuration
+WYNNCRAFT_MAIN_WORLD: "wynncraft"
+WYNNCRAFT_LIMBO_WORLD: "limbo"
+WYNNCRAFT_LIMBO_COORDINATES: "0,0,0" # X, Y, Z
+WYNNCRAFT_LOBBY_WORLD: "lobby"
+WYNNCRAFT_LOBBY_COORDINATES: "0,0,0" # X, Y, Z
+
+WYNNCRAFT_SERVER_INSTANCE_ID: "WA3" # The ID of the server instance that this plugin is running on. This should vary between servers
 
 # Development mode; Determines whether development features should be enabled for the instance
 DEVELOPMENT_MODE: FALSE
