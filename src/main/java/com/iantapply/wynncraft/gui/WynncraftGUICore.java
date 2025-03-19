@@ -16,7 +16,6 @@ import java.util.Arrays;
  */
 @Getter @Setter
 public class WynncraftGUICore {
-    private ArrayList<WynncraftGUI> guis;
     private JavaPlugin plugin;
 
     /**
@@ -28,50 +27,6 @@ public class WynncraftGUICore {
         }
 
         this.plugin = plugin;
-        this.guis = new ArrayList<>();
-    }
-
-    /**
-     * Creates a new instance of the GUI core with a list of GUIs
-     * @param guis The GUIs to register
-     */
-    public WynncraftGUICore(JavaPlugin plugin, WynncraftGUI... guis) {
-        if (plugin == null) {
-            Logger.log(LoggingLevel.ERROR, "The Wynncraft plugin cannot be null. Please provide a valid instance.");
-        }
-
-        this.plugin = plugin;
-        this.guis = new ArrayList<>();
-        this.guis.addAll(Arrays.asList(guis));
-    }
-
-    /**
-     * Creates a new instance of the GUI core with a list of GUIs
-     * @param guis The list of GUIs to register
-     */
-    public WynncraftGUICore(JavaPlugin plugin, ArrayList<WynncraftGUI> guis) {
-        if (plugin == null) {
-            Logger.log(LoggingLevel.ERROR, "The Wynncraft plugin cannot be null. Please provide a valid instance.");
-        }
-
-        this.plugin = plugin;
-        this.guis = guis;
-    }
-
-    /**
-     * Registers a GUI to the GUI core
-     * @param gui The GUI to register
-     */
-    public void registerGUI(WynncraftGUI gui) {
-        this.guis.add(gui);
-    }
-
-    /**
-     * Unregisters a GUI from the GUI core
-     * @param gui The GUI to unregister
-     */
-    public void unregisterGUI(WynncraftGUI gui) {
-        this.guis.remove(gui);
     }
 
     /**
@@ -79,18 +34,13 @@ public class WynncraftGUICore {
      * @param gui The GUI to open
      */
     public void openGUI(WynncraftGUI gui, Player player) {
-        if (!this.getGuis().contains(gui)) {
-            Logger.log(LoggingLevel.ERROR, "The GUI " + gui.name() + " is not registered in the GUI core. Please register it before opening it.");
-        } else {
-            // Open the GUI and start a task to update the GUI every 20 ticks
-            gui.open(player);
-            player.openInventory(gui.inventory());
-            gui.startUpdater(this.getPlugin());
+        // Open the GUI and start a task to update the GUI every 20 ticks
+        gui.open(player);
+        gui.startUpdater(this.getPlugin());
 
-            // Trigger the event specified in the GUI if it exists
-            if (gui.triggerEvent() != null) {
-                gui.triggerEvent().callEvent();
-            }
+        // Trigger the event specified in the GUI if it exists
+        if (gui.triggerEvent() != null) {
+            gui.triggerEvent().callEvent();
         }
     }
 
@@ -99,13 +49,9 @@ public class WynncraftGUICore {
      * @param gui The GUI to close
      */
     public void closeGUI(WynncraftGUI gui, Player player) {
-        if (!this.getGuis().contains(gui)) {
-            Logger.log(LoggingLevel.ERROR, "The GUI " + gui.name() + " is not registered in the GUI core. Please register it before closing it.");
-        } else {
-            // Close the GUI and stop the task to update the GUI
-            gui.onClose(player);
-            player.closeInventory();
-            gui.stopUpdater();
-        }
+        // Close the GUI and stop the task to update the GUI
+        gui.onClose(player);
+        player.closeInventory();
+        gui.stopUpdater();
     }
 }

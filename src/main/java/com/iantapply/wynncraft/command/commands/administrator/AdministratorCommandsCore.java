@@ -14,5 +14,6 @@ public class AdministratorCommandsCore {
         Wynncraft.getInstance().getCommandCore().stageCommand(new SetRankCommand());
         Wynncraft.getInstance().getCommandCore().stageCommand(new SetSupportRankCommand());
         Wynncraft.getInstance().getCommandCore().stageCommand(new GiveMeCommand());
+        Wynncraft.getInstance().getCommandCore().stageCommand(new OpenGUICommand());
     }
 }

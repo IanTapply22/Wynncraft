@@ -8,6 +8,8 @@ import com.iantapply.wynncraft.database.influx.InfluxDatabaseCore;
 import com.iantapply.wynncraft.event.minecraft.PlayerChatEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
 import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
+import com.iantapply.wynncraft.gui.GUIListener;
+import com.iantapply.wynncraft.gui.WynncraftGUICore;
 import com.iantapply.wynncraft.item.ItemCore;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.metrics.Metrics;
@@ -33,6 +35,7 @@ public final class Wynncraft extends JavaPlugin {
     public ItemCore itemCore;
     public PartyCore partyCore;
     public ResourcePackCore resourcePackCore;
+    public WynncraftGUICore guiCore;
 
     @Override
     public void onEnable() {
@@ -67,9 +70,12 @@ public final class Wynncraft extends JavaPlugin {
         this.resourcePackCore = new ResourcePackCore(this.getConfigurationCore().getInteger("WYNNCRAFT_CDN_SERVER_PORT"));
         this.resourcePackCore.initialize();
 
+        this.guiCore = new WynncraftGUICore(this);
+
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new GUIListener(), this);
 
         new Metrics(this, PluginConfigurations.BSTATS_PLUGIN_ID);
 

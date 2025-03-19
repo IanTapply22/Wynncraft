@@ -1,6 +1,6 @@
 package com.iantapply.wynncraft.gui.item.border;
 
-import com.iantapply.wynncraft.gui.GUIClickableItem;
+import com.iantapply.wynncraft.gui.GUIClickableItemAbstract;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -17,8 +17,8 @@ public class BlackGlassPaneBorder {
      * @param slot The slot to add the border item to
      * @return The item that will fill the selected slot
      */
-    public static GUIClickableItem getItem(int slot) {
-        return new GUIClickableItem() {
+    public static GUIClickableItemAbstract getItem(int slot) {
+        return new GUIClickableItemAbstract() {
             @Override
             public void run(InventoryClickEvent event) {
                 event.setCancelled(true);

@@ -147,3 +147,6 @@ commands:
   giveme:
     description: "Gives the player the internally configured item"
     usage: "/giveme"
+  opengui:
+    description: "Opens the GUI for the player"
+    usage: "/opengui"

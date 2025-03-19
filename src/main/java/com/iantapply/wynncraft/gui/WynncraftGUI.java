@@ -3,7 +3,9 @@ package com.iantapply.wynncraft.gui;
 import com.iantapply.wynncraft.event.wynncraft.WynncraftEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,22 +42,18 @@ public abstract class WynncraftGUI {
      * @param slot The slot to add the border item to
      * @return The filler item as a WynncraftItem object
      */
-    public abstract GUIClickableItem fillerItem(int slot);
+    public GUIClickableItem fillerItem(int slot) {
+        return new GUIClickableItem(new ItemStack(Material.AIR), 0);
+    }
 
     /**
      * The border item that is used to create a border around the GUI
      * @param slot The slot to add the border item to
      * @return The border item as a WynncraftItem object
      */
-    public abstract GUIClickableItem borderItem(int slot);
-
-    /**
-     * The item that is displayed in the GUI but can't be picked up
-     * @param item The item to remove the ability to pickup for
-     * @param slot The slot that the item is in
-     * @return The item as a WynncraftItem object
-     */
-    public abstract GUIClickableItem cantPickup(ItemStack item, int slot);
+    public GUIClickableItem borderItem(int slot) {
+        return new GUIClickableItem(new ItemStack(Material.AIR), 0);
+    }
 
     /**
      * The event that is fired when the GUI is opened or triggered
@@ -70,7 +68,7 @@ public abstract class WynncraftGUI {
      *
      * @param player The player to close the GUI menu for
      */
-    public abstract void onClose(Player player);
+    public void onClose(Player player) {}
 
     /**
      * Determines what happens when the GUI is opened
@@ -82,7 +80,7 @@ public abstract class WynncraftGUI {
     /**
      * Determines what happens when the GUI is updated (this happens every 20 ticks)
      */
-    public abstract void update();
+    public void update() {}
 
     /**
      * Starts the GUI updater to update the GUI every 20 ticks
@@ -116,7 +114,7 @@ public abstract class WynncraftGUI {
      * @param slot The slot to add the item to
      */
     public void addItem(GUIClickableItem item, int slot) {
-        inventory().setItem(slot, item.getItem());
+        inventory().setItem(slot, item.getFinalizedItem());
     }
 
     /**
