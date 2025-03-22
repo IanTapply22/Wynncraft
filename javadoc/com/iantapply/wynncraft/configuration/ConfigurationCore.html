@@ -135,14 +135,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets an integer from the configuration file via a path to the name of the configuration</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getString(java.lang.String)" class="member-name-link">getString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.bukkit.Location</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLocation(java.lang.String)" class="member-name-link">getLocation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves a location from the configuration file.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getString(java.lang.String)" class="member-name-link">getString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets a string from the configuration file via a path to the name of the configuration</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Initializes the configuration core by creating and copying the configuration file
  if needed and sets all default values.</div>
 </div>
@@ -195,6 +200,20 @@ loadScripts(document, 'script');</script>
 <dd><code>path</code> - The path, or name of the variable in the configuration file</dd>
 <dt>Returns:</dt>
 <dd>A string if the value is found, otherwise the return is null and a warning is thrown</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getLocation(java.lang.String)">
+<h3>getLocation</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.bukkit.Location</span>&nbsp;<span class="element-name">getLocation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
+<div class="block">Retrieves a location from the configuration file. The location is stored as a string in the format and the
+ config prefixes must align and end with _WORLD and _COORDINATES.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>path</code> - The path to the coordinate configuration line. NOT the world path</dd>
+<dt>Returns:</dt>
+<dd>A location object if the location is found, otherwise null</dd>
 </dl>
 </section>
 </li>

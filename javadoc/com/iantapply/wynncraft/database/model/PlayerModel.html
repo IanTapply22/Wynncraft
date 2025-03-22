@@ -116,7 +116,7 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <div class="col-last even-row-color">
 <div class="block">Used only for running the migrate and revert methods</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.Rank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.SupportRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean)" class="member-name-link">PlayerModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.Rank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.SupportRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean,int,int,int)" class="member-name-link">PlayerModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;online,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;server,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;activeCharacter,
@@ -130,7 +130,10 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;firstJoin,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;lastJoin,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;forumLink,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile,
+ int&nbsp;lastX,
+ int&nbsp;lastY,
+ int&nbsp;lastZ)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID)" class="member-name-link">PlayerModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -215,7 +218,7 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.Rank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.SupportRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean)">
+<section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.Boolean,java.lang.String,java.util.UUID,java.lang.String,java.util.UUID,com.iantapply.wynncraft.rank.Rank,java.lang.String,com.iantapply.wynncraft.player.LegacyRankColour,com.iantapply.wynncraft.rank.SupportRank,java.lang.Boolean,java.sql.Timestamp,java.sql.Timestamp,java.lang.Integer,java.lang.Boolean,int,int,int)">
 <h3>PlayerModel</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerModel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;online,
@@ -231,7 +234,10 @@ implements <a href="Model.html" title="interface in com.iantapply.wynncraft.data
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;firstJoin,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a>&nbsp;lastJoin,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;forumLink,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;publicProfile,
+ int&nbsp;lastX,
+ int&nbsp;lastY,
+ int&nbsp;lastZ)</span></div>
 </section>
 </li>
 <li>

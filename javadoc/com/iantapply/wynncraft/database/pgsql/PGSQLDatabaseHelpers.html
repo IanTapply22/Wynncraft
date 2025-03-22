@@ -216,38 +216,51 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Finishes a query by executing the statement and closing it without returning a result</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#insertRow(java.sql.Connection,java.lang.String,java.lang.String%5B%5D,java.lang.Object%5B%5D)" class="member-name-link">insertRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getPrimaryKey(java.sql.Connection,java.lang.String)" class="member-name-link">getPrimaryKey</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Gets the primary key column of a table.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#insertRow(java.sql.Connection,java.lang.String,java.lang.String%5B%5D,java.lang.Object%5B%5D)" class="member-name-link">insertRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;columns,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>[]&nbsp;values)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Inserts a row into a table with the given columns and values.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseValue(java.lang.Object,com.iantapply.wynncraft.database.pgsql.table.DataType)" class="member-name-link">parseValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseValue(java.lang.Object,com.iantapply.wynncraft.database.pgsql.table.DataType)" class="member-name-link">parseValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value,
  <a href="table/DataType.html" title="enum class in com.iantapply.wynncraft.database.pgsql.table">DataType</a>&nbsp;type)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Helper method to parse database values to correct Java types.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#safeGet(T)" class="member-name-link">safeGet</a><wbr>(T&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#selectRow(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;condition,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;conditionValues)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Selects an entire row from a table with the given condition.</div>
-</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#safeGet(T)" class="member-name-link">safeGet</a><wbr>(T&nbsp;value)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#selectRowWithLatestCreatedAt(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRowWithLatestCreatedAt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#selectRow(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;condition,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;conditionValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Selects an entire row from a table with the given condition.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#selectRowWithLatestCreatedAt(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object...)" class="member-name-link">selectRowWithLatestCreatedAt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;condition,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;conditionValues)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Selects an entire and latest row from a table with the given condition.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#setPrimaryKey(java.sql.Connection,java.lang.String,java.lang.String)" class="member-name-link">setPrimaryKey</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Sets a primary key on a column in a table.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#updateColumnValue(java.sql.Connection,java.lang.String,java.lang.String,java.lang.Object,java.lang.String,java.lang.Object...)" class="member-name-link">updateColumnValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
@@ -635,6 +648,36 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setPrimaryKey(java.sql.Connection,java.lang.String,java.lang.String)">
+<h3>setPrimaryKey</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPrimaryKey</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column)</span></div>
+<div class="block">Sets a primary key on a column in a table.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>connection</code> - The database connection to use.</dd>
+<dd><code>table</code> - The name of the table to set the primary key on.</dd>
+<dd><code>column</code> - The name of the column to set as the primary key.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPrimaryKey(java.sql.Connection,java.lang.String)">
+<h3>getPrimaryKey</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPrimaryKey</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html" title="class or interface in java.sql" class="external-link">Connection</a>&nbsp;connection,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;table)</span></div>
+<div class="block">Gets the primary key column of a table.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>connection</code> - The database connection to use.</dd>
+<dd><code>table</code> - The name of the table to get the primary key of.</dd>
+<dt>Returns:</dt>
+<dd>The name of the primary key column, or null if no primary key is found.</dd>
 </dl>
 </section>
 </li>
