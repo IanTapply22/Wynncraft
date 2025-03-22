@@ -1,9 +1,8 @@
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.3.0"
-    id("io.papermc.paperweight.userdev") version "1.7.5"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
     id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id("com.gradleup.shadow") version "8.3.2"
     id 'maven-publish'
 }
 
@@ -42,18 +41,18 @@ publishing {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
-    implementation "net.kyori:adventure-api:4.17.0"
+    implementation "net.kyori:adventure-api:4.19.0"
 
-    compileOnly 'org.projectlombok:lombok:1.18.32'
-    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.32'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
 
-    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
     implementation 'xyz.jpenilla:reflection-remapper:0.1.1'
 
-    implementation 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.postgresql:postgresql:42.7.5'
     implementation 'org.incendo:cloud-paper:2.0.0-beta.10'
 
     implementation "com.influxdb:influxdb-client-java:7.2.0"
@@ -61,7 +60,7 @@ dependencies {
 
 tasks {
     runServer {
-        minecraftVersion("1.21.3")
+        minecraftVersion("1.21.4")
     }
     shadowJar {
         // Helper method to relocate a package into our package namespace
