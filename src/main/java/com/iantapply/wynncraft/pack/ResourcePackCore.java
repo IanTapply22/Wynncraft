@@ -21,6 +21,11 @@ public class ResourcePackCore {
      * Initializes the resource pack core instance creates the CDN server instance and contexts
      */
     public void initialize() {
+        if (!Wynncraft.getInstance().getConfig().getBoolean("WYNNCRAFT_CDN_ENABLE")) {
+            Logger.log(LoggingLevel.INFO, "Wynncraft CDN is set to disabled. Resource pack downloading will default to fallback URL and won't have a fallback.");
+            return;
+        }
+
         Logger.log(LoggingLevel.INFO, "Initializing the resource pack core instance...");
         this.createServerInstance();
         if (this.httpServer != null) {

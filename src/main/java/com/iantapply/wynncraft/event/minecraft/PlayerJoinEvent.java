@@ -3,6 +3,8 @@ import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.item.WynncraftItemMeta;
 import com.iantapply.wynncraft.item.items.WynncraftItem;
 import com.iantapply.wynncraft.item.util.VersionUtil;
+import com.iantapply.wynncraft.logger.Logger;
+import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.player.PlayerCore;
 import com.iantapply.wynncraft.player.WynncraftPlayer;
 import net.kyori.adventure.resource.ResourcePackInfo;
@@ -56,6 +58,15 @@ public class PlayerJoinEvent implements Listener {
         player.teleport(limboLocation);
 
         /* Send resource pack to player and configure it */
-        player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(ResourcePackInfo.resourcePackInfo(resourcePackUUID, resourcePackURI, "")).required(forceResourcePack).build());
+        if (Wynncraft.getInstance().getConfig().getBoolean("WYNNCRAFT_CDN_ENABLE")) {
+            player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(ResourcePackInfo.resourcePackInfo(resourcePackUUID, resourcePackURI, "")).required(forceResourcePack).build());
+        } else {
+            String fallbackResourcePackURI = Wynncraft.getInstance().getConfig().getString("WYNNCRAFT_RESOURCE_PACK_FALLBACK");
+            if (fallbackResourcePackURI == null) {
+                Logger.log(LoggingLevel.ERROR, "No fallback resource pack URI was found. Please configure one in the configuration file. No pack will be applied.");
+                return;
+            }
+            player.sendResourcePacks(ResourcePackRequest.resourcePackRequest().packs(ResourcePackInfo.resourcePackInfo(resourcePackUUID, URI.create(fallbackResourcePackURI), "")).required(forceResourcePack).build());
+        }
     }
 }

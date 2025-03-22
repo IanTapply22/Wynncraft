@@ -29,7 +29,10 @@ WYNNCRAFT_INFLUX_BUCKET: "wynncraft"
 WYNNCRAFT_RESOURCE_ACTIVE_PACK_TYPE: "PRODUCTION" # PRODUCTION or DEVELOPMENT
 WYNNCRAFT_RESOURCE_ACTIVE_PACK_ID: "000000000000000000000000000000000000" # ID of resource pack stored in CDN
 WYNNCRAFT_RESOURCE_PACK_UUID: "00000000-0000-0000-0000-000000000000" # UUID of resource pack itself, this can be random but must change when the pack changes
+
 # The context, or URI that the resource pack is hosted under in the CDN
+WYNNCRAFT_CDN_ENABLE: TRUE
+WYNNCRAFT_RESOURCE_PACK_FALLBACK: "https://wynncraft.com/"
 WYNNCRAFT_RESOURCE_PACK_CONTEXT: "/resource-pack/"
 WYNNCRAFT_CDN_SERVER_SSL: FALSE # True determines usage of https, false determines usage of http
 WYNNCRAFT_CDN_SERVER_HOST: "localhost"
