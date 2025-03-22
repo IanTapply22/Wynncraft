@@ -40,10 +40,13 @@ public class PlayerModel implements Model {
     private Timestamp lastJoin; // Stored in DB as timestamp
     private Integer forumLink; // The code used to link your forums account
     private Boolean publicProfile;
+    private int lastX;
+    private int lastY;
+    private int lastZ;
 
     public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, Rank rank,
                        String rankBadge, LegacyRankColour legacyRankColour, SupportRank supportRank, Boolean veteran,
-                       Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile) {
+                       Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile, int lastX, int lastY, int lastZ) {
         this.username = username;
         this.online = online;
         this.server = server;
@@ -59,6 +62,9 @@ public class PlayerModel implements Model {
         this.lastJoin = lastJoin;
         this.forumLink = forumLink;
         this.publicProfile = publicProfile;
+        this.lastX = lastX;
+        this.lastY = lastY;
+        this.lastZ = lastZ;
     }
 
     public PlayerModel(UUID uuid) {
@@ -120,6 +126,9 @@ public class PlayerModel implements Model {
         columns.add(new Column("lastJoin", DataType.TIMESTAMP));
         columns.add(new Column("forumLink", DataType.INTEGER));
         columns.add(new Column("publicProfile", DataType.BOOLEAN, "true"));
+        columns.add(new Column("lastX", DataType.INTEGER, "-1"));
+        columns.add(new Column("lastY", DataType.INTEGER, "-1"));
+        columns.add(new Column("lastZ", DataType.INTEGER, "-1"));
 
         return columns;
     }
@@ -144,7 +153,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String version() {
-        return "1.0.5";
+        return "1.0.7";
     }
 
     @Override
@@ -210,10 +219,18 @@ public class PlayerModel implements Model {
                 PGSQLDatabaseHelpers.safeGet(this.getFirstJoin()),
                 PGSQLDatabaseHelpers.safeGet(this.getLastJoin()),
                 PGSQLDatabaseHelpers.safeGet(this.getForumLink()),
-                PGSQLDatabaseHelpers.safeGet(this.getPublicProfile())
+                PGSQLDatabaseHelpers.safeGet(this.getPublicProfile()),
+                this.getLastX(),
+                this.getLastY(),
+                this.getLastZ()
         };
 
         Connection connection = this.database().connect(true);
+
+        // TODO: Fix multiple primary key error
+        if (PGSQLDatabaseHelpers.getPrimaryKey(connection, this.table()) == null) {
+            PGSQLDatabaseHelpers.setPrimaryKey(connection, this.table(), "uuid");
+        }
 
         try {
             // Check if a row with the same UUID exists

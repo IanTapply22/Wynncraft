@@ -553,6 +553,46 @@ public class PGSQLDatabaseHelpers {
         }
     }
 
+    /**
+     * Sets a primary key on a column in a table.
+     * @param connection The database connection to use.
+     * @param table The name of the table to set the primary key on.
+     * @param column The name of the column to set as the primary key.
+     */
+    public static void setPrimaryKey(Connection connection, String table, String column) {
+        String query = "ALTER TABLE " + table + " ADD PRIMARY KEY (" + column + ")";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, "Failed to set primary key: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Gets the primary key column of a table.
+     * @param connection The database connection to use.
+     * @param table The name of the table to get the primary key of.
+     * @return The name of the primary key column, or null if no primary key is found.
+     */
+    public static String getPrimaryKey(Connection connection, String table) {
+        String query = "SELECT a.attname FROM pg_index i JOIN pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey) WHERE i.indrelid = ?::regclass AND i.indisprimary;";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, table);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.log(LoggingLevel.ERROR, "Failed to get primary key: " + e.getMessage());
+        }
+
+        return null;
+    }
+
     public static <T> T safeGet(T value) {
         return value != null ? value : null;
     }

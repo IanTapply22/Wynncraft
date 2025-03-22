@@ -9,33 +9,25 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 import java.sql.SQLException;
 
-public class PlayerLeaveEvent implements Listener {
+public class PlayerWorldSwitchEvent implements Listener {
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerWorldSwitchEvent(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
         Location playerLocation = player.getLocation();
+        String worldName = player.getWorld().getName();
         PlayerCore playerCore = Wynncraft.getInstance().getPlayerCore();
         WynncraftPlayer wynncraftPlayer = playerCore.getPlayer(player.getUniqueId());
 
-        if (wynncraftPlayer == null) {
-            Logger.log(LoggingLevel.ERROR, "Could not find Wynncraft player instance for player with UUID " + player.getUniqueId() + ". This could be because you used the reload command.");
-            return;
-        }
-
-        wynncraftPlayer.getPlayerModel().setOnline(false);
-
-        if (player.getWorld().getName().equals(Wynncraft.getInstance().getConfig().getString("WYNNCRAFT_MAIN_WORLD"))) {
+        if (worldName.equals(Wynncraft.getInstance().getConfigurationCore().getString("WYNNCRAFT_MAIN_WORLD"))) {
             wynncraftPlayer.getPlayerModel().setLastX((int) playerLocation.getX() != wynncraftPlayer.getPlayerModel().getLastX() ? (int) playerLocation.getX() : wynncraftPlayer.getPlayerModel().getLastX());
             wynncraftPlayer.getPlayerModel().setLastY((int) playerLocation.getY() != wynncraftPlayer.getPlayerModel().getLastY() ? (int) playerLocation.getY() : wynncraftPlayer.getPlayerModel().getLastY());
             wynncraftPlayer.getPlayerModel().setLastZ((int) playerLocation.getZ() != wynncraftPlayer.getPlayerModel().getLastZ() ? (int) playerLocation.getZ() : wynncraftPlayer.getPlayerModel().getLastZ());
         }
-
-        playerCore.removePlayer(player.getUniqueId());
 
         try {
             wynncraftPlayer.getPlayerModel().populate();

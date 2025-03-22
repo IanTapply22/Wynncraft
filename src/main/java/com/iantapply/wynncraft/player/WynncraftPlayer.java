@@ -1,16 +1,13 @@
 package com.iantapply.wynncraft.player;
 
-import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.database.model.PlayerModel;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
 import lombok.Setter;
-import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * A class to interact with a player based on their stored Wynncraft player data model
@@ -31,8 +28,12 @@ public class WynncraftPlayer {
             return;
         }
 
+        /* Set chat name and tablist name */
         String name = (this.playerModel.getNickname() != null) ? this.playerModel.getNickname() : this.playerModel.getUsername();
         this.player.displayName(Component.text("[" + this.playerModel.getServer() + "] " +  name)); // Changes chat + tab list name
+
+        /* Set gamemode and prep player object */
+        this.player.setGameMode(GameMode.ADVENTURE);
 
         // Start sending proper actionbar
         // TODO: Send properly formatted unicode characters

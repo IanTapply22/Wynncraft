@@ -5,9 +5,7 @@ import com.iantapply.wynncraft.configuration.ConfigurationCore;
 import com.iantapply.wynncraft.configuration.PluginConfigurations;
 import com.iantapply.wynncraft.database.DatabaseCore;
 import com.iantapply.wynncraft.database.influx.InfluxDatabaseCore;
-import com.iantapply.wynncraft.event.minecraft.PlayerChatEvent;
-import com.iantapply.wynncraft.event.minecraft.PlayerJoinEvent;
-import com.iantapply.wynncraft.event.minecraft.PlayerLeaveEvent;
+import com.iantapply.wynncraft.event.minecraft.*;
 import com.iantapply.wynncraft.gui.GUIListener;
 import com.iantapply.wynncraft.gui.WynncraftGUICore;
 import com.iantapply.wynncraft.item.ItemCore;
@@ -18,6 +16,7 @@ import com.iantapply.wynncraft.nbs.NBSCore;
 import com.iantapply.wynncraft.pack.ResourcePackCore;
 import com.iantapply.wynncraft.party.PartyCore;
 import com.iantapply.wynncraft.player.PlayerCore;
+import com.iantapply.wynncraft.world.WorldCore;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,6 +35,7 @@ public final class Wynncraft extends JavaPlugin {
     public PartyCore partyCore;
     public ResourcePackCore resourcePackCore;
     public WynncraftGUICore guiCore;
+    public WorldCore worldCore;
 
     @Override
     public void onEnable() {
@@ -72,9 +72,14 @@ public final class Wynncraft extends JavaPlugin {
 
         this.guiCore = new WynncraftGUICore(this);
 
+        this.worldCore = new WorldCore();
+        this.worldCore.initialize();
+
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerWorldSwitchEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PayerResourcePackStatusEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GUIListener(), this);
 
         new Metrics(this, PluginConfigurations.BSTATS_PLUGIN_ID);

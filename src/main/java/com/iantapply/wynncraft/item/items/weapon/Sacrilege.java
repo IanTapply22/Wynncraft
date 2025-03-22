@@ -45,7 +45,7 @@ public class Sacrilege extends WynncraftWeapon {
     @Override
     public ItemIcon icon() {
         ItemIconAttributeValue attributeValue = new ItemIconAttributeValue("minecraft:iron_horse_armor",
-                                                                337, "wand.thunder3");
+                                                                341, "wand.thunder3");
         return new ItemIcon(ItemIconFormat.ATTRIBUTE, attributeValue);
     }
 

@@ -4,9 +4,13 @@ import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * The configuration core that handles all configuration related tasks
@@ -56,6 +60,31 @@ public class ConfigurationCore {
         }
 
         return configuration.getString(path);
+    }
+
+    /**
+     * Retrieves a location from the configuration file. The location is stored as a string in the format and the
+     * config prefixes must align and end with _WORLD and _COORDINATES.
+     * @param path The path to the coordinate configuration line. NOT the world path
+     * @return A location object if the location is found, otherwise null
+     */
+    public Location getLocation(String path) {
+        String rawCoordinates = this.getString(path);
+        double[] parsedCoordinates = Arrays.stream(rawCoordinates.split(",")).mapToDouble(Double::parseDouble).toArray(); // X, Y, Z
+        String configWorldPath = path.replace("COORDINATES", "WORLD");
+        String worldName = this.getString(configWorldPath);
+        if (worldName == null) {
+            Logger.log(LoggingLevel.WARNING, String.format("World %s does not exist in the configuration file. Please add the world if needed.", worldName));
+            return null;
+        }
+
+        World worldInstance = Bukkit.getWorld(worldName);
+        if (worldInstance == null) {
+            Logger.log(LoggingLevel.WARNING, String.format("World %s does not exist in the server. Please add the world if needed.", worldName));
+            return null;
+        }
+
+        return new Location(worldInstance, parsedCoordinates[0], parsedCoordinates[1], parsedCoordinates[2]);
     }
 
     /**

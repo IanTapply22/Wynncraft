@@ -19,7 +19,8 @@ public enum DataType {
     CIDR(7, "cidr", "IPv4 or IPv6 network address"),
     TIME_WITH_TIMEZONE(8, "timetz", "Time with timezone"),
     TIMESTAMP_WITH_TIMEZONE(9, "timestamptz", "Timestamp with timezone"),
-    TIMESTAMP(10, "timestamp", "Timestamp");
+    TIMESTAMP(10, "timestamp", "Timestamp"),
+    DOUBLE(11, "double precision", "Double precision floating-point number");
 
     private final int id;
     private final String type;

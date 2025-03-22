@@ -52,8 +52,9 @@ public class PlayerCore {
         PlayerModel playerModel = new PlayerModel(player.getUniqueId());
         ConfigurationCore configurationCore = Wynncraft.getInstance().getConfigurationCore();
         try {
+            boolean isFirstJoin = PGSQLDatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null;
             // Sets the player up if they aren't in the database
-            if (PGSQLDatabaseHelpers.selectRow(playerModel.database().connect(true), playerModel.table(), "uuid = CAST(? AS UUID)", player.getUniqueId()) == null) {
+            if (isFirstJoin) {
                 playerModel.setRank(Rank.PLAYER);
 
                 playerModel.setVeteran(false); // ignore: set, but means they had VIP before update
@@ -64,10 +65,19 @@ public class PlayerCore {
             playerModel.setUsername(player.getName());
             playerModel.setOnline(true);
             playerModel.setServer(configurationCore.getString("WYNNCRAFT_SERVER_INSTANCE_ID"));
-            playerModel.setRank(Rank.getRankById((int) playerModel.getModelValue("rank")));
 
-            Object supportRank = playerModel.getModelValue("supportRank");
-            if (supportRank != null) playerModel.setSupportRank(SupportRank.getRankById((int) supportRank));
+            if (!isFirstJoin) {
+                playerModel.setRank(Rank.getRankById((int) playerModel.getModelValue("rank")));
+
+                Object supportRank = playerModel.getModelValue("supportRank");
+                if (supportRank != null) playerModel.setSupportRank(SupportRank.getRankById((int) supportRank));
+
+                // Load last location into player model
+                playerModel.setLastX((int) playerModel.getModelValue("lastX"));
+                playerModel.setLastY((int) playerModel.getModelValue("lastY"));
+                playerModel.setLastZ((int) playerModel.getModelValue("lastZ"));
+            }
+
             playerModel.setLastJoin(new Timestamp(System.currentTimeMillis()));
 
             playerModel.populate();
@@ -79,6 +89,7 @@ public class PlayerCore {
         } catch (Exception e) {
             player.sendMessage("Could not execute query to database! Please see the console logs.");
             Logger.log(LoggingLevel.ERROR, String.format("Could not execute SQL query with error: %s", e));
+            e.printStackTrace();
         }
     }
 
