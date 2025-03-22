@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PayerResourcePackStatusEvent implements Listener {
 
@@ -37,7 +38,7 @@ public class PayerResourcePackStatusEvent implements Listener {
                     // TODO: Handle tutorial initiation
                     player.teleport(new Location(Bukkit.getWorld(configurationCore.getString("WYNNCRAFT_MAIN_WORLD")), parsedCoordinates[0], parsedCoordinates[1], parsedCoordinates[2], 270, 0));
                 } else {
-                    player.teleport(new Location(Bukkit.getWorld(configurationCore.getString("WYNNCRAFT_MAIN_WORLD")), wynncraftPlayer.getPlayerModel().getLastX(), wynncraftPlayer.getPlayerModel().getLastY(), wynncraftPlayer.getPlayerModel().getLastZ()));
+                    player.teleport(new Location(Bukkit.getWorld(configurationCore.getString("WYNNCRAFT_MAIN_WORLD")), wynncraftPlayer.getPlayerModel().getLastX(), wynncraftPlayer.getPlayerModel().getLastY(), wynncraftPlayer.getPlayerModel().getLastZ(), ThreadLocalRandom.current().nextInt(0, 360), 0));
                 }
             }
             case FAILED_DOWNLOAD -> {
