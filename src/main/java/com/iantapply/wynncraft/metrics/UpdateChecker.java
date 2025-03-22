@@ -46,7 +46,7 @@ public record UpdateChecker(Wynncraft plugin, int resourceId) {
         // Resource ID for the plugin on SpigotMC
         int resourceId = 122402;
         new UpdateChecker(Wynncraft.getInstance(), resourceId).getVersion(version -> {
-            String currentVersion = Wynncraft.getInstance().getDescription().getVersion();
+        String currentVersion = Wynncraft.getInstance().getPluginMeta().getVersion();
 
             if (VersionChecker.isVersionLower(currentVersion, version)) {
                 Logger.logUpdateNotificationConsole();
