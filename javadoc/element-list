@@ -1,4 +1,5 @@
 com.iantapply.wynncraft
+com.iantapply.wynncraft.character
 com.iantapply.wynncraft.command
 com.iantapply.wynncraft.command.commands.administrator
 com.iantapply.wynncraft.command.commands.cosmetic
@@ -15,6 +16,7 @@ com.iantapply.wynncraft.database
 com.iantapply.wynncraft.database.database
 com.iantapply.wynncraft.database.influx
 com.iantapply.wynncraft.database.model
+com.iantapply.wynncraft.database.model.object
 com.iantapply.wynncraft.database.mongo
 com.iantapply.wynncraft.database.pgsql
 com.iantapply.wynncraft.database.pgsql.table
