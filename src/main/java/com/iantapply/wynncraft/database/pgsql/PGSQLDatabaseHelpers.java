@@ -309,7 +309,8 @@ public class PGSQLDatabaseHelpers {
                 throw new IllegalArgumentException("Column name contains invalid characters: " + column.getName());
             }
 
-            columnString.append(column.getName()).append(" ").append(column.getType());
+            String columnType = column.getType().getType().contains("double") ? "DOUBLE PRECISION" : column.getType().getType();
+            columnString.append(column.getName()).append(" ").append(columnType);
             if (i < columns.size() - 1) {
                 columnString.append(", ");
             }

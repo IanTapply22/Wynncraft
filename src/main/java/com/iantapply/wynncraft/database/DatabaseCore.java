@@ -1,8 +1,6 @@
 package com.iantapply.wynncraft.database;
 
-import com.iantapply.wynncraft.database.model.MigrationModel;
-import com.iantapply.wynncraft.database.model.Model;
-import com.iantapply.wynncraft.database.model.PlayerModel;
+import com.iantapply.wynncraft.database.model.*;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
@@ -29,6 +27,8 @@ public class DatabaseCore {
     public void initialize() {
         this.stageModel(new MigrationModel());
         this.stageModel(new PlayerModel());
+        this.stageModel(new GuildModel());
+        this.stageModel(new CharacterModel());
     }
 
     /**

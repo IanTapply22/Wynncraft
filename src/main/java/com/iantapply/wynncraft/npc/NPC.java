@@ -1,6 +1,7 @@
 package com.iantapply.wynncraft.npc;
 
 import com.iantapply.wynncraft.world.NPCLocation;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -23,7 +24,7 @@ public interface NPC {
      * Spawns the NPC in the game world with all of its settings
      * including the entity type
      */
-    void spawn();
+    void spawn(Location location);
 
     /**
      * Despawns the NPC from the game world

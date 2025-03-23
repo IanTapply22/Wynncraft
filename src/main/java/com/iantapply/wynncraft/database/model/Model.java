@@ -113,6 +113,7 @@ public interface Model {
                 PGSQLDatabaseHelpers.createTable(this.database().connect(true), this.table(), this.columns());
             } catch (Exception e) {
                 Logger.log(LoggingLevel.ERROR, String.format("Creating table for migration failed. Skipping migration with error: %s", e.getMessage()));
+                e.printStackTrace();
                 this.database().disconnect();
                 return;
             }

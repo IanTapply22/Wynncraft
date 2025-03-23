@@ -1,15 +1,16 @@
 package com.iantapply.wynncraft.database.model;
 
+import com.iantapply.wynncraft.database.model.object.BannerLayer;
+import com.iantapply.wynncraft.database.model.object.GuildMember;
+import com.iantapply.wynncraft.database.model.object.SeasonRank;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
 import com.iantapply.wynncraft.database.pgsql.table.DataType;
-import com.iantapply.wynncraft.player.LegacyRankColour;
 import com.iantapply.wynncraft.database.database.WynncraftDatabase;
 import com.iantapply.wynncraft.database.pgsql.table.Column;
-import com.iantapply.wynncraft.rank.Rank;
-import com.iantapply.wynncraft.rank.SupportRank;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,64 +18,53 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.UUID;
 
-/**
- * A model that is used to handle and store the base profile data of a
- * player who is registered on the server.
- * <p>
- * All profile related data is stored in the profiles table on a per-profile basis
- */
 @Getter @Setter
-public class PlayerModel implements Model {
-    private String username;
-    private Boolean online;
-    private String server;
-    private UUID activeCharacter; // Stored as UUID internally, but stored as String in DB
-    private String nickname;
-    private UUID uuid; // Shouldn't change and should be the main source of ID
-    private Rank rank; // Stored as the rank ID in the DB, but stored internally as a NonPurchasableRank
-    private String rankBadge; // The URL path to the badge SVG in the Wynncraft CDN
-    private LegacyRankColour legacyRankColour; // Stored in a LegacyRankColour object internally, but parsed in DB as JSON
-    private SupportRank supportRank; // The rank that determines the support level, stored in DB as string
-    private Boolean veteran;
-    private Timestamp firstJoin; // Also the created_at of the DB row. Type in DB is of timestamp
-    private Timestamp lastJoin; // Stored in DB as timestamp
-    private Integer forumLink; // The code used to link your forums account
-    private Boolean publicProfile;
-    private int lastX;
-    private int lastY;
-    private int lastZ;
+public class GuildModel implements Model {
+    private UUID uuid;
+    private String name;
+    private String prefix;
+    private int level;
+    private int rawXp;
+    private int wars;
+    private Timestamp created;
+    private GuildMember owner;
+    private ArrayList<GuildMember> chiefs;
+    private ArrayList<GuildMember> strategists;
+    private ArrayList<GuildMember> captains;
+    private ArrayList<GuildMember> recruiters;
+    private ArrayList<GuildMember> recruits;
+    private NamedTextColor bannerBase;
+    private int bannerTier;
+    private ArrayList<BannerLayer> bannerLayers;
+    private ArrayList<SeasonRank> seasonRanks;
 
-    public PlayerModel(String username, Boolean online, String server, UUID activeCharacter, String nickname, UUID uuid, Rank rank,
-                       String rankBadge, LegacyRankColour legacyRankColour, SupportRank supportRank, Boolean veteran,
-                       Timestamp firstJoin, Timestamp lastJoin, Integer forumLink, Boolean publicProfile, int lastX, int lastY, int lastZ) {
-        this.username = username;
-        this.online = online;
-        this.server = server;
-        this.activeCharacter = activeCharacter;
-        this.nickname = nickname;
+    public GuildModel(UUID uuid, String name, String prefix, int level, int rawXp, int wars, Timestamp created,
+                      GuildMember owner, ArrayList<GuildMember> chiefs, ArrayList<GuildMember> strategists, ArrayList<GuildMember> captains,
+                      ArrayList<GuildMember> recruiters, ArrayList<GuildMember> recruits, NamedTextColor bannerBase, int bannerTier,
+                      ArrayList<BannerLayer> bannerLayers, ArrayList<SeasonRank> seasonRanks) {
         this.uuid = uuid;
-        this.rank = rank;
-        this.rankBadge = rankBadge;
-        this.legacyRankColour = legacyRankColour;
-        this.supportRank = supportRank;
-        this.veteran = veteran;
-        this.firstJoin = firstJoin;
-        this.lastJoin = lastJoin;
-        this.forumLink = forumLink;
-        this.publicProfile = publicProfile;
-        this.lastX = lastX;
-        this.lastY = lastY;
-        this.lastZ = lastZ;
-    }
-
-    public PlayerModel(UUID uuid) {
-        this.uuid = uuid;
+        this.name = name;
+        this.prefix = prefix;
+        this.level = level;
+        this.rawXp = rawXp;
+        this.wars = wars;
+        this.created = created;
+        this.owner = owner;
+        this.chiefs = chiefs;
+        this.strategists = strategists;
+        this.captains = captains;
+        this.recruiters = recruiters;
+        this.recruits = recruits;
+        this.bannerBase = bannerBase;
+        this.bannerTier = bannerTier;
+        this.bannerLayers = bannerLayers;
+        this.seasonRanks = seasonRanks;
     }
 
     /**
      * Used only for running the migrate and revert methods
      */
-    public PlayerModel() {}
+    public GuildModel() {}
 
     /**
      * The UUID of the model. This does not change
@@ -82,7 +72,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String uuid() {
-        return "163d5af6-43dd-4c82-8da7-df40bddb7d62";
+        return "79251aba-dd91-4298-a8c3-f5b46b2e978e";
     }
 
     /**
@@ -101,7 +91,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String table() {
-        return "players";
+        return "guilds";
     }
 
     /**
@@ -111,24 +101,26 @@ public class PlayerModel implements Model {
     @Override
     public ArrayList<Column> columns() {
         ArrayList<Column> columns = new ArrayList<>();
-        columns.add(new Column("username", DataType.TEXT));
-        columns.add(new Column("online", DataType.BOOLEAN));
-        columns.add(new Column("server", DataType.TEXT));
-        columns.add(new Column("activeCharacter", DataType.UUID));
-        columns.add(new Column("nickname", DataType.TEXT));
         columns.add(new Column("uuid", DataType.UUID));
-        columns.add(new Column("rank", DataType.INTEGER)); // ID rather than name, this is parsed
-        columns.add(new Column("rankBadge", DataType.TEXT));
-        columns.add(new Column("legacyRankColour", DataType.JSON));
-        columns.add(new Column("supportRank", DataType.INTEGER)); // ID rather than name, this is parsed
-        columns.add(new Column("veteran", DataType.BOOLEAN));
-        columns.add(new Column("firstJoin", DataType.TIMESTAMP));
-        columns.add(new Column("lastJoin", DataType.TIMESTAMP));
-        columns.add(new Column("forumLink", DataType.INTEGER));
-        columns.add(new Column("publicProfile", DataType.BOOLEAN, "true"));
-        columns.add(new Column("lastX", DataType.INTEGER, "-1"));
-        columns.add(new Column("lastY", DataType.INTEGER, "-1"));
-        columns.add(new Column("lastZ", DataType.INTEGER, "-1"));
+        columns.add(new Column("name", DataType.TEXT));
+        columns.add(new Column("prefix", DataType.TEXT));
+        columns.add(new Column("level", DataType.INTEGER));
+        columns.add(new Column("rawXp", DataType.INTEGER));
+        columns.add(new Column("wars", DataType.INTEGER));
+        columns.add(new Column("created", DataType.TIMESTAMP));
+
+        columns.add(new Column("owner", DataType.JSONB));
+        columns.add(new Column("chiefs", DataType.JSONB));
+        columns.add(new Column("strategists", DataType.JSONB));
+        columns.add(new Column("captains", DataType.JSONB));
+        columns.add(new Column("recruiters", DataType.JSONB));
+        columns.add(new Column("recruits", DataType.JSONB));
+
+        columns.add(new Column("bannerBase", DataType.TEXT));
+        columns.add(new Column("bannerTier", DataType.INTEGER));
+        columns.add(new Column("bannerLayers", DataType.JSONB));
+
+        columns.add(new Column("seasonRanks", DataType.JSONB));
 
         return columns;
     }
@@ -140,7 +132,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String name() {
-        return "Player";
+        return "Guild";
     }
 
     /**
@@ -153,7 +145,7 @@ public class PlayerModel implements Model {
      */
     @Override
     public String version() {
-        return "1.0.7";
+        return "1.0.0";
     }
 
     @Override
@@ -205,24 +197,23 @@ public class PlayerModel implements Model {
 
         // Object array with a utility method for null checks
         Object[] values = new Object[]{
-                PGSQLDatabaseHelpers.safeGet(this.getUsername()),
-                PGSQLDatabaseHelpers.safeGet(this.getOnline()),
-                PGSQLDatabaseHelpers.safeGet(this.getServer()),
-                PGSQLDatabaseHelpers.safeGet(this.getActiveCharacter()),
-                PGSQLDatabaseHelpers.safeGet(this.getNickname()),
                 PGSQLDatabaseHelpers.safeGet(this.getUuid()),
-                PGSQLDatabaseHelpers.safeGet(this.getRank() != null ? this.getRank().getId() : null),
-                PGSQLDatabaseHelpers.safeGet(this.getRankBadge()),
-                PGSQLDatabaseHelpers.safeGet(this.getLegacyRankColour() != null ? this.getLegacyRankColour().getContent() : null),
-                PGSQLDatabaseHelpers.safeGet(this.getSupportRank() != null ? this.getSupportRank().getId() : null),
-                PGSQLDatabaseHelpers.safeGet(this.getVeteran()),
-                PGSQLDatabaseHelpers.safeGet(this.getFirstJoin()),
-                PGSQLDatabaseHelpers.safeGet(this.getLastJoin()),
-                PGSQLDatabaseHelpers.safeGet(this.getForumLink()),
-                PGSQLDatabaseHelpers.safeGet(this.getPublicProfile()),
-                this.getLastX(),
-                this.getLastY(),
-                this.getLastZ()
+                PGSQLDatabaseHelpers.safeGet(this.getName()),
+                PGSQLDatabaseHelpers.safeGet(this.getPrefix()),
+                this.getLevel(),
+                this.getRawXp(),
+                this.getWars(),
+                PGSQLDatabaseHelpers.safeGet(this.getCreated()),
+                PGSQLDatabaseHelpers.safeGet(this.getOwner()),
+                PGSQLDatabaseHelpers.safeGet(this.getChiefs()),
+                PGSQLDatabaseHelpers.safeGet(this.getStrategists()),
+                PGSQLDatabaseHelpers.safeGet(this.getCaptains()),
+                PGSQLDatabaseHelpers.safeGet(this.getRecruiters()),
+                PGSQLDatabaseHelpers.safeGet(this.getRecruits()),
+                PGSQLDatabaseHelpers.safeGet(this.getBannerBase().examinableName()),
+                this.getBannerTier(),
+                PGSQLDatabaseHelpers.safeGet(this.getBannerLayers()),
+                PGSQLDatabaseHelpers.safeGet(this.getSeasonRanks())
         };
 
         Connection connection = this.database().connect(true);
