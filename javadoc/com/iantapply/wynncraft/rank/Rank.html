@@ -169,6 +169,16 @@ loadScripts(document, 'script');</script>
 <div class="block">Retrieves a rank by its ID</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getRankByName(java.lang.String)" class="member-name-link">getRankByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Retrieves a rank by its name</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getRankByShortenedName(java.lang.String)" class="member-name-link">getRankByShortenedName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;shortenedName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Retrieves a rank by its shortened name</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -330,6 +340,32 @@ not permitted.)</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>id</code> - The ID of the rank</dd>
+<dt>Returns:</dt>
+<dd>The rank if found, otherwise null</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getRankByName(java.lang.String)">
+<h3>getRankByName</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></span>&nbsp;<span class="element-name">getRankByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="block">Retrieves a rank by its name</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>name</code> - The name of the rank</dd>
+<dt>Returns:</dt>
+<dd>The rank if found, otherwise null</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getRankByShortenedName(java.lang.String)">
+<h3>getRankByShortenedName</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a></span>&nbsp;<span class="element-name">getRankByShortenedName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;shortenedName)</span></div>
+<div class="block">Retrieves a rank by its shortened name</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>shortenedName</code> - The shortened name of the rank</dd>
 <dt>Returns:</dt>
 <dd>The rank if found, otherwise null</dd>
 </dl>

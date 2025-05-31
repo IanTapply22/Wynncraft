@@ -17,6 +17,7 @@ com.iantapply.wynncraft.database.database
 com.iantapply.wynncraft.database.influx
 com.iantapply.wynncraft.database.model
 com.iantapply.wynncraft.database.model.object
+com.iantapply.wynncraft.database.model.object.guild
 com.iantapply.wynncraft.database.mongo
 com.iantapply.wynncraft.database.pgsql
 com.iantapply.wynncraft.database.pgsql.table

@@ -90,12 +90,12 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>org.bukkit.command.CommandExecutor</code></dd>
+<dd><code>org.bukkit.command.CommandExecutor</code>, <code>org.bukkit.command.TabCompleter</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CommandCore</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements org.bukkit.command.CommandExecutor</span></div>
+implements org.bukkit.command.CommandExecutor, org.bukkit.command.TabCompleter</span></div>
 <div class="block">A class with utilities to manage the core functionality regarding
  commands registered and used on the Wynncraft server.</div>
 </section>
@@ -140,25 +140,38 @@ implements org.bukkit.command.CommandExecutor</span></div>
 <div class="block">Initializes the command core by staging all commands.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPlayer(org.bukkit.command.CommandSender)" class="member-name-link">isPlayer</a><wbr>(org.bukkit.command.CommandSender&nbsp;sender)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCommandAllowed(java.lang.String,com.iantapply.wynncraft.rank.Rank,com.iantapply.wynncraft.rank.SupportRank)" class="member-name-link">isCommandAllowed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;command,
+ <a href="../rank/Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a>&nbsp;rank,
+ <a href="../rank/SupportRank.html" title="enum class in com.iantapply.wynncraft.rank">SupportRank</a>&nbsp;supportRank)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if the sender is a player</div>
+<div class="block">Checks if a command is allowed for the given rank and support rank.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isValidExecution(com.iantapply.wynncraft.command.WynncraftCommand,org.bukkit.command.CommandSender,int)" class="member-name-link">isValidExecution</a><wbr>(<a href="WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a>&nbsp;command,
- org.bukkit.command.CommandSender&nbsp;sender,
- int&nbsp;argsLength)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPlayer(org.bukkit.command.CommandSender)" class="member-name-link">isPlayer</a><wbr>(org.bukkit.command.CommandSender&nbsp;sender)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if the command execution is valid</div>
+<div class="block">Checks if the sender is a player</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCommand(org.bukkit.command.CommandSender,org.bukkit.command.Command,java.lang.String,java.lang.String%5B%5D)" class="member-name-link">onCommand</a><wbr>(@NotNull org.bukkit.command.CommandSender&nbsp;sender,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isValidExecution(com.iantapply.wynncraft.command.WynncraftCommand,org.bukkit.command.CommandSender,int)" class="member-name-link">isValidExecution</a><wbr>(<a href="WynncraftCommand.html" title="class in com.iantapply.wynncraft.command">WynncraftCommand</a>&nbsp;command,
+ org.bukkit.command.CommandSender&nbsp;sender,
+ int&nbsp;argsLength)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if the command execution is valid</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCommand(org.bukkit.command.CommandSender,org.bukkit.command.Command,java.lang.String,java.lang.String%5B%5D)" class="member-name-link">onCommand</a><wbr>(@NotNull org.bukkit.command.CommandSender&nbsp;sender,
  @NotNull org.bukkit.command.Command&nbsp;command,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Executes the command, returning whether the command was successful</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onTabComplete(org.bukkit.command.CommandSender,org.bukkit.command.Command,java.lang.String,java.lang.String%5B%5D)" class="member-name-link">onTabComplete</a><wbr>(org.bukkit.command.CommandSender&nbsp;sender,
+ org.bukkit.command.Command&nbsp;command,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerCommands()" class="member-name-link">registerCommands</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -289,6 +302,19 @@ implements org.bukkit.command.CommandExecutor</span></div>
 </section>
 </li>
 <li>
+<section class="detail" id="onTabComplete(org.bukkit.command.CommandSender,org.bukkit.command.Command,java.lang.String,java.lang.String[])">
+<h3>onTabComplete</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">onTabComplete</span><wbr><span class="parameters">(org.bukkit.command.CommandSender&nbsp;sender,
+ org.bukkit.command.Command&nbsp;command,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>onTabComplete</code>&nbsp;in interface&nbsp;<code>org.bukkit.command.TabCompleter</code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="isPlayer(org.bukkit.command.CommandSender)">
 <h3>isPlayer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPlayer</span><wbr><span class="parameters">(org.bukkit.command.CommandSender&nbsp;sender)</span></div>
@@ -298,6 +324,23 @@ implements org.bukkit.command.CommandExecutor</span></div>
 <dd><code>sender</code> - The sender of the command</dd>
 <dt>Returns:</dt>
 <dd>Whether the sender is a player</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isCommandAllowed(java.lang.String,com.iantapply.wynncraft.rank.Rank,com.iantapply.wynncraft.rank.SupportRank)">
+<h3>isCommandAllowed</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isCommandAllowed</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;command,
+ <a href="../rank/Rank.html" title="enum class in com.iantapply.wynncraft.rank">Rank</a>&nbsp;rank,
+ <a href="../rank/SupportRank.html" title="enum class in com.iantapply.wynncraft.rank">SupportRank</a>&nbsp;supportRank)</span></div>
+<div class="block">Checks if a command is allowed for the given rank and support rank.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to check</dd>
+<dd><code>rank</code> - The rank of the player executing the command</dd>
+<dd><code>supportRank</code> - The support rank of the player executing the command</dd>
+<dt>Returns:</dt>
+<dd>True if the command is allowed for the given rank and support rank, false otherwise.</dd>
 </dl>
 </section>
 </li>
