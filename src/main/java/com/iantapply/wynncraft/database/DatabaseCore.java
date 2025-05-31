@@ -59,6 +59,7 @@ public class DatabaseCore {
             Logger.log(LoggingLevel.INFO, String.format("Registering %s model...", model.name()));
 
             Connection connection = model.database().connect(true);
+
             // Check if table does not exist, if not then create the blank table
             try {
                 if (!PGSQLDatabaseHelpers.checkTableExists(connection, model.table())) {

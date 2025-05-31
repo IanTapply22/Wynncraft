@@ -10,6 +10,7 @@ import com.iantapply.wynncraft.gui.GUIListener;
 import com.iantapply.wynncraft.gui.WynncraftGUICore;
 import com.iantapply.wynncraft.item.ItemCore;
 import com.iantapply.wynncraft.logger.Logger;
+import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.metrics.Metrics;
 import com.iantapply.wynncraft.metrics.UpdateChecker;
 import com.iantapply.wynncraft.nbs.NBSCore;
@@ -45,9 +46,15 @@ public final class Wynncraft extends JavaPlugin {
         this.configurationCore = new ConfigurationCore(this);
         this.configurationCore.initialize();
 
-        DatabaseCore databaseCore = new DatabaseCore();
-        databaseCore.initialize();
-        databaseCore.registerModels();
+        try {
+            DatabaseCore databaseCore = new DatabaseCore();
+            databaseCore.initialize();
+            databaseCore.registerModels();
+        } catch (Exception e) {
+            Logger.log(LoggingLevel.ERROR, "Failed to initialize database core and register models. This is most likely due to a misconfiguration in the database settings. Please check your configuration file and ensure that the database is set up correctly.");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
 
         this.influxDatabaseCore = new InfluxDatabaseCore();
         this.influxDatabaseCore.stageInfluxDatabases();
@@ -93,8 +100,8 @@ public final class Wynncraft extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.influxDatabaseCore.unregisterDatabases();
-        this.resourcePackCore.closeServerInstance();
+        if (this.influxDatabaseCore != null) this.influxDatabaseCore.unregisterDatabases();
+        if (this.resourcePackCore != null) this.resourcePackCore.closeServerInstance();
 
         Logger.logShutdown();
     }
