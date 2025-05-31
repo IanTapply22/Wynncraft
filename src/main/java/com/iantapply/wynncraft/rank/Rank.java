@@ -114,4 +114,32 @@ public enum Rank {
         }
         return null;
     }
+
+    /**
+     * Retrieves a rank by its name
+     * @param name The name of the rank
+     * @return The rank if found, otherwise null
+     */
+    public static Rank getRankByName(String name) {
+        for (Rank rank : Rank.values()) {
+            if (rank.getName().equalsIgnoreCase(name)) {
+                return rank;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieves a rank by its shortened name
+     * @param shortenedName The shortened name of the rank
+     * @return The rank if found, otherwise null
+     */
+    public static Rank getRankByShortenedName(String shortenedName) {
+        for (Rank rank : Rank.values()) {
+            if (rank.getShortenedName() != null && rank.getShortenedName().equalsIgnoreCase(shortenedName)) {
+                return rank;
+            }
+        }
+        return null;
+    }
 }

@@ -2,27 +2,28 @@ package com.iantapply.wynncraft.command.commands.administrator;
 
 import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.command.WynncraftCommand;
-import com.iantapply.wynncraft.gui.menu.CharacterSelector;
 import com.iantapply.wynncraft.rank.Rank;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class OpenGUICommand extends WynncraftCommand {
+public class SpawnCommand extends WynncraftCommand {
+
     @Override
     public String name() {
-        return "opengui";
+        return "spawn";
     }
 
     @Override
     public String syntax() {
-        return "opengui";
+        return "spawn";
     }
 
     @Override
     public String description() {
-        return "Opens a specified GUI";
+        return "Teleports the current player to spawn configured in the config file";
     }
 
     @Override
@@ -55,6 +56,14 @@ public class OpenGUICommand extends WynncraftCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        Wynncraft.getInstance().getGuiCore().openGUI(new CharacterSelector(), player);
+        Location spawnLocation = Wynncraft.getInstance().getConfigurationCore().getLocation("WYNNCRAFT_MAIN_COORDINATES");
+
+        if (spawnLocation == null) {
+            player.sendMessage("Spawn location is not configured. Please contact an administrator.");
+            return;
+        }
+
+        player.teleport(spawnLocation);
+        player.sendMessage("You have been teleported to spawn");
     }
 }

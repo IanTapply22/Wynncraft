@@ -1,8 +1,8 @@
 package com.iantapply.wynncraft.database.model;
 
-import com.iantapply.wynncraft.database.model.object.BannerLayer;
-import com.iantapply.wynncraft.database.model.object.GuildMember;
-import com.iantapply.wynncraft.database.model.object.SeasonRank;
+import com.iantapply.wynncraft.database.model.object.guild.BannerLayer;
+import com.iantapply.wynncraft.database.model.object.guild.GuildMember;
+import com.iantapply.wynncraft.database.model.object.guild.SeasonRank;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabaseHelpers;
 import com.iantapply.wynncraft.database.pgsql.PGSQLDatabase;
 import com.iantapply.wynncraft.database.pgsql.table.DataType;

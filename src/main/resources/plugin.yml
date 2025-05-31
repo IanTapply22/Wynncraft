@@ -139,14 +139,23 @@ commands:
     usage: "/nbs <play|stop> <args>"
   # Administrator commands
   setrank:
-    description: "Sets the rank of the player"
-    usage: "/setrank <rank ID>"
+    description: "Sets the current players rank or the specified players rank"
+    usage: "/setrank <rank ID> [player]"
   setsupportrank:
-    description: "Sets the support rank of the player"
-    usage: "/setsupportrank <rank ID>"
+    description: "Sets the current players support rank or the specified players support rank"
+    usage: "/setsupportrank <rank ID> [player]"
   giveme:
     description: "Gives the player the internally configured item"
     usage: "/giveme"
   opengui:
     description: "Opens the GUI for the player"
     usage: "/opengui"
+  gm:
+    description: "Sets the gamemode of the current player"
+    usage: "/gm <1|2|3>"
+  speed:
+    description: "Sets the speed of the current player"
+    usage: "/speed <value>"
+  spawn:
+    description: "Teleports the current player to spawn configured in the config file"
+    usage: "/spawn"

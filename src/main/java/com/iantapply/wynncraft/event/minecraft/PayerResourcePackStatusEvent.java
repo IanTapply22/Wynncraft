@@ -29,7 +29,7 @@ public class PayerResourcePackStatusEvent implements Listener {
         ConfigurationCore configurationCore = Wynncraft.getInstance().getConfigurationCore();
         WynncraftPlayer wynncraftPlayer = playerCore.getPlayer(player.getUniqueId());
 
-        String rawCoordinates = configurationCore.getString("WYNNCRAFT_MAIN_WORLD_SPAWN");
+        String rawCoordinates = configurationCore.getString("WYNNCRAFT_MAIN_COORDINATES");
         double[] parsedCoordinates = Arrays.stream(rawCoordinates.split(",")).mapToDouble(Double::parseDouble).toArray(); // X, Y, Z
 
         switch (event.getStatus()) {

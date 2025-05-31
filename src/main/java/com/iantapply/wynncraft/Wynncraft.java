@@ -80,6 +80,7 @@ public final class Wynncraft extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerWorldSwitchEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PayerResourcePackStatusEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerCommandSendEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GUIListener(), this);
 
         new Metrics(this, PluginConfigurations.BSTATS_PLUGIN_ID);

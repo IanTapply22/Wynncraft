@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Represents a command that can be executed by a player or console
@@ -66,6 +67,15 @@ public abstract class WynncraftCommand {
      * @return The maximum amount of arguments
      */
     public abstract int maxArgs();
+
+    /**
+     * The options that are available for tab completion
+     * This is used to provide suggestions for the command arguments when the player presses tab
+     * @return A hashmap containing the options as keys and their respective argument index they appear in
+     */
+    public HashMap<String, Integer> tabCompleteOptions() {
+        return new HashMap<>();
+    }
 
     /**
      * The permission strings that are required to execute the command

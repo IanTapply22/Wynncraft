@@ -1,28 +1,27 @@
 package com.iantapply.wynncraft.command.commands.administrator;
 
-import com.iantapply.wynncraft.Wynncraft;
 import com.iantapply.wynncraft.command.WynncraftCommand;
-import com.iantapply.wynncraft.gui.menu.CharacterSelector;
 import com.iantapply.wynncraft.rank.Rank;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class OpenGUICommand extends WynncraftCommand {
+public class SpeedCommand extends WynncraftCommand {
+
     @Override
     public String name() {
-        return "opengui";
+        return "speed";
     }
 
     @Override
     public String syntax() {
-        return "opengui";
+        return "speed <value>";
     }
 
     @Override
     public String description() {
-        return "Opens a specified GUI";
+        return "Sets the speed of the current player";
     }
 
     @Override
@@ -32,12 +31,12 @@ public class OpenGUICommand extends WynncraftCommand {
 
     @Override
     public int minArgs() {
-        return 0;
+        return 1;
     }
 
     @Override
     public int maxArgs() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -55,6 +54,13 @@ public class OpenGUICommand extends WynncraftCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        Wynncraft.getInstance().getGuiCore().openGUI(new CharacterSelector(), player);
+        int speed = Integer.parseInt(args[0]);
+
+        if (speed < 0 || speed > 100) {
+            player.sendMessage("Speed must be between 0 and 100");
+            return;
+        }
+
+        player.setWalkSpeed(speed / 100f);
     }
 }

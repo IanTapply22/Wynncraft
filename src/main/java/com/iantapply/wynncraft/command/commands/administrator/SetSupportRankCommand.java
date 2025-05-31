@@ -6,11 +6,14 @@ import com.iantapply.wynncraft.database.model.PlayerModel;
 import com.iantapply.wynncraft.logger.Logger;
 import com.iantapply.wynncraft.logger.LoggingLevel;
 import com.iantapply.wynncraft.player.WynncraftPlayer;
+import com.iantapply.wynncraft.rank.Rank;
 import com.iantapply.wynncraft.rank.SupportRank;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SetSupportRankCommand extends WynncraftCommand {
     @Override
@@ -20,17 +23,12 @@ public class SetSupportRankCommand extends WynncraftCommand {
 
     @Override
     public String syntax() {
-        return "setsupportrank <rank ID>";
+        return "setsupportrank <rank ID> [player]";
     }
 
     @Override
     public String description() {
-        return "Sets your support rank";
-    }
-
-    @Override
-    public boolean isPlayerOnly() {
-        return true;
+        return "Sets the current players support rank or the specified players support rank";
     }
 
     @Override
@@ -40,7 +38,7 @@ public class SetSupportRankCommand extends WynncraftCommand {
 
     @Override
     public int maxArgs() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -49,9 +47,34 @@ public class SetSupportRankCommand extends WynncraftCommand {
     }
 
     @Override
+    public ArrayList<Rank> requiredRanks() {
+        ArrayList<Rank> ranks = new ArrayList<>();
+        ranks.add(Rank.ADMINISTRATOR);
+        ranks.add(Rank.OWNER);
+        return ranks;
+    }
+
+    @Override
     public void execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        WynncraftPlayer wynncraftPlayer = Wynncraft.getInstance().getPlayerCore().getPlayer(player.getUniqueId());
+        WynncraftPlayer wynncraftPlayer;
+
+        if (args.length == 1) {
+            if (sender instanceof ConsoleCommandSender) {
+                Logger.log(LoggingLevel.ERROR, "Console cannot set rank for itself");
+                return;
+            }
+
+            wynncraftPlayer = Wynncraft.getInstance().getPlayerCore().getPlayer(player.getUniqueId());
+        } else {
+            Player targetPlayer = Wynncraft.getInstance().getServer().getPlayer(args[1]);
+            if (targetPlayer == null) {
+                player.sendMessage("Player not found");
+                return;
+            }
+            wynncraftPlayer = Wynncraft.getInstance().getPlayerCore().getPlayer(targetPlayer.getUniqueId());
+        }
+
         PlayerModel playerModel = wynncraftPlayer.getPlayerModel();
 
         try {

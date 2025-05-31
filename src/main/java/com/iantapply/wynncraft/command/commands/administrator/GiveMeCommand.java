@@ -2,9 +2,12 @@ package com.iantapply.wynncraft.command.commands.administrator;
 
 import com.iantapply.wynncraft.command.WynncraftCommand;
 import com.iantapply.wynncraft.item.items.weapon.Sacrilege;
+import com.iantapply.wynncraft.rank.Rank;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 
 public class GiveMeCommand extends WynncraftCommand {
     @Override
@@ -40,6 +43,13 @@ public class GiveMeCommand extends WynncraftCommand {
     @Override
     public boolean isDevelopment() {
         return true;
+    }
+
+    @Override
+    public ArrayList<Rank> requiredRanks() {
+        ArrayList<Rank> ranks = new ArrayList<>();
+        ranks.add(Rank.ADMINISTRATOR);
+        return ranks;
     }
 
     @Override

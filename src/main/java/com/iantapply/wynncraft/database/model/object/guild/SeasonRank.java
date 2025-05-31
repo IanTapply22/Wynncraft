@@ -1,4 +1,6 @@
-package com.iantapply.wynncraft.database.model.object;
+package com.iantapply.wynncraft.database.model.object.guild;
+
+import com.iantapply.wynncraft.database.model.object.JSONObject;
 
 public class SeasonRank extends JSONObject {
 
